@@ -8,7 +8,7 @@ using DiGi.Rhino.Core.Interfaces;
 using DiGi.Core.Interfaces;
 using GH_IO.Serialization;
 
-namespace DiGi.Rhino.Core.Classes.Goo
+namespace DiGi.Rhino.Core.Classes
 {
     public class GooSerializableObject<T> : GH_Goo<T>, IGooSerializableObject where T : ISerializableObject
     {
@@ -122,7 +122,9 @@ namespace DiGi.Rhino.Core.Classes.Goo
         public override bool CastFrom(object source)
         {
             if (source == null)
+            {
                 return false;
+            }
 
             if (source is T)
             {
@@ -212,7 +214,7 @@ namespace DiGi.Rhino.Core.Classes.Goo
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
         public GooSerializableObjectParam()
-            : base(typeof(T).Name, typeof(T).Name, typeof(T).FullName.Replace(".", " "), "Params", "SAM")
+            : base(typeof(T).Name, typeof(T).Name, typeof(T).FullName.Replace(".", " "), "Params", "DiGi")
         {
         }
 
@@ -240,4 +242,45 @@ namespace DiGi.Rhino.Core.Classes.Goo
             Query.SaveAs(VolatileData);
         }
     }
+
+    public class GooSerializableObject : GooSerializableObject<ISerializableObject>
+    {
+        public GooSerializableObject()
+            : base()
+        {
+        }
+
+        public GooSerializableObject(ISerializableObject serializableObject)
+        {
+            Value = serializableObject;
+        }
+
+        public override IGH_Goo Duplicate()
+        {
+            return new GooSerializableObject(Value);
+        }
+    }
+
+    public class GooSerializableObjectParam : GH_PersistentParam<GooSerializableObject>
+    {
+        public override Guid ComponentGuid => new Guid("a557ef4b-4fa1-47a4-a5cc-894c03f057e7");
+        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
+
+        public GooSerializableObjectParam()
+            : base(typeof(ISerializableObject).Name, typeof(ISerializableObject).Name, typeof(ISerializableObject).FullName.Replace(".", " "), "Params", "DiGi")
+        {
+        }
+
+        protected override GH_GetterResult Prompt_Singular(ref GooSerializableObject value)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override GH_GetterResult Prompt_Plural(ref List<GooSerializableObject> values)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
 }

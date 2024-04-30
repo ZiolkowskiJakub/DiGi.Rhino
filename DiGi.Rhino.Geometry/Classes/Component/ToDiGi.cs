@@ -1,18 +1,21 @@
 ﻿using DiGi.Core.Classes;
 using DiGi.Core.Interfaces;
+using DiGi.Geometry.Spatial.Interfaces;
+using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using System;
 using System.Collections.Generic;
 
-namespace DiGi.Rhino.Core.Classes
+namespace DiGi.Rhino.Geometry.Classes
 {
     public class ToDiGi : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("d60640ab-a230-4465-a772-00ead8d7eda7");
+        public override Guid ComponentGuid => new Guid("da315540-b151-491b-802a-8a55e9bb3813");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -25,9 +28,9 @@ namespace DiGi.Rhino.Core.Classes
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
         public ToDiGi()
-          : base("Core.ToDiGi", "Core.ToDiGi",
-              "Converts File to SerializableObjects",
-              "DiGi", "DiGi.Core")
+          : base("Geometry.ToDiGi", "Geomery.ToDiGi",
+              "Converts Rhino geometry to DiGi geometry",
+              "DiGi", "DiGi.Geometry")
         {
         }
 
@@ -39,7 +42,7 @@ namespace DiGi.Rhino.Core.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_FilePath() { Name = "path", NickName = "path", Description = "File Path", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Geometry() { Name = "geometry", NickName = "geometry", Description = "Rhino geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -52,7 +55,7 @@ namespace DiGi.Rhino.Core.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooSerializableObjectParam<ISerializableObject>() { Name = "serializableObjects", NickName = "serializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooGeometry3DParam() { Name = "geometry3D", NickName = "geometry3D", Description = "DiGi Geometry3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -67,28 +70,20 @@ namespace DiGi.Rhino.Core.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("path");
-            string path = null;
-            if (index == -1 || !dataAccess.GetData(index, ref path) || path == null)
+            index = Params.IndexOfInputParam("geometry");
+            IGH_GeometricGoo geometricGoo = null;
+            if (index == -1 || !dataAccess.GetData(index, ref geometricGoo) || geometricGoo == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            Path? path_Temp = path;
-
-            if(!path_Temp.Value.FileExists)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "File does not exist or is invalid.");
-                return;
-            }
-
-            List<ISerializableObject> serializableObjects = DiGi.Core.Convert.ToDiGi<ISerializableObject>(path_Temp);
-
-            index = Params.IndexOfOutputParam("serializableObjects");
+            index = Params.IndexOfOutputParam("geometry3D");
             if (index != -1)
             {
-                dataAccess.SetDataList(index, serializableObjects?.ConvertAll(x => new GooSerializableObject<ISerializableObject>(x)));
+                IGeometry3D geometry3D = Convert.ToDiGi(geometricGoo);
+
+                dataAccess.SetData(index, geometry3D == null ? null : new GooGeometry3D(geometry3D));
             }
         }
     }

@@ -6,9 +6,9 @@ namespace DiGi.Rhino.Core.Classes
 {
     public abstract class VariableParameterComponent : Component, IGH_VariableParameterComponent
     {
-        protected abstract Parameter[] Inputs { get; }
+        protected abstract Param[] Inputs { get; }
 
-        protected abstract Parameter[] Outputs { get; }
+        protected abstract Param[] Outputs { get; }
 
         public VariableParameterComponent(string name, string nickname, string description, string category, string subCategory)
             : base(name, nickname, description, category, subCategory)
@@ -33,21 +33,21 @@ namespace DiGi.Rhino.Core.Classes
                     return templateParams.Length > 0;
                 }
 
-                return componentParams[0].Name != templateParams[0].Param.Name;
+                return componentParams[0].Name != templateParams[0].GH_Param.Name;
             }
 
             if (index >= componentParams.Count)
             {
-                return componentParams[componentParams.Count - 1].Name != templateParams[templateParams.Length - 1].Param.Name;
+                return componentParams[componentParams.Count - 1].Name != templateParams[templateParams.Length - 1].GH_Param.Name;
             }
 
             string previous = componentParams[index - 1].Name;
 
             for (int i = 0; i < templateParams.Length; ++i)
             {
-                if (templateParams[i].Param.Name == previous)
+                if (templateParams[i].GH_Param.Name == previous)
                 {
-                    return templateParams[i + 1].Param.Name != componentParams[index].Name;
+                    return templateParams[i + 1].GH_Param.Name != componentParams[index].Name;
                 }
             }
 
@@ -62,9 +62,9 @@ namespace DiGi.Rhino.Core.Classes
             string current = componentParams[index].Name;
             for (int i = 0; i < templateParams.Length; ++i)
             {
-                if (templateParams[i].Param.Name == current)
+                if (templateParams[i].GH_Param.Name == current)
                 {
-                    return !templateParams[i].ParameterVisibility.HasFlag(Enums.ParameterVisibility.Mandatory);
+                    return !templateParams[i].ParameterVisibility.HasFlag(ParameterVisibility.Mandatory);
                 }
             }
 
@@ -83,7 +83,7 @@ namespace DiGi.Rhino.Core.Classes
             {
                 if (templateParams.Length > 0)
                 {
-                    return templateParams[templateParams.Length + offset].Param;
+                    return templateParams[templateParams.Length + offset].GH_Param;
                 }
             }
             else
@@ -91,9 +91,9 @@ namespace DiGi.Rhino.Core.Classes
                 var currentName = componentParams[reference].Name;
                 for (int i = 0; i < templateParams.Length; ++i)
                 {
-                    if (templateParams[i].Param.Name == currentName)
+                    if (templateParams[i].GH_Param.Name == currentName)
                     {
-                        return templateParams[i + offset].Param;
+                        return templateParams[i + offset].GH_Param;
                     }
                 }
             }
@@ -122,7 +122,7 @@ namespace DiGi.Rhino.Core.Classes
         {
             foreach (var definition in Inputs.Where(x => x.ParameterVisibility.HasFlag(ParameterVisibility.Default)))
             {
-                inputParamManager.AddParameter(definition.Param.Clone());
+                inputParamManager.AddParameter(definition.GH_Param.Clone());
             }
         }
 
@@ -130,7 +130,7 @@ namespace DiGi.Rhino.Core.Classes
         {
             foreach (var definition in Outputs.Where(x => x.ParameterVisibility.HasFlag(ParameterVisibility.Default)))
             {
-                outputParamManager.AddParameter(definition.Param.Clone());
+                outputParamManager.AddParameter(definition.GH_Param.Clone());
             }
         }
     }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DiGi.Rhino.Core
+namespace DiGi.Rhino.Core.Classes
 {
     public class NullAttributes : IGH_Attributes
     {

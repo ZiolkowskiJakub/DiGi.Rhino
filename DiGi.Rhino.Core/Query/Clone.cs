@@ -1,5 +1,6 @@
 ﻿using Grasshopper.Kernel;
 using Grasshopper;
+using DiGi.Rhino.Core.Classes;
 
 namespace DiGi.Rhino.Core
 {

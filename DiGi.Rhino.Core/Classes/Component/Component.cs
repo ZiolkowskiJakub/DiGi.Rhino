@@ -1,6 +1,6 @@
 using Grasshopper.Kernel;
 
-namespace DiGi.Rhino.Core
+namespace DiGi.Rhino.Core.Classes
 {
     public abstract class Component : GH_Component
     {
