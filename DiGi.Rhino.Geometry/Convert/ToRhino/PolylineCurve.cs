@@ -29,5 +29,22 @@ namespace DiGi.Rhino.Geometry
             return new PolylineCurve(point3ds);
 
         }
+
+        public static PolylineCurve ToRhino(this Polyline3D polyline3D)
+        {
+            List<Point3D> point3Ds = polyline3D?.GetPoints();
+            if (point3Ds == null)
+            {
+                return null;
+            }
+
+            List<Point3d> point3ds = point3Ds.ConvertAll(x => x.ToRhino());
+            if (point3ds == null || point3ds.Count < 2)
+            {
+                return null;
+            }
+
+            return new PolylineCurve(point3ds);
+        }
     }
 }

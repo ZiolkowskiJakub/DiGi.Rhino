@@ -4,7 +4,6 @@ using Rhino.DocObjects;
 using Rhino;
 using System.Collections.Generic;
 using DiGi.Geometry.Spatial.Classes;
-using Eto.Forms;
 
 namespace DiGi.Rhino.Geometry
 {
