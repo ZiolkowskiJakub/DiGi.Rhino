@@ -178,10 +178,18 @@ namespace DiGi.Rhino.Geometry.Classes
         }
     }
 
-    public abstract class GooGeometryParam<T> : GH_PersistentParam<GooGeometry<T>> where T : IGeometry
+    public abstract class GooGeometryParam<T> : GH_PersistentParam<GooGeometry<T>>, IGH_PreviewObject, IGH_BakeAwareObject where T : IGeometry
     {
         public override Guid ComponentGuid => new Guid("63680047-20b3-4e89-a085-2add878abb76");
-        
+
+        public BoundingBox ClippingBox => Preview_ComputeClippingBox();
+
+        public bool Hidden { get; set; }
+
+        public bool IsPreviewCapable => !VolatileData.IsEmpty;
+
+        public bool IsBakeCapable => !VolatileData.IsEmpty;
+
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
         public GooGeometryParam()
@@ -195,36 +203,6 @@ namespace DiGi.Rhino.Geometry.Classes
         }
 
         protected override GH_GetterResult Prompt_Singular(ref GooGeometry<T> value)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class GooGeometryParam : GooGeometryParam<IGeometry>, IGH_PreviewObject, IGH_BakeAwareObject
-    {
-        public override Guid ComponentGuid => new Guid("38d1d698-3de7-4537-9175-3b19372718f9");
-
-        public BoundingBox ClippingBox => Preview_ComputeClippingBox();
-
-        public bool Hidden { get; set; }
-
-        public bool IsPreviewCapable => !VolatileData.IsEmpty;
-
-        public bool IsBakeCapable => !VolatileData.IsEmpty;
-
-        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-
-        public GooGeometryParam()
-            : base()
-        {
-        }
-
-        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<IGeometry>> values)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override GH_GetterResult Prompt_Singular(ref GooGeometry<IGeometry> value)
         {
             throw new NotImplementedException();
         }
@@ -250,6 +228,28 @@ namespace DiGi.Rhino.Geometry.Classes
         }
 
         public void BakeGeometry(RhinoDoc doc, ObjectAttributes att, List<Guid> obj_ids)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class GooGeometryParam : GooGeometryParam<IGeometry>
+    {
+        public override Guid ComponentGuid => new Guid("38d1d698-3de7-4537-9175-3b19372718f9");
+
+        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
+
+        public GooGeometryParam()
+            : base()
+        {
+        }
+
+        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<IGeometry>> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override GH_GetterResult Prompt_Singular(ref GooGeometry<IGeometry> value)
         {
             throw new NotImplementedException();
         }

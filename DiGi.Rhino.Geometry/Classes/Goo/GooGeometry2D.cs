@@ -24,31 +24,28 @@ namespace DiGi.Rhino.Geometry.Classes
         }
     }
 
-    public abstract class GooGeometry2DParam<T> : GH_PersistentParam<GooGeometry2D<T>> where T : IGeometry2D
+    public class GooGeometry2D : GooGeometry2D<IGeometry2D>
     {
-        public override Guid ComponentGuid => new Guid("6e75e25e-c691-4cc3-868b-50e722a36bea");
-        
-        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-
-        public GooGeometry2DParam()
-           : base(typeof(T).Name, typeof(T).Name, typeof(T).FullName.Replace(".", " "), "Params", "DiGi")
+        public GooGeometry2D()
+            : base()
         {
         }
 
-        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry2D<T>> values)
+        public GooGeometry2D(IGeometry2D geometry2D)
         {
-            throw new NotImplementedException();
+            Value = geometry2D;
         }
 
-        protected override GH_GetterResult Prompt_Singular(ref GooGeometry2D<T> value)
+        public override IGH_Goo Duplicate()
         {
-            throw new NotImplementedException();
+            return new GooGeometry2D(Value);
         }
+
     }
 
-    public class GooGeometry2DParam : GooGeometry2DParam<IGeometry2D>
+    public class GooGeometry2DParam : GooGeometryParam<IGeometry2D>
     {
-        public override Guid ComponentGuid => new Guid("db40a120-61d3-4eb4-9bd4-df62ebfb0c48");
+        public override Guid ComponentGuid => new Guid("b058cbef-083c-4093-a53a-d6e4d913f662");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
@@ -57,12 +54,12 @@ namespace DiGi.Rhino.Geometry.Classes
         {
         }
 
-        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry2D<IGeometry2D>> values)
+        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<IGeometry2D>> values)
         {
             throw new NotImplementedException();
         }
 
-        protected override GH_GetterResult Prompt_Singular(ref GooGeometry2D<IGeometry2D> value)
+        protected override GH_GetterResult Prompt_Singular(ref GooGeometry<IGeometry2D> value)
         {
             throw new NotImplementedException();
         }
