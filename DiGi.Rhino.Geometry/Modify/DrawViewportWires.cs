@@ -14,6 +14,10 @@ namespace DiGi.Rhino.Geometry
             {
                 DrawViewportWires((IGeometry3D)geometry, gH_PreviewWireArgs, color);
             }
+            else if(geometry is IGeometry2D)
+            {
+                DrawViewportWires((IGeometry2D)geometry, gH_PreviewWireArgs, color);
+            }
         }
 
         public static void DrawViewportWires(this IGeometry3D geometry3D, GH_PreviewWireArgs gH_PreviewWireArgs, System.Drawing.Color color)

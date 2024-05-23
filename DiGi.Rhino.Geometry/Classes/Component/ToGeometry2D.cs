@@ -1,10 +1,12 @@
 ﻿using DiGi.Geometry.Planar.Interfaces;
+using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Spatial.Interfaces;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DiGi.Rhino.Geometry.Classes
 {
@@ -78,27 +80,27 @@ namespace DiGi.Rhino.Geometry.Classes
                 return;
             }
 
-            DiGi.Geometry.Spatial.Classes.Plane plane = null;
+            Plane plane = null;
             if (geometry3D is IPlanar)
             {
                 plane = ((IPlanar)geometry3D).Plane;
             }
 
+            if(plane == null)
+            {
+                plane = DiGi.Geometry.Spatial.Constans.Plane.WorldZ;
+            }
 
-                index = Params.IndexOfOutputParam("geometry2D");
+
+            index = Params.IndexOfOutputParam("geometry2D");
             if (index != -1)
             {
                 IGeometry2D geometry2D = null;
 
-                if(geometry3D is IPlanar)
+                PlanarResult planarResult = DiGi.Geometry.Spatial.Create.ProjectionResult(plane, geometry3D);
+                if(planarResult != null)
                 {
-                    geometry2D = DiGi.Geometry.Spatial.Query.Convert((IPlanar)geometry3D);
-                }
-                else
-                {
-                    plane = DiGi.Geometry.Spatial.Constans.Plane.WorldZ;
-
-                    
+                    geometry2D = planarResult.GetGeometry2Ds<IGeometry2D>()?.FirstOrDefault();
                 }
 
                 dataAccess.SetData(index, geometry2D);
