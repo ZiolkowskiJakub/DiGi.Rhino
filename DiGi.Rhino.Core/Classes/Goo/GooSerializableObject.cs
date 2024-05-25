@@ -208,13 +208,13 @@ namespace DiGi.Rhino.Core.Classes
         }
     }
 
-    public class GooSerializableObjectParam<T> : GH_PersistentParam<GooSerializableObject<T>> where T : ISerializableObject
+    public class GooSerializableObjectParam<T> : GooPresistentParam<GooSerializableObject<T>, T> where T : ISerializableObject
     {
         public override Guid ComponentGuid => new Guid("bb4a37e5-b901-422a-89b5-19b8e5463724");
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
         public GooSerializableObjectParam()
-            : base(typeof(T).Name, typeof(T).Name, typeof(T).FullName.Replace(".", " "), "Params", "DiGi")
+            : base()
         {
         }
 
@@ -281,6 +281,4 @@ namespace DiGi.Rhino.Core.Classes
             throw new NotImplementedException();
         }
     }
-
-
 }

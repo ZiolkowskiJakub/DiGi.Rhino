@@ -1,7 +1,5 @@
 ﻿using Grasshopper.Kernel.Types;
-using Grasshopper.Kernel;
 using System;
-using System.Collections.Generic;
 using DiGi.Geometry.Spatial.Interfaces;
 
 namespace DiGi.Rhino.Geometry.Classes
@@ -52,16 +50,6 @@ namespace DiGi.Rhino.Geometry.Classes
         public GooGeometry3DParam()
             : base()
         {
-        }
-
-        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<IGeometry3D>> values)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override GH_GetterResult Prompt_Singular(ref GooGeometry<IGeometry3D> value)
-        {
-            throw new NotImplementedException();
         }
     }
 }

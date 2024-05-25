@@ -103,7 +103,7 @@ namespace DiGi.Rhino.Geometry.Classes
                     geometry2D = planarResult.GetGeometry2Ds<IGeometry2D>()?.FirstOrDefault();
                 }
 
-                dataAccess.SetData(index, geometry2D);
+                dataAccess.SetData(index, new GooGeometry2D(geometry2D));
             }
         }
     }

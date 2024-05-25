@@ -1,7 +1,5 @@
 ﻿using Grasshopper.Kernel.Types;
-using Grasshopper.Kernel;
 using System;
-using System.Collections.Generic;
 using DiGi.Geometry.Spatial.Classes;
 
 namespace DiGi.Rhino.Geometry.Classes
@@ -34,16 +32,6 @@ namespace DiGi.Rhino.Geometry.Classes
         public GooPlaneParam()
             : base()
         {
-        }
-
-        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<Plane>> values)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override GH_GetterResult Prompt_Singular(ref GooGeometry<Plane> value)
-        {
-            throw new NotImplementedException();
         }
     }
 }

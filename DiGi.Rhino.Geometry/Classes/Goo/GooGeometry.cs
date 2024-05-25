@@ -10,6 +10,9 @@ using Rhino;
 using Rhino.DocObjects;
 using Rhino.Geometry;
 using DiGi.Geometry.Core.Interfaces;
+using DiGi.Geometry.Planar.Interfaces;
+using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Planar.Classes;
 
 namespace DiGi.Rhino.Geometry.Classes
 {
@@ -32,6 +35,25 @@ namespace DiGi.Rhino.Geometry.Classes
                 if (Value is IBoundable3D)
                 {
                     return Convert.ToRhino(((IBoundable3D)Value).GetBoundingBox());
+                }
+
+                if(Value is Point3D)
+                {
+                    return Convert.ToRhino(new BoundingBox3D((Point3D)(object)Value, DiGi.Core.Constans.Tolerance.Distance));
+                }
+
+                if(Value is IBoundable2D)
+                {
+                    IGeometry3D geometry3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, (IGeometry2D)Value);
+                    if(geometry3D is IBoundable3D)
+                    {
+                        return Convert.ToRhino(((IBoundable3D)geometry3D).GetBoundingBox());
+                    }
+                }
+                else if (Value is Point2D)
+                {
+                    Point3D point3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, (Point2D)(object)Value);
+                    return Convert.ToRhino(new BoundingBox3D(point3D, DiGi.Core.Constans.Tolerance.Distance));
                 }
 
                 return BoundingBox.Unset;
@@ -178,7 +200,7 @@ namespace DiGi.Rhino.Geometry.Classes
         }
     }
 
-    public abstract class GooGeometryParam<T> : GH_PersistentParam<GooGeometry<T>>, IGH_PreviewObject, IGH_BakeAwareObject where T : IGeometry
+    public abstract class GooGeometryParam<T> : GooPresistentParam<GooGeometry<T>, T>, IGH_PreviewObject, IGH_BakeAwareObject where T : IGeometry
     {
         public override Guid ComponentGuid => new Guid("63680047-20b3-4e89-a085-2add878abb76");
 
@@ -193,18 +215,8 @@ namespace DiGi.Rhino.Geometry.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
         public GooGeometryParam()
-           : base(typeof(T).Name, typeof(T).Name, typeof(T).FullName.Replace(".", " "), "Params", "DiGi")
+           : base()
         {
-        }
-
-        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<T>> values)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override GH_GetterResult Prompt_Singular(ref GooGeometry<T> value)
-        {
-            throw new NotImplementedException();
         }
 
         void IGH_PreviewObject.DrawViewportWires(IGH_PreviewArgs args)
@@ -231,6 +243,16 @@ namespace DiGi.Rhino.Geometry.Classes
         {
             throw new NotImplementedException();
         }
+
+        protected override GH_GetterResult Prompt_Singular(ref GooGeometry<T> value)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<T>> values)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class GooGeometryParam : GooGeometryParam<IGeometry>
@@ -242,16 +264,6 @@ namespace DiGi.Rhino.Geometry.Classes
         public GooGeometryParam()
             : base()
         {
-        }
-
-        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<IGeometry>> values)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override GH_GetterResult Prompt_Singular(ref GooGeometry<IGeometry> value)
-        {
-            throw new NotImplementedException();
         }
     }
 }
