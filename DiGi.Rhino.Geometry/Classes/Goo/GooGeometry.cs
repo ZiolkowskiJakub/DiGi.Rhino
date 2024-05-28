@@ -13,10 +13,11 @@ using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Planar.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Planar.Classes;
+using DiGi.Rhino.Geometry.Interfaces;
 
 namespace DiGi.Rhino.Geometry.Classes
 {
-    public class GooGeometry<T> : GooSerializableObject<T>, IGH_PreviewData, IGH_BakeAwareData where T : IGeometry
+    public class GooGeometry<T> : GooSerializableObject<T>, IGooGeometry where T : IGeometry
     {
         public GooGeometry()
             : base()
@@ -60,9 +61,23 @@ namespace DiGi.Rhino.Geometry.Classes
             }
         }
 
-        public override IGH_Goo Duplicate()
+        public bool BakeGeometry(RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out Guid guid)
         {
-            return new GooGeometry<T>(Value);
+            guid = Guid.Empty;
+
+            bool result = Modify.BakeGeometry(Value, rhinoDoc, objectAttributes, out List<Guid> guids);
+            if (guids == null || guids.Count == 0)
+            {
+                return false;
+            }
+
+            guid = guids[0];
+            return true;
+        }
+
+        public bool BakeGeometry(RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids)
+        {
+            return Modify.BakeGeometry(Value, rhinoDoc, objectAttributes, out guids);
         }
 
         public override bool CastFrom(object source)
@@ -77,7 +92,7 @@ namespace DiGi.Rhino.Geometry.Classes
                 Value = (T)(object)source;
                 return true;
             }
-            
+
             if (source is IGooSerializableObject)
             {
                 Value = ((IGooSerializableObject)source).GetValue<T>();
@@ -87,7 +102,7 @@ namespace DiGi.Rhino.Geometry.Classes
             if (source is IGH_GeometricGoo)
             {
                 IGeometry3D geometry3D = ((IGH_GeometricGoo)source).ToDiGi();
-                if(geometry3D is T)
+                if (geometry3D is T)
                 {
                     Value = (T)geometry3D;
                     return true;
@@ -184,9 +199,9 @@ namespace DiGi.Rhino.Geometry.Classes
             return base.CastTo(ref target);
         }
 
-        public bool BakeGeometry(RhinoDoc doc, ObjectAttributes att, out Guid obj_guid)
+        public void DrawViewportMeshes(GH_PreviewMeshArgs args)
         {
-            throw new NotImplementedException();
+            Modify.DrawViewportMeshes(Value, args, args.Material);
         }
 
         public void DrawViewportWires(GH_PreviewWireArgs args)
@@ -194,34 +209,71 @@ namespace DiGi.Rhino.Geometry.Classes
             Modify.DrawViewportWires(Value, args, args.Color);
         }
 
-        public void DrawViewportMeshes(GH_PreviewMeshArgs args)
+        public override IGH_Goo Duplicate()
         {
-            Modify.DrawViewportMeshes(Value, args, args.Material);
+            return new GooGeometry<T>(Value);
         }
     }
 
     public abstract class GooGeometryParam<T> : GooPresistentParam<GooGeometry<T>, T>, IGH_PreviewObject, IGH_BakeAwareObject where T : IGeometry
     {
-        public override Guid ComponentGuid => new Guid("63680047-20b3-4e89-a085-2add878abb76");
-
-        public BoundingBox ClippingBox => Preview_ComputeClippingBox();
-
-        public bool Hidden { get; set; }
-
-        public bool IsPreviewCapable => !VolatileData.IsEmpty;
-
-        public bool IsBakeCapable => !VolatileData.IsEmpty;
-
-        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-
         public GooGeometryParam()
            : base()
         {
         }
 
-        void IGH_PreviewObject.DrawViewportWires(IGH_PreviewArgs args)
+        public BoundingBox ClippingBox => Preview_ComputeClippingBox();
+        
+        public override Guid ComponentGuid => new Guid("63680047-20b3-4e89-a085-2add878abb76");
+        
+        public bool Hidden { get; set; }
+
+        public bool IsBakeCapable => !VolatileData.IsEmpty;
+        
+        public bool IsPreviewCapable => !VolatileData.IsEmpty;
+        
+        public void BakeGeometry(RhinoDoc rhinoDoc, List<Guid> guids)
         {
-            Preview_DrawWires(args);
+            BakeGeometry(rhinoDoc, rhinoDoc?.CreateDefaultAttributes(), guids);
+        }
+
+        public void BakeGeometry(RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, List<Guid> guids)
+        {
+            if (rhinoDoc == null)
+            {
+                return;
+            }
+
+            if (guids == null)
+            {
+                guids = new List<Guid>();
+            }
+
+            foreach (var value in VolatileData.AllData(true))
+            {
+                IGH_BakeAwareData gH_BakeAwareData = value as IGH_BakeAwareData;
+                if (gH_BakeAwareData == null)
+                {
+                    continue;
+                }
+
+                if(gH_BakeAwareData is IGooGeometry)
+                {
+                    if(((IGooGeometry)gH_BakeAwareData).BakeGeometry(rhinoDoc, objectAttributes, out List<Guid> guids_Temp) && guids_Temp != null)
+                    {
+                        guids.AddRange(guids_Temp);
+                    }
+
+                    continue;
+                }
+
+                if (!gH_BakeAwareData.BakeGeometry(rhinoDoc, objectAttributes, out Guid guid))
+                {
+                    continue;
+                }
+
+                guids.Add(guid);
+            }
         }
 
         void IGH_PreviewObject.DrawViewportMeshes(IGH_PreviewArgs args)
@@ -229,17 +281,13 @@ namespace DiGi.Rhino.Geometry.Classes
             Preview_DrawMeshes(args);
         }
 
-        public bool BakeGeometry(RhinoDoc doc, ObjectAttributes att, out Guid obj_guid)
+        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
+        void IGH_PreviewObject.DrawViewportWires(IGH_PreviewArgs args)
         {
-            throw new NotImplementedException();
+            Preview_DrawWires(args);
         }
 
-        public void BakeGeometry(RhinoDoc doc, List<Guid> obj_ids)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void BakeGeometry(RhinoDoc doc, ObjectAttributes att, List<Guid> obj_ids)
+        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<T>> values)
         {
             throw new NotImplementedException();
         }
@@ -248,22 +296,17 @@ namespace DiGi.Rhino.Geometry.Classes
         {
             throw new NotImplementedException();
         }
-
-        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<T>> values)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class GooGeometryParam : GooGeometryParam<IGeometry>
     {
-        public override Guid ComponentGuid => new Guid("38d1d698-3de7-4537-9175-3b19372718f9");
-
-        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-
         public GooGeometryParam()
             : base()
         {
         }
+
+        public override Guid ComponentGuid => new Guid("38d1d698-3de7-4537-9175-3b19372718f9");
+
+        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
 }
