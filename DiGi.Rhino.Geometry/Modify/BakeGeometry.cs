@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Planar.Interfaces;
-using Eto.Forms;
 
 namespace DiGi.Rhino.Geometry
 {

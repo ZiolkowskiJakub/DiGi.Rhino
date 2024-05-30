@@ -3,7 +3,6 @@ using DiGi.Rhino.Core;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using DiGi.Rhino.Geometry.Classes;
-using Eto.Forms;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System;
