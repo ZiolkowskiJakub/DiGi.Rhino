@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using DiGi.Rhino.Core.Interfaces;
 using DiGi.Core.Interfaces;
 using DiGi.Rhino.Core.Classes;
-using DiGi.Geometry.Spatial.Interfaces;
 using Rhino;
 using Rhino.DocObjects;
 using Rhino.Geometry;
-using DiGi.Geometry.Core.Interfaces;
-using DiGi.Geometry.Planar.Interfaces;
-using DiGi.Geometry.Spatial.Classes;
-using DiGi.Geometry.Planar.Classes;
 using DiGi.Rhino.Geometry.Interfaces;
+using DiGi.Geometry.Core.Interfaces;
+using DiGi.Geometry.Spatial.Interfaces;
+using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Planar.Interfaces;
+using DiGi.Geometry.Planar.Classes;
 
 namespace DiGi.Rhino.Geometry.Classes
 {

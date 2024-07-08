@@ -1,4 +1,5 @@
 ﻿using DiGi.Geometry.Planar.Classes;
+using DiGi.Geometry.Planar.Interfaces;
 using DiGi.Rhino.Core;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
@@ -7,6 +8,7 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DiGi.Rhino.Geometry.Random.Classes
 {
@@ -136,6 +138,20 @@ namespace DiGi.Rhino.Geometry.Random.Classes
             if (index != -1)
             {
                 PolygonalFace2D polygonalFace2D = DiGi.Geometry.Planar.Random.Create.PolygonalFace2D(interval_X.ToDiGi(), interval_Y.ToDiGi(), new DiGi.Core.Classes.Range<int>((int)interval_PointCount.T0, (int)interval_PointCount.T1), new DiGi.Core.Classes.Range<int>((int)interval_InternalEdgeCount.T0, (int)interval_InternalEdgeCount.T1), seed, tolerance);
+
+                double fixTolerance = 0.01;
+
+                if(DiGi.Geometry.Planar.Query.TryUpdate(new IGeometry2DUpdater[] { new DouglasPeuckerUpdater(fixTolerance), new SnapperUpdater(fixTolerance), new TopologyPreservingUpdater(fixTolerance) }, polygonalFace2D, out IGeometry2D geometry2D))
+                {
+                    if(geometry2D is PolygonalFace2D)
+                    {
+                        polygonalFace2D = (PolygonalFace2D)geometry2D;
+                    }
+                    else if(geometry2D is GeometryCollection2D)
+                    {
+                        polygonalFace2D = ((GeometryCollection2D)geometry2D).ToList().Find(x => x is PolygonalFace2D) as PolygonalFace2D;
+                    }
+                }
 
                 dataAccess.SetData(index, polygonalFace2D == null ? null : new GooPolygonalFace2D(polygonalFace2D));
             }

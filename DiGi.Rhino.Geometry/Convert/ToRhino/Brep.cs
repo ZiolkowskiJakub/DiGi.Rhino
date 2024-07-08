@@ -1,8 +1,8 @@
 ﻿using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Interfaces;
 using Rhino.Geometry;
 using System.Collections.Generic;
 using System.Linq;
-using DiGi.Geometry.Spatial.Interfaces;
 
 namespace DiGi.Rhino.Geometry
 {

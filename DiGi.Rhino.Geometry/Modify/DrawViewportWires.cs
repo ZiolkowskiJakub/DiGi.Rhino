@@ -1,8 +1,8 @@
-﻿using Grasshopper.Kernel;
-using DiGi.Geometry.Spatial.Interfaces;
-using DiGi.Geometry.Core.Interfaces;
-using DiGi.Geometry.Spatial.Classes;
+﻿using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Planar.Interfaces;
+using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Interfaces;
+using Grasshopper.Kernel;
 
 namespace DiGi.Rhino.Geometry
 {

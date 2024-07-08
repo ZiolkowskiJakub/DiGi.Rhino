@@ -1,11 +1,11 @@
 ﻿using System;
-using DiGi.Geometry.Spatial.Interfaces;
 using Rhino.DocObjects;
 using Rhino;
 using System.Collections.Generic;
-using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Planar.Interfaces;
+using DiGi.Geometry.Spatial.Interfaces;
+using DiGi.Geometry.Spatial.Classes;
 
 namespace DiGi.Rhino.Geometry
 {

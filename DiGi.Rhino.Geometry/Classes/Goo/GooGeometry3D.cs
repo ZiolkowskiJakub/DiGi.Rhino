@@ -1,6 +1,6 @@
-﻿using Grasshopper.Kernel.Types;
+﻿using DiGi.Geometry.Spatial.Interfaces;
+using Grasshopper.Kernel.Types;
 using System;
-using DiGi.Geometry.Spatial.Interfaces;
 
 namespace DiGi.Rhino.Geometry.Classes
 {
