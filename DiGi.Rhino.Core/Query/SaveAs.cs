@@ -37,7 +37,7 @@ namespace DiGi.Rhino.Core
                 return false;
             }
 
-            System.IO.FileInfo fileInfo = DiGi.Core.Convert.ToFile(jSAMObjects, path);
+            System.IO.FileInfo fileInfo = DiGi.Core.Convert.ToFileInfo(jSAMObjects, path);
 
             return fileInfo != null && fileInfo.Exists;
         }
