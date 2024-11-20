@@ -20,7 +20,6 @@ namespace DiGi.Rhino.Geometry.Classes
         {
             return new GooSegment2D(Value);
         }
-
     }
 
     public class GooSegment2DParam : GooGeometryParam<Segment2D>

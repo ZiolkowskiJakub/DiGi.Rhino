@@ -20,7 +20,6 @@ namespace DiGi.Rhino.Geometry.Classes
         {
             return new GooPoint2D(Value);
         }
-
     }
 
     public class GooPoint2DParam : GooGeometryParam<Point2D>
