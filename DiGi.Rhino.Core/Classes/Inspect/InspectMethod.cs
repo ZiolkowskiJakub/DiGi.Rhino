@@ -7,6 +7,7 @@ namespace DiGi.Rhino.Core.Classes
     public class InspectMethod
     {
         public MethodInfo MethodInfo { get; }
+        
         public InspectAttribute InspectAttribute { get; }
 
         public InspectMethod(MethodInfo methodInfo, InspectAttribute inspectAttribute)
@@ -38,6 +39,11 @@ namespace DiGi.Rhino.Core.Classes
 
             enumerable = true;
 
+            if(type == typeof(IEnumerable))
+            {
+                return true;
+            }
+
             if (typeof(IGH_Goo).IsAssignableFrom(type.GetGenericArguments()[0]))
             {
                 return true;
@@ -56,6 +62,35 @@ namespace DiGi.Rhino.Core.Classes
             IsValid(out bool result);
 
             return result;
+        }
+
+        public bool TryGetValue<T>(object @object, out T value)
+        {
+            value = default;
+
+            if(@object == null || MethodInfo == null)
+            {
+                return false;
+            }
+
+            object value_Temp = MethodInfo.Invoke(null, new object[] { @object });
+            if(value_Temp is T)
+            {
+                value = (T)value_Temp;
+                return true;
+            }
+
+            if(value_Temp is IGH_Goo)
+            {
+                value_Temp = ((dynamic)value_Temp).Value;
+            }
+
+            if(!DiGi.Core.Query.TryConvert(value_Temp, out value))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

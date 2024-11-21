@@ -42,8 +42,8 @@ namespace DiGi.Rhino.Geometry.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometry3DParam() { Name = "geometry3D", NickName = "geometry3D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooPlaneParam() { Name = "plane", NickName = "plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Voluntary));
+                result.Add(new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Voluntary));
                 return result.ToArray();
             }
         }
@@ -56,8 +56,8 @@ namespace DiGi.Rhino.Geometry.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometry2DParam() { Name = "geometry2D", NickName = "geometry2D", Description = "DiGi Geometry 2D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooPlaneParam() { Name = "plane", NickName = "plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Voluntary));
+                result.Add(new Param(new GooGeometry2DParam() { Name = "Geometry2D", NickName = "Geometry2D", Description = "DiGi Geometry 2D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Voluntary));
                 return result.ToArray();
             }
         }
@@ -72,7 +72,7 @@ namespace DiGi.Rhino.Geometry.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("geometry3D");
+            index = Params.IndexOfInputParam("Geometry3D");
             IGeometry3D geometry3D = null;
             if (index == -1 || !dataAccess.GetData(index, ref geometry3D) || geometry3D == null)
             {
@@ -92,7 +92,7 @@ namespace DiGi.Rhino.Geometry.Classes
             }
 
 
-            index = Params.IndexOfOutputParam("geometry2D");
+            index = Params.IndexOfOutputParam("Geometry2D");
             if (index != -1)
             {
                 IGeometry2D geometry2D = null;

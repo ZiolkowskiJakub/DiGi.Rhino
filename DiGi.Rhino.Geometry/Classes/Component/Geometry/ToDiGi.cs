@@ -40,7 +40,7 @@ namespace DiGi.Rhino.Geometry.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Geometry() { Name = "geometry", NickName = "geometry", Description = "Rhino geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Geometry() { Name = "Geometry", NickName = "Geometry", Description = "Rhino geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -53,7 +53,7 @@ namespace DiGi.Rhino.Geometry.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometry3DParam() { Name = "geometry3D", NickName = "geometry3D", Description = "DiGi Geometry3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi Geometry3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -68,7 +68,7 @@ namespace DiGi.Rhino.Geometry.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("geometry");
+            index = Params.IndexOfInputParam("Geometry");
             IGH_GeometricGoo geometricGoo = null;
             if (index == -1 || !dataAccess.GetData(index, ref geometricGoo) || geometricGoo == null)
             {
@@ -76,7 +76,7 @@ namespace DiGi.Rhino.Geometry.Classes
                 return;
             }
 
-            index = Params.IndexOfOutputParam("geometry3D");
+            index = Params.IndexOfOutputParam("Geometry3D");
             if (index != -1)
             {
                 IGeometry3D geometry3D = Convert.ToDiGi(geometricGoo);

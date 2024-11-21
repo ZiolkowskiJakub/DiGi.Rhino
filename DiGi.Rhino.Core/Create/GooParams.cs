@@ -7,7 +7,7 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Create
     {
-        public static HashSet<GooParam> GooParams(this IGooSerializableObject gooSerializableObject)
+        public static List<GooParam> GooParams(this IGooSerializableObject gooSerializableObject)
         {
             if(gooSerializableObject == null)
             {
@@ -20,7 +20,7 @@ namespace DiGi.Rhino.Core
                 return null;
             }
 
-            HashSet<GooParam> result = new HashSet<GooParam>();
+            List<GooParam> result = new List<GooParam>();
             foreach (InspectMethod inspectMethod in inspectMethods)
             {
                 if(inspectMethod == null || !inspectMethod.IsValid(out bool enumerable))
@@ -29,7 +29,12 @@ namespace DiGi.Rhino.Core
                 }
 
                 InspectAttribute inspectAttribute = inspectMethod?.InspectAttribute;
-                if (inspectAttribute == null)
+                if (string.IsNullOrWhiteSpace(inspectAttribute?.Name))
+                {
+                    continue;
+                }
+
+                if (result.Find(x => x.Name == inspectAttribute.Name) != null)
                 {
                     continue;
                 }

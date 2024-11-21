@@ -22,9 +22,10 @@ namespace DiGi.Rhino.Core
 
             foreach(InspectMethod inspectMethod in inspectMethods)
             {
-                if(inspectMethod.InspectAttribute.Name == gooParam.Name)
+                if(inspectMethod?.InspectAttribute?.Name == gooParam.Name)
                 {
-                    return inspectMethod.MethodInfo.Invoke(null, new object[] { gooSerializableObject.GetValue<ISerializableObject>() });
+                    inspectMethod.TryGetValue(gooSerializableObject.GetValue<ISerializableObject>(), out object value);
+                    return value;
                 }
             }
 

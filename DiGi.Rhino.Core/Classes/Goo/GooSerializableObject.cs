@@ -224,30 +224,6 @@ namespace DiGi.Rhino.Core.Classes
             : base()
         {
         }
-
-        protected override GH_GetterResult Prompt_Plural(ref List<GooSerializableObject<T>> values)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override GH_GetterResult Prompt_Singular(ref GooSerializableObject<T> value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
-        {
-            Menu_AppendItem(menu, "Save As...", Menu_SaveAs, VolatileData.AllData(true).Any());
-
-            //Menu_AppendSeparator(menu);
-
-            base.AppendAdditionalMenuItems(menu);
-        }
-
-        private void Menu_SaveAs(object sender, EventArgs e)
-        {
-            Query.SaveAs(VolatileData);
-        }
     }
 
     public class GooSerializableObject : GooSerializableObject<ISerializableObject>
@@ -286,6 +262,20 @@ namespace DiGi.Rhino.Core.Classes
         protected override GH_GetterResult Prompt_Plural(ref List<GooSerializableObject> values)
         {
             throw new NotImplementedException();
+        }
+
+        public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
+        {
+            Menu_AppendItem(menu, "Save As...", Menu_SaveAs, VolatileData.AllData(true).Any());
+
+            //Menu_AppendSeparator(menu);
+
+            base.AppendAdditionalMenuItems(menu);
+        }
+
+        private void Menu_SaveAs(object sender, EventArgs e)
+        {
+            Query.SaveAs(VolatileData);
         }
     }
 }

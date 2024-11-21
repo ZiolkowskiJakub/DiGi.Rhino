@@ -50,16 +50,14 @@ namespace DiGi.Rhino.Core.Classes
         void PopulateOutputParameters(IEnumerable<IGH_Param> @params)
         {
             Dictionary<string, IList<IGH_Param>> dictionary = new Dictionary<string, IList<IGH_Param>>();
-            foreach (IGH_Param param in Params.Output)
+            foreach (IGH_Param gH_Param in Params.Output)
             {
-                if (param.Recipients == null && param.Recipients.Count == 0)
+                if (gH_Param.Recipients == null && gH_Param.Recipients.Count == 0)
+                {
                     continue;
+                }
 
-                IGH_Param gooParameterParam = param as IGH_Param;
-                if (gooParameterParam == null)
-                    continue;
-
-                dictionary.Add(gooParameterParam.Name, new List<IGH_Param>(gooParameterParam.Recipients));
+                dictionary.Add(gH_Param.Name, new List<IGH_Param>(gH_Param.Recipients));
             }
 
             while (Params.Output != null && Params.Output.Count() > 0)
@@ -85,7 +83,7 @@ namespace DiGi.Rhino.Core.Classes
 
                     foreach (IGH_Param param_Temp in @params_Temp)
                     {
-                        param_Temp.AddSource(param_Temp);
+                        param.AddSource(param_Temp);
                     }
                 }
             }
@@ -106,7 +104,7 @@ namespace DiGi.Rhino.Core.Classes
 
         void Menu_PopulateOutputsWithAllParameters(object sender, EventArgs e)
         {
-            HashSet<GooParam> gooParams = new HashSet<GooParam>();
+            List<GooParam> gooParams = new List<GooParam>();
             foreach (object @object in Params.Input[0].VolatileData.AllData(true).OfType<object>())
             {
                 IGooSerializableObject gooSerializableObject = @object as IGooSerializableObject;
@@ -115,7 +113,7 @@ namespace DiGi.Rhino.Core.Classes
                     continue;
                 }
                 
-                HashSet<GooParam> gooParams_Temp = Create.GooParams(gooSerializableObject);
+                List<GooParam> gooParams_Temp = Create.GooParams(gooSerializableObject);
                 if(gooParams_Temp == null)
                 {
                     continue;
@@ -123,7 +121,7 @@ namespace DiGi.Rhino.Core.Classes
 
                 foreach(GooParam gooParam_Temp in gooParams_Temp)
                 {
-                    if(gooParam_Temp == null)
+                    if(gooParam_Temp == null || gooParams.Find(x => x.Name == gooParam_Temp.Name) != null)
                     {
                         continue;
                     }
@@ -142,13 +140,13 @@ namespace DiGi.Rhino.Core.Classes
 
         void Menu_PopulateOutputsWithCommonParameters(object sender, EventArgs e)
         {
-            Dictionary<Type, HashSet<GooParam>> dictionary = new Dictionary<Type, HashSet<GooParam>>();
+            Dictionary<Type, List<GooParam>> dictionary = new Dictionary<Type, List<GooParam>>();
             foreach (object @object in Params.Input[0].VolatileData.AllData(true).OfType<object>())
             {
                 IGooSerializableObject gooSerializableObject = @object as IGooSerializableObject;
                 if (gooSerializableObject == null)
                 {
-                    dictionary = new Dictionary<Type, HashSet<GooParam>>();
+                    dictionary = new Dictionary<Type, List<GooParam>>();
                     break;
                 }
 
@@ -159,10 +157,10 @@ namespace DiGi.Rhino.Core.Classes
                     continue;
                 }
 
-                HashSet<GooParam> gooParams_Temp = Create.GooParams(gooSerializableObject);
+                List<GooParam> gooParams_Temp = Create.GooParams(gooSerializableObject);
                 if (gooParams_Temp == null || gooParams_Temp.Count == 0)
                 {
-                    dictionary = new Dictionary<Type, HashSet<GooParam>>();
+                    dictionary = new Dictionary<Type, List<GooParam>>();
                     break;
                 }
 
@@ -177,7 +175,7 @@ namespace DiGi.Rhino.Core.Classes
                 gooParams = new List<GooParam>(dictionary.Values.First());
                 if (dictionary.Count > 0)
                 {
-                    foreach (KeyValuePair<Type, HashSet<GooParam>> keyValuePair in dictionary)
+                    foreach (KeyValuePair<Type, List<GooParam>> keyValuePair in dictionary)
                     {
                         for (int i = gooParams.Count - 1; i > 0; i--)
                         {

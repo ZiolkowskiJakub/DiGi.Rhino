@@ -1,19 +1,21 @@
-﻿using DiGi.Geometry.Spatial.Interfaces;
+﻿using DiGi.Geometry.Planar.Interfaces;
+using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Interfaces;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
-using Grasshopper.Kernel.Types;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DiGi.Rhino.Geometry.Classes
 {
-    public class ToGrasshopper : VariableParameterComponent
+    public class ToGeometry3D : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("b5ca211a-a681-4149-9cdb-3eb933143127");
+        public override Guid ComponentGuid => new Guid("42d8cfda-ad7c-4e6e-b90e-f7a2ccf1cdc4");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -25,9 +27,9 @@ namespace DiGi.Rhino.Geometry.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public ToGrasshopper()
-          : base("Geometry.ToGrasshopper", "Geomery.ToGrasshopper",
-              "Converts DiGi geometry to Grasshopper geometry",
+        public ToGeometry3D()
+          : base("Geometry.ToGeometry3D", "Geomery.ToGeometry3D",
+              "Converts DiGi geometry 3D to DiGi geometry 3D",
               "DiGi", "DiGi.Geometry")
         {
         }
@@ -40,7 +42,8 @@ namespace DiGi.Rhino.Geometry.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooGeometry2DParam() { Name = "Geometry2D", NickName = "Geometry2D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Voluntary));
                 return result.ToArray();
             }
         }
@@ -53,7 +56,7 @@ namespace DiGi.Rhino.Geometry.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Geometry() { Name = "Geometry", NickName = "Geometry", Description = "Grasshopper Geometry3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi Geometry 3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -68,20 +71,32 @@ namespace DiGi.Rhino.Geometry.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("Geometry3D");
-            IGeometry3D geometry3D = null;
-            if (index == -1 || !dataAccess.GetData(index, ref geometry3D) || geometry3D == null)
+            index = Params.IndexOfInputParam("Geometry2D");
+            IGeometry2D geometry2D = null;
+            if (index == -1 || !dataAccess.GetData(index, ref geometry2D) || geometry2D == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            index = Params.IndexOfOutputParam("Geometry");
+            Plane plane = null;
+            if (geometry2D is IPlanar)
+            {
+                plane = ((IPlanar)geometry2D).Plane;
+            }
+
+            if(plane == null)
+            {
+                plane = DiGi.Geometry.Spatial.Constans.Plane.WorldZ;
+            }
+
+
+            index = Params.IndexOfOutputParam("Geometry3D");
             if (index != -1)
             {
-                IGH_Goo gH_Goo = Convert.ToGrasshopper(geometry3D);
+                IGeometry3D geometry3D = DiGi.Geometry.Spatial.Query.Convert(plane, geometry2D);
 
-                dataAccess.SetData(index, gH_Goo);
+                dataAccess.SetData(index, new GooGeometry3D(geometry3D));
             }
         }
     }
