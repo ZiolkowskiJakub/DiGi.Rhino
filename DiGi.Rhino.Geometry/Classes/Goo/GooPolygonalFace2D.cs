@@ -16,9 +16,14 @@ namespace DiGi.Rhino.Geometry.Classes
             Value = polygonalFace2D;
         }
 
+        public GooPolygonalFace2D(GooPolygonalFace2D gooPolygonalFace2D)
+        {
+            Value = gooPolygonalFace2D?.Value;
+        }
+
         public override IGH_Goo Duplicate()
         {
-            return new GooPolygonalFace2D(Value);
+            return new GooPolygonalFace2D(this);
         }
 
     }

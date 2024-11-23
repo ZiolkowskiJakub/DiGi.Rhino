@@ -13,14 +13,19 @@ namespace DiGi.Rhino.Geometry
                 return default;
             }
 
-            if(geometry3D is Segment3D)
+            if (geometry3D is Point3D)
+            {
+                return ToGrasshopper((Point3D)geometry3D);
+            }
+
+            if (geometry3D is Segment3D)
             {
                 return ToGrasshopper((Segment3D)geometry3D);
             }
 
-            if (geometry3D is Point3D)
+            if (geometry3D is Rectangle3D)
             {
-                return ToGrasshopper((Point3D)geometry3D);
+                return ToGrasshopper((Rectangle3D)geometry3D);
             }
 
             if (geometry3D is PolygonalFace3D)

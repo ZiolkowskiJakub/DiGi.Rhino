@@ -4,14 +4,14 @@ namespace DiGi.Rhino.Geometry
 {
     public static partial class Convert
     {
-        public static global::Rhino.Geometry.Point3d ToRhino(this Point3D point3D)
+        public static global::Rhino.Geometry.Vector3d ToRhino(this Vector3D vector3D)
         {
-            if (point3D == null)
+            if (vector3D == null)
             {
-                return global::Rhino.Geometry.Point3d.Unset;
+                return global::Rhino.Geometry.Vector3d.Unset;
             }
 
-            return new global::Rhino.Geometry.Point3d(point3D.X, point3D.Y, point3D.Z);
+            return new global::Rhino.Geometry.Vector3d(vector3D.X, vector3D.Y, vector3D.Z);
         }
     }
 }

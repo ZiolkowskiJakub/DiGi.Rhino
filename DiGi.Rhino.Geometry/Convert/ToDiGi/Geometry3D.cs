@@ -33,6 +33,11 @@ namespace DiGi.Rhino.Geometry
                 return ToDiGi((global::Rhino.Geometry.Point3d)@object);
             }
 
+            if (@object is global::Rhino.Geometry.Rectangle3d)
+            {
+                return ToDiGi((global::Rhino.Geometry.Rectangle3d)@object);
+            }
+
             if (@object is global::Rhino.Geometry.LineCurve)
             {
                 return ToDiGi((global::Rhino.Geometry.LineCurve)@object);
