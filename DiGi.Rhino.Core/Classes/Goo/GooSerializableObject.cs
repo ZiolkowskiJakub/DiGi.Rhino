@@ -69,7 +69,7 @@ namespace DiGi.Rhino.Core.Classes
                 return false;
             }
 
-            string json = DiGi.Core.Convert.ToString(Value);
+            string json = DiGi.Core.Convert.ToSystem_String(Value);
             if (json == null)
             {
                 return false;
