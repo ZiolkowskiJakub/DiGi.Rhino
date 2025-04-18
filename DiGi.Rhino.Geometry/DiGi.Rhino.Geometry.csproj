@@ -6,16 +6,16 @@
     <OutputPath>..\bin\</OutputPath>
     <Title>DiGi.Rhino.Geometry</Title>
     <Description>DiGi.Rhino.Geometry</Description>
-    <TargetExt>.gha</TargetExt>
+    <TargetExt>.dll</TargetExt>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Grasshopper" Version="7.13.21348.13001" IncludeAssets="compile;build" />
+    <PackageReference Include="Grasshopper" Version="8.18.25100.11001" IncludeAssets="compile;build" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="QuikGraph" Version="2.5.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.0" />
+    <PackageReference Include="System.Text.Json" Version="9.0.4" />
   </ItemGroup>
   
   <ItemGroup>
@@ -34,5 +34,9 @@
 	</Reference>
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
-
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Copy
+			SourceFiles="$(TargetPath)"
+			DestinationFiles="$(TargetDir)$(TargetName).gha" />
+	</Target>
 </Project>
