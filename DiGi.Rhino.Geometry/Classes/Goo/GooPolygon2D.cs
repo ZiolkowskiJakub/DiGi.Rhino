@@ -4,32 +4,32 @@ using System;
 
 namespace DiGi.Rhino.Geometry.Classes
 {
-    public class GooPolygon2D : GooGeometry2D<Polygon2D>
+    public class GooEllipse2D : GooGeometry2D<Ellipse2D>
     {
-        public GooPolygon2D()
+        public GooEllipse2D()
             : base()
         {
         }
 
-        public GooPolygon2D(Polygon2D polygon2D)
+        public GooEllipse2D(Ellipse2D ellipse2D)
         {
-            Value = polygon2D;
+            Value = ellipse2D;
         }
 
         public override IGH_Goo Duplicate()
         {
-            return new GooPolygon2D(Value);
+            return new GooEllipse2D(Value);
         }
 
     }
 
-    public class GooPolygon2DParam : GooGeometryParam<Polygon2D>
+    public class GooEllipse2DParam : GooGeometryParam<Ellipse2D>
     {
-        public override Guid ComponentGuid => new Guid("d20aa671-8cc3-48b6-9b7a-2dd61ceb3799");
+        public override Guid ComponentGuid => new Guid("7e79f2a6-a3a8-4955-bcec-536e646943ea");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
-        public GooPolygon2DParam()
+        public GooEllipse2DParam()
             : base()
         {
         }

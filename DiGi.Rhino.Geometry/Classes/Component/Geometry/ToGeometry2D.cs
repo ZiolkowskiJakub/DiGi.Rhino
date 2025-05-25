@@ -43,7 +43,7 @@ namespace DiGi.Rhino.Geometry.Classes
             {
                 List<Param> result = new List<Param>();
                 result.Add(new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Voluntary));
+                result.Add(new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
                 return result.ToArray();
             }
         }
@@ -81,16 +81,28 @@ namespace DiGi.Rhino.Geometry.Classes
             }
 
             Plane plane = null;
-            if (geometry3D is IPlanar)
+
+            index = Params.IndexOfInputParam("Plane");
+            if (index != -1)
             {
-                plane = ((IPlanar)geometry3D).Plane;
+                if(!dataAccess.GetData(index, ref plane))
+                {
+                    plane = null;
+                }
+            }
+
+            if(plane == null)
+            {
+                if (geometry3D is IPlanar)
+                {
+                    plane = ((IPlanar)geometry3D).Plane;
+                }
             }
 
             if(plane == null)
             {
                 plane = DiGi.Geometry.Spatial.Constans.Plane.WorldZ;
             }
-
 
             index = Params.IndexOfOutputParam("Geometry2D");
             if (index != -1)

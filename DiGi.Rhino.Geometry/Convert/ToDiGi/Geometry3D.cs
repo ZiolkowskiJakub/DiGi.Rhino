@@ -53,6 +53,11 @@ namespace DiGi.Rhino.Geometry
                 return ToDiGi((global::Rhino.Geometry.Curve)@object, tolerance);
             }
 
+            if (@object is global::Rhino.Geometry.Ellipse)
+            {
+                return ToDiGi((global::Rhino.Geometry.Ellipse)@object);
+            }
+
             if (@object is global::Rhino.Geometry.Brep)
             {
                 global::Rhino.Geometry.Brep brep = (global::Rhino.Geometry.Brep)@object;
@@ -62,6 +67,11 @@ namespace DiGi.Rhino.Geometry
                 {
                     return polyhedron;
                 }
+            }
+
+            if (@object is global::Rhino.Geometry.Plane)
+            {
+                return ToDiGi((global::Rhino.Geometry.Plane)@object);
             }
 
             return null;

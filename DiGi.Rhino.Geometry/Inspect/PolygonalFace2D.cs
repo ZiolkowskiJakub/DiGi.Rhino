@@ -17,16 +17,5 @@ namespace DiGi.Rhino.Geometry
 
             return new GooPoint2D(DiGi.Geometry.Planar.Query.Centroid(polygonalFace2D));
         }
-
-        [Inspect("Height", "Height", "Height")]
-        public static GH_Number B(this DiGi.Geometry.Planar.Classes.BoundingBox2D boundingBox2D)
-        {
-            if (boundingBox2D == null)
-            {
-                return null;
-            }
-
-            return new GH_Number(boundingBox2D.Height);
-        }
     }
 }

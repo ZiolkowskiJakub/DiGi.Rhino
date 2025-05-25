@@ -37,6 +37,11 @@ namespace DiGi.Rhino.Geometry
                 gH_PreviewWireArgs.Pipeline.DrawCurve(((Segment3D)geometry3D).ToRhino(), color);
             }
 
+            if (geometry3D is Ellipse3D)
+            {
+                gH_PreviewWireArgs.Pipeline.DrawCurve(((Ellipse3D)geometry3D).ToRhino()?.ToNurbsCurve(), color);
+            }
+
             if (geometry3D is IPolygonal3D)
             {
                 gH_PreviewWireArgs.Pipeline.DrawCurve(((IPolygonal3D)geometry3D).ToRhino(), color);

@@ -26,6 +26,11 @@ namespace DiGi.Rhino.Geometry
                 return ToDiGi((PolyCurve)curve, tolerance);
             }
 
+            if (curve.IsEllipse() && curve.TryGetEllipse(out Ellipse ellipse))
+            {
+                return ToDiGi(ellipse);
+            }
+
             throw new System.NotImplementedException();
         }
 

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Version>1.0</Version>
     <OutputPath>..\bin\</OutputPath>
     <Title>DiGi.Rhino.Geometry</Title>
@@ -12,10 +12,10 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Grasshopper" Version="8.18.25100.11001" IncludeAssets="compile;build" />
+    <PackageReference Include="Grasshopper" Version="8.19.25132.1001" IncludeAssets="compile;build" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="QuikGraph" Version="2.5.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.4" />
+    <PackageReference Include="System.Text.Json" Version="9.0.5" />
   </ItemGroup>
   
   <ItemGroup>
@@ -32,11 +32,8 @@
 	<Reference Include="DiGi.Geometry.Random">
 	  <HintPath>..\..\DiGi.Geometry.Random\bin\DiGi.Geometry.Random.dll</HintPath>
 	</Reference>
-    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Copy
-			SourceFiles="$(TargetPath)"
-			DestinationFiles="$(TargetDir)$(TargetName).gha" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFiles="$(TargetDir)$(TargetName).gha" />
 	</Target>
 </Project>

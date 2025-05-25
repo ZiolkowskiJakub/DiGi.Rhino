@@ -4,31 +4,31 @@ using System;
 
 namespace DiGi.Rhino.Geometry.Classes
 {
-    public class GooPlane : GooGeometry3D<Plane>
+    public class GooPoint3D : GooGeometry3D<Point3D>
     {
-        public GooPlane()
+        public GooPoint3D()
             : base()
         {
         }
 
-        public GooPlane(Plane plane)
+        public GooPoint3D(Point3D point3D)
         {
-            Value = plane;
+            Value = point3D;
         }
 
         public override IGH_Goo Duplicate()
         {
-            return new GooPlane(Value);
+            return new GooPoint3D(Value);
         }
     }
 
-    public class GooPlaneParam : GooGeometryParam<Plane>
+    public class GooPoint3DParam : GooGeometryParam<Point3D>
     {
-        public override Guid ComponentGuid => new Guid("3c36ec41-1560-4ec9-93cc-01bc990f5486");
+        public override Guid ComponentGuid => new Guid("baacf835-6a09-41d4-9219-dd9ef1b54a0e");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
-        public GooPlaneParam()
+        public GooPoint3DParam()
             : base()
         {
         }
