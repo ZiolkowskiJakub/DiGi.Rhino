@@ -54,5 +54,17 @@ namespace DiGi.Rhino.Geometry
             return ellipse3D.GetFocalPoints()?.ToList().ConvertAll(x => new GooPoint3D(x));
         }
 
+        [Inspect("Plane", "Plane", "Plane")]
+        public static GooPlane Plane(this Ellipse3D ellipse3D)
+        {
+            if (ellipse3D == null)
+            {
+                return null;
+            }
+
+
+            return new GooPlane(ellipse3D.Plane);
+        }
+
     }
 }

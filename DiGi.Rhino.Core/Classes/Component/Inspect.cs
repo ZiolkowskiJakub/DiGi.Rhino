@@ -1,4 +1,3 @@
-using DiGi.Core;
 using DiGi.Rhino.Core.Interfaces;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Attributes;
@@ -24,9 +23,9 @@ namespace DiGi.Rhino.Core.Classes
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
         public Inspect()
-          : base("Core.Inspect", "Inspect",
+          : base("Core.Inspect", "Core.Inspect",
               "Inspect Object",
-              "DiGi", "Core")
+              "DiGi", "DiGi.Core")
         {
 
         }
