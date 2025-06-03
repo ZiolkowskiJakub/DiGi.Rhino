@@ -1,11 +1,7 @@
-using DiGi.Core.Classes;
-using DiGi.Core.Constans;
-using DiGi.Core.Enums;
 using DiGi.Core.Interfaces;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
-using Rhino.Commands;
 using System;
 using System.Collections.Generic;
 

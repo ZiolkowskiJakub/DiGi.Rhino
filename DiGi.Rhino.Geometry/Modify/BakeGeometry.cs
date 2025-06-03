@@ -82,6 +82,13 @@ namespace DiGi.Rhino.Geometry
                 return true;
             }
 
+            if (geometry3D is Mesh3D)
+            {
+                Guid guid = rhinoDoc.Objects.AddMesh(Convert.ToRhino((Mesh3D)geometry3D), objectAttributes);
+                guids.Add(guid);
+                return true;
+            }
+
             return false;
         }
     }

@@ -6,7 +6,6 @@ using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DiGi.Rhino.Geometry.Classes
 {

@@ -1,5 +1,4 @@
-﻿using DiGi.Core.Classes;
-using DiGi.Rhino.Core.Classes;
+﻿using DiGi.Rhino.Core.Classes;
 
 namespace DiGi.Rhino.Core
 {

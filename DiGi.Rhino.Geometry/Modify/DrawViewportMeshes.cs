@@ -2,7 +2,6 @@
 using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Spatial.Interfaces;
 using Grasshopper.Kernel;
-using Rhino.Geometry;
 
 namespace DiGi.Rhino.Geometry
 {
@@ -28,23 +27,18 @@ namespace DiGi.Rhino.Geometry
                 displayMaterial = gH_PreviewMeshArgs.Material;
             }
 
-            Brep brep = null;
-
             if (geometry3D is PolygonalFace3D)
             {
-                brep = ((PolygonalFace3D)geometry3D).ToRhino();
+                gH_PreviewMeshArgs.Pipeline.DrawBrepShaded(((PolygonalFace3D)geometry3D).ToRhino(), displayMaterial);
             }
             else if (geometry3D is Polyhedron)
             {
-                brep = ((Polyhedron)geometry3D).ToRhino();
+                gH_PreviewMeshArgs.Pipeline.DrawBrepShaded(((Polyhedron)geometry3D).ToRhino(), displayMaterial);
             }
-
-            if (brep == null)
+            else if (geometry3D is Mesh3D)
             {
-                return;
+                gH_PreviewMeshArgs.Pipeline.DrawMeshShaded(((Mesh3D)geometry3D).ToRhino(), displayMaterial);
             }
-
-            gH_PreviewMeshArgs.Pipeline.DrawBrepShaded(brep, displayMaterial);
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using DiGi.Geometry.Planar;
-using DiGi.Rhino.Core.Classes;
+﻿using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Geometry.Classes;
-using Grasshopper.Kernel.Types;
 
 namespace DiGi.Rhino.Geometry
 {
