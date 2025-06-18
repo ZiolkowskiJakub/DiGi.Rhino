@@ -8,7 +8,7 @@ namespace DiGi.Rhino.Geometry
 {
     public static partial class Convert
     {
-        public static Brep ToRhino(this PolygonalFace3D polygonalFace3D, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static Brep ToRhino(this IPolygonalFace3D polygonalFace3D, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             List<IPolygonal3D> polygonal3Ds = polygonalFace3D?.Edges;
             if(polygonal3Ds == null || polygonal3Ds.Count == 0)
@@ -44,7 +44,7 @@ namespace DiGi.Rhino.Geometry
 
         public static Brep ToRhino(this Polyhedron polyhedron, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
-            List<PolygonalFace3D> polygonalFace3Ds = polyhedron?.PolygonalFaces;
+            List<IPolygonalFace3D> polygonalFace3Ds = polyhedron?.PolygonalFaces;
             if(polygonalFace3Ds == null)
             {
                 return null;

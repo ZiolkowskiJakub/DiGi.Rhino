@@ -56,7 +56,7 @@ namespace DiGi.Rhino.Geometry
                     polygonal2Ds.Add(polygonal2D);
                 }
 
-                PolygonalFace2D polygonalFace2D = DiGi.Geometry.Planar.Create.PolygonalFace2Ds(polygonal2Ds, tolerance).FirstOrDefault();
+                IPolygonalFace2D polygonalFace2D = DiGi.Geometry.Planar.Create.PolygonalFace2Ds(polygonal2Ds, tolerance).FirstOrDefault();
                 if(polygonalFace2D == null)
                 {
                     return null;

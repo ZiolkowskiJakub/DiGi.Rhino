@@ -62,5 +62,16 @@ namespace DiGi.Rhino.Geometry
 
             return new GH_Number(triangle3D.Length);
         }
+
+        [Inspect("Plane", "Plane", "Plane")]
+        public static GooPlane Plane(this Triangle3D triangle3D)
+        {
+            if (triangle3D == null)
+            {
+                return null;
+            }
+
+            return new GooPlane(triangle3D.Plane);
+        }
     }
 }
