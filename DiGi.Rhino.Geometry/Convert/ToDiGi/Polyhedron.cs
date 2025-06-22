@@ -70,7 +70,7 @@ namespace DiGi.Rhino.Geometry
                 return null;
             }
 
-            return Create.Polyhedron(polygonalFace3Ds);
+            return DiGi.Geometry.Spatial.Create.Polyhedron(polygonalFace3Ds);
         }
     }
 }

@@ -3,6 +3,7 @@ using DiGi.Geometry.Planar.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Spatial.Interfaces;
 using Grasshopper.Kernel;
+using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry
 {
@@ -77,6 +78,24 @@ namespace DiGi.Rhino.Geometry
             }
 
             DrawViewportWires(geometry3D, gH_PreviewWireArgs, color);
+        }
+        
+        public static void DrawViewportWires<TGeometry>(this IEnumerable<TGeometry> geometries, GH_PreviewWireArgs gH_PreviewWireArgs, System.Drawing.Color color) where TGeometry : IGeometry
+        {
+            if (geometries == null || gH_PreviewWireArgs == null)
+            {
+                return;
+            }
+
+            foreach (TGeometry geometry in geometries)
+            {
+                DrawViewportWires(geometry, gH_PreviewWireArgs, color);
+            }
+        }
+
+        public static void DrawViewportWires(this IIntersectionResult3D intersectionResult3D, GH_PreviewWireArgs gH_PreviewWireArgs, System.Drawing.Color color)
+        {
+            DrawViewportWires(intersectionResult3D?.GetGeometry3Ds<IGeometry3D>(), gH_PreviewWireArgs, color);
         }
     }
 }

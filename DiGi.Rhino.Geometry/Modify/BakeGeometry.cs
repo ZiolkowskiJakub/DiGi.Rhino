@@ -1,11 +1,12 @@
-﻿using System;
-using Rhino.DocObjects;
-using Rhino;
-using System.Collections.Generic;
-using DiGi.Geometry.Spatial.Interfaces;
+﻿using DiGi.Geometry.Core.Interfaces;
+using DiGi.Geometry.Planar.Classes;
 using DiGi.Geometry.Planar.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
-using DiGi.Geometry.Core.Interfaces;
+using DiGi.Geometry.Spatial.Interfaces;
+using Rhino;
+using Rhino.DocObjects;
+using System;
+using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry
 {
@@ -90,6 +91,37 @@ namespace DiGi.Rhino.Geometry
             }
 
             return false;
+        }
+
+        public static bool BakeGeometry<TGeometry>(this IEnumerable<TGeometry> geometries, RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids) where TGeometry : IGeometry
+        {
+            guids = null;
+
+            if (geometries == null || rhinoDoc == null || objectAttributes == null)
+            {
+                return false;
+            }
+
+            guids = new List<Guid>();
+            foreach (IGeometry3D geometry3D in geometries)
+            {
+                if (!BakeGeometry(geometry3D, rhinoDoc, objectAttributes, out List<Guid> guids_Temp) || guids_Temp == null || guids_Temp.Count == 0)
+                {
+                    continue;
+                }
+
+                foreach (Guid guid_Temp in guids_Temp)
+                {
+                    guids.Add(guid_Temp);
+                }
+            }
+
+            return guids != null && guids.Count > 0;
+        }
+
+        public static bool BakeGeometry(this IIntersectionResult3D intersectionResult3D, RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids)
+        {
+            return BakeGeometry(intersectionResult3D?.GetGeometry3Ds<IGeometry3D>(), rhinoDoc, objectAttributes, out guids);
         }
     }
 }

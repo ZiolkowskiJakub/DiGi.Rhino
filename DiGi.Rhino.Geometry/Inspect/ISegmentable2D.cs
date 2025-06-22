@@ -15,7 +15,7 @@ namespace DiGi.Rhino.Geometry
                 return null;
             }
 
-            return new GooRectangle2D(Create.Rectangle2D(segmentable2D));
+            return new GooRectangle2D(DiGi.Geometry.Planar.Create.Rectangle2D(segmentable2D));
         }
 
         [Inspect("Points", "Points", "Points")]
