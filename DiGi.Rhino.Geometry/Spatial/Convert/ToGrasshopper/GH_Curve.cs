@@ -1,4 +1,5 @@
 ﻿using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Interfaces;
 using Grasshopper.Kernel.Types;
 
 namespace DiGi.Rhino.Geometry.Spatial
@@ -13,6 +14,16 @@ namespace DiGi.Rhino.Geometry.Spatial
             }
 
             return new GH_Curve(segment3D.ToRhino());
+        }
+
+        public static GH_Curve ToGrasshopper(this IPolygonal3D polygonal3D)
+        {
+            if (polygonal3D == null)
+            {
+                return null;
+            }
+
+            return new GH_Curve(polygonal3D.ToRhino());
         }
     }
 }

@@ -5,14 +5,14 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static GH_Point ToGrasshopper(this Point3D point3D)
+        public static GH_Mesh ToGrasshopper(this Mesh3D mesh3D)
         {
-            if (point3D == null)
+            if (mesh3D == null)
             {
                 return null;
             }
 
-            return new GH_Point(point3D.ToRhino());
+            return new GH_Mesh(mesh3D.ToRhino());
         }
     }
 }

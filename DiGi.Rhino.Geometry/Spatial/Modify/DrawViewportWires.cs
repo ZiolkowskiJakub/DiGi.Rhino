@@ -32,38 +32,31 @@ namespace DiGi.Rhino.Geometry.Spatial
             {
                 gH_PreviewWireArgs.Pipeline.DrawPoint(((Point3D)geometry3D).ToRhino(), color);
             }
-
-            if (geometry3D is Segment3D)
+            else if (geometry3D is Segment3D)
             {
                 gH_PreviewWireArgs.Pipeline.DrawCurve(((Segment3D)geometry3D).ToRhino(), color);
             }
-
-            if (geometry3D is Ellipse3D)
+            else if (geometry3D is Ellipse3D)
             {
                 gH_PreviewWireArgs.Pipeline.DrawCurve(((Ellipse3D)geometry3D).ToRhino()?.ToNurbsCurve(), color);
             }
-
-            if (geometry3D is IPolygonal3D)
+            else if (geometry3D is IPolygonal3D)
             {
                 gH_PreviewWireArgs.Pipeline.DrawCurve(((IPolygonal3D)geometry3D).ToRhino(), color);
             }
-
-            if (geometry3D is Polyline3D)
+            else if (geometry3D is Polyline3D)
             {
                 gH_PreviewWireArgs.Pipeline.DrawCurve(((Polyline3D)geometry3D).ToRhino(), color);
             }
-
-            if (geometry3D is PolygonalFace3D)
+            else if (geometry3D is PolygonalFace3D)
             {
                 gH_PreviewWireArgs.Pipeline.DrawBrepWires(((PolygonalFace3D)geometry3D).ToRhino(), color);
             }
-
-            if (geometry3D is Polyhedron)
+            else if (geometry3D is Polyhedron)
             {
                 gH_PreviewWireArgs.Pipeline.DrawBrepWires(((Polyhedron)geometry3D).ToRhino(), color);
             }
-
-            if (geometry3D is BoundingBox3D)
+            else if (geometry3D is BoundingBox3D)
             {
                 gH_PreviewWireArgs.Pipeline.DrawBox(((BoundingBox3D)geometry3D).ToRhino(), color);
             }

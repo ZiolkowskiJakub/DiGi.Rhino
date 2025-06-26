@@ -6,7 +6,7 @@ namespace DiGi.Rhino.Core.Classes
 {
     public class RhinoInfo : GH_AssemblyInfo
     {
-        public override string Name => "DiGi.Rhino";
+        public override string Name => "DiGi.Rhino.Core";
 
         //Return a 24x24 pixel bitmap to represent this GHA library.
         public override Bitmap Icon => null;

@@ -5,37 +5,37 @@ using System;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
-    public class GooPolygonalFace3D : GooGeometry3D<IPolygonalFace3D>
+    public class GooPolygonal3D : GooGeometry3D<IPolygonal3D>
     {
-        public GooPolygonalFace3D()
+        public GooPolygonal3D()
             : base()
         {
         }
 
-        public GooPolygonalFace3D(IPolygonalFace3D polygonalFace3D)
+        public GooPolygonal3D(IPolygonal3D polygonal3D)
         {
-            Value = polygonalFace3D;
+            Value = polygonal3D;
         }
 
-        public GooPolygonalFace3D(GooPolygonalFace3D gooPolygonalFace3D)
+        public GooPolygonal3D(GooPolygonal3D gooPolygonal3D)
         {
-            Value = gooPolygonalFace3D?.Value;
+            Value = gooPolygonal3D?.Value;
         }
 
         public override IGH_Goo Duplicate()
         {
-            return new GooPolygonalFace3D(this);
+            return new GooPolygonal3D(this);
         }
 
     }
 
-    public class GooPolygonalFace3DParam : GooGeometryParam<IPolygonalFace3D>
+    public class GooPolygonal3DParam : GooGeometryParam<IPolygonal3D>
     {
-        public override Guid ComponentGuid => new Guid("81f5aaec-0abd-470f-93b0-13cdce5aeb34");
+        public override Guid ComponentGuid => new Guid("b1999ae8-dd6d-450e-8080-286119574b29");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
-        public GooPolygonalFace3DParam()
+        public GooPolygonal3DParam()
             : base()
         {
         }

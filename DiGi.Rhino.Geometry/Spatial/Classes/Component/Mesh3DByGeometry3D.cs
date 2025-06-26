@@ -1,4 +1,5 @@
 ﻿using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Interfaces;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
@@ -7,12 +8,12 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
-    public class Mesh3DByEllipsoid : VariableParameterComponent
+    public class Mesh3DByGeometry3D : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("b060c096-fc99-48ca-90c3-a4b1f1482de3");
+        public override Guid ComponentGuid => new Guid("c7cf7362-34e1-4222-8a9e-fb272fde8576");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -24,8 +25,8 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public Mesh3DByEllipsoid()
-          : base("Geometry.Mesh3DByEllipsoid", "Geomery.Mesh3DByEllipsoid",
+        public Mesh3DByGeometry3D()
+          : base("Geometry.Mesh3DByGeometry3D", "Geomery.Mesh3DByGeometry3D",
               "Create Mesh3D",
               "DiGi", "DiGi.Geometry")
         {
@@ -39,9 +40,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooEllipsoidParam() { Name = "Ellipsoid", NickName = "Ellipsoid", Description = "Ellipsoid", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Integer() { Name = "Stacks", NickName = "Stacks", Description = "Stacks", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Integer() { Name = "Slices", NickName = "Slices", Description = "Slices", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "Geometry3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+
+                Grasshopper.Kernel.Parameters.Param_Number param_Number = new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
+                param_Number.SetPersistentData(DiGi.Core.Constans.Tolerance.Distance);
+                result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
                 return result.ToArray();
             }
@@ -70,32 +73,36 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("Ellipsoid");
-            DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid = null;
-            if (index == -1 || !dataAccess.GetData(index, ref ellipsoid) || ellipsoid == null)
+            index = Params.IndexOfInputParam("Geometry3D");
+            IGeometry3D geometry3D = null;
+            if (index == -1 || !dataAccess.GetData(index, ref geometry3D) || geometry3D == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            int stacks = -1;
-            index = Params.IndexOfInputParam("Stacks");
-            if (index == -1 || !dataAccess.GetData(index, ref stacks))
+            double tolerance = DiGi.Core.Constans.Tolerance.Distance;
+            index = Params.IndexOfInputParam("Tolerance");
+            if (index != -1)
             {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
-                return;
+                dataAccess.GetData(index, ref tolerance);
             }
 
-            int slices = -1;
-            index = Params.IndexOfInputParam("Slices");
-            if (index == -1 || !dataAccess.GetData(index, ref slices))
+            Mesh3D mesh3D = null;
+
+            if (geometry3D is PolygonalFace3D)
             {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
-                return;
+                mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D((PolygonalFace3D)geometry3D, tolerance);
+            }
+            else if (geometry3D is Polyhedron)
+            {
+                mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D((Polyhedron)geometry3D, tolerance);
+            }
+            else if (geometry3D is IPolygonal3D)
+            {
+                mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D(new PolygonalFace3D((IPolygonal3D)geometry3D), tolerance);
             }
 
-
-            Mesh3D mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D(ellipsoid, stacks, slices);
             index = Params.IndexOfOutputParam("Mesh3D");
             if (index != -1)
             {

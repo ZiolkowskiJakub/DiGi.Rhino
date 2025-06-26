@@ -1,6 +1,8 @@
 ﻿using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Spatial.Interfaces;
 using Grasshopper.Kernel.Types;
+using Rhino.Geometry;
+using Rhino.Geometry.Collections;
 
 namespace DiGi.Rhino.Geometry.Spatial
 {
@@ -28,44 +30,57 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return null;
             }
 
-            if (@object is global::Rhino.Geometry.Point3d) 
+            if (@object is Point3d) 
             {
-                return ToDiGi((global::Rhino.Geometry.Point3d)@object);
+                return ToDiGi((Point3d)@object);
             }
 
-            if (@object is global::Rhino.Geometry.Rectangle3d)
+            if (@object is Rectangle3d)
             {
-                return ToDiGi((global::Rhino.Geometry.Rectangle3d)@object);
+                return ToDiGi((Rectangle3d)@object);
             }
 
-            if (@object is global::Rhino.Geometry.LineCurve)
+            if (@object is LineCurve)
             {
-                return ToDiGi((global::Rhino.Geometry.LineCurve)@object);
+                return ToDiGi((LineCurve)@object);
             }
 
-            if (@object is global::Rhino.Geometry.Line)
+            if (@object is Line)
             {
-                return ToDiGi((global::Rhino.Geometry.Line)@object);
+                return ToDiGi((Line)@object);
             }
 
-            if (@object is global::Rhino.Geometry.Curve)
+            if (@object is Curve)
             {
-                return ToDiGi((global::Rhino.Geometry.Curve)@object, tolerance);
+                return ToDiGi((Curve)@object, tolerance);
             }
 
-            if (@object is global::Rhino.Geometry.Ellipse)
+            if (@object is Ellipse)
             {
-                return ToDiGi((global::Rhino.Geometry.Ellipse)@object);
+                return ToDiGi((Ellipse)@object);
             }
 
-            if (@object is global::Rhino.Geometry.Brep)
+            if (@object is Brep)
             {
-                global::Rhino.Geometry.Brep brep = (global::Rhino.Geometry.Brep)@object;
+                Brep brep = (Brep)@object;
 
-                Polyhedron polyhedron = brep.ToDiGi_Polyhedron(tolerance);
-                if(polyhedron != null)
+                if(brep.IsSolid)
                 {
-                    return polyhedron;
+                    Polyhedron polyhedron = brep.ToDiGi_Polyhedron(tolerance);
+                    if (polyhedron != null)
+                    {
+                        return polyhedron;
+                    }
+                }
+                else
+                {
+                    double unitScale = Core.Query.UnitScale();
+
+                    BrepFaceList brepFaceList = brep.Faces;
+                    if (brepFaceList.Count == 1 && brepFaceList[0].IsPlanar(unitScale * tolerance))
+                    {
+                        return ToDiGi_PolygonalFace3D(brepFaceList[0], tolerance);
+                    }
                 }
             }
 

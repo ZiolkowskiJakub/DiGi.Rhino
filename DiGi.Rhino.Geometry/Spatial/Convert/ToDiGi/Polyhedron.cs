@@ -33,36 +33,13 @@ namespace DiGi.Rhino.Geometry.Spatial
                     return null;
                 }
 
-                if (!Query.TryGetPlane(brepFace, out DiGi.Geometry.Spatial.Classes.Plane plane, tolerance) || plane == null)
+                PolygonalFace3D polygonalFace3D = brepFace.ToDiGi_PolygonalFace3D(tolerance);
+                if(polygonalFace3D == null)
                 {
-                    return null;
+                    continue;
                 }
 
-                List<IPolygonal2D> polygonal2Ds = new List<IPolygonal2D>();
-                foreach (BrepLoop brepLoop in brepFace.Loops)
-                {
-                    IPolygonal3D polygonal3D = brepLoop?.To3dCurve()?.ToDiGi(tolerance) as IPolygonal3D;
-                    if(polygonal3D == null)
-                    {
-                        return null;
-                    }
-
-                    IPolygonal2D polygonal2D = plane.Convert(polygonal3D);
-                    if(polygonal2D == null)
-                    {
-                        return null;
-                    }
-
-                    polygonal2Ds.Add(polygonal2D);
-                }
-
-                IPolygonalFace2D polygonalFace2D = DiGi.Geometry.Planar.Create.PolygonalFace2Ds(polygonal2Ds, tolerance).FirstOrDefault();
-                if(polygonalFace2D == null)
-                {
-                    return null;
-                }
-
-                polygonalFace3Ds.Add(new PolygonalFace3D(plane, polygonalFace2D));
+                polygonalFace3Ds.Add(polygonalFace3D);
             }
 
             if(polygonalFace3Ds == null || polygonalFace3Ds.Count == 0)

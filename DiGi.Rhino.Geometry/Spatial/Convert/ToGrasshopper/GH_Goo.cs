@@ -28,6 +28,11 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return ToGrasshopper((Rectangle3D)geometry3D);
             }
 
+            if (geometry3D is Mesh3D)
+            {
+                return ToGrasshopper((Mesh3D)geometry3D);
+            }
+
             if (geometry3D is PolygonalFace3D)
             {
                 return ToGrasshopper((PolygonalFace3D)geometry3D, tolerance);
@@ -36,6 +41,11 @@ namespace DiGi.Rhino.Geometry.Spatial
             if (geometry3D is Polyhedron)
             {
                 return ToGrasshopper((Polyhedron)geometry3D, tolerance);
+            }
+
+            if (geometry3D is IPolygonal3D)
+            {
+                return ToGrasshopper((IPolygonal3D)geometry3D);
             }
 
             return default;

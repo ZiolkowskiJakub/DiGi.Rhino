@@ -11,7 +11,7 @@ using DiGi.Geometry.Spatial.Classes;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
-    public class GooIntersectionResult3D : GooSerializableObject<IntersectionResult3D>
+    public class GooIntersectionResult3D : GooSerializableObject<IntersectionResult3D>, IGooGeometry
     {
         public GooIntersectionResult3D()
             : base()

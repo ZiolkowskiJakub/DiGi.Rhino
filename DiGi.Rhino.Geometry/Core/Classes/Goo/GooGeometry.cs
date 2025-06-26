@@ -11,9 +11,6 @@ using Rhino.Geometry;
 using DiGi.Rhino.Geometry.Core.Interfaces;
 using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Spatial.Interfaces;
-using DiGi.Geometry.Spatial.Classes;
-using DiGi.Geometry.Planar.Interfaces;
-using DiGi.Geometry.Planar.Classes;
 
 namespace DiGi.Rhino.Geometry.Core.Classes
 {
@@ -33,31 +30,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         {
             get
             {
-                if (Value is IBoundable3D)
-                {
-                    return Spatial.Convert.ToRhino(((IBoundable3D)Value).GetBoundingBox());
-                }
-
-                if(Value is Point3D)
-                {
-                    return Spatial.Convert.ToRhino(new BoundingBox3D((Point3D)(object)Value, DiGi.Core.Constans.Tolerance.Distance));
-                }
-
-                if(Value is IBoundable2D)
-                {
-                    IGeometry3D geometry3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, (IGeometry2D)Value);
-                    if(geometry3D is IBoundable3D)
-                    {
-                        return Spatial.Convert.ToRhino(((IBoundable3D)geometry3D).GetBoundingBox());
-                    }
-                }
-                else if (Value is Point2D)
-                {
-                    Point3D point3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, (Point2D)(object)Value);
-                    return Spatial.Convert.ToRhino(new BoundingBox3D(point3D, DiGi.Core.Constans.Tolerance.Distance));
-                }
-
-                return BoundingBox.Unset;
+                return Spatial.Create.BoundingBox(Value);
             }
         }
 

@@ -98,7 +98,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             index = Params.IndexOfOutputParam("Point3D");
             if (index != -1)
             {
-                dataAccess.SetData(index, ellipsoid == null ? null : new GooPoint3D(point3D));
+                dataAccess.SetData(index, point3D == null ? null : new GooPoint3D(point3D));
             }
         }
     }
