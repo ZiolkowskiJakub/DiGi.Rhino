@@ -11,6 +11,8 @@ using Rhino.Geometry;
 using DiGi.Rhino.Geometry.Core.Interfaces;
 using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Spatial.Interfaces;
+using DiGi.Geometry.Spatial.Classes;
+using DiGi.Rhino.Geometry.Spatial;
 
 namespace DiGi.Rhino.Geometry.Core.Classes
 {
@@ -103,6 +105,15 @@ namespace DiGi.Rhino.Geometry.Core.Classes
                     {
                         @object = Spatial.Convert.ToDiGi((IGH_GeometricGoo)source);
                     }
+                    if(typeof(GH_Vector).IsAssignableFrom(type_Source))
+                    {
+                        GH_Vector gH_Vector = (GH_Vector)source;
+                        if (typeof(T).IsAssignableFrom(typeof(Vector3D)))
+                        {
+                            Value = (T)(object)gH_Vector.Value.ToDiGi();
+                            return true;
+                        }
+                    }
                     else
                     {
                         @object = (source as dynamic).Value;
@@ -188,7 +199,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         }
     }
 
-    public abstract class GooGeometryParam<T> : GooPresistentParam<GooGeometry<T>, T>, IGH_PreviewObject, IGH_BakeAwareObject where T : IGeometry
+    public class GooGeometryParam<T> : GooPresistentParam<GooGeometry<T>, T>, IGooGeometryParam where T : IGeometry
     {
         public GooGeometryParam()
            : base()

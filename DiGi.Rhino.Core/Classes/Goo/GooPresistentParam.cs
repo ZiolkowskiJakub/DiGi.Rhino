@@ -7,12 +7,14 @@ using DiGi.Core.Interfaces;
 
 namespace DiGi.Rhino.Core.Classes
 {
-    public abstract class GooPresistentParam<T, X> : GH_PersistentParam<T> where T : GooSerializableObject<X> where X : ISerializableObject
+    public class GooPresistentParam<T, X> : GH_PersistentParam<T> where T : GooSerializableObject<X> where X : ISerializableObject
     {
         public GooPresistentParam()
             : base(typeof(X).Name, typeof(X).Name, typeof(X).FullName.Replace(".", " "), "Params", "DiGi")
         {
         }
+
+        public override Guid ComponentGuid => new Guid("f360150a-d89b-4324-aff2-43c883eb3c98");
 
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
         {

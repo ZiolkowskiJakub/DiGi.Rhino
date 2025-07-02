@@ -48,6 +48,16 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return ToGrasshopper((IPolygonal3D)geometry3D);
             }
 
+            if (geometry3D is Ellipsoid)
+            {
+                return ToGrasshopper((Ellipsoid)geometry3D);
+            }
+
+            if (geometry3D is Polyline3D)
+            {
+                return ToGrasshopper((Polyline3D)geometry3D);
+            }
+
             return default;
         }
     }

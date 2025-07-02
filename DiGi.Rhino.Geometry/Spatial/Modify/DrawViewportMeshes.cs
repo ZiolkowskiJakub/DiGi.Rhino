@@ -40,6 +40,10 @@ namespace DiGi.Rhino.Geometry.Spatial
             {
                 gH_PreviewMeshArgs.Pipeline.DrawMeshShaded(((Mesh3D)geometry3D).ToRhino(), displayMaterial);
             }
+            else if (geometry3D is Ellipsoid)
+            {
+                gH_PreviewMeshArgs.Pipeline.DrawBrepShaded(((Ellipsoid)geometry3D).ToRhino(), displayMaterial);
+            }
         }
 
         public static void DrawViewportMeshes<TGeometry>(this IEnumerable<TGeometry> geometries, GH_PreviewMeshArgs gH_PreviewMeshArgs, global::Rhino.Display.DisplayMaterial displayMaterial = null) where TGeometry : IGeometry

@@ -5,6 +5,7 @@ using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Spatial.Interfaces;
 using Rhino.Geometry;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DiGi.Rhino.Geometry.Spatial
 {
@@ -39,29 +40,28 @@ namespace DiGi.Rhino.Geometry.Spatial
             return global::Rhino.Geometry.BoundingBox.Unset;
         }
 
-        public static BoundingBox BoundingBox(this IIntersectionResult3D intersectionResult3D)
+        public static BoundingBox BoundingBox(this IEnumerable<IGeometry> geometries)
         {
-            List<IGeometry3D> geometry3Ds = intersectionResult3D?.GetGeometry3Ds<IGeometry3D>();
-            if(geometry3Ds == null || geometry3Ds.Count == 0)
+            if (geometries == null || geometries.Count() == 0)
             {
                 return global::Rhino.Geometry.BoundingBox.Unset;
             }
 
             BoundingBox result = global::Rhino.Geometry.BoundingBox.Unset;
-            foreach(IGeometry3D geometry3D in geometry3Ds)
+            foreach (IGeometry geometry in geometries)
             {
-                if(geometry3D == null)
+                if (geometry == null)
                 {
                     continue;
                 }
 
-                BoundingBox boundingBox = BoundingBox(geometry3D);
-                if(global::Rhino.Geometry.BoundingBox.Unset.Equals(boundingBox))
+                BoundingBox boundingBox = BoundingBox(geometry);
+                if (global::Rhino.Geometry.BoundingBox.Unset.Equals(boundingBox))
                 {
                     continue;
                 }
 
-                if(global::Rhino.Geometry.BoundingBox.Unset.Equals(boundingBox))
+                if (global::Rhino.Geometry.BoundingBox.Unset.Equals(boundingBox))
                 {
                     result = boundingBox;
                 }
@@ -72,6 +72,11 @@ namespace DiGi.Rhino.Geometry.Spatial
             }
 
             return result;
+        }
+
+        public static BoundingBox BoundingBox(this IIntersectionResult3D intersectionResult3D)
+        {
+            return BoundingBox(intersectionResult3D?.GetGeometry3Ds<IGeometry3D>()?.Cast<IGeometry>());
         }
     }
 }

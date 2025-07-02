@@ -1,18 +1,17 @@
-﻿using DiGi.Geometry.Spatial.Classes;
-using DiGi.Rhino.Geometry.Core.Classes;
+﻿using DiGi.Rhino.Geometry.Core.Classes;
 using Grasshopper.Kernel.Types;
 using System;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
-    public class GooPoint3D : GooGeometry3D<Point3D>
+    public class GooPoint3D : GooGeometry3D<DiGi.Geometry.Spatial.Classes.Point3D>
     {
         public GooPoint3D()
             : base()
         {
         }
 
-        public GooPoint3D(Point3D point3D)
+        public GooPoint3D(DiGi.Geometry.Spatial.Classes.Point3D point3D)
         {
             Value = point3D;
         }
@@ -23,7 +22,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         }
     }
 
-    public class GooPoint3DParam : GooGeometryParam<Point3D>
+    public class GooPoint3DParam : GooGeometryParam<DiGi.Geometry.Spatial.Classes.Point3D>
     {
         public override Guid ComponentGuid => new Guid("baacf835-6a09-41d4-9219-dd9ef1b54a0e");
 

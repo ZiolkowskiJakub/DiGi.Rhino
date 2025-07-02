@@ -77,5 +77,29 @@ namespace DiGi.Rhino.Geometry.Spatial
 
             return result[0];
         }
+
+        public static Brep ToRhino(this Ellipsoid ellipsoid, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        {
+            Point3d center = ToRhino(ellipsoid?.Center);
+            if(!center.IsValid)
+            {
+                return null;
+            }
+
+            global::Rhino.Geometry.Plane plane = global::Rhino.Geometry.Plane.WorldXY;// new global::Rhino.Geometry.Plane(center, ellipsoid.DirectionA.ToRhino(), ellipsoid.DirectionB.ToRhino());
+
+            global::Rhino.Geometry.Sphere sphere = new global::Rhino.Geometry.Sphere(Point3d.Origin, 1.0);
+            NurbsSurface nurbSurface = sphere.ToNurbsSurface();
+
+            Transform scale = Transform.Scale(plane, ellipsoid.A, ellipsoid.B, ellipsoid.C);
+
+            nurbSurface.Transform(scale);
+
+            Transform orient = Transform.PlaneToPlane(plane, new global::Rhino.Geometry.Plane(center, ellipsoid.DirectionA.ToRhino(), ellipsoid.DirectionB.ToRhino()));
+            
+            nurbSurface.Transform(orient);
+
+            return nurbSurface.ToBrep();
+        }
     }
 }

@@ -17,16 +17,9 @@ namespace DiGi.Rhino.Core.Classes
         {
         }
 
-        public GooSerializableObject(GooSerializableObject<T> gooSerializableObject)
-            : base(gooSerializableObject)
-        {
-
-        }
-
         public GooSerializableObject(T serializableObject)
-            : base(serializableObject)
         {
-
+            Value = serializableObject;
         }
 
         public override bool IsValid => Value != null;

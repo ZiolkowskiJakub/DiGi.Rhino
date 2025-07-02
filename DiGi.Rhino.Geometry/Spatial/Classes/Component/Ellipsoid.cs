@@ -7,12 +7,12 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
-    public class Ellipsoid : VariableParameterComponent
+    public class Point3D : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("3bb37fd8-0b29-43ec-baea-564606ac192b");
+        public override Guid ComponentGuid => new Guid("760539d2-870c-448e-ba87-52e3dbeff623");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -24,9 +24,9 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public Ellipsoid()
-          : base("Geometry.Ellipsoid", "Geomery.Ellipsoid",
-              "Create Ellipsoid",
+        public Point3D()
+          : base("Geometry.Point3D", "Geomery.Point3D",
+              "Create Point3D",
               "DiGi", "DiGi.Geometry")
         {
         }
@@ -39,10 +39,9 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "A", NickName = "A", Description = "A", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "B", NickName = "B", Description = "B", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "C", NickName = "C", Description = "C", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "X", NickName = "X", Description = "X", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Y", NickName = "Y", Description = "Y", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Z", NickName = "Z", Description = "Z", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
 
                 return result.ToArray();
             }
@@ -56,7 +55,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooEllipsoidParam() { Name = "Ellipsoid", NickName = "Ellipsoid", Description = "DiGi Ellipsoid", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooPoint3DParam() { Name = "Point3D", NickName = "Point3D", Description = "DiGi Point3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -71,43 +70,35 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("Plane");
-            Plane plane = null;
-            if (index == -1 || !dataAccess.GetData(index, ref plane) || plane == null)
+            double x = double.NaN;
+            index = Params.IndexOfInputParam("X");
+            if (index == -1 || !dataAccess.GetData(index, ref x))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            double a = double.NaN;
-            index = Params.IndexOfInputParam("A");
-            if (index == -1 || !dataAccess.GetData(index, ref a))
+            double y = double.NaN;
+            index = Params.IndexOfInputParam("Y");
+            if (index == -1 || !dataAccess.GetData(index, ref y))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            double b = double.NaN;
-            index = Params.IndexOfInputParam("B");
-            if (index == -1 || !dataAccess.GetData(index, ref b))
+            double z = double.NaN;
+            index = Params.IndexOfInputParam("Z");
+            if (index == -1 || !dataAccess.GetData(index, ref z))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            double c = double.NaN;
-            index = Params.IndexOfInputParam("C");
-            if (index == -1 || !dataAccess.GetData(index, ref c))
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
-                return;
-            }
-
-            DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid = new DiGi.Geometry.Spatial.Classes.Ellipsoid(plane, a, b, c);
-            index = Params.IndexOfOutputParam("Ellipsoid");
+            DiGi.Geometry.Spatial.Classes.Point3D point3D = new DiGi.Geometry.Spatial.Classes.Point3D(x, y, z);
+            index = Params.IndexOfOutputParam("Point3D");
             if (index != -1)
             {
-                dataAccess.SetData(index, ellipsoid == null ? null : new GooEllipsoid(ellipsoid));
+                dataAccess.SetData(index, point3D == null ? null : new GooPoint3D(point3D));
             }
         }
     }

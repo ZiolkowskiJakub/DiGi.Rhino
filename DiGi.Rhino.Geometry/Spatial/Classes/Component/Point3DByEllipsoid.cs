@@ -94,7 +94,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 return;
             }
 
-            Point3D point3D = ellipsoid.GetPoint(theta, phi);
+            DiGi.Geometry.Spatial.Classes.Point3D point3D = ellipsoid.GetPoint(theta, phi);
             index = Params.IndexOfOutputParam("Point3D");
             if (index != -1)
             {

@@ -25,5 +25,15 @@ namespace DiGi.Rhino.Geometry.Spatial
 
             return new GH_Curve(polygonal3D.ToRhino());
         }
+
+        public static GH_Curve ToGrasshopper(this Polyline3D polyline3D)
+        {
+            if (polyline3D == null)
+            {
+                return null;
+            }
+
+            return new GH_Curve(polyline3D.ToRhino());
+        }
     }
 }

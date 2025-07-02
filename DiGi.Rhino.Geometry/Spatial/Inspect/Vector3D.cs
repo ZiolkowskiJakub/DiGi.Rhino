@@ -49,5 +49,16 @@ namespace DiGi.Rhino.Geometry.Spatial
 
             return new GH_Number(vector3D.Y);
         }
+
+        [Inspect("Z", "Z", "Z Coordinate")]
+        public static GH_Number Z(this DiGi.Geometry.Spatial.Classes.Vector3D vector3D)
+        {
+            if (vector3D == null)
+            {
+                return null;
+            }
+
+            return new GH_Number(vector3D.Z);
+        }
     }
 }

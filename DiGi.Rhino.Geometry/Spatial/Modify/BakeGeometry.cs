@@ -103,9 +103,23 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return true;
             }
 
+            if (geometry3D is Ellipsoid)
+            {
+                Guid guid = rhinoDoc.Objects.AddBrep(Convert.ToRhino((Ellipsoid)geometry3D), objectAttributes);
+                guids.Add(guid);
+                return true;
+            }
+
             if (geometry3D is BoundingBox3D)
             {
                 Guid guid = rhinoDoc.Objects.AddBox(Convert.ToRhino_Box((BoundingBox3D)geometry3D), objectAttributes);
+                guids.Add(guid);
+                return true;
+            }
+
+            if (geometry3D is Polyline3D)
+            {
+                Guid guid = rhinoDoc.Objects.AddCurve(Convert.ToRhino((Polyline3D)geometry3D), objectAttributes);
                 guids.Add(guid);
                 return true;
             }
@@ -123,9 +137,9 @@ namespace DiGi.Rhino.Geometry.Spatial
             }
 
             guids = new List<Guid>();
-            foreach (IGeometry3D geometry3D in geometries)
+            foreach (IGeometry geometry in geometries)
             {
-                if (!BakeGeometry(geometry3D, rhinoDoc, objectAttributes, out List<Guid> guids_Temp) || guids_Temp == null || guids_Temp.Count == 0)
+                if (!BakeGeometry(geometry, rhinoDoc, objectAttributes, out List<Guid> guids_Temp) || guids_Temp == null || guids_Temp.Count == 0)
                 {
                     continue;
                 }

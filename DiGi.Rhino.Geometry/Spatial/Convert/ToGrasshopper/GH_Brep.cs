@@ -24,5 +24,15 @@ namespace DiGi.Rhino.Geometry.Spatial
 
             return new GH_Brep(polyhedron.ToRhino(tolerance));
         }
+
+        public static GH_Brep ToGrasshopper(this Ellipsoid ellipsoid)
+        {
+            if (ellipsoid == null)
+            {
+                return null;
+            }
+
+            return new GH_Brep(ellipsoid.ToRhino());
+        }
     }
 }

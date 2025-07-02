@@ -16,7 +16,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return null;
             }
 
-            Point3D point3D = polygonalFace3D.GetInternalPoint();
+            DiGi.Geometry.Spatial.Classes.Point3D point3D = polygonalFace3D.GetInternalPoint();
 
             return point3D == null ? null : new GooPoint3D(point3D);
         }
