@@ -1,4 +1,3 @@
-using DiGi.Core.Interfaces;
 using DiGi.GIS.Rhino.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
@@ -7,12 +6,12 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
-    public class Address : VariableParameterComponent
+    public class Coordinates : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("7fc32700-de9c-498b-9b6a-bfdf3bdd1ea1");
+        public override Guid ComponentGuid => new Guid("aad4ac01-458f-4d39-9eca-12de4923f6fa");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -24,9 +23,9 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Initializes a new instance of the SAM_point3D class.
         /// </summary>
-        public Address()
-          : base("Core.Address", "Core.Address",
-              "Create Address",
+        public Coordinates()
+          : base("Core.Coordinates", "Core.Coordinates",
+              "Create Coordinates",
               "DiGi", "DiGi.Core")
         {
         }
@@ -39,10 +38,9 @@ namespace DiGi.Rhino.Core.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Street", NickName = "Street", Description = "Street", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Latitude", NickName = "Latitude", Description = "Latitude", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Longitude", NickName = "Longitude", Description = "Longitude", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
-
-                
             }
         }
 
@@ -54,7 +52,7 @@ namespace DiGi.Rhino.Core.Classes
             get
             {
                 List<Param> result = new List<Param>();
-                result.Add(new Param(new GooAddressParam() { Name = "Address", NickName = "Address", Description = "Address", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                result.Add(new Param(new GooCoordinatesParam() { Name = "Coordinates", NickName = "Coordinates", Description = "Coordinates", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -69,20 +67,28 @@ namespace DiGi.Rhino.Core.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("Street");
-            string street = null;
-            if (index == -1 || !dataAccess.GetData(index, ref street))
+            index = Params.IndexOfInputParam("Latitude");
+            double latitude = double.NaN;
+            if (index == -1 || !dataAccess.GetData(index, ref latitude))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            DiGi.Core.Classes.Address address = new DiGi.Core.Classes.Address(street, null, null, DiGi.Core.Enums.CountryCode.Undefined);
+            index = Params.IndexOfInputParam("Longitude");
+            double longitude = double.NaN;
+            if (index == -1 || !dataAccess.GetData(index, ref longitude))
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
+                return;
+            }
 
-            index = Params.IndexOfOutputParam("Address");
+            DiGi.Core.Classes.Coordinates coordinates = new DiGi.Core.Classes.Coordinates(latitude, longitude);
+
+            index = Params.IndexOfOutputParam("Coordinates");
             if (index != -1)
             {
-                dataAccess.SetData(index, new GooAddress(address));
+                dataAccess.SetData(index, new GooCoordinates(coordinates));
             }
         }
     }

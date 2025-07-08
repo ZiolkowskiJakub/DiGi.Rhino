@@ -3,6 +3,7 @@ using DiGi.Geometry.Planar.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Spatial.Interfaces;
 using Grasshopper.Kernel;
+using Rhino.Geometry;
 using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial
@@ -50,11 +51,19 @@ namespace DiGi.Rhino.Geometry.Spatial
             }
             else if (geometry3D is PolygonalFace3D)
             {
-                gH_PreviewWireArgs.Pipeline.DrawBrepWires(((PolygonalFace3D)geometry3D).ToRhino(), color);
+                Brep brep = ((PolygonalFace3D)geometry3D).ToRhino();
+                if(brep != null)
+                {
+                    gH_PreviewWireArgs.Pipeline.DrawBrepWires(brep, color);
+                }
             }
             else if (geometry3D is Polyhedron)
             {
-                gH_PreviewWireArgs.Pipeline.DrawBrepWires(((Polyhedron)geometry3D).ToRhino(), color);
+                Brep brep = ((Polyhedron)geometry3D).ToRhino();
+                if(brep != null)
+                {
+                    gH_PreviewWireArgs.Pipeline.DrawBrepWires(brep, color);
+                }
             }
             else if (geometry3D is BoundingBox3D)
             {

@@ -76,7 +76,7 @@ namespace DiGi.Rhino.Core.Classes
         /// </param>
         protected override void SolveInstance(IGH_DataAccess dataAccess)
         {
-            dataAccess.SetData(0, new GooEnum<T>(value));
+            dataAccess.SetData(0, new GooEnum(value));
         }
 
         private void Menu_Changed(object sender, EventArgs e)

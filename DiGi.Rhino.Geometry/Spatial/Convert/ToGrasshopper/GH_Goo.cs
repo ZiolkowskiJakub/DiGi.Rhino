@@ -18,6 +18,11 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return ToGrasshopper((Point3D)geometry3D);
             }
 
+            if (geometry3D is Vector3D)
+            {
+                return ToGrasshopper((Vector3D)geometry3D);
+            }
+
             if (geometry3D is Segment3D)
             {
                 return ToGrasshopper((Segment3D)geometry3D);

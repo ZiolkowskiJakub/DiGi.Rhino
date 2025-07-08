@@ -4,33 +4,33 @@ using System;
 
 namespace DiGi.GIS.Rhino.Classes
 {
-    public class GooAddress : GooSerializableObject<Core.Classes.Address>
+    public class GooTimeSeries : GooSerializableObject<Core.Interfaces.ITimeSeries>
     {
-        public GooAddress()
+        public GooTimeSeries()
             : base()
         {
         }
 
-        public GooAddress(Core.Classes.Address address)
+        public GooTimeSeries(Core.Interfaces.ITimeSeries timeSeries)
             : base()
         {
-            Value = address;
+            Value = timeSeries;
         }
 
         public override IGH_Goo Duplicate()
         {
-            return new GooAddress(Value);
+            return new GooTimeSeries(Value);
         }
 
     }
 
-    public class GooAddressParam : GooPresistentParam<GooAddress, Core.Classes.Address>
+    public class GooTimeSeriesParam : GooPresistentParam<GooTimeSeries, Core.Interfaces.ITimeSeries>
     {
-        public override Guid ComponentGuid => new Guid("dbe281ef-b816-4923-89bb-21943ef8b779");
+        public override Guid ComponentGuid => new Guid("13973939-9f83-42ff-80bc-8e11389d8a82");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
-        public GooAddressParam()
+        public GooTimeSeriesParam()
             : base()
         {
         }
