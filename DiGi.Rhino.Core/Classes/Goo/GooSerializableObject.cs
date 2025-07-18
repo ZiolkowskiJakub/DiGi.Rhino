@@ -243,7 +243,7 @@ namespace DiGi.Rhino.Core.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
         public GooSerializableObjectParam()
-            : base(typeof(ISerializableObject).Name, typeof(ISerializableObject).Name, typeof(ISerializableObject).FullName.Replace(".", " "), "Params", "DiGi")
+            : base(Query.Name(typeof(ISerializableObject)), Query.Name(typeof(ISerializableObject)), typeof(ISerializableObject).FullName.Replace(".", " "), "Params", Query.Subcategory(typeof(ISerializableObject)))
         {
         }
 

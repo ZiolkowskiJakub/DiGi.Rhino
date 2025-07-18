@@ -1,32 +1,25 @@
-﻿using Grasshopper.Kernel;
-using Grasshopper;
-using DiGi.Rhino.Core.Classes;
+﻿using System;
 
 namespace DiGi.Rhino.Core
 {
     public static partial class Query
     {
-        public static IGH_Param Clone(this IGH_Param param)
+        public static string Subcategory(this Type type)
         {
-            var attributes = param.Attributes;
-            try
+            string name = type?.Assembly?.GetName()?.Name;
+            if(string.IsNullOrWhiteSpace(name))
             {
-                param.Attributes = new NullAttributes();
-                IGH_Param newParam = GH_ComponentParamServer.CreateDuplicate(param);
-
-                newParam.NewInstanceGuid();
-
-                if (newParam.MutableNickName && CentralSettings.CanvasFullNames)
-                {
-                    newParam.NickName = newParam.Name;
-                }
-
-                return newParam;
+                return "DiGi";
             }
-            finally 
-            { 
-                param.Attributes = attributes; 
+
+            string[] values = name.Split(".", StringSplitOptions.RemoveEmptyEntries);
+            if (values.Length <= 2)
+            {
+                return name;
             }
+
+            return string.Join(".", values[0], values[1]);
+
         }
     }
 }

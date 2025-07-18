@@ -1,7 +1,6 @@
 ﻿using DiGi.Geometry.Spatial.Interfaces;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Geometry.Spatial.Classes;
-using Grasshopper.Kernel.Types;
 using System.Collections;
 using System.Collections.Generic;
 

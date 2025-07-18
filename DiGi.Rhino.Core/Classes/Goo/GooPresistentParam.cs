@@ -9,8 +9,13 @@ namespace DiGi.Rhino.Core.Classes
 {
     public class GooPresistentParam<T, X> : GH_PersistentParam<T> where T : GooSerializableObject<X> where X : ISerializableObject
     {
+        public GooPresistentParam(string name, string subcategory)
+            : base(name, name, typeof(X).FullName.Replace(".", " "), "Params", subcategory)
+        {
+        }
+
         public GooPresistentParam()
-            : base(typeof(X).Name, typeof(X).Name, typeof(X).FullName.Replace(".", " "), "Params", "DiGi")
+            : base(Query.Name(typeof(X)), Query.Name(typeof(X)), typeof(X).FullName.Replace(".", " "), "Params", Query.Subcategory(typeof(X)))
         {
         }
 

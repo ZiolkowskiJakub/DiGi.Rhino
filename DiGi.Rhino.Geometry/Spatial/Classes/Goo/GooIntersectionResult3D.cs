@@ -1,12 +1,5 @@
 ﻿using Grasshopper.Kernel.Types;
-using Grasshopper.Kernel;
 using System;
-using System.Collections.Generic;
-using DiGi.Rhino.Core.Classes;
-using Rhino;
-using Rhino.DocObjects;
-using Rhino.Geometry;
-using DiGi.Rhino.Geometry.Core.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
 using DiGi.Rhino.Geometry.Core.Classes;
 using DiGi.Geometry.Core.Interfaces;

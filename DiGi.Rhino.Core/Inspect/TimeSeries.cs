@@ -3,7 +3,7 @@ using Grasshopper.Kernel.Types;
 using System.Collections;
 using System.Linq;
 
-namespace DiGi.Rhino.Geometry.Spatial
+namespace DiGi.Rhino.Core
 {
     public static partial class Inspect
     {

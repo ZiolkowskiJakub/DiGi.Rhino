@@ -1,9 +1,10 @@
-﻿using Grasshopper.Kernel.Types;
-using Grasshopper.Kernel;
-using System;
-using System.Collections.Generic;
+﻿using DiGi.Core.Interfaces;
 using DiGi.Rhino.Core.Interfaces;
 using GH_IO.Serialization;
+using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
+using System;
+using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
@@ -202,7 +203,7 @@ namespace DiGi.Rhino.Core.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
         public GooEnumParam()
-            : base(typeof(Enum).Name, typeof(Enum).Name, typeof(Enum).FullName.Replace(".", " "), "Params", "DiGi")
+            : base(Query.Name(typeof(Enum)), Query.Name(typeof(Enum)), typeof(Enum).FullName.Replace(".", " "), "Params", Query.Subcategory(typeof(IObject)))
         {
         }
 

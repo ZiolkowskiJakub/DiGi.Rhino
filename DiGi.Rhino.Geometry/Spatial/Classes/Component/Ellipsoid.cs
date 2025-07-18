@@ -1,5 +1,4 @@
-﻿using DiGi.Geometry.Spatial.Classes;
-using DiGi.Rhino.Core.Classes;
+﻿using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
 using System;

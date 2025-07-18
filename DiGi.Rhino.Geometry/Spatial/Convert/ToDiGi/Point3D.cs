@@ -13,5 +13,15 @@ namespace DiGi.Rhino.Geometry.Spatial
 
             return new Point3D(point3d.X, point3d.Y, point3d.Z);
         }
+
+        public static Point3D ToDiGi(this global::Rhino.Geometry.Point3f point3f)
+        {
+            if (!point3f.IsValid)
+            {
+                return null;
+            }
+
+            return new Point3D(point3f.X, point3f.Y, point3f.Z);
+        }
     }
 }

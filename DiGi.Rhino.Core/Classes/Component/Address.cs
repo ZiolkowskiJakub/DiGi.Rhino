@@ -1,4 +1,3 @@
-using DiGi.Core.Interfaces;
 using DiGi.GIS.Rhino.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
