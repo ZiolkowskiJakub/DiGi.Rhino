@@ -8,6 +8,6 @@ namespace DiGi.Rhino.Geometry.Core.Interfaces
 {
     public interface IGooBakeAware : IGH_PreviewData, IGH_BakeAwareData
     {
-        bool BakeGeometry(RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids);
+        bool BakeGeometry(RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids);
     }
 }

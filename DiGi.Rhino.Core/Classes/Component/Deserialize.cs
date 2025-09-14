@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("c676a4b2-4add-4528-bdb5-d09bcbfad4e5");
+        public override Guid ComponentGuid => new ("c676a4b2-4add-4528-bdb5-d09bcbfad4e5");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -37,9 +37,11 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Json", NickName = "Json", Description = "Json", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Json", NickName = "Json", Description = "Json", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -50,9 +52,11 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -67,14 +71,14 @@ namespace DiGi.Rhino.Core.Classes
             int index;
 
             index = Params.IndexOfInputParam("Json");
-            string json = null;
+            string? json = null;
             if (index == -1 || !dataAccess.GetData(index, ref json) || json == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            List<ISerializableObject> serializableObjects = DiGi.Core.Convert.ToDiGi<ISerializableObject>(json);
+            List<ISerializableObject>? serializableObjects = DiGi.Core.Convert.ToDiGi<ISerializableObject>(json);
 
             index = Params.IndexOfOutputParam("SerializableObjects");
             if (index != -1)

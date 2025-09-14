@@ -9,7 +9,7 @@ namespace DiGi.Rhino.Core
     {
 
         [Inspect("Name", "Name", "Name")]
-        public static GH_String Name(this Parameter parameter)
+        public static GH_String? Name(this Parameter? parameter)
         {
             if (parameter == null)
             {
@@ -20,7 +20,7 @@ namespace DiGi.Rhino.Core
         }
 
         [Inspect("ParameterDefinition", "ParameterDefinition", "ParameterDefinition")]
-        public static GooParameterDefinition ParameterDefinition(this Parameter parameter)
+        public static GooParameterDefinition? ParameterDefinition(this Parameter? parameter)
         {
             if(parameter == null)
             {
@@ -31,7 +31,7 @@ namespace DiGi.Rhino.Core
         }
 
         [Inspect("ParameterType", "ParameterType", "ParameterType")]
-        public static GooEnum ParameterType(this Parameter parameter)
+        public static GooEnum? ParameterType(this Parameter? parameter)
         {
             if (parameter == null)
             {
@@ -42,7 +42,7 @@ namespace DiGi.Rhino.Core
         }
 
         [Inspect("Value", "Value", "Value")]
-        public static IGH_Goo Value(this Parameter parameter)
+        public static IGH_Goo? Value(this Parameter? parameter)
         {
             if (parameter == null)
             {

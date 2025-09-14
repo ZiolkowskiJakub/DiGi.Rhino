@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
         }
 
-        public GooSegment3D(Segment3D segment3D)
+        public GooSegment3D(Segment3D? segment3D)
         {
             Value = segment3D;
         }
@@ -25,7 +25,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooSegment3DParam : GooGeometryParam<Segment3D>
     {
-        public override Guid ComponentGuid => new Guid("93c88362-a263-4807-9d71-11dd09d334a5");
+        public override Guid ComponentGuid => new ("93c88362-a263-4807-9d71-11dd09d334a5");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

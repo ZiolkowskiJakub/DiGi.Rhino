@@ -12,12 +12,12 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
         }
 
-        public GooPolygonalFace2D(PolygonalFace2D polygonalFace2D)
+        public GooPolygonalFace2D(PolygonalFace2D? polygonalFace2D)
         {
             Value = polygonalFace2D;
         }
 
-        public GooPolygonalFace2D(GooPolygonalFace2D gooPolygonalFace2D)
+        public GooPolygonalFace2D(GooPolygonalFace2D? gooPolygonalFace2D)
         {
             Value = gooPolygonalFace2D?.Value;
         }
@@ -31,7 +31,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
 
     public class GooPolygonalFace2DParam : GooGeometryParam<PolygonalFace2D>
     {
-        public override Guid ComponentGuid => new Guid("0e44ab21-a17b-4b26-94c7-f49a433987c8");
+        public override Guid ComponentGuid => new ("0e44ab21-a17b-4b26-94c7-f49a433987c8");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

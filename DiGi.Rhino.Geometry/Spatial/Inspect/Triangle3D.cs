@@ -9,7 +9,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     public static partial class Inspect
     {
         [Inspect("Points", "Points", "Points")]
-        public static IEnumerable<GooPoint3D> Points(this Triangle3D triangle3D)
+        public static IEnumerable<GooPoint3D>? Points(this Triangle3D? triangle3D)
         {
             if (triangle3D == null)
             {
@@ -20,7 +20,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("Centroid", "Centroid", "Centroid")]
-        public static GooPoint3D Centroid(this Triangle3D triangle3D)
+        public static GooPoint3D? Centroid(this Triangle3D? triangle3D)
         {
             if (triangle3D == null)
             {
@@ -31,7 +31,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("Area", "Area", "Area")]
-        public static GH_Number Area(this Triangle3D triangle3D)
+        public static GH_Number? Area(this Triangle3D? triangle3D)
         {
             if (triangle3D == null)
             {
@@ -42,7 +42,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("Segments", "Segments", "Segments")]
-        public static IEnumerable<GooSegment3D> Segments(this Triangle3D triangle3D)
+        public static IEnumerable<GooSegment3D>? Segments(this Triangle3D? triangle3D)
         {
             if (triangle3D == null)
             {
@@ -53,7 +53,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("Length", "Length", "Length")]
-        public static GH_Number Length(this Triangle3D triangle3D)
+        public static GH_Number? Length(this Triangle3D? triangle3D)
         {
             if (triangle3D == null)
             {
@@ -64,7 +64,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("Plane", "Plane", "Plane")]
-        public static GooPlane Plane(this Triangle3D triangle3D)
+        public static GooPlane? Plane(this Triangle3D? triangle3D)
         {
             if (triangle3D == null)
             {

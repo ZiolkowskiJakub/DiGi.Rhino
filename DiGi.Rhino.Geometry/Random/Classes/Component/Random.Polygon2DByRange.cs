@@ -15,7 +15,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("fefc5785-4659-4fe0-b316-65b3eb304723");
+        public override Guid ComponentGuid => new ("fefc5785-4659-4fe0-b316-65b3eb304723");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -41,16 +41,18 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "x", NickName = "x", Description = "x Range", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "y", NickName = "y", Description = "y Range", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Integer() { Name = "pointCount", NickName = "pointCount", Description = "Point count", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Integer() { Name = "seed", NickName = "seed", Description = "seed", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "x", NickName = "x", Description = "x Range", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "y", NickName = "y", Description = "y Range", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Integer() { Name = "pointCount", NickName = "pointCount", Description = "Point count", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Integer() { Name = "seed", NickName = "seed", Description = "seed", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                ];
 
-                Grasshopper.Kernel.Parameters.Param_Number param_Number = new Grasshopper.Kernel.Parameters.Param_Number() { Name = "tolerance", NickName = "tolerance", Description = "tolerance", Access = GH_ParamAccess.item, Optional = true };
+                Grasshopper.Kernel.Parameters.Param_Number param_Number = new() { Name = "tolerance", NickName = "tolerance", Description = "tolerance", Access = GH_ParamAccess.item, Optional = true };
                 param_Number.SetPersistentData(DiGi.Core.Constans.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -61,9 +63,11 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooPolygon2DParam() { Name = "polygon2D", NickName = "polygon2D", Description = "DiGi Geometry Polygon2D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooPolygon2DParam() { Name = "polygon2D", NickName = "polygon2D", Description = "DiGi Geometry Polygon2D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -79,7 +83,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
 
             index = Params.IndexOfInputParam("x");
             Interval interval_X = Interval.Unset;
-            if (index == -1 || !dataAccess.GetData(index, ref interval_X) || interval_X == null)
+            if (index == -1 || !dataAccess.GetData(index, ref interval_X))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
@@ -87,7 +91,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
 
             index = Params.IndexOfInputParam("y");
             Interval interval_Y = Interval.Unset;
-            if (index == -1 || !dataAccess.GetData(index, ref interval_Y) || interval_Y == null)
+            if (index == -1 || !dataAccess.GetData(index, ref interval_Y))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
@@ -117,7 +121,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
             index = Params.IndexOfOutputParam("polygon2D");
             if (index != -1)
             {
-                Polygon2D polygon2D = null;
+                Polygon2D? polygon2D;
                 if (pointCount == -1)
                 {
                     System.Random random = DiGi.Core.Create.Random(seed); 

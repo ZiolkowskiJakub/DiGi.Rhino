@@ -6,18 +6,18 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static Ellipse3D ToDiGi(this global::Rhino.Geometry.Ellipse ellipse)
+        public static Ellipse3D? ToDiGi(this global::Rhino.Geometry.Ellipse ellipse)
         {
             if(!ellipse.IsValid)
             {
                 return null;
             }
 
-            Plane plane = ellipse.Plane.ToDiGi();
+            Plane? plane = ellipse.Plane.ToDiGi();
 
-            Vector2D direction = plane.Convert(plane.AxisX);
+            Vector2D? direction = plane.Convert(plane?.AxisX);
 
-            Ellipse2D ellipse2D = new Ellipse2D(plane.Convert(ellipse.Center.ToDiGi()), ellipse.Radius1, ellipse.Radius2, direction);
+            Ellipse2D ellipse2D = new (plane.Convert(ellipse.Center.ToDiGi()), ellipse.Radius1, ellipse.Radius2, direction);
 
             return new Ellipse3D(plane, ellipse2D);
         }

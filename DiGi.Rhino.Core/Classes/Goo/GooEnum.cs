@@ -8,20 +8,20 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
-    public class GooEnum<T> : GH_Goo<T>, IGoo where T : Enum
+    public class GooEnum<T> : GH_Goo<T?>, IGoo where T : Enum
     {
         public GooEnum()
             : base()
         {
         }
 
-        public GooEnum(GooEnum<T> gooEnum)
+        public GooEnum(GooEnum<T>? gooEnum)
             : base(gooEnum)
         {
 
         }
 
-        public GooEnum(T @enum)
+        public GooEnum(T? @enum)
             : base(@enum)
         {
 
@@ -29,7 +29,20 @@ namespace DiGi.Rhino.Core.Classes
 
         public override bool IsValid => Value != null;
 
-        public override string TypeName
+        public override string? TypeDescription
+        {
+            get
+            {
+                if (Value == null)
+                {
+                    return typeof(T).FullName?.Replace(".", " ");
+                }
+
+                return Value.GetType().FullName?.Replace(".", " ");
+            }
+        }
+
+        public override string? TypeName
         {
             get
             {
@@ -40,74 +53,6 @@ namespace DiGi.Rhino.Core.Classes
 
                 return Value.GetType().FullName;
             }
-        }
-
-        public override string TypeDescription
-        {
-            get
-            {
-                if (Value == null)
-                {
-                    return typeof(T).FullName.Replace(".", " ");
-                }
-
-                return Value.GetType().FullName.Replace(".", " ");
-            }
-        }
-
-        public override IGH_Goo Duplicate()
-        {
-            return new GooEnum<T>(Value);
-        }
-
-        public override bool Write(GH_IWriter writer)
-        {
-            if (Value == null || writer == null)
-            {
-                return false;
-            }
-
-            writer.SetString(typeof(T).FullName, Value.ToString());
-            return true;
-        }
-
-        public override bool Read(GH_IReader reader)
-        {
-            if(reader == null)
-            {
-                return false;
-            }
-
-            string value = null;
-            if (!reader.TryGetString(typeof(T).FullName, ref value))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                Value = default;
-                return true;
-            }
-
-            if(!DiGi.Core.Query.TryGetEnum(value, out T @enum))
-            {
-                Value = default;
-                return true;
-            }
-
-            Value = @enum;
-            return true;
-        }
-
-        public override string ToString()
-        {
-            if (Value == null)
-            {
-                return null;
-            }
-
-            return Value.ToString();
         }
 
         public override bool CastFrom(object source)
@@ -124,12 +69,12 @@ namespace DiGi.Rhino.Core.Classes
             }
 
             object value = source;
-            if(value is IGH_Goo)
+            if (value is IGH_Goo)
             {
                 value = ((dynamic)value).Value;
             }
 
-            if(DiGi.Core.Query.TryConvert(value, out T @enum))
+            if (DiGi.Core.Query.TryConvert(value, out T? @enum))
             {
                 Value = @enum;
                 return true;
@@ -142,14 +87,20 @@ namespace DiGi.Rhino.Core.Classes
         {
             if (typeof(Y) == typeof(T))
             {
-                target = (Y)(object)Value;
-                return true;
+                if ((Y?)(object?)Value is Y y)
+                {
+                    target = y;
+                    return true;
+                }
             }
 
             if (typeof(Y) == typeof(object))
             {
-                target = (Y)(object)Value;
-                return true;
+                if ((Y?)(object?)Value is Y y)
+                {
+                    target = y;
+                    return true;
+                }
             }
 
             if (typeof(GH_ObjectWrapper) == typeof(Y))
@@ -158,7 +109,7 @@ namespace DiGi.Rhino.Core.Classes
                 return true;
             }
 
-            if (DiGi.Core.Query.TryConvert(Value, out Y value))
+            if (DiGi.Core.Query.TryConvert(Value, out Y? value) && value is not null)
             {
                 target = value;
                 return true;
@@ -166,16 +117,60 @@ namespace DiGi.Rhino.Core.Classes
 
             return base.CastTo(ref target);
         }
-    }
 
-    public class GooEnumParam<T> : GooEnumParam<GooEnum<T>, T> where T : Enum
-    {
-        public override Guid ComponentGuid => new Guid("fa4f4af4-3a0d-45d4-be59-bfb65dc350cb");
-        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-
-        public GooEnumParam()
-            : base()
+        public override IGH_Goo? Duplicate()
         {
+            return new GooEnum<T>(Value);
+        }
+
+        public override bool Read(GH_IReader? reader)
+        {
+            if (reader == null)
+            {
+                return false;
+            }
+
+            string? value = null;
+            if (!reader.TryGetString(typeof(T).FullName, ref value))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                Value = default;
+                return true;
+            }
+
+            if (!DiGi.Core.Query.TryGetEnum(value, out T? @enum))
+            {
+                Value = default;
+                return true;
+            }
+
+            Value = @enum;
+            return true;
+        }
+
+        public override string? ToString()
+        {
+            if (Value == null)
+            {
+                return null;
+            }
+
+            return Value.ToString();
+        }
+
+        public override bool Write(GH_IWriter writer)
+        {
+            if (Value == null || writer == null)
+            {
+                return false;
+            }
+
+            writer.SetString(typeof(T).FullName, Value.ToString());
+            return true;
         }
     }
 
@@ -186,33 +181,43 @@ namespace DiGi.Rhino.Core.Classes
         {
         }
 
-        public GooEnum(Enum @enum)
+        public GooEnum(Enum? @enum)
         {
             Value = @enum;
         }
 
-        public override IGH_Goo Duplicate()
+        public override IGH_Goo? Duplicate()
         {
             return new GooEnum(Value);
         }
     }
 
-    public class GooEnumParam : GH_PersistentParam<GooEnum>
+    public class GooEnumParam<T> : GooEnumParam<GooEnum<T>, T> where T : Enum
     {
-        public override Guid ComponentGuid => new Guid("659a3dbe-c305-4512-94c2-202f18c80911");
-        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-
         public GooEnumParam()
-            : base(Query.Name(typeof(Enum)), Query.Name(typeof(Enum)), typeof(Enum).FullName.Replace(".", " "), "Params", Query.Subcategory(typeof(IObject)))
+            : base()
         {
         }
 
-        protected override GH_GetterResult Prompt_Singular(ref GooEnum value)
+        public override Guid ComponentGuid => new ("fa4f4af4-3a0d-45d4-be59-bfb65dc350cb");
+        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
+    }
+    public class GooEnumParam : GH_PersistentParam<GooEnum>
+    {
+        public GooEnumParam()
+            : base(Query.Name(typeof(Enum)), Query.Name(typeof(Enum)), typeof(Enum).FullName?.Replace(".", " "), "Params", Query.Subcategory(typeof(IObject)))
+        {
+        }
+
+        public override Guid ComponentGuid => new("659a3dbe-c305-4512-94c2-202f18c80911");
+        
+        protected override GH_GetterResult Prompt_Plural(ref List<GooEnum> values)
         {
             throw new NotImplementedException();
         }
 
-        protected override GH_GetterResult Prompt_Plural(ref List<GooEnum> values)
+        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
+        protected override GH_GetterResult Prompt_Singular(ref GooEnum value)
         {
             throw new NotImplementedException();
         }

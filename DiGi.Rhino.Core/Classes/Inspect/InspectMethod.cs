@@ -6,11 +6,11 @@ namespace DiGi.Rhino.Core.Classes
 {
     public class InspectMethod
     {
-        public MethodInfo MethodInfo { get; }
+        public MethodInfo? MethodInfo { get; }
         
-        public InspectAttribute InspectAttribute { get; }
+        public InspectAttribute? InspectAttribute { get; }
 
-        public InspectMethod(MethodInfo methodInfo, InspectAttribute inspectAttribute)
+        public InspectMethod(MethodInfo? methodInfo, InspectAttribute? inspectAttribute)
         {
             MethodInfo = methodInfo;
             InspectAttribute = inspectAttribute;
@@ -64,7 +64,7 @@ namespace DiGi.Rhino.Core.Classes
             return result;
         }
 
-        public bool TryGetValue<T>(object @object, out T value)
+        public bool TryGetValue<T>(object? @object, out T? value)
         {
             value = default;
 
@@ -73,10 +73,10 @@ namespace DiGi.Rhino.Core.Classes
                 return false;
             }
 
-            object value_Temp = MethodInfo.Invoke(null, new object[] { @object });
-            if(value_Temp is T)
+            object? value_Temp = MethodInfo.Invoke(null, [@object]);
+            if(value_Temp is T t)
             {
-                value = (T)value_Temp;
+                value = t;
                 return true;
             }
 

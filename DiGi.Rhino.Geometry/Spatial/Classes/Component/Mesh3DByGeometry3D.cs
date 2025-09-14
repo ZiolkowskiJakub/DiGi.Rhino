@@ -13,7 +13,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("c7cf7362-34e1-4222-8a9e-fb272fde8576");
+        public override Guid ComponentGuid => new ("c7cf7362-34e1-4222-8a9e-fb272fde8576");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -39,14 +39,16 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "Geometry3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "Geometry3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
 
-                Grasshopper.Kernel.Parameters.Param_Number param_Number = new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
+                Grasshopper.Kernel.Parameters.Param_Number param_Number = new() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
                 param_Number.SetPersistentData(DiGi.Core.Constans.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -57,9 +59,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooMesh3DParam() { Name = "Mesh3D", NickName = "Mesh3D", Description = "DiGi Mesh3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooMesh3DParam() { Name = "Mesh3D", NickName = "Mesh3D", Description = "DiGi Mesh3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -74,7 +78,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             int index;
 
             index = Params.IndexOfInputParam("Geometry3D");
-            IGeometry3D geometry3D = null;
+            IGeometry3D? geometry3D = null;
             if (index == -1 || !dataAccess.GetData(index, ref geometry3D) || geometry3D == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -88,19 +92,19 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 dataAccess.GetData(index, ref tolerance);
             }
 
-            Mesh3D mesh3D = null;
+            Mesh3D? mesh3D = null;
 
-            if (geometry3D is PolygonalFace3D)
+            if (geometry3D is PolygonalFace3D polygonalFace3D)
             {
-                mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D((PolygonalFace3D)geometry3D, tolerance);
+                mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D(polygonalFace3D, tolerance);
             }
-            else if (geometry3D is Polyhedron)
+            else if (geometry3D is Polyhedron polyhedron)
             {
-                mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D((Polyhedron)geometry3D, tolerance);
+                mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D(polyhedron, tolerance);
             }
-            else if (geometry3D is IPolygonal3D)
+            else if (geometry3D is IPolygonal3D polygonal3D)
             {
-                mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D(new PolygonalFace3D((IPolygonal3D)geometry3D), tolerance);
+                mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D(new PolygonalFace3D(polygonal3D), tolerance);
             }
 
             index = Params.IndexOfOutputParam("Mesh3D");

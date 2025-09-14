@@ -8,9 +8,9 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static Brep ToRhino(this IPolygonalFace3D polygonalFace3D, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static Brep? ToRhino(this IPolygonalFace3D? polygonalFace3D, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
-            List<IPolygonal3D> polygonal3Ds = polygonalFace3D?.Edges;
+            List<IPolygonal3D>? polygonal3Ds = polygonalFace3D?.Edges;
             if(polygonal3Ds == null || polygonal3Ds.Count == 0)
             {
                 return null;
@@ -29,31 +29,31 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return breps[0];
             }
 
-            List<Brep> brepList = breps.ToList();
+            List<Brep> brepList = [.. breps];
             brepList.Sort((x, y) => x.GetArea().CompareTo(y.GetArea()));
 
             Brep brep = brepList.Last();
             brepList.Remove(brep);
 
-            breps = Brep.CreateBooleanIntersection(new List<Brep> { brep }, brepList, unitScale * tolerance);
+            breps = Brep.CreateBooleanIntersection([brep], brepList, unitScale * tolerance);
             if (breps == null || breps.Length == 0)
                 return null;
 
             return breps[0];
         }
 
-        public static Brep ToRhino(this Polyhedron polyhedron, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static Brep? ToRhino(this Polyhedron? polyhedron, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
-            List<IPolygonalFace3D> polygonalFace3Ds = polyhedron?.PolygonalFaces;
+            List<IPolygonalFace3D>? polygonalFace3Ds = polyhedron?.PolygonalFaces;
             if(polygonalFace3Ds == null)
             {
                 return null;
             }
 
-            List<Brep> breps = new List<Brep>();
-            foreach (PolygonalFace3D polygonalFace3D in polygonalFace3Ds)
+            List<Brep> breps = [];
+            foreach (IPolygonalFace3D polygonalFace3D in polygonalFace3Ds)
             {
-                Brep brep = polygonalFace3D.ToRhino(tolerance);
+                Brep? brep = polygonalFace3D.ToRhino(tolerance);
                 if (brep == null)
                 {
                     continue;
@@ -78,7 +78,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             return result[0];
         }
 
-        public static Brep ToRhino(this Ellipsoid ellipsoid, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static Brep? ToRhino(this Ellipsoid? ellipsoid)
         {
             Point3d center = ToRhino(ellipsoid?.Center);
             if(!center.IsValid)
@@ -86,16 +86,26 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return null;
             }
 
+            if (ellipsoid!.DirectionA is not Vector3D directionA)
+            {
+                return null;
+            }
+
+            if (ellipsoid!.DirectionB is not Vector3D directionB)
+            {
+                return null;
+            }
+
             global::Rhino.Geometry.Plane plane = global::Rhino.Geometry.Plane.WorldXY;// new global::Rhino.Geometry.Plane(center, ellipsoid.DirectionA.ToRhino(), ellipsoid.DirectionB.ToRhino());
 
-            global::Rhino.Geometry.Sphere sphere = new global::Rhino.Geometry.Sphere(Point3d.Origin, 1.0);
+            global::Rhino.Geometry.Sphere sphere = new(Point3d.Origin, 1.0);
             NurbsSurface nurbSurface = sphere.ToNurbsSurface();
 
             Transform scale = Transform.Scale(plane, ellipsoid.A, ellipsoid.B, ellipsoid.C);
 
             nurbSurface.Transform(scale);
 
-            Transform orient = Transform.PlaneToPlane(plane, new global::Rhino.Geometry.Plane(center, ellipsoid.DirectionA.ToRhino(), ellipsoid.DirectionB.ToRhino()));
+            Transform orient = Transform.PlaneToPlane(plane, new global::Rhino.Geometry.Plane(center, directionA.ToRhino(), directionB.ToRhino()));
             
             nurbSurface.Transform(orient);
 

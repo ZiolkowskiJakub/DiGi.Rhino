@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
         }
 
-        public GooTriangle3D(Triangle3D triangle3D)
+        public GooTriangle3D(Triangle3D? triangle3D)
         {
             Value = triangle3D;
         }
@@ -25,7 +25,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooTriangle3DParam : GooGeometryParam<Triangle3D>
     {
-        public override Guid ComponentGuid => new Guid("a89cf240-e7be-41ff-9d05-c62a7f7fc4a9");
+        public override Guid ComponentGuid => new ("a89cf240-e7be-41ff-9d05-c62a7f7fc4a9");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

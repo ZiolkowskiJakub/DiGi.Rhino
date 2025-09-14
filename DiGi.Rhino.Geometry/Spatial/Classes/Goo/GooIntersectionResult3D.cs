@@ -15,21 +15,21 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
         }
 
-        public GooIntersectionResult3D(IntersectionResult3D intersectionResult3D)
+        public GooIntersectionResult3D(IntersectionResult3D? intersectionResult3D)
             :base()
         {
             Value = intersectionResult3D;
         }
 
-        public override IGeometry[] Geometries
+        public override IGeometry[]? Geometries
         {
             get
             {
-                return Value.GetGeometry3Ds<IGeometry3D>()?.Cast<IGeometry>()?.ToArray();
+                return Value?.GetGeometry3Ds<IGeometry3D>()?.Cast<IGeometry>()?.ToArray();
             }
         }
 
-        public override bool CastFrom(object source)
+        public override bool CastFrom(object? source)
         {
             if (source == null)
             {
@@ -41,10 +41,15 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
         public override bool CastTo<Y>(ref Y target)
         {
+            if(target is null)
+            {
+                return base.CastTo(ref target);
+            }
+
 
             if (typeof(Y) == typeof(object))
             {
-                target = (Y)(object)Value;
+                target = (Y)(object)Value!;
                 return true;
             }
 
@@ -66,11 +71,17 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 {
                     if (typeof(Y).IsAssignableFrom(Value.GetType()))
                     {
-                        target = (Y)(object)Value.Clone();
+                        if((Y?)(object?)Value.Clone() is Y y)
+                        {
+                            target = y;
+                        }
                     }
                     else
                     {
-                        target = DiGi.Core.Create.Object<Y>(Value);
+                        if (DiGi.Core.Create.Object<Y>(Value) is Y y)
+                        {
+                            target = y;
+                        }
                     }
 
                     if (target != null)
@@ -95,7 +106,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooIntersectionResult3DParam : GooBakeAwareSerializableParam<GooIntersectionResult3D, IntersectionResult3D>
     {
-        public override Guid ComponentGuid => new Guid("9e9f7879-bd95-46b5-b0e2-4a05b6c12af1");
+        public override Guid ComponentGuid => new ("9e9f7879-bd95-46b5-b0e2-4a05b6c12af1");
     }
 
 

@@ -10,7 +10,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("b5355531-7d1b-46a7-831f-28bcc73d9e95");
+        public override Guid ComponentGuid => new ("b5355531-7d1b-46a7-831f-28bcc73d9e95");
 
         public override GH_Exposure Exposure => GH_Exposure.hidden;
 

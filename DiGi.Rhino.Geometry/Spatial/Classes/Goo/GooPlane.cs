@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
         }
 
-        public GooPlane(Plane plane)
+        public GooPlane(Plane? plane)
         {
             Value = plane;
         }
@@ -25,7 +25,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooPlaneParam : GooGeometryParam<Plane>
     {
-        public override Guid ComponentGuid => new Guid("3c36ec41-1560-4ec9-93cc-01bc990f5486");
+        public override Guid ComponentGuid => new ("3c36ec41-1560-4ec9-93cc-01bc990f5486");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

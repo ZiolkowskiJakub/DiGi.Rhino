@@ -8,7 +8,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static Mesh3D ToDiGi(this Mesh mesh)
+        public static Mesh3D? ToDiGi(this Mesh? mesh)
         {
             if(mesh == null || !mesh.IsValid)
             {
@@ -29,8 +29,8 @@ namespace DiGi.Rhino.Geometry.Spatial
             {
                 return null;    
             }
-            SortedDictionary<int, Point3D> dictionary = new SortedDictionary<int, Point3D>();
-            List<int[]> indexes = new List<int[]>();
+            SortedDictionary<int, Point3D> dictionary = [];
+            List<int[]> indexes = [];
 
             foreach( MeshFace meshFace in meshFaces )
             {
@@ -43,22 +43,34 @@ namespace DiGi.Rhino.Geometry.Spatial
 
                     if (!dictionary.ContainsKey(index_1))
                     {
-                        dictionary[index_1] = meshVertexList[index_1].ToDiGi();
+                        if(meshVertexList[index_1].ToDiGi() is Point3D point3D)
+                        {
+                            dictionary[index_1] = point3D;
+                        }
                     }
 
                     if (!dictionary.ContainsKey(index_2))
                     {
-                        dictionary[index_2] = meshVertexList[index_2].ToDiGi();
+                        if (meshVertexList[index_2].ToDiGi() is Point3D point3D)
+                        {
+                            dictionary[index_2] = point3D;
+                        }
                     }
 
                     if (!dictionary.ContainsKey(index_3))
                     {
-                        dictionary[index_3] = meshVertexList[index_3].ToDiGi();
+                        if (meshVertexList[index_3].ToDiGi() is Point3D point3D)
+                        {
+                            dictionary[index_3] = point3D;
+                        }
                     }
 
                     if (!dictionary.ContainsKey(index_4))
                     {
-                        dictionary[index_4] = meshVertexList[index_4].ToDiGi();
+                        if (meshVertexList[index_4].ToDiGi() is Point3D point3D)
+                        {
+                            dictionary[index_4] = point3D;
+                        }
                     }
 
                     indexes.Add([index_1, index_2, index_3]);
@@ -72,17 +84,26 @@ namespace DiGi.Rhino.Geometry.Spatial
 
                     if(!dictionary.ContainsKey(index_1))
                     {
-                        dictionary[index_1] = meshVertexList[index_1].ToDiGi();
+                        if (meshVertexList[index_1].ToDiGi() is Point3D point3D)
+                        {
+                            dictionary[index_1] = point3D;
+                        }
                     }
 
                     if (!dictionary.ContainsKey(index_2))
                     {
-                        dictionary[index_2] = meshVertexList[index_2].ToDiGi();
+                        if (meshVertexList[index_2].ToDiGi() is Point3D point3D)
+                        {
+                            dictionary[index_2] = point3D;
+                        }
                     }
 
                     if (!dictionary.ContainsKey(index_3))
                     {
-                        dictionary[index_3] = meshVertexList[index_3].ToDiGi();
+                        if (meshVertexList[index_3].ToDiGi() is Point3D point3D)
+                        {
+                            dictionary[index_3] = point3D;
+                        }
                     }
 
                     indexes.Add([index_1, index_2, index_3]);

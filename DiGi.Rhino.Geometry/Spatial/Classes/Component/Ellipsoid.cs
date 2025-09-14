@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("760539d2-870c-448e-ba87-52e3dbeff623");
+        public override Guid ComponentGuid => new ("760539d2-870c-448e-ba87-52e3dbeff623");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -37,12 +37,14 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "X", NickName = "X", Description = "X", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Y", NickName = "Y", Description = "Y", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Z", NickName = "Z", Description = "Z", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "X", NickName = "X", Description = "X", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Y", NickName = "Y", Description = "Y", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Z", NickName = "Z", Description = "Z", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -53,9 +55,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooPoint3DParam() { Name = "Point3D", NickName = "Point3D", Description = "DiGi Point3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooPoint3DParam() { Name = "Point3D", NickName = "Point3D", Description = "DiGi Point3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -93,7 +97,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 return;
             }
 
-            DiGi.Geometry.Spatial.Classes.Point3D point3D = new DiGi.Geometry.Spatial.Classes.Point3D(x, y, z);
+            DiGi.Geometry.Spatial.Classes.Point3D point3D = new(x, y, z);
             index = Params.IndexOfOutputParam("Point3D");
             if (index != -1)
             {

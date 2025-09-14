@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
         }
 
-        public GooVector3D(Vector3D vector3D)
+        public GooVector3D(Vector3D? vector3D)
         {
             Value = vector3D;
         }
@@ -25,7 +25,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooVector3DParam : GooGeometryParam<Vector3D>
     {
-        public override Guid ComponentGuid => new Guid("e441884e-b98c-4e51-8f67-71ad21fcf07f");
+        public override Guid ComponentGuid => new ("e441884e-b98c-4e51-8f67-71ad21fcf07f");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

@@ -10,16 +10,16 @@ namespace DiGi.Rhino.Core.Classes
     public class GooPresistentParam<T, X> : GH_PersistentParam<T> where T : GooSerializableObject<X> where X : ISerializableObject
     {
         public GooPresistentParam(string name, string subcategory)
-            : base(name, name, typeof(X).FullName.Replace(".", " "), "Params", subcategory)
+            : base(name, name, typeof(X).FullName?.Replace(".", " "), "Params", subcategory)
         {
         }
 
         public GooPresistentParam()
-            : base(Query.Name(typeof(X)), Query.Name(typeof(X)), typeof(X).FullName.Replace(".", " "), "Params", Query.Subcategory(typeof(X)))
+            : base(Query.Name(typeof(X)), Query.Name(typeof(X)), typeof(X).FullName?.Replace(".", " "), "Params", Query.Subcategory(typeof(X)))
         {
         }
 
-        public override Guid ComponentGuid => new Guid("f360150a-d89b-4324-aff2-43c883eb3c98");
+        public override Guid ComponentGuid => new ("f360150a-d89b-4324-aff2-43c883eb3c98");
 
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
         {
@@ -40,7 +40,7 @@ namespace DiGi.Rhino.Core.Classes
             throw new NotImplementedException();
         }
         
-        private void Menu_SaveAs(object sender, EventArgs e)
+        private void Menu_SaveAs(object? sender, EventArgs e)
         {
             Query.SaveAs(VolatileData);
         }

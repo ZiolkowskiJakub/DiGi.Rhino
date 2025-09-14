@@ -9,7 +9,7 @@ namespace DiGi.Rhino.Geometry.Planar
     public static partial class Inspect
     {
         [Inspect("A", "A", "A")]
-        public static GH_Number A(this DiGi.Geometry.Planar.Classes.Ellipse2D ellipse2D)
+        public static GH_Number? A(this DiGi.Geometry.Planar.Classes.Ellipse2D? ellipse2D)
         {
             if(ellipse2D == null)
             {
@@ -20,7 +20,7 @@ namespace DiGi.Rhino.Geometry.Planar
         }
 
         [Inspect("B", "B", "B")]
-        public static GH_Number B(this DiGi.Geometry.Planar.Classes.Ellipse2D ellipse2D)
+        public static GH_Number? B(this DiGi.Geometry.Planar.Classes.Ellipse2D? ellipse2D)
         {
             if (ellipse2D == null)
             {
@@ -31,7 +31,7 @@ namespace DiGi.Rhino.Geometry.Planar
         }
 
         [Inspect("Center", "Center", "Center")]
-        public static GooPoint2D Centroid(this DiGi.Geometry.Planar.Classes.Ellipse2D ellipse2D)
+        public static GooPoint2D? Centroid(this DiGi.Geometry.Planar.Classes.Ellipse2D? ellipse2D)
         {
             if (ellipse2D == null)
             {
@@ -42,7 +42,7 @@ namespace DiGi.Rhino.Geometry.Planar
         }
 
         [Inspect("FocalPoints", "FocalPoints", "Focal Points")]
-        public static IEnumerable<GooPoint2D> FocalPoints(this DiGi.Geometry.Planar.Classes.Ellipse2D ellipse2D)
+        public static IEnumerable<GooPoint2D>? FocalPoints(this DiGi.Geometry.Planar.Classes.Ellipse2D? ellipse2D)
         {
             if (ellipse2D == null)
             {

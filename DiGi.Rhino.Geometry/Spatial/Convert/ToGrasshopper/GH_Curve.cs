@@ -6,7 +6,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static GH_Curve ToGrasshopper(this Segment3D segment3D)
+        public static GH_Curve? ToGrasshopper(this Segment3D? segment3D)
         {
             if (segment3D == null)
             {
@@ -16,7 +16,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             return new GH_Curve(segment3D.ToRhino());
         }
 
-        public static GH_Curve ToGrasshopper(this IPolygonal3D polygonal3D)
+        public static GH_Curve? ToGrasshopper(this IPolygonal3D? polygonal3D)
         {
             if (polygonal3D == null)
             {
@@ -26,7 +26,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             return new GH_Curve(polygonal3D.ToRhino());
         }
 
-        public static GH_Curve ToGrasshopper(this Polyline3D polyline3D)
+        public static GH_Curve? ToGrasshopper(this Polyline3D? polyline3D)
         {
             if (polyline3D == null)
             {

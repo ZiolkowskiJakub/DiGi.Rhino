@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("cb1c010d-cd43-4f2d-9378-212e4083838b");
+        public override Guid ComponentGuid => new ("cb1c010d-cd43-4f2d-9378-212e4083838b");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -38,15 +38,17 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooPolygonal3DParam() { Name = "ExternalEdge", NickName = "ExternalEdge", Description = "ExternalEdge", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooPolygonal3DParam() { Name = "InternalEdges", NickName = "InternalEdges", Description = "InternalEdges", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Voluntary));
+                List<Param> result =
+                [
+                    new Param(new GooPolygonal3DParam() { Name = "ExternalEdge", NickName = "ExternalEdge", Description = "ExternalEdge", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooPolygonal3DParam() { Name = "InternalEdges", NickName = "InternalEdges", Description = "InternalEdges", Access = GH_ParamAccess.list, Optional = true }, ParameterVisibility.Voluntary),
+                ];
 
-                Grasshopper.Kernel.Parameters.Param_Number param_Number = new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
+                Grasshopper.Kernel.Parameters.Param_Number param_Number = new() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
                 param_Number.SetPersistentData(DiGi.Core.Constans.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -57,9 +59,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooPolygonalFace3DParam() { Name = "PolygonalFace3D", NickName = "PolygonalFace3D", Description = "DiGi PolygonalFace3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooPolygonalFace3DParam() { Name = "PolygonalFace3D", NickName = "PolygonalFace3D", Description = "DiGi PolygonalFace3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -74,7 +78,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             int index;
 
             index = Params.IndexOfInputParam("ExternalEdge");
-            DiGi.Geometry.Spatial.Interfaces.IPolygonal3D externalEdge = null;
+            DiGi.Geometry.Spatial.Interfaces.IPolygonal3D? externalEdge = null;
             if (index == -1 || !dataAccess.GetData(index, ref externalEdge) || externalEdge == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -82,7 +86,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             }
 
             index = Params.IndexOfInputParam("InternalEdges");
-            List<DiGi.Geometry.Spatial.Interfaces.IPolygonal3D> internalEdges = new List<DiGi.Geometry.Spatial.Interfaces.IPolygonal3D>();
+            List<DiGi.Geometry.Spatial.Interfaces.IPolygonal3D>? internalEdges = [];
             if (index != -1 || !dataAccess.GetData(index, ref internalEdges))
             {
                 internalEdges = null;
@@ -95,7 +99,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 dataAccess.GetData(index, ref tolerance);
             }
 
-            PolygonalFace3D polygonalFace3D = DiGi.Geometry.Spatial.Create.PolygonalFace3D(externalEdge, internalEdges, tolerance);
+            PolygonalFace3D? polygonalFace3D = DiGi.Geometry.Spatial.Create.PolygonalFace3D(externalEdge, internalEdges, tolerance);
             index = Params.IndexOfOutputParam("PolygonalFace3D");
             if (index != -1)
             {

@@ -6,7 +6,7 @@ namespace DiGi.Rhino.Geometry.Planar
     public static partial class Inspect
     {
         [Inspect("X", "X", "X Coordinate")]
-        public static GH_Number X(this DiGi.Geometry.Planar.Classes.Point2D point2D)
+        public static GH_Number? X(this DiGi.Geometry.Planar.Classes.Point2D? point2D)
         {
             if(point2D == null)
             {
@@ -17,7 +17,7 @@ namespace DiGi.Rhino.Geometry.Planar
         }
 
         [Inspect("Y", "Y", "Y Coordinate")]
-        public static GH_Number Y(this DiGi.Geometry.Planar.Classes.Point2D point2D)
+        public static GH_Number? Y(this DiGi.Geometry.Planar.Classes.Point2D? point2D)
         {
             if (point2D == null)
             {

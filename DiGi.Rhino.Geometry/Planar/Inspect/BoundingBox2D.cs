@@ -8,7 +8,7 @@ namespace DiGi.Rhino.Geometry.Planar
     public static partial class Inspect
     {
         [Inspect("BottomLeft", "BottomLeft", "Bottom Left Corrner")]
-        public static GooPoint2D BottomLeft(this DiGi.Geometry.Planar.Classes.BoundingBox2D boundingBox2D)
+        public static GooPoint2D? BottomLeft(this DiGi.Geometry.Planar.Classes.BoundingBox2D? boundingBox2D)
         {
             if (boundingBox2D == null)
             {
@@ -19,7 +19,7 @@ namespace DiGi.Rhino.Geometry.Planar
         }
 
         [Inspect("BottomRight", "BottomRight", "Bottom Right Corrner")]
-        public static GooPoint2D BottomRight(this DiGi.Geometry.Planar.Classes.BoundingBox2D boundingBox2D)
+        public static GooPoint2D? BottomRight(this DiGi.Geometry.Planar.Classes.BoundingBox2D? boundingBox2D)
         {
             if (boundingBox2D == null)
             {
@@ -30,7 +30,7 @@ namespace DiGi.Rhino.Geometry.Planar
         }
 
         [Inspect("Centroid", "Centroid", "Centroid")]
-        public static GooPoint2D Centroid(this DiGi.Geometry.Planar.Classes.BoundingBox2D boundingBox2D)
+        public static GooPoint2D? Centroid(this DiGi.Geometry.Planar.Classes.BoundingBox2D? boundingBox2D)
         {
             if (boundingBox2D == null)
             {
@@ -41,7 +41,7 @@ namespace DiGi.Rhino.Geometry.Planar
         }
 
         [Inspect("Height", "Height", "Height")]
-        public static GH_Number Height(this DiGi.Geometry.Planar.Classes.BoundingBox2D boundingBox2D)
+        public static GH_Number? Height(this DiGi.Geometry.Planar.Classes.BoundingBox2D? boundingBox2D)
         {
             if (boundingBox2D == null)
             {
@@ -52,29 +52,29 @@ namespace DiGi.Rhino.Geometry.Planar
         }
 
         [Inspect("Points", "Points", "Points")]
-        public static IEnumerable<GooPoint2D> Points(this DiGi.Geometry.Planar.Classes.BoundingBox2D boundingBox2D)
+        public static IEnumerable<GooPoint2D>? Points(this DiGi.Geometry.Planar.Classes.BoundingBox2D? boundingBox2D)
         {
             if (boundingBox2D == null)
             {
                 return null;
             }
 
-            return boundingBox2D.GetPoints().ConvertAll(x => new GooPoint2D(x));
+            return boundingBox2D?.GetPoints()?.ConvertAll(x => new GooPoint2D(x));
         }
 
         [Inspect("Segments", "Segments", "Segments")]
-        public static IEnumerable<GooSegment2D> Segments(this DiGi.Geometry.Planar.Classes.BoundingBox2D boundingBox2D)
+        public static IEnumerable<GooSegment2D>? Segments(this DiGi.Geometry.Planar.Classes.BoundingBox2D? boundingBox2D)
         {
             if (boundingBox2D == null)
             {
                 return null;
             }
 
-            return boundingBox2D.GetSegments().ConvertAll(x => new GooSegment2D(x));
+            return boundingBox2D?.GetSegments()?.ConvertAll(x => new GooSegment2D(x));
         }
 
         [Inspect("TopLeft", "TopLeft", "Top Left Corrner")]
-        public static GooPoint2D TopLeft(this DiGi.Geometry.Planar.Classes.BoundingBox2D boundingBox2D)
+        public static GooPoint2D? TopLeft(this DiGi.Geometry.Planar.Classes.BoundingBox2D? boundingBox2D)
         {
             if (boundingBox2D == null)
             {
@@ -85,7 +85,7 @@ namespace DiGi.Rhino.Geometry.Planar
         }
 
         [Inspect("TopRight", "TopRight", "Top Right Corrner")]
-        public static GooPoint2D TopRight(this DiGi.Geometry.Planar.Classes.BoundingBox2D boundingBox2D)
+        public static GooPoint2D? TopRight(this DiGi.Geometry.Planar.Classes.BoundingBox2D? boundingBox2D)
         {
             if (boundingBox2D == null)
             {
@@ -96,7 +96,7 @@ namespace DiGi.Rhino.Geometry.Planar
         }
 
         [Inspect("Width", "Width", "Width")]
-        public static GH_Number Width(this DiGi.Geometry.Planar.Classes.BoundingBox2D boundingBox2D)
+        public static GH_Number? Width(this DiGi.Geometry.Planar.Classes.BoundingBox2D? boundingBox2D)
         {
             if(boundingBox2D == null)
             {

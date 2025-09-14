@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("df9e0fa7-ae39-47ae-94a2-bf1d69f4c37d");
+        public override Guid ComponentGuid => new ("df9e0fa7-ae39-47ae-94a2-bf1d69f4c37d");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -37,10 +37,12 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_FilePath() { Name = "Path", NickName = "Path", Description = "File Path", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_FilePath() { Name = "Path", NickName = "Path", Description = "File Path", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -51,11 +53,13 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Boolean() { Name = "Succeed", NickName = "Succeed", Description = "Succeed", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Json", NickName = "Json", Description = "Json", Access = GH_ParamAccess.item }, ParameterVisibility.Voluntary));
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Boolean() { Name = "Succeed", NickName = "Succeed", Description = "Succeed", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Json", NickName = "Json", Description = "Json", Access = GH_ParamAccess.item }, ParameterVisibility.Voluntary),
+                ];
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -73,7 +77,7 @@ namespace DiGi.Rhino.Core.Classes
             int index;
 
             index = Params.IndexOfInputParam("Path");
-            string path = null;
+            string? path = null;
             if (index == -1 || !dataAccess.GetData(index, ref path) || path == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -81,13 +85,13 @@ namespace DiGi.Rhino.Core.Classes
             }
 
             index = Params.IndexOfInputParam("SerializableObjects");
-            List<ISerializableObject> serializableObjects = new List<ISerializableObject>();
+            List<ISerializableObject> serializableObjects = [];
             if (index == -1 || !dataAccess.GetDataList(index, serializableObjects) || serializableObjects == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
             }
 
-            string json = DiGi.Core.Convert.ToJson(serializableObjects)?.ToString();
+            string? json = DiGi.Core.Convert.ToJson(serializableObjects)?.ToString();
 
             index = Params.IndexOfOutputParam("Json");
             if (index != -1)

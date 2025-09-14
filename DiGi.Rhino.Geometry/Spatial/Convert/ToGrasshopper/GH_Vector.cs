@@ -5,7 +5,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static GH_Vector ToGrasshopper(this Vector3D vector3D)
+        public static GH_Vector? ToGrasshopper(this Vector3D? vector3D)
         {
             if (vector3D == null)
             {

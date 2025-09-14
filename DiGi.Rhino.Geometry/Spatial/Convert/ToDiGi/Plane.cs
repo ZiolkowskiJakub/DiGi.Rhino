@@ -4,9 +4,9 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static Plane ToDiGi(this global::Rhino.Geometry.Plane plane)
+        public static Plane? ToDiGi(this global::Rhino.Geometry.Plane plane)
         {
-            if(plane == null || !plane.IsValid)
+            if(!plane.IsValid)
             {
                 return null;
             }

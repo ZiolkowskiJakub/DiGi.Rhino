@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("3bb37fd8-0b29-43ec-baea-564606ac192b");
+        public override Guid ComponentGuid => new ("3bb37fd8-0b29-43ec-baea-564606ac192b");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -38,13 +38,15 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "A", NickName = "A", Description = "A", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "B", NickName = "B", Description = "B", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "C", NickName = "C", Description = "C", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "A", NickName = "A", Description = "A", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "B", NickName = "B", Description = "B", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "C", NickName = "C", Description = "C", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -55,9 +57,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooEllipsoidParam() { Name = "Ellipsoid", NickName = "Ellipsoid", Description = "DiGi Ellipsoid", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooEllipsoidParam() { Name = "Ellipsoid", NickName = "Ellipsoid", Description = "DiGi Ellipsoid", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -72,7 +76,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             int index;
 
             index = Params.IndexOfInputParam("Plane");
-            Plane plane = null;
+            Plane? plane = null;
             if (index == -1 || !dataAccess.GetData(index, ref plane) || plane == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -103,7 +107,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 return;
             }
 
-            DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid = new DiGi.Geometry.Spatial.Classes.Ellipsoid(plane, a, b, c);
+            DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid = new(plane, a, b, c);
             index = Params.IndexOfOutputParam("Ellipsoid");
             if (index != -1)
             {

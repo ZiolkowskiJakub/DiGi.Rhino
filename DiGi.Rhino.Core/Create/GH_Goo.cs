@@ -8,7 +8,7 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Create
     {
-        public static IGH_Goo GH_Goo(this ParameterType parameterType, object value)
+        public static IGH_Goo? GH_Goo(this ParameterType parameterType, object? value)
         {
             if (value == null)
             {
@@ -39,7 +39,7 @@ namespace DiGi.Rhino.Core
                     {
                         if (value is ISerializableObject)
                         {
-                            if (DiGi.Core.Query.TryConvert(value, out ISerializableObject serializableObject))
+                            if (DiGi.Core.Query.TryConvert(value, out ISerializableObject? serializableObject))
                             {
                                 return new GooSerializableObject(serializableObject);
                             }
@@ -89,7 +89,7 @@ namespace DiGi.Rhino.Core
 
                 case ParameterType.String:
                     {
-                        if (DiGi.Core.Query.TryConvert(value, out string @string))
+                        if (DiGi.Core.Query.TryConvert(value, out string? @string))
                         {
                             return new GH_String(@string);
                         }

@@ -7,14 +7,14 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Query
     {
-        public static object Value(this IGooSerializableObject gooSerializableObject, GooParam gooParam)
+        public static object? Value(this IGooSerializableObject? gooSerializableObject, GooParam? gooParam)
         {
             if(gooParam == null || gooSerializableObject == null)
             {
                 return null;
             }
 
-            List<InspectMethod> inspectMethods = Settings.InspectManager.GetInspectMethods(gooSerializableObject.GetValue<ISerializableObject>()?.GetType());
+            List<InspectMethod>? inspectMethods = Settings.InspectManager.GetInspectMethods(gooSerializableObject.GetValue<ISerializableObject>()?.GetType());
             if(inspectMethods == null)
             {
                 return null;
@@ -24,7 +24,7 @@ namespace DiGi.Rhino.Core
             {
                 if(inspectMethod?.InspectAttribute?.Name == gooParam.Name)
                 {
-                    inspectMethod.TryGetValue(gooSerializableObject.GetValue<ISerializableObject>(), out object value);
+                    inspectMethod.TryGetValue(gooSerializableObject.GetValue<ISerializableObject>(), out object? value);
                     return value;
                 }
             }

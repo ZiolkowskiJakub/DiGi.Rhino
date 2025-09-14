@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("7fc32700-de9c-498b-9b6a-bfdf3bdd1ea1");
+        public override Guid ComponentGuid => new ("7fc32700-de9c-498b-9b6a-bfdf3bdd1ea1");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -37,9 +37,11 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Street", NickName = "Street", Description = "Street", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Street", NickName = "Street", Description = "Street", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
 
                 
             }
@@ -52,9 +54,11 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooAddressParam() { Name = "Address", NickName = "Address", Description = "Address", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooAddressParam() { Name = "Address", NickName = "Address", Description = "Address", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -69,14 +73,14 @@ namespace DiGi.Rhino.Core.Classes
             int index;
 
             index = Params.IndexOfInputParam("Street");
-            string street = null;
+            string? street = null;
             if (index == -1 || !dataAccess.GetData(index, ref street))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            DiGi.Core.Classes.Address address = new DiGi.Core.Classes.Address(street, null, null, DiGi.Core.Enums.CountryCode.Undefined);
+            DiGi.Core.Classes.Address address = new (street, null, null, DiGi.Core.Enums.CountryCode.Undefined);
 
             index = Params.IndexOfOutputParam("Address");
             if (index != -1)

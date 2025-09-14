@@ -9,7 +9,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     public static partial class Inspect
     {
         [Inspect("PolygonalFaces", "PolygonalFaces", "Polygonal Faces")]
-        public static IEnumerable PolygonalFaces(this Polyhedron polyhedron)
+        public static IEnumerable? PolygonalFaces(this Polyhedron? polyhedron)
         {
             if (polyhedron == null)
             {
@@ -20,35 +20,35 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("InternalPoint", "InternalPoint", "Internal Point")]
-        public static GooPoint3D InternalPoint(this Polyhedron polyhedron)
+        public static GooPoint3D? InternalPoint(this Polyhedron? polyhedron)
         {
             if (polyhedron == null)
             {
                 return null;
             }
 
-            DiGi.Geometry.Spatial.Classes.Point3D point3D = polyhedron.GetInternalPoint();
+            DiGi.Geometry.Spatial.Classes.Point3D? point3D = polyhedron.GetInternalPoint();
 
             return point3D == null ? null : new GooPoint3D(point3D);
         }
 
         [Inspect("BoundingBox", "BoundingBox", "BoundingBox")]
-        public static GooBoundingBox3D BoundingBox(this Polyhedron polyhedron)
+        public static GooBoundingBox3D? BoundingBox(this Polyhedron? polyhedron)
         {
             if (polyhedron == null)
             {
                 return null;
             }
 
-            BoundingBox3D boundingBox3D = polyhedron.GetBoundingBox();
+            BoundingBox3D? boundingBox3D = polyhedron.GetBoundingBox();
 
             return boundingBox3D == null ? null : new GooBoundingBox3D(boundingBox3D);
         }
 
         [Inspect("Mesh3D", "Mesh3D", "Mesh3D")]
-        public static GooMesh3D Mesh3D(this Polyhedron polyhedron)
+        public static GooMesh3D? Mesh3D(this Polyhedron? polyhedron)
         {
-            Mesh3D mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D(polyhedron);
+            Mesh3D? mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D(polyhedron);
 
             return mesh3D == null ? null : new GooMesh3D(mesh3D);
         }

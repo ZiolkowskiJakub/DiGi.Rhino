@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
         }
 
-        public GooPolygon2D(Polygon2D polygon2D)
+        public GooPolygon2D(Polygon2D? polygon2D)
         {
             Value = polygon2D;
         }
@@ -26,7 +26,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
 
     public class GooPolygon2DParam : GooGeometryParam<Polygon2D>
     {
-        public override Guid ComponentGuid => new Guid("d20aa671-8cc3-48b6-9b7a-2dd61ceb3799");
+        public override Guid ComponentGuid => new ("d20aa671-8cc3-48b6-9b7a-2dd61ceb3799");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

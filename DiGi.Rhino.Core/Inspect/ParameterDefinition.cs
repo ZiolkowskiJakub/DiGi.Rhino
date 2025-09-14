@@ -7,7 +7,7 @@ namespace DiGi.Rhino.Core
     public static partial class Inspect
     {
         [Inspect("GroupName", "GroupName", "GroupName")]
-        public static GH_String GroupName(this IParameterDefinition parameterDefinition)
+        public static GH_String? GroupName(this IParameterDefinition? parameterDefinition)
         {
             if (parameterDefinition == null)
             {
@@ -18,7 +18,7 @@ namespace DiGi.Rhino.Core
         }
 
         [Inspect("Name", "Name", "Name")]
-        public static GH_String Name(this IParameterDefinition parameterDefinition)
+        public static GH_String? Name(this IParameterDefinition? parameterDefinition)
         {
             if(parameterDefinition == null)
             {
@@ -29,7 +29,7 @@ namespace DiGi.Rhino.Core
         }
         
         [Inspect("ParameterType", "ParameterType", "ParameterType")]
-        public static GooEnum ParameterType(this IParameterDefinition parameterDefinition)
+        public static GooEnum? ParameterType(this IParameterDefinition? parameterDefinition)
         {
             if (parameterDefinition == null)
             {
@@ -40,7 +40,7 @@ namespace DiGi.Rhino.Core
         }
 
         [Inspect("UniqueId", "UniqueId", "UniqueId")]
-        public static GH_String UniqueId(this IParameterDefinition parameterDefinition)
+        public static GH_String? UniqueId(this IParameterDefinition? parameterDefinition)
         {
             if (parameterDefinition == null)
             {

@@ -11,38 +11,38 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Create
     {
-        public static BoundingBox BoundingBox(this IGeometry geometry)
+        public static BoundingBox BoundingBox(this IGeometry? geometry)
         {
-            if (geometry is IBoundable3D)
+            if (geometry is IBoundable3D boundable3D)
             {
-                return Convert.ToRhino(((IBoundable3D)geometry).GetBoundingBox());
+                return Convert.ToRhino(boundable3D.GetBoundingBox());
             }
 
-            if (geometry is Point3D)
+            if (geometry is Point3D point3D)
             {
-                return Convert.ToRhino(new BoundingBox3D((Point3D)(object)geometry, DiGi.Core.Constans.Tolerance.Distance));
+                return Convert.ToRhino(new BoundingBox3D(point3D, DiGi.Core.Constans.Tolerance.Distance));
             }
 
-            if (geometry is IBoundable2D)
+            if (geometry is IBoundable2D boundable2D)
             {
-                IGeometry3D geometry3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, (IGeometry2D)geometry);
-                if (geometry3D is IBoundable3D)
+                IGeometry3D? geometry3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, boundable2D);
+                if (geometry3D is IBoundable3D boundable3D_Temp)
                 {
-                    return Convert.ToRhino(((IBoundable3D)geometry3D).GetBoundingBox());
+                    return Convert.ToRhino(boundable3D_Temp.GetBoundingBox());
                 }
             }
-            else if (geometry is Point2D)
+            else if (geometry is Point2D point2D)
             {
-                Point3D point3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, (Point2D)(object)geometry);
-                return Convert.ToRhino(new BoundingBox3D(point3D, DiGi.Core.Constans.Tolerance.Distance));
+                Point3D? point3D_Temp = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, point2D);
+                return Convert.ToRhino(new BoundingBox3D(point3D_Temp, DiGi.Core.Constans.Tolerance.Distance));
             }
 
             return global::Rhino.Geometry.BoundingBox.Unset;
         }
 
-        public static BoundingBox BoundingBox(this IEnumerable<IGeometry> geometries)
+        public static BoundingBox BoundingBox(this IEnumerable<IGeometry>? geometries)
         {
-            if (geometries == null || geometries.Count() == 0)
+            if (geometries == null || !geometries.Any())
             {
                 return global::Rhino.Geometry.BoundingBox.Unset;
             }
@@ -74,7 +74,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             return result;
         }
 
-        public static BoundingBox BoundingBox(this IIntersectionResult3D intersectionResult3D)
+        public static BoundingBox BoundingBox(this IIntersectionResult3D? intersectionResult3D)
         {
             return BoundingBox(intersectionResult3D?.GetGeometry3Ds<IGeometry3D>()?.Cast<IGeometry>());
         }

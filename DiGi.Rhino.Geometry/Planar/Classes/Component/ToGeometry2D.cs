@@ -16,7 +16,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("07dc7a7e-8105-4e90-a664-2d3ad2c6ab68");
+        public override Guid ComponentGuid => new ("07dc7a7e-8105-4e90-a664-2d3ad2c6ab68");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -42,10 +42,12 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                ];
+                return [.. result];
             }
         }
 
@@ -56,10 +58,12 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometry2DParam() { Name = "Geometry2D", NickName = "Geometry2D", Description = "DiGi Geometry 2D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Voluntary));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooGeometry2DParam() { Name = "Geometry2D", NickName = "Geometry2D", Description = "DiGi Geometry 2D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item }, ParameterVisibility.Voluntary),
+                ];
+                return [.. result];
             }
         }
 
@@ -74,14 +78,14 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
             int index;
 
             index = Params.IndexOfInputParam("Geometry3D");
-            IGeometry3D geometry3D = null;
+            IGeometry3D? geometry3D = null;
             if (index == -1 || !dataAccess.GetData(index, ref geometry3D) || geometry3D == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            Plane plane = null;
+            Plane? plane = null;
 
             index = Params.IndexOfInputParam("Plane");
             if (index != -1)
@@ -94,23 +98,20 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
 
             if(plane == null)
             {
-                if (geometry3D is IPlanar)
+                if (geometry3D is IPlanar planar)
                 {
-                    plane = ((IPlanar)geometry3D).Plane;
+                    plane = planar.Plane;
                 }
             }
 
-            if(plane == null)
-            {
-                plane = DiGi.Geometry.Spatial.Constans.Plane.WorldZ;
-            }
+            plane ??= DiGi.Geometry.Spatial.Constans.Plane.WorldZ;
 
             index = Params.IndexOfOutputParam("Geometry2D");
             if (index != -1)
             {
-                IGeometry2D geometry2D = null;
+                IGeometry2D? geometry2D = null;
 
-                PlanarResult planarResult = DiGi.Geometry.Spatial.Create.ProjectionResult(plane, geometry3D);
+                PlanarResult? planarResult = DiGi.Geometry.Spatial.Create.ProjectionResult(plane, geometry3D);
                 if(planarResult != null)
                 {
                     geometry2D = planarResult.GetGeometry2Ds<IGeometry2D>()?.FirstOrDefault();

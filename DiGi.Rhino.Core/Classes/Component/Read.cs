@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("d60640ab-a230-4465-a772-00ead8d7eda7");
+        public override Guid ComponentGuid => new("d60640ab-a230-4465-a772-00ead8d7eda7");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -38,9 +38,11 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_FilePath() { Name = "Path", NickName = "Path", Description = "File Path", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_FilePath() { Name = "Path", NickName = "Path", Description = "File Path", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -51,9 +53,11 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -68,7 +72,7 @@ namespace DiGi.Rhino.Core.Classes
             int index;
 
             index = Params.IndexOfInputParam("Path");
-            string path = null;
+            string? path = null;
             if (index == -1 || !dataAccess.GetData(index, ref path) || path == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -83,7 +87,7 @@ namespace DiGi.Rhino.Core.Classes
                 return;
             }
 
-            List<ISerializableObject> serializableObjects = DiGi.Core.Convert.ToDiGi<ISerializableObject>(path_Temp);
+            List<ISerializableObject>? serializableObjects = DiGi.Core.Convert.ToDiGi<ISerializableObject>(path_Temp);
 
             index = Params.IndexOfOutputParam("SerializableObjects");
             if (index != -1)

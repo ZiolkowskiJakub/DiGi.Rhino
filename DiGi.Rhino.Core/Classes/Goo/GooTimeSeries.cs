@@ -11,7 +11,7 @@ namespace DiGi.GIS.Rhino.Classes
         {
         }
 
-        public GooTimeSeries(Core.Interfaces.ITimeSeries timeSeries)
+        public GooTimeSeries(Core.Interfaces.ITimeSeries? timeSeries)
             : base()
         {
             Value = timeSeries;
@@ -26,7 +26,7 @@ namespace DiGi.GIS.Rhino.Classes
 
     public class GooTimeSeriesParam : GooPresistentParam<GooTimeSeries, Core.Interfaces.ITimeSeries>
     {
-        public override Guid ComponentGuid => new Guid("13973939-9f83-42ff-80bc-8e11389d8a82");
+        public override Guid ComponentGuid => new ("13973939-9f83-42ff-80bc-8e11389d8a82");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

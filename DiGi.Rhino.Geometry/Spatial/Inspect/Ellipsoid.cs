@@ -9,7 +9,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     public static partial class Inspect
     {
         [Inspect("A", "A", "A")]
-        public static GH_Number A(this DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid)
+        public static GH_Number? A(this DiGi.Geometry.Spatial.Classes.Ellipsoid? ellipsoid)
         {
             if(ellipsoid == null)
             {
@@ -20,7 +20,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("B", "B", "B")]
-        public static GH_Number B(this DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid)
+        public static GH_Number? B(this DiGi.Geometry.Spatial.Classes.Ellipsoid? ellipsoid)
         {
             if (ellipsoid == null)
             {
@@ -31,7 +31,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("C", "C", "C")]
-        public static GH_Number C(this DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid)
+        public static GH_Number? C(this DiGi.Geometry.Spatial.Classes.Ellipsoid? ellipsoid)
         {
             if (ellipsoid == null)
             {
@@ -42,7 +42,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("Center", "Center", "Center")]
-        public static GooPoint3D Center(this DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid)
+        public static GooPoint3D? Center(this DiGi.Geometry.Spatial.Classes.Ellipsoid? ellipsoid)
         {
             if (ellipsoid == null)
             {
@@ -53,7 +53,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("DirectionA", "DirectionA", "Direction A")]
-        public static GooVector3D DirectionA(this DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid)
+        public static GooVector3D? DirectionA(this DiGi.Geometry.Spatial.Classes.Ellipsoid? ellipsoid)
         {
             if (ellipsoid == null)
             {
@@ -64,7 +64,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("DirectionB", "DirectionB", "Direction B")]
-        public static GooVector3D DirectionB(this DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid)
+        public static GooVector3D? DirectionB(this DiGi.Geometry.Spatial.Classes.Ellipsoid? ellipsoid)
         {
             if (ellipsoid == null)
             {
@@ -75,7 +75,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("DirectionC", "DirectionC", "Direction C")]
-        public static GooVector3D DirectionC(this DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid)
+        public static GooVector3D? DirectionC(this DiGi.Geometry.Spatial.Classes.Ellipsoid? ellipsoid)
         {
             if (ellipsoid == null)
             {
@@ -86,7 +86,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("FocalPoints", "FocalPoints", "Focal Points")]
-        public static IEnumerable<GooPoint3D> FocalPoints(this DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid)
+        public static IEnumerable<GooPoint3D>? FocalPoints(this DiGi.Geometry.Spatial.Classes.Ellipsoid? ellipsoid)
         {
             if (ellipsoid == null)
             {

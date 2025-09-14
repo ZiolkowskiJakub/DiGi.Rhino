@@ -6,14 +6,14 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Query
     {
-        public static List<T> SerializableObjects<T>(this Grasshopper.Kernel.Data.IGH_Structure gH_Structure) where T : ISerializableObject
+        public static List<T>? SerializableObjects<T>(this Grasshopper.Kernel.Data.IGH_Structure? gH_Structure) where T : ISerializableObject
         {
             if (gH_Structure == null)
             {
                 return null;
             }
 
-            List<T> result = new List<T>();
+            List<T> result = [];
             foreach (IGH_Goo goo in gH_Structure.AllData(true))
             {
                 if(goo == null)
@@ -21,7 +21,7 @@ namespace DiGi.Rhino.Core
                     continue;
                 }
 
-                ISerializableObject serializableObject = null;
+                ISerializableObject? serializableObject;
                 try
                 {
                     serializableObject = (goo as dynamic).Value as ISerializableObject;
@@ -31,7 +31,7 @@ namespace DiGi.Rhino.Core
                     serializableObject = null;
                 }
 
-                if (!(serializableObject is T))
+                if (serializableObject is not T)
                 {
                     continue;
                 }

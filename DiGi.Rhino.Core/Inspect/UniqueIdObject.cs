@@ -9,7 +9,7 @@ namespace DiGi.Rhino.Core
     {
 
         [Inspect("UniqueId", "UniqueId", "Unique Id")]
-        public static GH_String UniqueId(this IUniqueIdObject uniqueIdObject)
+        public static GH_String? UniqueId(this IUniqueIdObject? uniqueIdObject)
         {
             if(uniqueIdObject == null)
             {

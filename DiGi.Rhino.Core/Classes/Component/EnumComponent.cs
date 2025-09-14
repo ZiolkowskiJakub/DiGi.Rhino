@@ -7,7 +7,7 @@ namespace DiGi.Rhino.Core.Classes
 {
     public abstract class EnumComponent<T> : GH_Component where T : Enum
     {
-        private T value;
+        private T? value;
 
         public EnumComponent(string name, string nickname, string description, string category, string subCategory)
           : base(name, nickname, description, category, subCategory)
@@ -39,7 +39,7 @@ namespace DiGi.Rhino.Core.Classes
 
         public override bool Write(GH_IWriter writer)
         {
-            writer.SetInt32(typeof(T).Name, value.GetHashCode());
+            writer.SetInt32(typeof(T).Name, value == null ? int.MinValue : value.GetHashCode());
             return base.Write(writer);
         }
 
@@ -79,11 +79,11 @@ namespace DiGi.Rhino.Core.Classes
             dataAccess.SetData(0, new GooEnum(value));
         }
 
-        private void Menu_Changed(object sender, EventArgs e)
+        private void Menu_Changed(object? sender, EventArgs e)
         {
-            if (sender is ToolStripMenuItem item && item.Tag is T)
+            if (sender is ToolStripMenuItem toolStripMenuItem && toolStripMenuItem.Tag is T t)
             {
-                value = (T)item.Tag;
+                value = t;
                 ExpireSolution(true);
             }
         }

@@ -6,7 +6,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static Polyhedron ToDiGi_Polyhedron(this Brep brep, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static Polyhedron? ToDiGi_Polyhedron(this Brep? brep, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             if(brep == null || !brep.IsValid)
             {
@@ -20,7 +20,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 
             double unitScale = Core.Query.UnitScale();
 
-            List<PolygonalFace3D> polygonalFace3Ds = new List<PolygonalFace3D>();
+            List<PolygonalFace3D> polygonalFace3Ds = [];
             foreach (BrepFace brepFace in brep.Faces)
             {
                 if (!brepFace.IsPlanar(unitScale * tolerance))
@@ -28,7 +28,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                     return null;
                 }
 
-                PolygonalFace3D polygonalFace3D = brepFace.ToDiGi_PolygonalFace3D(tolerance);
+                PolygonalFace3D? polygonalFace3D = brepFace.ToDiGi_PolygonalFace3D(tolerance);
                 if(polygonalFace3D == null)
                 {
                     continue;

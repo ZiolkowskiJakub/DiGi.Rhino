@@ -3,7 +3,7 @@ using Grasshopper.Kernel;
 
 namespace DiGi.Rhino.Core.Classes
 {
-    public struct Param
+    public readonly struct Param
     {
         public readonly IGH_Param GH_Param;
         public readonly ParameterVisibility ParameterVisibility;

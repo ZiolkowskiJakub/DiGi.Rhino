@@ -4,7 +4,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static global::Rhino.Geometry.Point3d ToRhino(this Point3D point3D)
+        public static global::Rhino.Geometry.Point3d ToRhino(this Point3D? point3D)
         {
             if (point3D == null)
             {

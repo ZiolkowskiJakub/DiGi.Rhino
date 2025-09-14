@@ -23,7 +23,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         {
         }
 
-        public GooGeometry(T geometry)
+        public GooGeometry(T? geometry)
         {
             Value = geometry;
         }
@@ -32,7 +32,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         {
             get
             {
-                return Spatial.Create.BoundingBox(Value);
+                return Create.BoundingBox(Value);
             }
         }
 
@@ -40,22 +40,21 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         {
             guid = Guid.Empty;
 
-            bool result = Spatial.Modify.BakeGeometry(Value, rhinoDoc, objectAttributes, out List<Guid> guids);
-            if (guids == null || guids.Count == 0)
+            bool result = Modify.BakeGeometry(Value, rhinoDoc, objectAttributes, out List<Guid>? guids);
+            if (guids != null && guids.Count == 0)
             {
-                return false;
+                guid = guids[0];
             }
 
-            guid = guids[0];
-            return true;
+            return result;
         }
 
-        public bool BakeGeometry(RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids)
+        public bool BakeGeometry(RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids)
         {
-            return Spatial.Modify.BakeGeometry(Value, rhinoDoc, objectAttributes, out guids);
+            return Modify.BakeGeometry(Value, rhinoDoc, objectAttributes, out guids);
         }
 
-        public override bool CastFrom(object source)
+        public override bool CastFrom(object? source)
         {
             if (source == null)
             {
@@ -68,31 +67,31 @@ namespace DiGi.Rhino.Geometry.Core.Classes
                 return true;
             }
 
-            if (source is IGooSerializableObject)
+            if (source is IGooSerializableObject gooSerializableObject)
             {
-                Value = ((IGooSerializableObject)source).GetValue<T>();
+                Value = gooSerializableObject.GetValue<T>();
                 return true;
             }
 
-            if (source is IGH_GeometricGoo)
+            if (source is IGH_GeometricGoo gH_GeometricGoo)
             {
-                IGeometry3D geometry3D = Spatial.Convert.ToDiGi(((IGH_GeometricGoo)source));
-                if (geometry3D is T)
+                IGeometry3D? geometry3D = Spatial.Convert.ToDiGi(gH_GeometricGoo);
+                if (geometry3D is T t)
                 {
-                    Value = (T)geometry3D;
+                    Value = t;
                     return true;
                 }
             }
 
-            Type type_Source = source?.GetType();
+            Type? type_Source = source?.GetType();
             if (type_Source != null)
             {
                 if (typeof(IGooSerializableObject).IsAssignableFrom(type_Source))
                 {
-                    ISerializableObject serializableObject = ((IGooSerializableObject)source).GetValue<ISerializableObject>();
-                    if (serializableObject is T)
+                    ISerializableObject? serializableObject = ((IGooSerializableObject)source!).GetValue<ISerializableObject>();
+                    if (serializableObject is T t)
                     {
-                        Value = (T)serializableObject;
+                        Value = t;
                     }
 
                     return true;
@@ -100,28 +99,31 @@ namespace DiGi.Rhino.Geometry.Core.Classes
 
                 if (typeof(IGH_Goo).IsAssignableFrom(type_Source))
                 {
-                    object @object = null;
+                    object? @object = null;
                     if (typeof(IGH_GeometricGoo).IsAssignableFrom(type_Source))
                     {
-                        @object = Spatial.Convert.ToDiGi((IGH_GeometricGoo)source);
+                        @object = Spatial.Convert.ToDiGi((IGH_GeometricGoo)source!);
                     }
                     if(typeof(GH_Vector).IsAssignableFrom(type_Source))
                     {
-                        GH_Vector gH_Vector = (GH_Vector)source;
+                        GH_Vector gH_Vector = (GH_Vector)source!;
                         if (typeof(T).IsAssignableFrom(typeof(Vector3D)))
                         {
-                            Value = (T)(object)gH_Vector.Value.ToDiGi();
-                            return true;
+                            if((T?)(object?)gH_Vector.Value.ToDiGi() is T t_Temp)
+                            {
+                                Value = t_Temp;
+                                return true;
+                            }
                         }
                     }
                     else
                     {
-                        @object = (source as dynamic).Value;
+                        @object = ((dynamic)source!).Value;
                     }
 
-                    if (@object is T)
+                    if (@object is T t)
                     {
-                        Value = (T)@object;
+                        Value = t;
                         return true;
                     }
                 }
@@ -134,13 +136,13 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         {
             if (typeof(Y) == typeof(T))
             {
-                target = (Y)(object)Value;
+                target = (Y)(object)Value!;
                 return true;
             }
 
             if (typeof(Y) == typeof(object))
             {
-                target = (Y)(object)Value;
+                target = (Y)(object)Value!;
                 return true;
             }
 
@@ -162,11 +164,17 @@ namespace DiGi.Rhino.Geometry.Core.Classes
                 {
                     if (typeof(Y).IsAssignableFrom(Value.GetType()))
                     {
-                        target = (Y)(object)Value.Clone();
+                        if((Y?)(object?)Value.Clone() is Y y)
+                        {
+                            target = y;
+                        }
                     }
                     else
                     {
-                        target = DiGi.Core.Create.Object<Y>(Value);
+                        if(DiGi.Core.Create.Object<Y>(Value) is Y y)
+                        {
+                            target = y;
+                        }
                     }
 
                     if (target != null)
@@ -185,12 +193,12 @@ namespace DiGi.Rhino.Geometry.Core.Classes
 
         public void DrawViewportMeshes(GH_PreviewMeshArgs args)
         {
-            Spatial.Modify.DrawViewportMeshes(Value, args, args.Material);
+            Modify.DrawViewportMeshes(Value, args, args.Material);
         }
 
         public void DrawViewportWires(GH_PreviewWireArgs args)
         {
-            Spatial.Modify.DrawViewportWires(Value, args, args.Color);
+            Modify.DrawViewportWires(Value, args, args.Color);
         }
 
         public override IGH_Goo Duplicate()
@@ -208,7 +216,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
 
         public BoundingBox ClippingBox => Preview_ComputeClippingBox();
         
-        public override Guid ComponentGuid => new Guid("63680047-20b3-4e89-a085-2add878abb76");
+        public override Guid ComponentGuid => new ("63680047-20b3-4e89-a085-2add878abb76");
         
         public bool Hidden { get; set; }
 
@@ -221,29 +229,25 @@ namespace DiGi.Rhino.Geometry.Core.Classes
             BakeGeometry(rhinoDoc, rhinoDoc?.CreateDefaultAttributes(), guids);
         }
 
-        public void BakeGeometry(RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, List<Guid> guids)
+        public void BakeGeometry(RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, List<Guid>? guids)
         {
             if (rhinoDoc == null)
             {
                 return;
             }
 
-            if (guids == null)
-            {
-                guids = new List<Guid>();
-            }
+            guids ??= [];
 
             foreach (var value in VolatileData.AllData(true))
             {
-                IGH_BakeAwareData gH_BakeAwareData = value as IGH_BakeAwareData;
-                if (gH_BakeAwareData == null)
+                if (value is not IGH_BakeAwareData gH_BakeAwareData)
                 {
                     continue;
                 }
 
-                if(gH_BakeAwareData is IGooGeometry)
+                if (gH_BakeAwareData is IGooGeometry gooGeometry)
                 {
-                    if(((IGooGeometry)gH_BakeAwareData).BakeGeometry(rhinoDoc, objectAttributes, out List<Guid> guids_Temp) && guids_Temp != null)
+                    if(gooGeometry.BakeGeometry(rhinoDoc, objectAttributes, out List<Guid>? guids_Temp) && guids_Temp != null)
                     {
                         guids.AddRange(guids_Temp);
                     }
@@ -289,7 +293,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         {
         }
 
-        public override Guid ComponentGuid => new Guid("38d1d698-3de7-4537-9175-3b19372718f9");
+        public override Guid ComponentGuid => new ("38d1d698-3de7-4537-9175-3b19372718f9");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

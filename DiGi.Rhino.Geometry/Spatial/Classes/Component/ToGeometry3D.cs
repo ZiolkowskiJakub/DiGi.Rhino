@@ -15,7 +15,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("42d8cfda-ad7c-4e6e-b90e-f7a2ccf1cdc4");
+        public override Guid ComponentGuid => new ("42d8cfda-ad7c-4e6e-b90e-f7a2ccf1cdc4");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -41,10 +41,12 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometry2DParam() { Name = "Geometry2D", NickName = "Geometry2D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooGeometry2DParam() { Name = "Geometry2D", NickName = "Geometry2D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooPlaneParam() { Name = "Plane", NickName = "Plane", Description = "DiGi Geometry Plane", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                ];
+                return [.. result];
             }
         }
 
@@ -55,9 +57,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi Geometry 3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi Geometry 3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -72,14 +76,14 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             int index;
 
             index = Params.IndexOfInputParam("Geometry2D");
-            IGeometry2D geometry2D = null;
+            IGeometry2D? geometry2D = null;
             if (index == -1 || !dataAccess.GetData(index, ref geometry2D) || geometry2D == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            Plane plane = null;
+            Plane? plane = null;
 
             index = Params.IndexOfInputParam("Plane");
             if (index != -1)
@@ -90,15 +94,12 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 }
             }
 
-            if (plane == null)
-            {
-                plane = DiGi.Geometry.Spatial.Constans.Plane.WorldZ;
-            }
+            plane ??= DiGi.Geometry.Spatial.Constans.Plane.WorldZ;
 
             index = Params.IndexOfOutputParam("Geometry3D");
             if (index != -1)
             {
-                IGeometry3D geometry3D = DiGi.Geometry.Spatial.Query.Convert(plane, geometry2D);
+                IGeometry3D? geometry3D = DiGi.Geometry.Spatial.Query.Convert(plane, geometry2D);
 
                 dataAccess.SetData(index, new GooGeometry3D(geometry3D));
             }

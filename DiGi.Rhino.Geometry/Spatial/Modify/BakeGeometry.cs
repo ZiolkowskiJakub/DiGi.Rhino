@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Modify
     {
-        public static bool BakeGeometry(this IGeometry geometry, RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids)
+        public static bool BakeGeometry(this IGeometry? geometry, RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids)
         {
             guids = null;
 
@@ -20,17 +20,19 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return false;
             }
 
-            if(geometry is IGeometry2D)
+            if(geometry is IGeometry2D geometry2D)
             {
-                return BakeGeometry((IGeometry2D)geometry, rhinoDoc, objectAttributes, out guids);
+                return BakeGeometry(geometry2D, rhinoDoc, objectAttributes, out guids);
             }
-            else
+            else if(geometry is IGeometry3D geometry3D)
             {
-                return BakeGeometry((IGeometry3D)geometry, rhinoDoc, objectAttributes, out guids);
+                return BakeGeometry(geometry3D, rhinoDoc, objectAttributes, out guids);
             }
+
+            return false;
         }
 
-        public static bool BakeGeometry(this IGeometry2D geometry2D, RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids)
+        public static bool BakeGeometry(this IGeometry2D? geometry2D, RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids)
         {
             guids = null;
 
@@ -39,7 +41,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return false;
             }
 
-            IGeometry3D geometry3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, geometry2D);
+            IGeometry3D? geometry3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, geometry2D);
             if(geometry3D == null)
             {
                 return false;
@@ -48,7 +50,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             return BakeGeometry(geometry3D, rhinoDoc, objectAttributes, out guids);
         }
 
-        public static bool BakeGeometry(this IGeometry3D geometry3D, RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids)
+        public static bool BakeGeometry(this IGeometry3D? geometry3D, RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids)
         {
             guids = null;
 
@@ -57,69 +59,67 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return false;
             }
 
-            guids = new List<Guid>();
+            guids = [];
 
-            if (geometry3D is Point3D)
+            if (geometry3D is Point3D point3D)
             {
-                Guid guid = rhinoDoc.Objects.AddPoint(((Point3D)geometry3D).ToRhino(), objectAttributes, null, false);
+                Guid guid = rhinoDoc.Objects.AddPoint(point3D.ToRhino(), objectAttributes, null, false);
                 guids.Add(guid);
                 return true;
             }
 
-            if (geometry3D is Segment3D)
+            if (geometry3D is Segment3D segment3D && segment3D[0] is Point3D point3D_1 && segment3D[1] is Point3D point3D_2)
             {
-                Segment3D segment3D = (Segment3D)geometry3D;
-
-                Guid guid = rhinoDoc.Objects.AddLine(segment3D[0].ToRhino(), segment3D[1].ToRhino(), objectAttributes, null, false);
+                Guid guid = rhinoDoc.Objects.AddLine(point3D_1.ToRhino(), point3D_2.ToRhino(), objectAttributes, null, false);
                 guids.Add(guid);
                 return true;
             }
 
-            if (geometry3D is IPolygonal3D)
+            if (geometry3D is IPolygonal3D polygonal3D)
             {
-                Guid guid = rhinoDoc.Objects.AddCurve(Convert.ToRhino((IPolygonal3D)geometry3D), objectAttributes);
+                Guid guid = rhinoDoc.Objects.AddCurve(Convert.ToRhino(polygonal3D), objectAttributes);
                 guids.Add(guid);
                 return true;
             }
 
-            if (geometry3D is Mesh3D)
+            if (geometry3D is Mesh3D mesh3D)
             {
-                Guid guid = rhinoDoc.Objects.AddMesh(Convert.ToRhino((Mesh3D)geometry3D), objectAttributes);
+                Guid guid = rhinoDoc.Objects.AddMesh(Convert.ToRhino(mesh3D), objectAttributes);
                 guids.Add(guid);
                 return true;
             }
 
-            if (geometry3D is IPolygonalFace3D)
+            if (geometry3D is IPolygonalFace3D polygonalFace3D)
             {
-                Guid guid = rhinoDoc.Objects.AddBrep(Convert.ToRhino((IPolygonalFace3D)geometry3D), objectAttributes);
+                Guid guid = rhinoDoc.Objects.AddBrep(Convert.ToRhino(polygonalFace3D), objectAttributes);
                 guids.Add(guid);
                 return true;
             }
 
-            if (geometry3D is Polyhedron)
+            if (geometry3D is Polyhedron polyhedron)
             {
-                Guid guid = rhinoDoc.Objects.AddBrep(Convert.ToRhino((Polyhedron)geometry3D), objectAttributes);
+                Guid guid = rhinoDoc.Objects.AddBrep(Convert.ToRhino(polyhedron), objectAttributes);
                 guids.Add(guid);
                 return true;
             }
 
-            if (geometry3D is Ellipsoid)
+            if (geometry3D is Ellipsoid ellipsoid)
             {
-                Guid guid = rhinoDoc.Objects.AddBrep(Convert.ToRhino((Ellipsoid)geometry3D), objectAttributes);
+                Guid guid = rhinoDoc.Objects.AddBrep(Convert.ToRhino(ellipsoid), objectAttributes);
                 guids.Add(guid);
                 return true;
             }
 
-            if (geometry3D is BoundingBox3D)
+            if (geometry3D is BoundingBox3D boundingBox3D)
             {
-                Guid guid = rhinoDoc.Objects.AddBox(Convert.ToRhino_Box((BoundingBox3D)geometry3D), objectAttributes);
+                Guid guid = rhinoDoc.Objects.AddBox(Convert.ToRhino_Box(boundingBox3D), objectAttributes);
                 guids.Add(guid);
                 return true;
             }
 
-            if (geometry3D is Polyline3D)
+            if (geometry3D is Polyline3D polyline3D)
             {
-                Guid guid = rhinoDoc.Objects.AddCurve(Convert.ToRhino((Polyline3D)geometry3D), objectAttributes);
+                Guid guid = rhinoDoc.Objects.AddCurve(Convert.ToRhino(polyline3D), objectAttributes);
                 guids.Add(guid);
                 return true;
             }
@@ -127,7 +127,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             return false;
         }
 
-        public static bool BakeGeometry<TGeometry>(this IEnumerable<TGeometry> geometries, RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids) where TGeometry : IGeometry
+        public static bool BakeGeometry<TGeometry>(this IEnumerable<TGeometry>? geometries, RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids) where TGeometry : IGeometry
         {
             guids = null;
 
@@ -136,10 +136,10 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return false;
             }
 
-            guids = new List<Guid>();
+            guids = [];
             foreach (IGeometry geometry in geometries)
             {
-                if (!BakeGeometry(geometry, rhinoDoc, objectAttributes, out List<Guid> guids_Temp) || guids_Temp == null || guids_Temp.Count == 0)
+                if (!BakeGeometry(geometry, rhinoDoc, objectAttributes, out List<Guid>? guids_Temp) || guids_Temp == null || guids_Temp.Count == 0)
                 {
                     continue;
                 }
@@ -153,7 +153,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             return guids != null && guids.Count > 0;
         }
 
-        public static bool BakeGeometry(this IIntersectionResult3D intersectionResult3D, RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids)
+        public static bool BakeGeometry(this IIntersectionResult3D? intersectionResult3D, RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids)
         {
             return BakeGeometry(intersectionResult3D?.GetGeometry3Ds<IGeometry3D>(), rhinoDoc, objectAttributes, out guids);
         }

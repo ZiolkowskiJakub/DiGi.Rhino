@@ -10,7 +10,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static PolygonalFace3D ToDiGi_PolygonalFace3D(this BrepFace brepFace, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static PolygonalFace3D? ToDiGi_PolygonalFace3D(this BrepFace? brepFace, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             if(brepFace == null || !brepFace.IsValid)
             {
@@ -24,21 +24,20 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return null;
             }
 
-            if (!Query.TryGetPlane(brepFace, out DiGi.Geometry.Spatial.Classes.Plane plane, tolerance) || plane == null)
+            if (!Query.TryGetPlane(brepFace, out DiGi.Geometry.Spatial.Classes.Plane? plane, tolerance) || plane == null)
             {
                 return null;
             }
 
-            List<IPolygonal2D> polygonal2Ds = new List<IPolygonal2D>();
+            List<IPolygonal2D> polygonal2Ds = [];
             foreach (BrepLoop brepLoop in brepFace.Loops)
             {
-                IPolygonal3D polygonal3D = brepLoop?.To3dCurve()?.ToDiGi(tolerance) as IPolygonal3D;
-                if (polygonal3D == null)
+                if (brepLoop?.To3dCurve()?.ToDiGi(tolerance) is not IPolygonal3D polygonal3D)
                 {
                     return null;
                 }
 
-                IPolygonal2D polygonal2D = plane.Convert(polygonal3D);
+                IPolygonal2D? polygonal2D = plane.Convert(polygonal3D);
                 if (polygonal2D == null)
                 {
                     return null;
@@ -47,7 +46,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 polygonal2Ds.Add(polygonal2D);
             }
 
-            IPolygonalFace2D polygonalFace2D = DiGi.Geometry.Planar.Create.PolygonalFace2Ds(polygonal2Ds, tolerance).FirstOrDefault();
+            IPolygonalFace2D? polygonalFace2D = DiGi.Geometry.Planar.Create.PolygonalFace2Ds(polygonal2Ds, tolerance)?.FirstOrDefault();
             if (polygonalFace2D == null)
             {
                 return null;

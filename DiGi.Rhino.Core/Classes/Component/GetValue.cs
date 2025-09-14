@@ -13,7 +13,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("5c5b9f88-974a-4a56-95d8-cc840087151b");
+        public override Guid ComponentGuid => new ("5c5b9f88-974a-4a56-95d8-cc840087151b");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -39,10 +39,12 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooParametrizedObjectParam() { Name = "ParametrizedObject", NickName = "ParametrizedObject", Description = "DiGi ParametrizedObject", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooParameterDefinitionParam() { Name = "ParameterDefinition", NickName = "ParameterDefinition", Description = "ParameterDefinition", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooParametrizedObjectParam() { Name = "ParametrizedObject", NickName = "ParametrizedObject", Description = "DiGi ParametrizedObject", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooParameterDefinitionParam() { Name = "ParameterDefinition", NickName = "ParameterDefinition", Description = "ParameterDefinition", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -53,9 +55,11 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_GenericObject() { Name = "Value", NickName = "Value", Description = "Value", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_GenericObject() { Name = "Value", NickName = "Value", Description = "Value", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -70,7 +74,7 @@ namespace DiGi.Rhino.Core.Classes
             int index;
 
             index = Params.IndexOfInputParam("ParametrizedObject");
-            IParametrizedObject parametrizedObject = null;
+            IParametrizedObject? parametrizedObject = null;
             if (index == -1 || !dataAccess.GetData(index, ref parametrizedObject) || parametrizedObject == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -79,16 +83,16 @@ namespace DiGi.Rhino.Core.Classes
 
 
             index = Params.IndexOfInputParam("ParameterDefinition");
-            IParameterDefinition parameterDefinition = null;
+            IParameterDefinition? parameterDefinition = null;
             if (index == -1 || !dataAccess.GetData(index, ref parameterDefinition) || parameterDefinition == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            IGH_Goo gH_Goo = null;
+            IGH_Goo? gH_Goo = null;
 
-            if(parametrizedObject.TryGetValue(parameterDefinition, out object value, new DiGi.Core.Parameter.Classes.GetValueSettings(true, true)))
+            if(parametrizedObject.TryGetValue(parameterDefinition, out object? value, new DiGi.Core.Parameter.Classes.GetValueSettings(true, true)))
             {
                 gH_Goo = Create.GH_Goo(parameterDefinition.ParameterType, value);
             }

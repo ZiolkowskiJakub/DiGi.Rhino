@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("aad4ac01-458f-4d39-9eca-12de4923f6fa");
+        public override Guid ComponentGuid => new ("aad4ac01-458f-4d39-9eca-12de4923f6fa");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -37,10 +37,12 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Latitude", NickName = "Latitude", Description = "Latitude", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Longitude", NickName = "Longitude", Description = "Longitude", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Latitude", NickName = "Latitude", Description = "Latitude", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Longitude", NickName = "Longitude", Description = "Longitude", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -51,9 +53,11 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooCoordinatesParam() { Name = "Coordinates", NickName = "Coordinates", Description = "Coordinates", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooCoordinatesParam() { Name = "Coordinates", NickName = "Coordinates", Description = "Coordinates", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -83,7 +87,7 @@ namespace DiGi.Rhino.Core.Classes
                 return;
             }
 
-            DiGi.Core.Classes.Coordinates coordinates = new DiGi.Core.Classes.Coordinates(latitude, longitude);
+            DiGi.Core.Classes.Coordinates coordinates = new(latitude, longitude);
 
             index = Params.IndexOfOutputParam("Coordinates");
             if (index != -1)

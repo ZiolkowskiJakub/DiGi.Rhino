@@ -8,7 +8,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     public static partial class Inspect
     {
         [Inspect("Triangles", "Triangles", "Triangles")]
-        public static IEnumerable<GooTriangle3D> Triangles(this Mesh3D mesh3D)
+        public static IEnumerable<GooTriangle3D>? Triangles(this Mesh3D? mesh3D)
         {
             if (mesh3D == null)
             {
@@ -19,7 +19,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("Points", "Points", "Points")]
-        public static IEnumerable<GooPoint3D> Points(this Mesh3D mesh3D)
+        public static IEnumerable<GooPoint3D>? Points(this Mesh3D? mesh3D)
         {
             if (mesh3D == null)
             {

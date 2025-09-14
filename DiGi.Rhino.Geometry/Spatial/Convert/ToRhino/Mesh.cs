@@ -6,29 +6,37 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static Mesh ToRhino(this Mesh3D mesh3D)
+        public static Mesh? ToRhino(this Mesh3D? mesh3D)
         {
             if (mesh3D == null)
             {
                 return null;
             }
 
-            Mesh result = new Mesh();
+            Mesh result = new();
 
-            List<Point3D> point3Ds = mesh3D.GetPoints();
+            List<Point3D>? point3Ds = mesh3D.GetPoints();
+            if(point3Ds == null)
+            {
+                return result;
+            }
+
             foreach(Point3D point3D in point3Ds)
             {
                 result.Vertices.Add(point3D.X, point3D.Y, point3D.Z);
             }
 
-            List<int[]> indexesList = mesh3D.GetIndexes();
-            foreach (int[] indexes in indexesList)
+            List<int[]>? indexesList = mesh3D.GetIndexes();
+            if(indexesList != null)
             {
-                result.Faces.AddFace(indexes[0], indexes[1], indexes[2]);
-            }
+                foreach (int[] indexes in indexesList)
+                {
+                    result.Faces.AddFace(indexes[0], indexes[1], indexes[2]);
+                }
 
-            result.Normals.ComputeNormals();
-            result.Compact();
+                result.Normals.ComputeNormals();
+                result.Compact();
+            }
 
             //List<Triangle3D> triangle3Ds = mesh3D.GetTriangles();
             //if (triangle3Ds != null)

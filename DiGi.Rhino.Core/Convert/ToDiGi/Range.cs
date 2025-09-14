@@ -5,7 +5,7 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Convert
     {
-        public static Range<double> ToDiGi(this Interval interval)
+        public static Range<double>? ToDiGi(this Interval interval)
         {
             if(interval == Interval.Unset)
             {

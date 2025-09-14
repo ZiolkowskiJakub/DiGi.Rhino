@@ -4,7 +4,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static Segment3D ToDiGi(this global::Rhino.Geometry.Line line)
+        public static Segment3D? ToDiGi(this global::Rhino.Geometry.Line line)
         {
             if(!line.IsValid)
             {
@@ -14,7 +14,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             return new Segment3D(line.From.ToDiGi(), line.To.ToDiGi());
         }
 
-        public static Segment3D ToDiGi(this global::Rhino.Geometry.LineCurve lineCurve)
+        public static Segment3D? ToDiGi(this global::Rhino.Geometry.LineCurve lineCurve)
         {
             if (lineCurve == null)
             {

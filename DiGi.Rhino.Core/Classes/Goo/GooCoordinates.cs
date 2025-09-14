@@ -11,7 +11,7 @@ namespace DiGi.GIS.Rhino.Classes
         {
         }
 
-        public GooCoordinates(Core.Classes.Coordinates coordinates)
+        public GooCoordinates(Core.Classes.Coordinates? coordinates)
             : base()
         {
             Value = coordinates;
@@ -26,7 +26,7 @@ namespace DiGi.GIS.Rhino.Classes
 
     public class GooCoordinatesParam : GooPresistentParam<GooCoordinates, Core.Classes.Coordinates>
     {
-        public override Guid ComponentGuid => new Guid("1dedddb6-0ea6-42a3-ba70-dafec74e9bee");
+        public override Guid ComponentGuid => new ("1dedddb6-0ea6-42a3-ba70-dafec74e9bee");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

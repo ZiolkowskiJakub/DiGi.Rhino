@@ -8,14 +8,14 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static IGeometry3D ToDiGi(this IGH_GeometricGoo geometricGoo, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static IGeometry3D? ToDiGi(this IGH_GeometricGoo? geometricGoo, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             if (geometricGoo == null)
             {
                 return null;
             }
 
-            object @object = null;
+            object? @object;
             try
             {
                 @object = (geometricGoo as dynamic).Value;
@@ -30,43 +30,41 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return null;
             }
 
-            if (@object is Point3d) 
+            if (@object is Point3d point3d) 
             {
-                return ToDiGi((Point3d)@object);
+                return ToDiGi(point3d);
             }
 
-            if (@object is Rectangle3d)
+            if (@object is Rectangle3d rectangle3D)
             {
-                return ToDiGi((Rectangle3d)@object);
+                return ToDiGi(rectangle3D);
             }
 
-            if (@object is LineCurve)
+            if (@object is LineCurve lineCurve)
             {
-                return ToDiGi((LineCurve)@object);
+                return ToDiGi(lineCurve);
             }
 
-            if (@object is Line)
+            if (@object is Line line)
             {
-                return ToDiGi((Line)@object);
+                return ToDiGi(line);
             }
 
-            if (@object is Curve)
+            if (@object is Curve curve)
             {
-                return ToDiGi((Curve)@object, tolerance);
+                return ToDiGi(curve, tolerance);
             }
 
-            if (@object is Ellipse)
+            if (@object is Ellipse ellipse)
             {
-                return ToDiGi((Ellipse)@object);
+                return ToDiGi(ellipse);
             }
 
-            if (@object is Brep)
+            if (@object is Brep brep)
             {
-                Brep brep = (Brep)@object;
-
                 if(brep.IsSolid)
                 {
-                    Polyhedron polyhedron = brep.ToDiGi_Polyhedron(tolerance);
+                    Polyhedron? polyhedron = brep.ToDiGi_Polyhedron(tolerance);
                     if (polyhedron != null)
                     {
                         return polyhedron;
@@ -84,9 +82,9 @@ namespace DiGi.Rhino.Geometry.Spatial
                 }
             }
 
-            if (@object is global::Rhino.Geometry.Plane)
+            if (@object is global::Rhino.Geometry.Plane plane)
             {
-                return ToDiGi((global::Rhino.Geometry.Plane)@object);
+                return ToDiGi(plane);
             }
 
             return null;

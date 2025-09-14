@@ -5,7 +5,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Query
     {
-        public static bool TryGetPlane(BrepFace brepFace, out DiGi.Geometry.Spatial.Classes.Plane plane, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static bool TryGetPlane(BrepFace? brepFace, out DiGi.Geometry.Spatial.Classes.Plane? plane, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             plane = null;
             if(brepFace == null)
@@ -31,7 +31,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return false;
             }
 
-            Vector3D normal = brepFace.NormalAt(0.5, 0.5).ToDiGi();
+            Vector3D? normal = brepFace.NormalAt(0.5, 0.5).ToDiGi();
             if (normal != null && !DiGi.Geometry.Spatial.Query.SameHalf(plane.Normal, normal, 0))
             {
                 plane.Inverse();

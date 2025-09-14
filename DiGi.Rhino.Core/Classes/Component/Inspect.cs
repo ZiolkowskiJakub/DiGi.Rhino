@@ -14,7 +14,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("cd6ddc4e-e56a-4b66-9023-5415b96ff7c8");
+        public override Guid ComponentGuid => new ("cd6ddc4e-e56a-4b66-9023-5415b96ff7c8");
 
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
@@ -48,18 +48,23 @@ namespace DiGi.Rhino.Core.Classes
 
         void PopulateOutputParameters(IEnumerable<IGH_Param> @params)
         {
-            Dictionary<string, IList<IGH_Param>> dictionary = new Dictionary<string, IList<IGH_Param>>();
+            if(Params is null)
+            {
+                return;
+            }
+
+            Dictionary<string, IList<IGH_Param>> dictionary = [];
             foreach (IGH_Param gH_Param in Params.Output)
             {
-                if (gH_Param.Recipients == null && gH_Param.Recipients.Count == 0)
+                if (gH_Param?.Recipients == null && gH_Param!.Recipients.Count == 0)
                 {
                     continue;
                 }
 
-                dictionary.Add(gH_Param.Name, new List<IGH_Param>(gH_Param.Recipients));
+                dictionary.Add(gH_Param.Name, [.. gH_Param.Recipients]);
             }
 
-            while (Params.Output != null && Params.Output.Count() > 0)
+            while (Params.Output != null && Params.Output.Count > 0)
             {
                 Params.UnregisterOutputParameter(Params.Output[0]);
             }
@@ -75,7 +80,7 @@ namespace DiGi.Rhino.Core.Classes
 
                     AddOutputParameter(param);
 
-                    if (!dictionary.TryGetValue(param.Name, out IList<IGH_Param> @params_Temp))
+                    if (!dictionary.TryGetValue(param.Name, out IList<IGH_Param>? @params_Temp))
                     {
                         continue;
                     }
@@ -93,26 +98,22 @@ namespace DiGi.Rhino.Core.Classes
 
         void AddOutputParameter(IGH_Param param)
         {
-            if (param.Attributes is null)
-            {
-                param.Attributes = new GH_LinkedParamAttributes(param, Attributes);
-            }
+            param.Attributes ??= new GH_LinkedParamAttributes(param, Attributes);
 
             Params.RegisterOutputParam(param);
         }
 
-        void Menu_PopulateOutputsWithAllParameters(object sender, EventArgs e)
+        void Menu_PopulateOutputsWithAllParameters(object? sender, EventArgs e)
         {
-            List<GooParam> gooParams = new List<GooParam>();
+            List<GooParam> gooParams = [];
             foreach (object @object in Params.Input[0].VolatileData.AllData(true).OfType<object>())
             {
-                IGooSerializableObject gooSerializableObject = @object as IGooSerializableObject;
-                if(gooSerializableObject == null)
+                if (@object is not IGooSerializableObject gooSerializableObject)
                 {
                     continue;
                 }
-                
-                List<GooParam> gooParams_Temp = Create.GooParams(gooSerializableObject);
+
+                List<GooParam>? gooParams_Temp = Create.GooParams(gooSerializableObject);
                 if(gooParams_Temp == null)
                 {
                     continue;
@@ -131,21 +132,20 @@ namespace DiGi.Rhino.Core.Classes
 
             RecordUndoEvent("Get Common Parameters");
 
-            List<GooParam> gooParams_Sorted = gooParams.ToList();
+            List<GooParam> gooParams_Sorted = [.. gooParams];
             gooParams_Sorted.Sort((x, y) => x.Name.CompareTo(y.Name));
 
             PopulateOutputParameters(gooParams_Sorted);
         }
 
-        void Menu_PopulateOutputsWithCommonParameters(object sender, EventArgs e)
+        void Menu_PopulateOutputsWithCommonParameters(object? sender, EventArgs e)
         {
-            Dictionary<Type, List<GooParam>> dictionary = new Dictionary<Type, List<GooParam>>();
+            Dictionary<Type, List<GooParam>> dictionary = [];
             foreach (object @object in Params.Input[0].VolatileData.AllData(true).OfType<object>())
             {
-                IGooSerializableObject gooSerializableObject = @object as IGooSerializableObject;
-                if (gooSerializableObject == null)
+                if (@object is not IGooSerializableObject gooSerializableObject)
                 {
-                    dictionary = new Dictionary<Type, List<GooParam>>();
+                    dictionary = [];
                     break;
                 }
 
@@ -156,10 +156,10 @@ namespace DiGi.Rhino.Core.Classes
                     continue;
                 }
 
-                List<GooParam> gooParams_Temp = Create.GooParams(gooSerializableObject);
+                List<GooParam>? gooParams_Temp = Create.GooParams(gooSerializableObject);
                 if (gooParams_Temp == null || gooParams_Temp.Count == 0)
                 {
-                    dictionary = new Dictionary<Type, List<GooParam>>();
+                    dictionary = [];
                     break;
                 }
 
@@ -168,10 +168,10 @@ namespace DiGi.Rhino.Core.Classes
 
             RecordUndoEvent("Get Common Parameters");
 
-            List<GooParam> gooParams = new List<GooParam>();
+            List<GooParam> gooParams = [];
             if (dictionary.Count != 0)
             {
-                gooParams = new List<GooParam>(dictionary.Values.First());
+                gooParams = [.. dictionary.Values.First()];
                 if (dictionary.Count > 0)
                 {
                     foreach (KeyValuePair<Type, List<GooParam>> keyValuePair in dictionary)
@@ -204,7 +204,7 @@ namespace DiGi.Rhino.Core.Classes
             PopulateOutputParameters(gooParams);
         }
 
-        void Menu_RemoveUnconnectedParameters(object sender, EventArgs e)
+        void Menu_RemoveUnconnectedParameters(object? sender, EventArgs e)
         {
             RecordUndoEvent("Remove Unconnected Outputs");
 
@@ -244,27 +244,25 @@ namespace DiGi.Rhino.Core.Classes
         /// </param>
         protected override void SolveInstance(IGH_DataAccess dataAccess)
         {
-            object @object = null;
+            object? @object = null;
             if (!dataAccess.GetData(0, ref @object))
             {
                 return;
             }
 
-            IGooSerializableObject gooSerializableObject = @object as IGooSerializableObject;
-            if(gooSerializableObject == null)
+            if (@object is not IGooSerializableObject gooSerializableObject)
             {
                 return;
             }
 
             for (int i = 0; i < Params.Output.Count; ++i)
             {
-                GooParam gooParam = Params.Output[i] as GooParam;
-                if(gooParam == null)
+                if (Params.Output[i] is not GooParam gooParam)
                 {
                     continue;
                 }
 
-                object value = Query.Value(gooSerializableObject, gooParam);
+                object? value = Query.Value(gooSerializableObject, gooParam);
 
                 switch (gooParam.Access)
                 {
@@ -287,7 +285,7 @@ namespace DiGi.Rhino.Core.Classes
 
         bool IGH_VariableParameterComponent.CanRemoveParameter(GH_ParameterSide side, int index) => side == GH_ParameterSide.Output;
 
-        IGH_Param IGH_VariableParameterComponent.CreateParameter(GH_ParameterSide side, int index) => null;
+        IGH_Param? IGH_VariableParameterComponent.CreateParameter(GH_ParameterSide side, int index) => null;
 
         bool IGH_VariableParameterComponent.DestroyParameter(GH_ParameterSide side, int index) => true;
 

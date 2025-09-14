@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("6045bc78-7069-4265-8f76-615326635d2c");
+        public override Guid ComponentGuid => new ("6045bc78-7069-4265-8f76-615326635d2c");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -37,12 +37,14 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooEllipsoidParam() { Name = "Ellipsoid", NickName = "Ellipsoid", Description = "Ellipsoid", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Phi", NickName = "Phi", Description = "Phi", Access = GH_ParamAccess.item}, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Theta", NickName = "Theta", Description = "Theta", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooEllipsoidParam() { Name = "Ellipsoid", NickName = "Ellipsoid", Description = "Ellipsoid", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Phi", NickName = "Phi", Description = "Phi", Access = GH_ParamAccess.item}, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Theta", NickName = "Theta", Description = "Theta", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -53,9 +55,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooPoint3DParam() { Name = "Point3D", NickName = "Point3D", Description = "DiGi Point3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooPoint3DParam() { Name = "Point3D", NickName = "Point3D", Description = "DiGi Point3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -70,7 +74,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             int index;
 
             index = Params.IndexOfInputParam("Ellipsoid");
-            DiGi.Geometry.Spatial.Classes.Ellipsoid ellipsoid = null;
+            DiGi.Geometry.Spatial.Classes.Ellipsoid? ellipsoid = null;
             if (index == -1 || !dataAccess.GetData(index, ref ellipsoid) || ellipsoid == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -93,7 +97,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 return;
             }
 
-            DiGi.Geometry.Spatial.Classes.Point3D point3D = ellipsoid.GetPoint(theta, phi);
+            DiGi.Geometry.Spatial.Classes.Point3D? point3D = ellipsoid.GetPoint(theta, phi);
             index = Params.IndexOfOutputParam("Point3D");
             if (index != -1)
             {

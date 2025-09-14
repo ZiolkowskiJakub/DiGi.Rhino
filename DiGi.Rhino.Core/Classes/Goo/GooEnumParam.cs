@@ -7,7 +7,7 @@ namespace DiGi.Rhino.Core.Classes
     public abstract class GooEnumParam<T, X> : GH_PersistentParam<T> where T : GooEnum<X> where X : Enum
     {
         public GooEnumParam()
-            : base(typeof(X).Name, typeof(X).Name, typeof(X).FullName.Replace(".", " "), "Params", "DiGi")
+            : base(typeof(X).Name, typeof(X).Name, typeof(X).FullName?.Replace(".", " "), "Params", "DiGi")
         {
         }
 

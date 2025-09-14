@@ -32,7 +32,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
 
     public class GooBoundingBox3DParam : GooGeometryParam<BoundingBox3D>
     {
-        public override Guid ComponentGuid => new Guid("c683dd64-31fd-4363-8c26-8328aaea8d55");
+        public override Guid ComponentGuid => new ("c683dd64-31fd-4363-8c26-8328aaea8d55");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

@@ -6,9 +6,9 @@ namespace DiGi.Rhino.Core.Classes
 {
     public abstract class VariableParameterComponent : Component, IGH_VariableParameterComponent
     {
-        protected abstract Param[] Inputs { get; }
+        protected abstract Param[]? Inputs { get; }
 
-        protected abstract Param[] Outputs { get; }
+        protected abstract Param[]? Outputs { get; }
 
         public VariableParameterComponent(string name, string nickname, string description, string category, string subCategory)
             : base(name, nickname, description, category, subCategory)
@@ -21,7 +21,7 @@ namespace DiGi.Rhino.Core.Classes
             var templateParams = parameterSide == GH_ParameterSide.Input ? Inputs : Outputs;
             var componentParams = parameterSide == GH_ParameterSide.Input ? Params.Input : Params.Output;
 
-            if (index >= templateParams.Length)
+            if (templateParams == null || index >= templateParams.Length)
             {
                 return false;
             }
@@ -38,7 +38,7 @@ namespace DiGi.Rhino.Core.Classes
 
             if (index >= componentParams.Count)
             {
-                return componentParams[componentParams.Count - 1].Name != templateParams[templateParams.Length - 1].GH_Param.Name;
+                return componentParams[^1].Name != templateParams[^1].GH_Param.Name;
             }
 
             string previous = componentParams[index - 1].Name;
@@ -59,6 +59,11 @@ namespace DiGi.Rhino.Core.Classes
             var templateParams = parameterSide == GH_ParameterSide.Input ? Inputs : Outputs;
             var componentParams = parameterSide == GH_ParameterSide.Input ? Params.Input : Params.Output;
 
+            if(templateParams is null)
+            {
+                return false;
+            }
+
             string current = componentParams[index].Name;
             for (int i = 0; i < templateParams.Length; ++i)
             {
@@ -71,9 +76,14 @@ namespace DiGi.Rhino.Core.Classes
             return true;
         }
 
-        private IGH_Param GetTemplateParam(GH_ParameterSide parameterSide, int index)
+        private IGH_Param? GetTemplateParam(GH_ParameterSide parameterSide, int index)
         {
             var templateParams = parameterSide == GH_ParameterSide.Input ? Inputs : Outputs;
+            if(templateParams is null)
+            {
+                return null;
+            }
+
             var componentParams = parameterSide == GH_ParameterSide.Input ? Params.Input : Params.Output;
 
             int offset = index == 0 ? -1 : +1;
@@ -101,7 +111,7 @@ namespace DiGi.Rhino.Core.Classes
             return default;
         }
 
-        public IGH_Param CreateParameter(GH_ParameterSide parameterSide, int index)
+        public IGH_Param? CreateParameter(GH_ParameterSide parameterSide, int index)
         {
             if (GetTemplateParam(parameterSide, index) is IGH_Param param)
             {
@@ -120,6 +130,11 @@ namespace DiGi.Rhino.Core.Classes
 
         protected override sealed void RegisterInputParams(GH_InputParamManager inputParamManager)
         {
+            if(Inputs == null)
+            {
+                return;
+            }
+
             foreach (var definition in Inputs.Where(x => x.ParameterVisibility.HasFlag(ParameterVisibility.Default)))
             {
                 inputParamManager.AddParameter(definition.GH_Param.Clone());
@@ -128,6 +143,11 @@ namespace DiGi.Rhino.Core.Classes
 
         protected override sealed void RegisterOutputParams(GH_OutputParamManager outputParamManager)
         {
+            if(Outputs == null)
+            {
+                return;
+            }
+
             foreach (var definition in Outputs.Where(x => x.ParameterVisibility.HasFlag(ParameterVisibility.Default)))
             {
                 outputParamManager.AddParameter(definition.GH_Param.Clone());

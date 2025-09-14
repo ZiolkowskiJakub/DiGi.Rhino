@@ -13,14 +13,14 @@ namespace DiGi.Rhino.Core
                 return false;
             }
 
-            List<ISerializableObject> jSAMObjects = SerializableObjects<ISerializableObject>(gH_Structure);
+            List<ISerializableObject>? jSAMObjects = SerializableObjects<ISerializableObject>(gH_Structure);
             if (jSAMObjects == null || jSAMObjects.Count == 0)
             {
                 return false;
             }
 
-            string path = null;
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            string? path = null;
+            using (SaveFileDialog saveFileDialog = new ())
             {
                 saveFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
                 saveFileDialog.FilterIndex = 1;
@@ -37,7 +37,7 @@ namespace DiGi.Rhino.Core
                 return false;
             }
 
-            System.IO.FileInfo fileInfo = DiGi.Core.Convert.ToSystem_FileInfo(jSAMObjects, path);
+            System.IO.FileInfo? fileInfo = DiGi.Core.Convert.ToSystem_FileInfo(jSAMObjects, path);
 
             return fileInfo != null && fileInfo.Exists;
         }

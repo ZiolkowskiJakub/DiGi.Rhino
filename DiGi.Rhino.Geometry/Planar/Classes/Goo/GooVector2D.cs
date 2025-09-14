@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
         }
 
-        public GooVector2D(Vector2D vector2D)
+        public GooVector2D(Vector2D? vector2D)
         {
             Value = vector2D;
         }
@@ -25,7 +25,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
 
     public class GooVector2DParam : GooGeometryParam<Vector2D>
     {
-        public override Guid ComponentGuid => new Guid("81bcb4c8-8733-4935-9dbb-c2bcaeeaf47a");
+        public override Guid ComponentGuid => new ("81bcb4c8-8733-4935-9dbb-c2bcaeeaf47a");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

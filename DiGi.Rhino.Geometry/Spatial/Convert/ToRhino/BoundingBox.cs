@@ -4,7 +4,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static global::Rhino.Geometry.BoundingBox ToRhino(this BoundingBox3D boundingBox3D)
+        public static global::Rhino.Geometry.BoundingBox ToRhino(this BoundingBox3D? boundingBox3D)
         {
             if(boundingBox3D == null)
             {

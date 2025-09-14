@@ -5,7 +5,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static GH_Mesh ToGrasshopper(this Mesh3D mesh3D)
+        public static GH_Mesh? ToGrasshopper(this Mesh3D? mesh3D)
         {
             if (mesh3D == null)
             {

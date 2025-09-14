@@ -18,7 +18,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         {
         }
 
-        public GooBakeAwareSerializableObject(TSerializableObject geometry)
+        public GooBakeAwareSerializableObject(TSerializableObject? geometry)
         {
             Value = geometry;
         }
@@ -31,35 +31,35 @@ namespace DiGi.Rhino.Geometry.Core.Classes
             }
         }
 
-        public abstract IGeometry[] Geometries { get; }
+        public abstract IGeometry[]? Geometries { get; }
 
-        public virtual bool BakeGeometry(RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out Guid guid)
+        public virtual bool BakeGeometry(RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out Guid guid)
         {
             guid = Guid.Empty;
 
-            bool result = Spatial.Modify.BakeGeometry(Geometries, rhinoDoc, objectAttributes, out List<Guid> guids);
-            if (guids == null || guids.Count == 0)
+            bool result = Spatial.Modify.BakeGeometry(Geometries, rhinoDoc, objectAttributes, out List<Guid>? guids);
+            if (guids != null && guids.Count != 0)
             {
-                return false;
+                guid = guids[0];
             }
 
-            guid = guids[0];
-            return true;
+
+            return result;
         }
 
-        public virtual bool BakeGeometry(RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, out List<Guid> guids)
+        public virtual bool BakeGeometry(RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids)
         {
             return Spatial.Modify.BakeGeometry(Geometries, rhinoDoc, objectAttributes, out guids);
         }
 
-        public void DrawViewportMeshes(GH_PreviewMeshArgs args)
+        public void DrawViewportMeshes(GH_PreviewMeshArgs? args)
         {
-            Spatial.Modify.DrawViewportMeshes(Geometries, args, args.Material);
+            Spatial.Modify.DrawViewportMeshes(Geometries, args, args?.Material);
         }
 
-        public void DrawViewportWires(GH_PreviewWireArgs args)
+        public void DrawViewportWires(GH_PreviewWireArgs? args)
         {
-            Spatial.Modify.DrawViewportWires(Geometries, args, args.Color);
+            Spatial.Modify.DrawViewportWires(Geometries, args, args == null ? System.Drawing.Color.Empty : args.Color);
         }
     }
 
@@ -83,27 +83,23 @@ namespace DiGi.Rhino.Geometry.Core.Classes
             BakeGeometry(rhinoDoc, rhinoDoc?.CreateDefaultAttributes(), guids);
         }
 
-        public virtual void BakeGeometry(RhinoDoc rhinoDoc, ObjectAttributes objectAttributes, List<Guid> guids)
+        public virtual void BakeGeometry(RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, List<Guid>? guids)
         {
             if (rhinoDoc == null)
             {
                 return;
             }
 
-            if (guids == null)
-            {
-                guids = new List<Guid>();
-            }
+            guids ??= [];
 
             foreach (var value in VolatileData.AllData(true))
             {
-                IGooBakeAwareSerializableObject gooBakeAwareSerializableObject = value as IGooBakeAwareSerializableObject;
-                if (gooBakeAwareSerializableObject == null)
+                if (value is not IGooBakeAwareSerializableObject gooBakeAwareSerializableObject)
                 {
                     continue;
                 }
 
-                if (!gooBakeAwareSerializableObject.BakeGeometry(rhinoDoc, objectAttributes, out List<Guid> guids_Temp) || guids_Temp == null)
+                if (!gooBakeAwareSerializableObject.BakeGeometry(rhinoDoc, objectAttributes, out List<Guid>? guids_Temp) || guids_Temp == null)
                 {
                     continue;
                 }

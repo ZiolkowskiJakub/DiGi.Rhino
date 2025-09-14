@@ -10,7 +10,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     public static partial class Inspect
     {
         [Inspect("A", "A", "A")]
-        public static GH_Number A(this Ellipse3D ellipse3D)
+        public static GH_Number? A(this Ellipse3D? ellipse3D)
         {
             if(ellipse3D == null)
             {
@@ -21,7 +21,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("B", "B", "B")]
-        public static GH_Number B(this Ellipse3D ellipse3D)
+        public static GH_Number? B(this Ellipse3D? ellipse3D)
         {
             if (ellipse3D == null)
             {
@@ -32,7 +32,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("Center", "Center", "Center")]
-        public static GooPoint3D Center(this Ellipse3D ellipse3D)
+        public static GooPoint3D? Center(this Ellipse3D? ellipse3D)
         {
             if (ellipse3D == null)
             {
@@ -43,7 +43,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("FocalPoints", "FocalPoints", "Focal Points")]
-        public static IEnumerable<GooPoint3D> FocalPoints(this Ellipse3D ellipse3D)
+        public static IEnumerable<GooPoint3D>? FocalPoints(this Ellipse3D? ellipse3D)
         {
             if (ellipse3D == null)
             {
@@ -55,7 +55,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         }
 
         [Inspect("Plane", "Plane", "Plane")]
-        public static GooPlane Plane(this Ellipse3D ellipse3D)
+        public static GooPlane? Plane(this Ellipse3D? ellipse3D)
         {
             if (ellipse3D == null)
             {

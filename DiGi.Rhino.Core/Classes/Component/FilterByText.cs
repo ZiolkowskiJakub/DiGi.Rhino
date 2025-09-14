@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("b5b79ad2-998a-406f-97a6-81d6b6fdee96");
+        public override Guid ComponentGuid => new ("b5b79ad2-998a-406f-97a6-81d6b6fdee96");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -38,19 +38,21 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "ParameterName", NickName = "ParameterName", Description = "Parameter Name", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Value", NickName = "Value", Description = "Value", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
+                List<Param> result =
+                [
+                    new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "ParameterName", NickName = "ParameterName", Description = "Parameter Name", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Value", NickName = "Value", Description = "Value", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
 
 
-                GooEnumParam<DiGi.Core.Enums.TextComparisonType> gooEnumParam = new GooEnumParam<DiGi.Core.Enums.TextComparisonType>() { Name = "TextComparisonType", NickName = "TextComparisonType", Description = "DiGi Core TextComparisonType", Access = GH_ParamAccess.item };
+                GooEnumParam<DiGi.Core.Enums.TextComparisonType> gooEnumParam = new() { Name = "TextComparisonType", NickName = "TextComparisonType", Description = "DiGi Core TextComparisonType", Access = GH_ParamAccess.item };
                 gooEnumParam.SetPersistentData(DiGi.Core.Enums.TextComparisonType.Equals);
                 result.Add(new Param(gooEnumParam, ParameterVisibility.Binding));
 
                 result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Boolean() { Name = "CaseSensitive", NickName = "CaseSensitive", Description = "Case sensitive", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
 
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -61,12 +63,14 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooSerializableObjectParam() { Name = "In", NickName = "In", Description = "In", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooSerializableObjectParam() { Name = "Out", NickName = "Out", Description = "Out", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Boolean() { Name = "Mask", NickName = "Mask", Description = "Mask", Access = GH_ParamAccess.list }, ParameterVisibility.Voluntary));
-                result.Add(new Param(new GooSerializableObjectParam() { Name = "Invalid", NickName = "Invalid", Description = "Invalid", Access = GH_ParamAccess.list }, ParameterVisibility.Voluntary));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooSerializableObjectParam() { Name = "In", NickName = "In", Description = "In", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                    new Param(new GooSerializableObjectParam() { Name = "Out", NickName = "Out", Description = "Out", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Boolean() { Name = "Mask", NickName = "Mask", Description = "Mask", Access = GH_ParamAccess.list }, ParameterVisibility.Voluntary),
+                    new Param(new GooSerializableObjectParam() { Name = "Invalid", NickName = "Invalid", Description = "Invalid", Access = GH_ParamAccess.list }, ParameterVisibility.Voluntary),
+                ];
+                return [.. result];
             }
         }
 
@@ -81,7 +85,7 @@ namespace DiGi.Rhino.Core.Classes
             int index;
 
             index = Params.IndexOfInputParam("SerializableObjects");
-            List<ISerializableObject> serializableObjects = new List<ISerializableObject>();
+            List<ISerializableObject> serializableObjects = [];
             if (index == -1 || !dataAccess.GetDataList(index, serializableObjects) || serializableObjects == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -90,7 +94,7 @@ namespace DiGi.Rhino.Core.Classes
 
 
             index = Params.IndexOfInputParam("ParameterName");
-            string parameterName = null;
+            string? parameterName = null;
             if (index == -1 || !dataAccess.GetData(index, ref parameterName) || parameterName == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -98,7 +102,7 @@ namespace DiGi.Rhino.Core.Classes
             }
 
             index = Params.IndexOfInputParam("Value");
-            string value_1 = null;
+            string? value_1 = null;
             if (index == -1 || !dataAccess.GetData(index, ref value_1) || value_1 == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -125,13 +129,13 @@ namespace DiGi.Rhino.Core.Classes
                 }
             }
 
-            List<ISerializableObject> serializableObjects_In = new List<ISerializableObject>();
-            List<ISerializableObject> serializableObjects_Out = new List<ISerializableObject>();
-            List<ISerializableObject> serializableObjects_Invalid = new List<ISerializableObject>();
+            List<ISerializableObject> serializableObjects_In = [];
+            List<ISerializableObject> serializableObjects_Out = [];
+            List<ISerializableObject> serializableObjects_Invalid = [];
 
-            List<bool> mask = new List<bool>();
+            List<bool> mask = [];
 
-            Dictionary<Type, InspectMethod> dictionary = new Dictionary<Type, InspectMethod>();
+            Dictionary<Type, InspectMethod?> dictionary = [];
             foreach(ISerializableObject serializableObject in serializableObjects)
             {
                 if(serializableObject == null)
@@ -140,20 +144,20 @@ namespace DiGi.Rhino.Core.Classes
                     continue;
                 }
 
-                Type type = serializableObject?.GetType();
+                Type? type = serializableObject.GetType();
                 if(type == null)
                 {
                     mask.Add(false);
                     continue;
                 }
 
-                if(!dictionary.TryGetValue(type, out InspectMethod inspectMethod))
+                if(!dictionary.TryGetValue(type, out InspectMethod? inspectMethod))
                 {
-                    inspectMethod = Settings.InspectManager.GetInspectMethods(type).Find(x => x.InspectAttribute?.Name == parameterName);
+                    inspectMethod = Settings.InspectManager.GetInspectMethods(type)?.Find(x => x.InspectAttribute?.Name == parameterName);
                     dictionary[type] = inspectMethod;
                 }
 
-                if(inspectMethod == null || !inspectMethod.TryGetValue(serializableObject, out string value_2))
+                if(inspectMethod == null || !inspectMethod.TryGetValue(serializableObject, out string? value_2))
                 {
                     serializableObjects_Invalid.Add(serializableObject);
                     mask.Add(false);

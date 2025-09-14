@@ -13,7 +13,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("b5ca211a-a681-4149-9cdb-3eb933143127");
+        public override Guid ComponentGuid => new ("b5ca211a-a681-4149-9cdb-3eb933143127");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -39,9 +39,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooGeometry3DParam() { Name = "Geometry3D", NickName = "Geometry3D", Description = "DiGi geometry", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -52,9 +54,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Geometry() { Name = "Geometry", NickName = "Geometry", Description = "Grasshopper Geometry3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Geometry() { Name = "Geometry", NickName = "Geometry", Description = "Grasshopper Geometry3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -69,7 +73,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             int index;
 
             index = Params.IndexOfInputParam("Geometry3D");
-            IGeometry3D geometry3D = null;
+            IGeometry3D? geometry3D = null;
             if (index == -1 || !dataAccess.GetData(index, ref geometry3D) || geometry3D == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -79,7 +83,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             index = Params.IndexOfOutputParam("Geometry");
             if (index != -1)
             {
-                IGH_Goo gH_Goo = Convert.ToGrasshopper(geometry3D);
+                IGH_Goo? gH_Goo = Convert.ToGrasshopper(geometry3D);
 
                 dataAccess.SetData(index, gH_Goo);
             }

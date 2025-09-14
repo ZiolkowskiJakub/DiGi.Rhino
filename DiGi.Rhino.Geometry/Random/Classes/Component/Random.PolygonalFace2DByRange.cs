@@ -17,7 +17,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("51201449-28b2-43f0-97dd-391ec76a1adc");
+        public override Guid ComponentGuid => new ("51201449-28b2-43f0-97dd-391ec76a1adc");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -43,17 +43,18 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "x", NickName = "x", Description = "x Range", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "y", NickName = "y", Description = "y Range", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Integer() { Name = "seed", NickName = "seed", Description = "seed", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
-
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "pointCount", NickName = "pointCount", Description = "Point count", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "internalEdgeCount", NickName = "internalEdgeCount", Description = "Internal edge count", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary));
-                Grasshopper.Kernel.Parameters.Param_Number param_Number = new Grasshopper.Kernel.Parameters.Param_Number() { Name = "tolerance", NickName = "tolerance", Description = "tolerance", Access = GH_ParamAccess.item, Optional = true };
+                List<Param> result =
+                [
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "x", NickName = "x", Description = "x Range", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "y", NickName = "y", Description = "y Range", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Integer() { Name = "seed", NickName = "seed", Description = "seed", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "pointCount", NickName = "pointCount", Description = "Point count", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "internalEdgeCount", NickName = "internalEdgeCount", Description = "Internal edge count", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
+                ];
+                Grasshopper.Kernel.Parameters.Param_Number param_Number = new () { Name = "tolerance", NickName = "tolerance", Description = "tolerance", Access = GH_ParamAccess.item, Optional = true };
                 param_Number.SetPersistentData(DiGi.Core.Constans.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -64,9 +65,9 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
+                List<Param> result = [];
                 result.Add(new Param(new GooPolygonalFace2DParam() { Name = "polygonalFace2D", NickName = "polygonalFace2D", Description = "DiGi Geometry PolygonalFace2D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding));
-                return result.ToArray();
+                return [.. result];
             }
         }
 
@@ -82,7 +83,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
 
             index = Params.IndexOfInputParam("x");
             Interval interval_X = Interval.Unset;
-            if (index == -1 || !dataAccess.GetData(index, ref interval_X) || interval_X == null)
+            if (index == -1 || !dataAccess.GetData(index, ref interval_X))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
@@ -90,7 +91,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
 
             index = Params.IndexOfInputParam("y");
             Interval interval_Y = Interval.Unset;
-            if (index == -1 || !dataAccess.GetData(index, ref interval_Y) || interval_Y == null)
+            if (index == -1 || !dataAccess.GetData(index, ref interval_Y))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
@@ -137,19 +138,19 @@ namespace DiGi.Rhino.Geometry.Random.Classes
             index = Params.IndexOfOutputParam("polygonalFace2D");
             if (index != -1)
             {
-                PolygonalFace2D polygonalFace2D = DiGi.Geometry.Planar.Random.Create.PolygonalFace2D(interval_X.ToDiGi(), interval_Y.ToDiGi(), new DiGi.Core.Classes.Range<int>((int)interval_PointCount.T0, (int)interval_PointCount.T1), new DiGi.Core.Classes.Range<int>((int)interval_InternalEdgeCount.T0, (int)interval_InternalEdgeCount.T1), seed, tolerance);
+                PolygonalFace2D? polygonalFace2D = DiGi.Geometry.Planar.Random.Create.PolygonalFace2D(interval_X.ToDiGi(), interval_Y.ToDiGi(), new DiGi.Core.Classes.Range<int>((int)interval_PointCount.T0, (int)interval_PointCount.T1), new DiGi.Core.Classes.Range<int>((int)interval_InternalEdgeCount.T0, (int)interval_InternalEdgeCount.T1), seed, tolerance);
 
                 double fixTolerance = 0.01;
 
-                if(DiGi.Geometry.Planar.Query.TryUpdate(new IGeometry2DUpdater[] { new DouglasPeuckerUpdater(fixTolerance), new SnapperUpdater(fixTolerance), new TopologyPreservingUpdater(fixTolerance) }, polygonalFace2D, out IGeometry2D geometry2D))
+                if(DiGi.Geometry.Planar.Query.TryUpdate([new DouglasPeuckerUpdater(fixTolerance), new SnapperUpdater(fixTolerance), new TopologyPreservingUpdater(fixTolerance)], polygonalFace2D, out IGeometry2D? geometry2D))
                 {
-                    if(geometry2D is PolygonalFace2D)
+                    if(geometry2D is PolygonalFace2D polygonalFace2D_Temp)
                     {
-                        polygonalFace2D = (PolygonalFace2D)geometry2D;
+                        polygonalFace2D = polygonalFace2D_Temp;
                     }
-                    else if(geometry2D is GeometryCollection2D)
+                    else if(geometry2D is GeometryCollection2D geometryCollection2D)
                     {
-                        polygonalFace2D = ((GeometryCollection2D)geometry2D).ToList().Find(x => x is PolygonalFace2D) as PolygonalFace2D;
+                        polygonalFace2D = geometryCollection2D.ToList().Find(x => x is PolygonalFace2D) as PolygonalFace2D;
                     }
                 }
 

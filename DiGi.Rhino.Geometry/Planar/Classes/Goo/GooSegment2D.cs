@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
         }
 
-        public GooSegment2D(Segment2D segment2D)
+        public GooSegment2D(Segment2D? segment2D)
         {
             Value = segment2D;
         }
@@ -25,7 +25,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
 
     public class GooSegment2DParam : GooGeometryParam<Segment2D>
     {
-        public override Guid ComponentGuid => new Guid("ed94a00f-cd43-4ae1-bbec-9d792395f248");
+        public override Guid ComponentGuid => new ("ed94a00f-cd43-4ae1-bbec-9d792395f248");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

@@ -22,10 +22,10 @@ namespace DiGi.Rhino.Core.Classes
         public bool HasOutputGrip => false;
         public PointF InputGrip => PointF.Empty;
         public PointF OutputGrip => PointF.Empty;
-        public IGH_DocumentObject DocObject => null;
-        public IGH_Attributes Parent { get => null; set => throw new NotImplementedException(); }
+        public IGH_DocumentObject? DocObject => null;
+        public IGH_Attributes? Parent { get => null; set => throw new NotImplementedException(); }
         public bool IsTopLevel => false;
-        public IGH_Attributes GetTopLevel => null;
+        public IGH_Attributes? GetTopLevel => null;
         public string PathName => string.Empty;
         public Guid InstanceGuid => Guid.Empty;
         public bool Selected { get => false; set => throw new NotImplementedException(); }

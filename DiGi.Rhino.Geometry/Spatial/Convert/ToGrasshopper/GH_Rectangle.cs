@@ -5,7 +5,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static GH_Rectangle ToGrasshopper(this Rectangle3D rectangle3D)
+        public static GH_Rectangle? ToGrasshopper(this Rectangle3D? rectangle3D)
         {
             if (rectangle3D == null)
             {

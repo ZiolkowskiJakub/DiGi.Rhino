@@ -12,7 +12,7 @@ namespace DiGi.GIS.Rhino.Classes
         {
         }
 
-        public GooParametrizedObject(IParametrizedObject parametrizedObject)
+        public GooParametrizedObject(IParametrizedObject? parametrizedObject)
             : base()
         {
             Value = parametrizedObject;
@@ -27,7 +27,7 @@ namespace DiGi.GIS.Rhino.Classes
 
     public class GooParametrizedObjectParam : GooPresistentParam<GooParametrizedObject, IParametrizedObject>
     {
-        public override Guid ComponentGuid => new Guid("221d1e55-a083-4d11-a1d2-65faa76972fb");
+        public override Guid ComponentGuid => new ("221d1e55-a083-4d11-a1d2-65faa76972fb");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

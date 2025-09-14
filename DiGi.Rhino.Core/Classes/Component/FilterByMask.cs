@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new Guid("6c2fe566-8408-4aa6-b0af-d978db84720a");
+        public override Guid ComponentGuid => new ("6c2fe566-8408-4aa6-b0af-d978db84720a");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -37,10 +37,12 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                result.Add(new Param(new Grasshopper.Kernel.Parameters.Param_Boolean() { Name = "Mask", NickName = "Mask", Description = "Mask", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_Boolean() { Name = "Mask", NickName = "Mask", Description = "Mask", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -51,10 +53,12 @@ namespace DiGi.Rhino.Core.Classes
         {
             get
             {
-                List<Param> result = new List<Param>();
-                result.Add(new Param(new GooSerializableObjectParam() { Name = "In", NickName = "In", Description = "In", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                result.Add(new Param(new GooSerializableObjectParam() { Name = "Out", NickName = "Out", Description = "Out", Access = GH_ParamAccess.list }, ParameterVisibility.Binding));
-                return result.ToArray();
+                List<Param> result =
+                [
+                    new Param(new GooSerializableObjectParam() { Name = "In", NickName = "In", Description = "In", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                    new Param(new GooSerializableObjectParam() { Name = "Out", NickName = "Out", Description = "Out", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                ];
+                return [.. result];
             }
         }
 
@@ -69,7 +73,7 @@ namespace DiGi.Rhino.Core.Classes
             int index;
 
             index = Params.IndexOfInputParam("SerializableObjects");
-            List<ISerializableObject> serializableObjects = new List<ISerializableObject>();
+            List<ISerializableObject> serializableObjects = [];
             if (index == -1 || !dataAccess.GetDataList(index, serializableObjects) || serializableObjects == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
@@ -78,15 +82,15 @@ namespace DiGi.Rhino.Core.Classes
 
 
             index = Params.IndexOfInputParam("Mask");
-            List<bool> mask = new List<bool>();
+            List<bool> mask = [];
             if (index == -1 || !dataAccess.GetDataList(index, mask) || mask == null || mask.Count == 0)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            List<ISerializableObject> serializableObjects_In = new List<ISerializableObject>();
-            List<ISerializableObject> serializableObjects_Out = new List<ISerializableObject>();
+            List<ISerializableObject> serializableObjects_In = [];
+            List<ISerializableObject> serializableObjects_Out = [];
 
             for (int i=0; i < serializableObjects.Count; i++)
             {

@@ -4,7 +4,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static Vector3D ToDiGi(this global::Rhino.Geometry.Vector3d vector3d)
+        public static Vector3D? ToDiGi(this global::Rhino.Geometry.Vector3d vector3d)
         {
             if(!vector3d.IsValid)
             {
