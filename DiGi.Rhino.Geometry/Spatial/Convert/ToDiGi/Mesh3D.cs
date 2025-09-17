@@ -1,7 +1,6 @@
 ﻿using DiGi.Geometry.Spatial.Classes;
 using Rhino.Geometry;
 using Rhino.Geometry.Collections;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial
