@@ -34,7 +34,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             Vector3D? normal = brepFace.NormalAt(0.5, 0.5).ToDiGi();
             if (normal != null && !DiGi.Geometry.Spatial.Query.SameHalf(plane.Normal, normal, 0))
             {
-                plane.Inverse();
+                plane.Flip();
             }
 
             return true;
