@@ -142,13 +142,18 @@ namespace DiGi.Rhino.Geometry.Random.Classes
 
                 double fixTolerance = 0.01;
 
-                if(DiGi.Geometry.Planar.Query.TryUpdate([new DouglasPeuckerUpdater(fixTolerance), new SnapperUpdater(fixTolerance), new TopologyPreservingUpdater(fixTolerance)], polygonalFace2D, out IGeometry2D? geometry2D))
+                DiGi.Core.Classes.MultiUpdater<IGeometry2D> multiUpdater = new([new DouglasPeuckerUpdater(fixTolerance), new SnapperUpdater(fixTolerance), new TopologyPreservingUpdater(fixTolerance)])
                 {
-                    if(geometry2D is PolygonalFace2D polygonalFace2D_Temp)
+                    Value = polygonalFace2D
+                };
+
+                if(multiUpdater.Update() && multiUpdater.Value is IGeometry2D geometry2D)
+                {
+                    if (geometry2D is PolygonalFace2D polygonalFace2D_Temp)
                     {
                         polygonalFace2D = polygonalFace2D_Temp;
                     }
-                    else if(geometry2D is GeometryCollection2D geometryCollection2D)
+                    else if (geometry2D is GeometryCollection2D geometryCollection2D)
                     {
                         polygonalFace2D = geometryCollection2D.ToList().Find(x => x is PolygonalFace2D) as PolygonalFace2D;
                     }
