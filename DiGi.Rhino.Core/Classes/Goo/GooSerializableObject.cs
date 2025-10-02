@@ -10,14 +10,14 @@ using GH_IO.Serialization;
 
 namespace DiGi.Rhino.Core.Classes
 {
-    public class GooSerializableObject<T> : GH_Goo<T?>, IGooSerializableObject where T : ISerializableObject
+    public class GooSerializableObject<TSerializableObject> : GH_Goo<TSerializableObject?>, IGooSerializableObject<TSerializableObject> where TSerializableObject : ISerializableObject
     {
         public GooSerializableObject()
             : base()
         {
         }
 
-        public GooSerializableObject(T? serializableObject)
+        public GooSerializableObject(TSerializableObject? serializableObject)
         {
             Value = serializableObject;
         }
@@ -30,7 +30,7 @@ namespace DiGi.Rhino.Core.Classes
             {
                 if (Value == null)
                 {
-                    return typeof(T).FullName;
+                    return typeof(TSerializableObject).FullName;
                 }
 
                 return Value.GetType().FullName;
@@ -43,7 +43,7 @@ namespace DiGi.Rhino.Core.Classes
             {
                 if (Value == null)
                 {
-                    return typeof(T).FullName?.Replace(".", " ");
+                    return typeof(TSerializableObject).FullName?.Replace(".", " ");
                 }
 
                 return Value.GetType().FullName?.Replace(".", " ");
@@ -52,7 +52,7 @@ namespace DiGi.Rhino.Core.Classes
 
         public override IGH_Goo? Duplicate()
         {
-            return new GooSerializableObject<T>(Value);
+            return new GooSerializableObject<TSerializableObject>(Value);
         }
 
         public override bool Write(GH_IWriter writer)
@@ -68,7 +68,7 @@ namespace DiGi.Rhino.Core.Classes
                 return false;
             }
 
-            writer.SetString(typeof(T).FullName, json);
+            writer.SetString(typeof(TSerializableObject).FullName, json);
             return true;
         }
 
@@ -80,7 +80,7 @@ namespace DiGi.Rhino.Core.Classes
             }
 
             string? json = null;
-            if (!reader.TryGetString(typeof(T).FullName, ref json))
+            if (!reader.TryGetString(typeof(TSerializableObject).FullName, ref json))
             {
                 return false;
             }
@@ -91,7 +91,7 @@ namespace DiGi.Rhino.Core.Classes
                 return true;
             }
 
-            List<T>? values = DiGi.Core.Convert.ToDiGi<T>(json);
+            List<TSerializableObject>? values = DiGi.Core.Convert.ToDiGi<TSerializableObject>(json);
             if (values == null || values.Count == 0)
             {
                 Value = default;
@@ -102,9 +102,9 @@ namespace DiGi.Rhino.Core.Classes
             return true;
         }
 
-        public X? GetValue<X>() where X : ISerializableObject
+        public XSerializableObject? GetValue<XSerializableObject>() where XSerializableObject : TSerializableObject
         {
-            return Value is X ? (X)(object)Value : default;
+            return Value is XSerializableObject ? (XSerializableObject)(object)Value : default;
         }
 
         public override string? ToString()
@@ -126,9 +126,9 @@ namespace DiGi.Rhino.Core.Classes
                 return false;
             }
 
-            if (source is T)
+            if (source is TSerializableObject)
             {
-                Value = (T)(object)source;
+                Value = (TSerializableObject)(object)source;
                 return true;
             }
 
@@ -138,7 +138,7 @@ namespace DiGi.Rhino.Core.Classes
                 if (typeof(IGooSerializableObject).IsAssignableFrom(type_Source))
                 {
                     ISerializableObject? serializableObject = ((IGooSerializableObject)source!).GetValue<ISerializableObject>();
-                    if (serializableObject is T t)
+                    if (serializableObject is TSerializableObject t)
                     {
                         Value = t;
                     }
@@ -149,7 +149,7 @@ namespace DiGi.Rhino.Core.Classes
                 if (typeof(IGH_Goo).IsAssignableFrom(type_Source))
                 {
                     object? @object = (source as dynamic)?.Value;
-                    if (@object is T t)
+                    if (@object is TSerializableObject t)
                     {
                         Value = t;
                         return true;
@@ -162,7 +162,7 @@ namespace DiGi.Rhino.Core.Classes
 
         public override bool CastTo<Y>(ref Y target)
         {
-            if (typeof(Y) == typeof(T))
+            if (typeof(Y) == typeof(TSerializableObject))
             {
                 target = (Y)(object)Value!;
                 return true;
@@ -205,17 +205,6 @@ namespace DiGi.Rhino.Core.Classes
             }
 
             return base.CastTo(ref target);
-        }
-    }
-
-    public class GooSerializableObjectParam<T> : GooPresistentParam<GooSerializableObject<T>, T> where T : ISerializableObject
-    {
-        public override Guid ComponentGuid => new ("bb4a37e5-b901-422a-89b5-19b8e5463724");
-        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-
-        public GooSerializableObjectParam()
-            : base()
-        {
         }
     }
 

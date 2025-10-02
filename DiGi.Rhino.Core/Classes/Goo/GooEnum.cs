@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
-    public class GooEnum<T> : GH_Goo<T?>, IGoo where T : Enum
+    public class GooEnum<T> : GH_Goo<T?>, IGooObject where T : Enum
     {
         public GooEnum()
             : base()

@@ -1,9 +1,14 @@
-﻿using DiGi.Core.Interfaces;
+﻿using DiGi.Core.Classes;
+using DiGi.Core.Interfaces;
 
 namespace DiGi.Rhino.Core.Interfaces
 {
-    public interface IGooSerializableObject : IGoo
+    public interface IGooSerializableObject<TSerializableObject> : IGooObject<TSerializableObject> where TSerializableObject : ISerializableObject
     {
-        T? GetValue<T>() where T : ISerializableObject;
+    }
+
+    public interface IGooSerializableObject : IGooSerializableObject<ISerializableObject>
+    {
+
     }
 }
