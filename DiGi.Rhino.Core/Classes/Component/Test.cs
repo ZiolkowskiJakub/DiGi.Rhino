@@ -36,9 +36,12 @@ namespace DiGi.Rhino.Core.Classes
             return side == GH_ParameterSide.Input && index > ToIndex('B') && index == Params.Input.Count - 1;
         }
 
-        public IGH_Param CreateParameter(GH_ParameterSide side, int index)
+        public IGH_Param? CreateParameter(GH_ParameterSide side, int index)
         {
-            if (side == GH_ParameterSide.Output) return default;
+            if (side == GH_ParameterSide.Output)
+            {
+                return default;
+            }
 
             var name = $"Filter {ToChar(index)}";
             var nickName = ToChar(index).ToString();
@@ -88,7 +91,7 @@ namespace DiGi.Rhino.Core.Classes
 
     public class ElementLogicalAndFilter : ElementLogicalFilter
     {
-        public override Guid ComponentGuid => new Guid("0E534AFB-7264-4AFF-99F3-7F7EA7DB9F3D");
+        public override Guid ComponentGuid => new ("0E534AFB-7264-4AFF-99F3-7F7EA7DB9F3D");
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         public ElementLogicalAndFilter() 
@@ -105,8 +108,10 @@ namespace DiGi.Rhino.Core.Classes
             for (int i = 0; i < Params.Input.Count; ++i)
             {
                 string filter = string.Empty;
-                if (DA.GetData(i, ref filter) && filter is object)
+                if (DA.GetData(i, ref filter) && filter is not null)
+                {
                     filters.Add(filter);
+                }
             }
 
             DA.SetData("Filter", string.Join("_", filters));

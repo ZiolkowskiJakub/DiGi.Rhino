@@ -1,6 +1,8 @@
+using DiGi.Core.Interfaces;
 using DiGi.Rhino.Core.Interfaces;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Attributes;
+using Grasshopper.Kernel.Types;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -108,12 +110,12 @@ namespace DiGi.Rhino.Core.Classes
             List<GooParam> gooParams = [];
             foreach (object @object in Params.Input[0].VolatileData.AllData(true).OfType<object>())
             {
-                if (@object is not IGooSerializableObject gooSerializableObject)
+                if(!Query.TryGetValue(@object, out ISerializableObject? serializableObject) || serializableObject == null)
                 {
                     continue;
                 }
 
-                List<GooParam>? gooParams_Temp = Create.GooParams(gooSerializableObject);
+                List<GooParam>? gooParams_Temp = Create.GooParams(serializableObject);
                 if(gooParams_Temp == null)
                 {
                     continue;
@@ -143,20 +145,20 @@ namespace DiGi.Rhino.Core.Classes
             Dictionary<Type, List<GooParam>> dictionary = [];
             foreach (object @object in Params.Input[0].VolatileData.AllData(true).OfType<object>())
             {
-                if (@object is not IGooSerializableObject gooSerializableObject)
+                if (!Query.TryGetValue(@object, out ISerializableObject? serializableObject) || serializableObject == null)
                 {
                     dictionary = [];
                     break;
                 }
 
-                Type type = gooSerializableObject.GetType();
+                Type type = serializableObject.GetType();
 
                 if (dictionary.ContainsKey(type))
                 {
                     continue;
                 }
 
-                List<GooParam>? gooParams_Temp = Create.GooParams(gooSerializableObject);
+                List<GooParam>? gooParams_Temp = Create.GooParams(serializableObject);
                 if (gooParams_Temp == null || gooParams_Temp.Count == 0)
                 {
                     dictionary = [];
@@ -250,7 +252,7 @@ namespace DiGi.Rhino.Core.Classes
                 return;
             }
 
-            if (@object is not IGooSerializableObject gooSerializableObject)
+            if (!Query.TryGetValue(@object, out ISerializableObject? serializableObject) || serializableObject == null)
             {
                 return;
             }
@@ -262,7 +264,7 @@ namespace DiGi.Rhino.Core.Classes
                     continue;
                 }
 
-                object? value = Query.Value(gooSerializableObject, gooParam);
+                object? value = Query.Value(serializableObject, gooParam);
 
                 switch (gooParam.Access)
                 {

@@ -40,6 +40,9 @@ namespace DiGi.Rhino.Core.Classes
                 List<Param> result =
                 [
                     new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Street", NickName = "Street", Description = "Street", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "City", NickName = "City", Description = "City", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "PostalCode", NickName = "PostalCode", Description = "PostalCode", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooEnumParam() { Name = "CountryCode", NickName = "CountryCode", Description = "CountryCode", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
                 ];
                 return [.. result];
 
@@ -80,7 +83,31 @@ namespace DiGi.Rhino.Core.Classes
                 return;
             }
 
-            DiGi.Core.Classes.Address address = new (street, null, null, DiGi.Core.Enums.CountryCode.Undefined);
+            index = Params.IndexOfInputParam("City");
+            string? city = null;
+            if (index == -1 || !dataAccess.GetData(index, ref city))
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
+                return;
+            }
+
+            index = Params.IndexOfInputParam("PostalCode");
+            string? postalCode = null;
+            if (index == -1 || !dataAccess.GetData(index, ref postalCode))
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
+                return;
+            }
+
+            index = Params.IndexOfInputParam("CountryCode");
+            DiGi.Core.Enums.CountryCode countryCode = DiGi.Core.Enums.CountryCode.Undefined;
+            if (index == -1 || !dataAccess.GetData(index, ref countryCode))
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
+                return;
+            }
+
+            DiGi.Core.Classes.Address address = new (street, city, postalCode, countryCode);
 
             index = Params.IndexOfOutputParam("Address");
             if (index != -1)

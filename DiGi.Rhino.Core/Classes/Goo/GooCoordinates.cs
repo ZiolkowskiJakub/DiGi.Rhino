@@ -24,7 +24,7 @@ namespace DiGi.GIS.Rhino.Classes
 
     }
 
-    public class GooCoordinatesParam : GooPresistentParam<GooCoordinates, Core.Classes.Coordinates>
+    public class GooCoordinatesParam : GooSerializablePresistentParam<GooCoordinates, Core.Classes.Coordinates>
     {
         public override Guid ComponentGuid => new ("1dedddb6-0ea6-42a3-ba70-dafec74e9bee");
 

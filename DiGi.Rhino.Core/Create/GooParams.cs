@@ -9,13 +9,24 @@ namespace DiGi.Rhino.Core
     {
         public static List<GooParam>? GooParams(this IGooSerializableObject? gooSerializableObject)
         {
-            if(gooSerializableObject == null)
+            if(!Query.TryGetValue(gooSerializableObject, out ISerializableObject? serializableObject) || serializableObject is null)
             {
                 return null;
             }
 
-            List<InspectMethod>? inspectMethods = Settings.InspectManager.GetInspectMethods(gooSerializableObject.GetValue<ISerializableObject>()?.GetType());
-            if(inspectMethods == null)
+            return GooParams(serializableObject);
+        }
+
+        public static List<GooParam>? GooParams(this ISerializableObject? serializableObject)
+        {
+            if(serializableObject?.GetType() is not System.Type type)
+            {
+                return null;
+            }
+
+
+            List<InspectMethod>? inspectMethods = Settings.InspectManager.GetInspectMethods(type);
+            if (inspectMethods == null)
             {
                 return null;
             }
@@ -23,7 +34,7 @@ namespace DiGi.Rhino.Core
             List<GooParam> result = [];
             foreach (InspectMethod inspectMethod in inspectMethods)
             {
-                if(inspectMethod == null || !inspectMethod.IsValid(out bool enumerable))
+                if (inspectMethod == null || !inspectMethod.IsValid(out bool enumerable))
                 {
                     continue;
                 }
@@ -39,7 +50,7 @@ namespace DiGi.Rhino.Core
                     continue;
                 }
 
-                GooParam gooParam = new (inspectAttribute.Name, inspectAttribute.Nickname, inspectAttribute.Description, enumerable ? Grasshopper.Kernel.GH_ParamAccess.list : Grasshopper.Kernel.GH_ParamAccess.item);
+                GooParam gooParam = new(inspectAttribute.Name, inspectAttribute.Nickname, inspectAttribute.Description, enumerable ? Grasshopper.Kernel.GH_ParamAccess.list : Grasshopper.Kernel.GH_ParamAccess.item);
                 result.Add(gooParam);
             }
 

@@ -1,4 +1,5 @@
-﻿using DiGi.Core.Interfaces;
+﻿using DiGi.Core.Classes;
+using DiGi.Core.Interfaces;
 using DiGi.Rhino.Core.Interfaces;
 using GH_IO.Serialization;
 using Grasshopper.Kernel;
@@ -55,10 +56,9 @@ namespace DiGi.Rhino.Core.Classes
             object? source_Temp = source;
             if (source_Temp is IGH_Goo gH_Goo)
             {
-                PropertyInfo? propertyInfo = gH_Goo.GetType().GetProperty("Value", BindingFlags.Public | BindingFlags.Instance);
-                if (propertyInfo is not null && propertyInfo.CanRead)
+                if(Query.TryGetValue(gH_Goo, out object? value))
                 {
-                    source_Temp = propertyInfo.GetValue(gH_Goo);
+                    source_Temp = value;
                 }
             }
 
@@ -75,7 +75,22 @@ namespace DiGi.Rhino.Core.Classes
         {
             Type type = typeof(Y);
 
-            if (typeof(IGH_Goo).IsAssignableFrom(type))
+            if (type == typeof(TObject))
+            {
+                target = (Y)(object)Value!;
+                return true;
+            }
+            else if (type == typeof(object))
+            {
+                target = (Y)(object)Value!;
+                return true;
+            }
+            else if (type == typeof(GH_ObjectWrapper))
+            {
+                target = (Y)(object)(new GH_ObjectWrapper(Value));
+                return true;
+            }
+            else if (typeof(IGH_Goo).IsAssignableFrom(type))
             {
                 PropertyInfo? propertyInfo = type.GetProperty("Value", BindingFlags.Public | BindingFlags.Instance);
                 if (propertyInfo is not null && propertyInfo.CanWrite)
@@ -89,6 +104,30 @@ namespace DiGi.Rhino.Core.Classes
             {
                 target = (Y)(object)Value;
                 return true;
+            }
+
+            try
+            {
+                if (Value != null && Value is ISerializableObject serializableObject)
+                {
+                    if (typeof(Y).IsAssignableFrom(Value.GetType()))
+                    {
+                        target = (Y)(object)serializableObject.Clone()!;
+                    }
+                    else
+                    {
+                        target = DiGi.Core.Create.Object<Y>(serializableObject)!;
+                    }
+
+                    if (target != null)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+
             }
 
             return base.CastTo(ref target);
@@ -172,7 +211,7 @@ namespace DiGi.Rhino.Core.Classes
                 return false;
             }
 
-            string? json = null;
+            string? json;
 
             if (Value is ISerializableObject serializableObject && Value is not IValue)
             {
@@ -220,20 +259,19 @@ namespace DiGi.Rhino.Core.Classes
 
     public class GooObjectParam : GH_PersistentParam<GooObject>
     {
-        public override Guid ComponentGuid => new("2f2f88d8-fe6c-498a-8767-6bf2b18f5566");
-        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-
         public GooObjectParam()
             : base(Query.Name(typeof(object)), Query.Name(typeof(object)), typeof(object).FullName?.Replace(".", " "), "Params", Query.Subcategory(typeof(ISerializableObject)))
         {
         }
 
-        protected override GH_GetterResult Prompt_Singular(ref GooObject value)
+        public override Guid ComponentGuid => new("2f2f88d8-fe6c-498a-8767-6bf2b18f5566");
+        protected override GH_GetterResult Prompt_Plural(ref List<GooObject> values)
         {
             throw new NotImplementedException();
         }
 
-        protected override GH_GetterResult Prompt_Plural(ref List<GooObject> values)
+        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
+        protected override GH_GetterResult Prompt_Singular(ref GooObject value)
         {
             throw new NotImplementedException();
         }

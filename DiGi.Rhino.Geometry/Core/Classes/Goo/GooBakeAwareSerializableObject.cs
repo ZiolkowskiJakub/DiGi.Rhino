@@ -63,7 +63,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         }
     }
 
-    public class GooBakeAwareSerializableParam<X, T> : GooPresistentParam<X, T>, IGooBakeAwareParam where T : ISerializableObject where X : GooBakeAwareSerializableObject<T>
+    public class GooBakeAwareSerializableParam<X, T> : GooSerializablePresistentParam<X, T>, IGooBakeAwareParam where T : ISerializableObject where X : GooBakeAwareSerializableObject<T>
     {
         public GooBakeAwareSerializableParam()
            : base()

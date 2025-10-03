@@ -54,7 +54,7 @@ namespace DiGi.Rhino.Core.Classes
 
         public bool IsValid()
         {
-            return IsValid(out bool enumerable);
+            return IsValid(out _);
         }
 
         public bool IsEnumerable()

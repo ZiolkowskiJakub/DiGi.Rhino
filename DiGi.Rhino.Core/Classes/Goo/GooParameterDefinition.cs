@@ -24,7 +24,7 @@ namespace DiGi.GIS.Rhino.Classes
 
     }
 
-    public class GooParameterDefinitionParam : GooPresistentParam<GooParameterDefinition, Core.Parameter.Interfaces.IParameterDefinition>
+    public class GooParameterDefinitionParam : GooSerializablePresistentParam<GooParameterDefinition, Core.Parameter.Interfaces.IParameterDefinition>
     {
         public override Guid ComponentGuid => new ("ec1459a7-fdfd-4380-8549-7212b9ecc0bb");
 

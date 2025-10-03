@@ -14,17 +14,32 @@ namespace DiGi.Rhino.Core
                 return null;
             }
 
-            List<InspectMethod>? inspectMethods = Settings.InspectManager.GetInspectMethods(gooSerializableObject.GetValue<ISerializableObject>()?.GetType());
-            if(inspectMethods == null)
+            if (!TryGetValue(gooSerializableObject, out ISerializableObject? serializableObject) || serializableObject is null)
             {
                 return null;
             }
 
-            foreach(InspectMethod inspectMethod in inspectMethods)
+            return Value(serializableObject, gooParam);
+        }
+
+        public static object? Value(this ISerializableObject? serializableObject, GooParam? gooParam)
+        {
+            if (gooParam == null || serializableObject?.GetType() is not System.Type type)
             {
-                if(inspectMethod?.InspectAttribute?.Name == gooParam.Name)
+                return null;
+            }
+
+            List<InspectMethod>? inspectMethods = Settings.InspectManager.GetInspectMethods(type);
+            if (inspectMethods == null)
+            {
+                return null;
+            }
+
+            foreach (InspectMethod inspectMethod in inspectMethods)
+            {
+                if (inspectMethod?.InspectAttribute?.Name == gooParam.Name)
                 {
-                    inspectMethod.TryGetValue(gooSerializableObject.GetValue<ISerializableObject>(), out object? value);
+                    inspectMethod.TryGetValue(serializableObject, out object? value);
                     return value;
                 }
             }

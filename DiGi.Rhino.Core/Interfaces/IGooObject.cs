@@ -1,12 +1,17 @@
-﻿namespace DiGi.Rhino.Core.Interfaces
+﻿using Grasshopper.Kernel.Types;
+using System;
+
+namespace DiGi.Rhino.Core.Interfaces
 {
-    public interface IGooObject
+    public interface IGooObject : IGH_Goo
     {
 
     }
 
     public interface IGooObject<TObject> : IGooObject
     {
+        TObject? Value { get; }
+
         XObject? GetValue<XObject>() where XObject : TObject;
     }
 }

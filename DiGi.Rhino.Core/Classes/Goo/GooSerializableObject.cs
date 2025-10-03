@@ -10,7 +10,7 @@ using GH_IO.Serialization;
 
 namespace DiGi.Rhino.Core.Classes
 {
-    public class GooSerializableObject<TSerializableObject> : GH_Goo<TSerializableObject?>, IGooSerializableObject<TSerializableObject> where TSerializableObject : ISerializableObject
+    public class GooSerializableObject<TSerializableObject> : GooObject<TSerializableObject?>, IGooSerializableObject<TSerializableObject?> where TSerializableObject : ISerializableObject
     {
         public GooSerializableObject()
             : base()
@@ -18,193 +18,14 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         public GooSerializableObject(TSerializableObject? serializableObject)
+            :base(serializableObject)
         {
             Value = serializableObject;
         }
-
-        public override bool IsValid => Value != null;
-
-        public override string? TypeName
-        {
-            get
-            {
-                if (Value == null)
-                {
-                    return typeof(TSerializableObject).FullName;
-                }
-
-                return Value.GetType().FullName;
-            }
-        }
-
-        public override string? TypeDescription
-        {
-            get
-            {
-                if (Value == null)
-                {
-                    return typeof(TSerializableObject).FullName?.Replace(".", " ");
-                }
-
-                return Value.GetType().FullName?.Replace(".", " ");
-            }
-        }
-
+        
         public override IGH_Goo? Duplicate()
         {
             return new GooSerializableObject<TSerializableObject>(Value);
-        }
-
-        public override bool Write(GH_IWriter writer)
-        {
-            if (Value == null || writer == null)
-            {
-                return false;
-            }
-
-            string? json = DiGi.Core.Convert.ToSystem_String(Value);
-            if (json == null)
-            {
-                return false;
-            }
-
-            writer.SetString(typeof(TSerializableObject).FullName, json);
-            return true;
-        }
-
-        public override bool Read(GH_IReader reader)
-        {
-            if(reader == null)
-            {
-                return false;
-            }
-
-            string? json = null;
-            if (!reader.TryGetString(typeof(TSerializableObject).FullName, ref json))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(json))
-            {
-                Value = default;
-                return true;
-            }
-
-            List<TSerializableObject>? values = DiGi.Core.Convert.ToDiGi<TSerializableObject>(json);
-            if (values == null || values.Count == 0)
-            {
-                Value = default;
-                return true;
-            }
-
-            Value = values[0];
-            return true;
-        }
-
-        public XSerializableObject? GetValue<XSerializableObject>() where XSerializableObject : TSerializableObject
-        {
-            return Value is XSerializableObject ? (XSerializableObject)(object)Value : default;
-        }
-
-        public override string? ToString()
-        {
-            if (Value == null)
-            {
-                return null;
-            }
-
-            string? value = Value.GetType()?.FullName;
-
-            return value;
-        }
-
-        public override bool CastFrom(object? source)
-        {
-            if (source == null)
-            {
-                return false;
-            }
-
-            if (source is TSerializableObject)
-            {
-                Value = (TSerializableObject)(object)source;
-                return true;
-            }
-
-            Type? type_Source = source?.GetType();
-            if (type_Source != null)
-            {
-                if (typeof(IGooSerializableObject).IsAssignableFrom(type_Source))
-                {
-                    ISerializableObject? serializableObject = ((IGooSerializableObject)source!).GetValue<ISerializableObject>();
-                    if (serializableObject is TSerializableObject t)
-                    {
-                        Value = t;
-                    }
-
-                    return true;
-                }
-
-                if (typeof(IGH_Goo).IsAssignableFrom(type_Source))
-                {
-                    object? @object = (source as dynamic)?.Value;
-                    if (@object is TSerializableObject t)
-                    {
-                        Value = t;
-                        return true;
-                    }
-                }
-            }
-
-            return base.CastFrom(source);
-        }
-
-        public override bool CastTo<Y>(ref Y target)
-        {
-            if (typeof(Y) == typeof(TSerializableObject))
-            {
-                target = (Y)(object)Value!;
-                return true;
-            }
-
-            if (typeof(Y) == typeof(object))
-            {
-                target = (Y)(object)Value!;
-                return true;
-            }
-
-            if (typeof(GH_ObjectWrapper) == typeof(Y))
-            {
-                target = (Y)(object)(new GH_ObjectWrapper(Value));
-                return true;
-            }
-
-            try
-            {
-                if (Value != null)
-                {
-                    if (typeof(Y).IsAssignableFrom(Value.GetType()))
-                    {
-                        target = (Y)(object)Value.Clone()!;
-                    }
-                    else
-                    {
-                        target = DiGi.Core.Create.Object<Y>(Value)!;
-                    }
-
-                    if (target != null)
-                    {
-                        return true;
-                    }
-                }
-            }
-            catch
-            {
-
-            }
-
-            return base.CastTo(ref target);
         }
     }
 
@@ -228,24 +49,12 @@ namespace DiGi.Rhino.Core.Classes
 
     public class GooSerializableObjectParam : GH_PersistentParam<GooSerializableObject>
     {
-        public override Guid ComponentGuid => new ("a557ef4b-4fa1-47a4-a5cc-894c03f057e7");
-        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-
         public GooSerializableObjectParam()
             : base(Query.Name(typeof(ISerializableObject)), Query.Name(typeof(ISerializableObject)), typeof(ISerializableObject).FullName?.Replace(".", " "), "Params", Query.Subcategory(typeof(ISerializableObject)))
         {
         }
 
-        protected override GH_GetterResult Prompt_Singular(ref GooSerializableObject value)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override GH_GetterResult Prompt_Plural(ref List<GooSerializableObject> values)
-        {
-            throw new NotImplementedException();
-        }
-
+        public override Guid ComponentGuid => new("a557ef4b-4fa1-47a4-a5cc-894c03f057e7");
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
         {
             Menu_AppendItem(menu, "Save As...", Menu_SaveAs, VolatileData.AllData(true).Any());
@@ -255,6 +64,16 @@ namespace DiGi.Rhino.Core.Classes
             base.AppendAdditionalMenuItems(menu);
         }
 
+        protected override GH_GetterResult Prompt_Plural(ref List<GooSerializableObject> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
+        protected override GH_GetterResult Prompt_Singular(ref GooSerializableObject value)
+        {
+            throw new NotImplementedException();
+        }
         private void Menu_SaveAs(object? sender, EventArgs? e)
         {
             Query.SaveAs(VolatileData);

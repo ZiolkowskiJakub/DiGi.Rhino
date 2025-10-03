@@ -69,8 +69,11 @@ namespace DiGi.Rhino.Geometry.Core.Classes
 
             if (source is IGooSerializableObject gooSerializableObject)
             {
-                Value = gooSerializableObject.GetValue<T>();
-                return true;
+                if(Rhino.Core.Query.TryGetValue(gooSerializableObject, out T? t))
+                {
+                    Value = t;
+                    return true;
+                }
             }
 
             if (source is IGH_GeometricGoo gH_GeometricGoo)
@@ -88,13 +91,11 @@ namespace DiGi.Rhino.Geometry.Core.Classes
             {
                 if (typeof(IGooSerializableObject).IsAssignableFrom(type_Source))
                 {
-                    ISerializableObject? serializableObject = ((IGooSerializableObject)source!).GetValue<ISerializableObject>();
-                    if (serializableObject is T t)
+                    if (Rhino.Core.Query.TryGetValue((IGooSerializableObject)source!, out T? t))
                     {
                         Value = t;
+                        return true;
                     }
-
-                    return true;
                 }
 
                 if (typeof(IGH_Goo).IsAssignableFrom(type_Source))
@@ -207,7 +208,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         }
     }
 
-    public class GooGeometryParam<T> : GooPresistentParam<GooGeometry<T>, T>, IGooGeometryParam where T : IGeometry
+    public class GooGeometryParam<T> : GooSerializablePresistentParam<GooGeometry<T>, T>, IGooGeometryParam where T : IGeometry
     {
         public GooGeometryParam()
            : base()
