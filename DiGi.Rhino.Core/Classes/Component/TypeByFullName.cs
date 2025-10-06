@@ -1,17 +1,17 @@
-﻿using DiGi.Rhino.Core.Classes;
+using DiGi.GIS.Rhino.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
 using System;
 using System.Collections.Generic;
 
-namespace DiGi.Rhino.Geometry.Spatial.Classes
+namespace DiGi.Rhino.Core.Classes
 {
-    public class Point3D : VariableParameterComponent
+    public class TypeByFullName : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("760539d2-870c-448e-ba87-52e3dbeff623");
+        public override Guid ComponentGuid => new ("c77ada5b-8c47-482a-acdc-7988a402a36e");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -23,10 +23,10 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Initializes a new instance of object.
         /// </summary>
-        public Point3D()
-          : base("Geometry.Point3D", "Geomery.Point3D",
-              "Create Point3D",
-              "DiGi", "DiGi.Geometry")
+        public TypeByFullName()
+          : base("Core.TypeByFullName", "Core.TypeByFullName",
+              "Create type by full name",
+              "DiGi", "DiGi.Core")
         {
         }
 
@@ -39,12 +39,17 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             {
                 List<Param> result =
                 [
-                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "X", NickName = "X", Description = "X", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
-                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Y", NickName = "Y", Description = "Y", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
-                    new Param(new Grasshopper.Kernel.Parameters.Param_Number() { Name = "Z", NickName = "Z", Description = "Z", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "FullName", NickName = "FullName", Description = "FullName", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
                 ];
 
+                Grasshopper.Kernel.Parameters.Param_Boolean param_Boolean = new() { Name = "IgnoreCase", NickName = "IgnoreCase", Description = "IgnoreCase", Access = GH_ParamAccess.item, Optional = true };
+                param_Boolean.SetPersistentData(true);
+
+                result.Add(new Param(param_Boolean, ParameterVisibility.Voluntary));
+
                 return [.. result];
+
+                
             }
         }
 
@@ -57,7 +62,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             {
                 List<Param> result =
                 [
-                    new Param(new GooPoint3DParam() { Name = "Point3D", NickName = "Point3D", Description = "DiGi Point3D", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooTypeParam() { Name = "Type", NickName = "Type", Description = "Type", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
                 ];
                 return [.. result];
             }
@@ -73,35 +78,28 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             int index;
 
-            double x = double.NaN;
-            index = Params.IndexOfInputParam("X");
-            if (index == -1 || !dataAccess.GetData(index, ref x))
+            index = Params.IndexOfInputParam("FullName");
+            string? typeName = null;
+            if (index == -1 || !dataAccess.GetData(index, ref typeName))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            double y = double.NaN;
-            index = Params.IndexOfInputParam("Y");
-            if (index == -1 || !dataAccess.GetData(index, ref y))
+            index = Params.IndexOfInputParam("IgnoreCase");
+            bool ignoreCase = true;
+            if (index == -1 || !dataAccess.GetData(index, ref ignoreCase))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            double z = double.NaN;
-            index = Params.IndexOfInputParam("Z");
-            if (index == -1 || !dataAccess.GetData(index, ref z))
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
-                return;
-            }
+            Type? type = DiGi.Core.Query.Type(typeName, ignoreCase);
 
-            DiGi.Geometry.Spatial.Classes.Point3D point3D = new(x, y, z);
-            index = Params.IndexOfOutputParam("Point3D");
+            index = Params.IndexOfOutputParam("Type");
             if (index != -1)
             {
-                dataAccess.SetData(index, point3D == null ? null : new GooPoint3D(point3D));
+                dataAccess.SetData(index, new GooType(type));
             }
         }
     }

@@ -22,7 +22,7 @@ namespace DiGi.Rhino.Core.Classes
 
 
         /// <summary>
-        /// Initializes a new instance of the SAM_point3D class.
+        /// Initializes a new instance of object.
         /// </summary>
         public Inspect()
           : base("Core.Inspect", "Core.Inspect",
@@ -110,12 +110,22 @@ namespace DiGi.Rhino.Core.Classes
             List<GooParam> gooParams = [];
             foreach (object @object in Params.Input[0].VolatileData.AllData(true).OfType<object>())
             {
-                if(!Query.TryGetValue(@object, out ISerializableObject? serializableObject) || serializableObject == null)
+                object? @object_Temp = null;
+                if (Query.TryGetValue(@object, out ISerializableObject? serializableObject))
+                {
+                    @object_Temp = serializableObject;
+                }
+                else if (Query.TryGetValue(@object, out object? @object_Converted))
+                {
+                    @object_Temp = @object_Converted;
+                }
+
+                if(object_Temp is null)
                 {
                     continue;
                 }
 
-                List<GooParam>? gooParams_Temp = Create.GooParams(serializableObject);
+                List<GooParam>? gooParams_Temp = Create.GooParams(@object_Temp);
                 if(gooParams_Temp == null)
                 {
                     continue;
@@ -252,7 +262,17 @@ namespace DiGi.Rhino.Core.Classes
                 return;
             }
 
-            if (!Query.TryGetValue(@object, out ISerializableObject? serializableObject) || serializableObject == null)
+            object? @object_Temp = null;
+            if (Query.TryGetValue(@object, out ISerializableObject? serializableObject))
+            {
+                @object_Temp = serializableObject;
+            }
+            else if (Query.TryGetValue(@object, out object? @object_Converted))
+            {
+                @object_Temp = @object_Converted;
+            }
+
+            if (object_Temp is null)
             {
                 return;
             }
@@ -264,7 +284,7 @@ namespace DiGi.Rhino.Core.Classes
                     continue;
                 }
 
-                object? value = Query.Value(serializableObject, gooParam);
+                object? value = Query.Value(@object_Temp, gooParam);
 
                 switch (gooParam.Access)
                 {

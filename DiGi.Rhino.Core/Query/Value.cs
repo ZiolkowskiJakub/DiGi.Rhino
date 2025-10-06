@@ -22,9 +22,9 @@ namespace DiGi.Rhino.Core
             return Value(serializableObject, gooParam);
         }
 
-        public static object? Value(this ISerializableObject? serializableObject, GooParam? gooParam)
+        public static object? Value(this object? @object, GooParam? gooParam)
         {
-            if (gooParam == null || serializableObject?.GetType() is not System.Type type)
+            if (gooParam == null || @object?.GetType() is not System.Type type)
             {
                 return null;
             }
@@ -39,7 +39,7 @@ namespace DiGi.Rhino.Core
             {
                 if (inspectMethod?.InspectAttribute?.Name == gooParam.Name)
                 {
-                    inspectMethod.TryGetValue(serializableObject, out object? value);
+                    inspectMethod.TryGetValue(@object, out object? value);
                     return value;
                 }
             }

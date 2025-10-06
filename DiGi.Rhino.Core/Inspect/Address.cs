@@ -7,7 +7,7 @@ namespace DiGi.Rhino.Core
     {
 
         [Inspect("Street", "Street", "Street")]
-        public static GH_String? Name(this DiGi.Core.Classes.Address? address)
+        public static GH_String? Street(this DiGi.Core.Classes.Address? address)
         {
             if (address == null)
             {

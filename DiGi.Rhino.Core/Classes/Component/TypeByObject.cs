@@ -1,17 +1,17 @@
-﻿using DiGi.Core.Interfaces;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using System;
 using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
-    public class Serialize : VariableParameterComponent
+    public class TypeByObject : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("b8422531-8073-425e-9aee-8c410b86b521");
+        public override Guid ComponentGuid => new ("055f06ef-dbc5-462f-a231-20c150e0785a");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -23,9 +23,9 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Initializes a new instance of object.
         /// </summary>
-        public Serialize()
-          : base("Core.Serialize", "Core.Serialize",
-              "Converts SerializableObjects to json",
+        public TypeByObject()
+          : base("Core.TypeByObject", "Core.TypeByObject",
+              "Create type by object",
               "DiGi", "DiGi.Core")
         {
         }
@@ -39,9 +39,12 @@ namespace DiGi.Rhino.Core.Classes
             {
                 List<Param> result =
                 [
-                    new Param(new GooSerializableObjectParam() { Name = "SerializableObjects", NickName = "SerializableObjects", Description = "DiGi SerializableObjects", Access = GH_ParamAccess.list }, ParameterVisibility.Binding),
+                    new Param(new GooObjectParam() { Name = "Object", NickName = "Object", Description = "Object", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
                 ];
+
                 return [.. result];
+
+                
             }
         }
 
@@ -54,7 +57,7 @@ namespace DiGi.Rhino.Core.Classes
             {
                 List<Param> result =
                 [
-                    new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Json", NickName = "Json", Description = "Json", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
+                    new Param(new GooTypeParam() { Name = "Type", NickName = "Type", Description = "Type", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
                 ];
                 return [.. result];
             }
@@ -70,18 +73,26 @@ namespace DiGi.Rhino.Core.Classes
         {
             int index;
 
-            index = Params.IndexOfInputParam("SerializableObjects");
-            List<ISerializableObject> serializableObjects = [];
-            if (index == -1 || !dataAccess.GetDataList(index, serializableObjects) || serializableObjects == null)
+            index = Params.IndexOfInputParam("Object");
+            object? @object = null;
+            if (index == -1 || !dataAccess.GetData(index, ref @object))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            index = Params.IndexOfOutputParam("Json");
+            if(@object is IGH_Goo gH_Goo)
+            {
+                if(Query.TryGetValue(gH_Goo, out object? @object_Temp))
+                {
+                    @object = @object_Temp;
+                }
+            }
+
+            index = Params.IndexOfOutputParam("Type");
             if (index != -1)
             {
-                dataAccess.SetData(index, DiGi.Core.Convert.ToJson(serializableObjects)?.ToString());
+                dataAccess.SetData(index, new GooType(@object?.GetType()));
             }
         }
     }

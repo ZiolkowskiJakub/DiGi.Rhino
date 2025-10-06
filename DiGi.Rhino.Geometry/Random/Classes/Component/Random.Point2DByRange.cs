@@ -25,7 +25,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of the SAM_point3D class.
+        /// Initializes a new instance of object.
         /// </summary>
         public Point2DByRange()
           : base("Geometry.Random.Point2DByRange", "Geomery.Random.Point2DByRange",

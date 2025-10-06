@@ -17,9 +17,9 @@ namespace DiGi.Rhino.Core
             return GooParams(serializableObject);
         }
 
-        public static List<GooParam>? GooParams(this ISerializableObject? serializableObject)
+        public static List<GooParam>? GooParams(this object? @object)
         {
-            if(serializableObject?.GetType() is not System.Type type)
+            if (@object?.GetType() is not System.Type type)
             {
                 return null;
             }

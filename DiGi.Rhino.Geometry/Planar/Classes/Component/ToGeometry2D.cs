@@ -26,7 +26,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of the SAM_point3D class.
+        /// Initializes a new instance of object.
         /// </summary>
         public ToGeometry2D()
           : base("Geometry.ToGeometry2D", "Geomery.ToGeometry2D",

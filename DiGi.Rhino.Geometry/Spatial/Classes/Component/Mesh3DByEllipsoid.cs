@@ -22,7 +22,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of the SAM_point3D class.
+        /// Initializes a new instance of object.
         /// </summary>
         public Mesh3DByEllipsoid()
           : base("Geometry.Mesh3DByEllipsoid", "Geomery.Mesh3DByEllipsoid",

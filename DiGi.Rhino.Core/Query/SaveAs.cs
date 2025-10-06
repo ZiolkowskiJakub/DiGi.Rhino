@@ -13,8 +13,8 @@ namespace DiGi.Rhino.Core
                 return false;
             }
 
-            List<ISerializableObject>? jSAMObjects = SerializableObjects<ISerializableObject>(gH_Structure);
-            if (jSAMObjects == null || jSAMObjects.Count == 0)
+            List<ISerializableObject>? serializableObjects = SerializableObjects<ISerializableObject>(gH_Structure);
+            if (serializableObjects == null || serializableObjects.Count == 0)
             {
                 return false;
             }
@@ -37,7 +37,7 @@ namespace DiGi.Rhino.Core
                 return false;
             }
 
-            System.IO.FileInfo? fileInfo = DiGi.Core.Convert.ToSystem_FileInfo(jSAMObjects, path);
+            System.IO.FileInfo? fileInfo = DiGi.Core.Convert.ToSystem_FileInfo(serializableObjects, path);
 
             return fileInfo != null && fileInfo.Exists;
         }

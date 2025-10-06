@@ -221,7 +221,7 @@ namespace DiGi.Rhino.Core.Classes
             {
                 try
                 {
-                    json = DiGi.Core.Convert.ToSystem_String(new DiGi.Core.Classes.Value(Value as dynamic));
+                    json = DiGi.Core.Convert.ToSystem_String(new Value(Value as dynamic));
                 }
                 catch
                 {
