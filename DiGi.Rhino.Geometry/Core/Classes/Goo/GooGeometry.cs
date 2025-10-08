@@ -276,12 +276,12 @@ namespace DiGi.Rhino.Geometry.Core.Classes
             Preview_DrawWires(args);
         }
 
-        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<T>> values)
+        protected override GH_GetterResult Prompt_Plural(ref List<GooGeometry<T>?> values)
         {
             throw new NotImplementedException();
         }
 
-        protected override GH_GetterResult Prompt_Singular(ref GooGeometry<T> value)
+        protected override GH_GetterResult Prompt_Singular(ref GooGeometry<T>? value)
         {
             throw new NotImplementedException();
         }

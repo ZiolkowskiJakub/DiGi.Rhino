@@ -30,12 +30,12 @@ namespace DiGi.Rhino.Core.Classes
             base.AppendAdditionalMenuItems(menu);
         }
 
-        protected override GH_GetterResult Prompt_Plural(ref List<T> values)
+        protected override GH_GetterResult Prompt_Plural(ref List<T?> values)
         {
             throw new NotImplementedException();
         }
 
-        protected override GH_GetterResult Prompt_Singular(ref T value)
+        protected override GH_GetterResult Prompt_Singular(ref T? value)
         {
             throw new NotImplementedException();
         }

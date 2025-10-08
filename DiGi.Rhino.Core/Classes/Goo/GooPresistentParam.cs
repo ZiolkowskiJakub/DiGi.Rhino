@@ -5,7 +5,7 @@ using DiGi.Core.Interfaces;
 
 namespace DiGi.Rhino.Core.Classes
 {
-    public class GooPresistentParam<T, X> : GH_PersistentParam<T> where T : GooObject<X> where X : IObject
+    public class GooPresistentParam<T, X> : GH_PersistentParam<T?> where T : GooObject<X?> where X : IObject
     {
         public GooPresistentParam(string name, string subcategory)
             : base(name, name, typeof(X).FullName?.Replace(".", " "), "Params", subcategory)
@@ -19,12 +19,12 @@ namespace DiGi.Rhino.Core.Classes
 
         public override Guid ComponentGuid => new ("a2f8ed2f-2634-416a-b119-57bd05dc559c");
 
-        protected override GH_GetterResult Prompt_Plural(ref List<T> values)
+        protected override GH_GetterResult Prompt_Plural(ref List<T?> values)
         {
             throw new NotImplementedException();
         }
 
-        protected override GH_GetterResult Prompt_Singular(ref T value)
+        protected override GH_GetterResult Prompt_Singular(ref T? value)
         {
             throw new NotImplementedException();
         }

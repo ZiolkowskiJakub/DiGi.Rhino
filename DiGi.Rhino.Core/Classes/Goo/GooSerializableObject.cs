@@ -6,11 +6,10 @@ using System.Linq;
 using System.Windows.Forms;
 using DiGi.Rhino.Core.Interfaces;
 using DiGi.Core.Interfaces;
-using GH_IO.Serialization;
 
 namespace DiGi.Rhino.Core.Classes
 {
-    public class GooSerializableObject<TSerializableObject> : GooObject<TSerializableObject?>, IGooSerializableObject<TSerializableObject?> where TSerializableObject : ISerializableObject
+    public class GooSerializableObject<TSerializableObject> : GooObject<TSerializableObject?>, IGooSerializableObject<TSerializableObject> where TSerializableObject : ISerializableObject
     {
         public GooSerializableObject()
             : base()
@@ -47,7 +46,7 @@ namespace DiGi.Rhino.Core.Classes
         }
     }
 
-    public class GooSerializableObjectParam : GH_PersistentParam<GooSerializableObject>
+    public class GooSerializableObjectParam : GH_PersistentParam<GooSerializableObject?>
     {
         public GooSerializableObjectParam()
             : base(Query.Name(typeof(ISerializableObject)), Query.Name(typeof(ISerializableObject)), typeof(ISerializableObject).FullName?.Replace(".", " "), "Params", Query.Subcategory(typeof(ISerializableObject)))
@@ -64,13 +63,13 @@ namespace DiGi.Rhino.Core.Classes
             base.AppendAdditionalMenuItems(menu);
         }
 
-        protected override GH_GetterResult Prompt_Plural(ref List<GooSerializableObject> values)
+        protected override GH_GetterResult Prompt_Plural(ref List<GooSerializableObject?> values)
         {
             throw new NotImplementedException();
         }
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-        protected override GH_GetterResult Prompt_Singular(ref GooSerializableObject value)
+        protected override GH_GetterResult Prompt_Singular(ref GooSerializableObject? value)
         {
             throw new NotImplementedException();
         }
