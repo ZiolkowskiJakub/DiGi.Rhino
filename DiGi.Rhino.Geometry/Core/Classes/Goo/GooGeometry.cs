@@ -3,7 +3,6 @@ using Grasshopper.Kernel;
 using System;
 using System.Collections.Generic;
 using DiGi.Rhino.Core.Interfaces;
-using DiGi.Core.Interfaces;
 using DiGi.Rhino.Core.Classes;
 using Rhino;
 using Rhino.DocObjects;

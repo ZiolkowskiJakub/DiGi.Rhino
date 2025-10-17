@@ -1,64 +1,35 @@
-﻿using DiGi.Rhino.Core.Classes;
+﻿using DiGi.Geometry.Spatial.Classes;
+using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Geometry.Spatial.Classes;
-using Grasshopper.Kernel.Types;
 
 namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Inspect
     {
-        [Inspect("Length", "Length", "Vector Length")]
-        public static GH_Number? Length(this DiGi.Geometry.Spatial.Classes.Vector3D? vector3D)
+        [Inspect("Direction", "Direction", "Direction")]
+        public static GooVector3D? Direction(this Ray3D? ray3D)
         {
-            if (vector3D == null)
+            if (ray3D == null)
             {
                 return null;
             }
 
-            return new GH_Number(vector3D.Length);
+            Vector3D? direction = ray3D.Direction;
+
+            return direction == null ? null : new GooVector3D(direction);
         }
 
-        [Inspect("Unit", "Unit", "Unit Vector3D")]
-        public static GooVector3D? Unit(this DiGi.Geometry.Spatial.Classes.Vector3D? vector3D)
+        [Inspect("Origin", "Origin", "Origin")]
+        public static GooPoint3D? Origin(this Ray3D? ray3D)
         {
-            if (vector3D == null)
+            if (ray3D == null)
             {
                 return null;
             }
 
-            return new GooVector3D(vector3D.Unit);
-        }
+            DiGi.Geometry.Spatial.Classes.Point3D? origin = ray3D.Origin;
 
-        [Inspect("X", "X", "X Coordinate")]
-        public static GH_Number? X(this DiGi.Geometry.Spatial.Classes.Vector3D? vector3D)
-        {
-            if(vector3D == null)
-            {
-                return null;
-            }
-
-            return new GH_Number(vector3D.X);
-        }
-
-        [Inspect("Y", "Y", "Y Coordinate")]
-        public static GH_Number? Y(this DiGi.Geometry.Spatial.Classes.Vector3D? vector3D)
-        {
-            if (vector3D == null)
-            {
-                return null;
-            }
-
-            return new GH_Number(vector3D.Y);
-        }
-
-        [Inspect("Z", "Z", "Z Coordinate")]
-        public static GH_Number? Z(this DiGi.Geometry.Spatial.Classes.Vector3D? vector3D)
-        {
-            if (vector3D == null)
-            {
-                return null;
-            }
-
-            return new GH_Number(vector3D.Z);
+            return origin == null ? null : new GooPoint3D(origin);
         }
     }
 }
