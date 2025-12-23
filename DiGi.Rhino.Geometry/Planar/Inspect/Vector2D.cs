@@ -42,7 +42,7 @@ namespace DiGi.Rhino.Geometry.Planar
         [Inspect("X", "X", "X Coordinate")]
         public static GH_Number? X(this DiGi.Geometry.Planar.Classes.Vector2D? vector2D)
         {
-            if(vector2D == null)
+            if (vector2D == null)
             {
                 return null;
             }

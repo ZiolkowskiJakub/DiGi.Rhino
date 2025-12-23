@@ -13,7 +13,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("5c5b9f88-974a-4a56-95d8-cc840087151b");
+        public override Guid ComponentGuid => new("5c5b9f88-974a-4a56-95d8-cc840087151b");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -92,7 +92,7 @@ namespace DiGi.Rhino.Core.Classes
 
             IGH_Goo? gH_Goo = null;
 
-            if(parametrizedObject.TryGetValue(parameterDefinition, out object? value, new DiGi.Core.Parameter.Classes.GetValueSettings(true, true)))
+            if (parametrizedObject.TryGetValue(parameterDefinition, out object? value, new DiGi.Core.Parameter.Classes.GetValueSettings(true, true)))
             {
                 gH_Goo = Create.GH_Goo(parameterDefinition.ParameterType, value);
             }

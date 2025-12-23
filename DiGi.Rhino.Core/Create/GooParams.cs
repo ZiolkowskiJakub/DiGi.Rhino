@@ -9,7 +9,7 @@ namespace DiGi.Rhino.Core
     {
         public static List<GooParam>? GooParams(this IGooSerializableObject? gooSerializableObject)
         {
-            if(!Query.TryGetValue(gooSerializableObject, out ISerializableObject? serializableObject) || serializableObject is null)
+            if (!Query.TryGetValue(gooSerializableObject, out ISerializableObject? serializableObject) || serializableObject is null)
             {
                 return null;
             }

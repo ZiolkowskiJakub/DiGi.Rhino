@@ -10,7 +10,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     {
         public static void DrawViewportMeshes(this IGeometry? geometry, GH_PreviewMeshArgs? gH_PreviewMeshArgs, global::Rhino.Display.DisplayMaterial? displayMaterial = null)
         {
-            if(geometry is IGeometry3D geometry3D)
+            if (geometry is IGeometry3D geometry3D)
             {
                 DrawViewportMeshes(geometry3D, gH_PreviewMeshArgs, displayMaterial);
             }
@@ -18,7 +18,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 
         public static void DrawViewportMeshes(this IGeometry3D? geometry3D, GH_PreviewMeshArgs? gH_PreviewMeshArgs, global::Rhino.Display.DisplayMaterial? displayMaterial = null)
         {
-            if(geometry3D == null || gH_PreviewMeshArgs == null)
+            if (geometry3D == null || gH_PreviewMeshArgs == null)
             {
                 return;
             }
@@ -52,7 +52,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 
             displayMaterial ??= gH_PreviewMeshArgs.Material;
 
-            foreach(TGeometry geometry in geometries)
+            foreach (TGeometry geometry in geometries)
             {
                 DrawViewportMeshes(geometry, gH_PreviewMeshArgs, displayMaterial);
             }

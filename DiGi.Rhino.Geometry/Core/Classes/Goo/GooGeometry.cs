@@ -1,17 +1,17 @@
-﻿using Grasshopper.Kernel.Types;
-using Grasshopper.Kernel;
-using System;
-using System.Collections.Generic;
-using DiGi.Rhino.Core.Interfaces;
+﻿using DiGi.Geometry.Core.Interfaces;
+using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Interfaces;
 using DiGi.Rhino.Core.Classes;
+using DiGi.Rhino.Core.Interfaces;
+using DiGi.Rhino.Geometry.Core.Interfaces;
+using DiGi.Rhino.Geometry.Spatial;
+using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using Rhino;
 using Rhino.DocObjects;
 using Rhino.Geometry;
-using DiGi.Rhino.Geometry.Core.Interfaces;
-using DiGi.Geometry.Core.Interfaces;
-using DiGi.Geometry.Spatial.Interfaces;
-using DiGi.Geometry.Spatial.Classes;
-using DiGi.Rhino.Geometry.Spatial;
+using System;
+using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Core.Classes
 {
@@ -68,7 +68,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
 
             if (source is IGooSerializableObject gooSerializableObject)
             {
-                if(Rhino.Core.Query.TryGetValue(gooSerializableObject, out T? t))
+                if (Rhino.Core.Query.TryGetValue(gooSerializableObject, out T? t))
                 {
                     Value = t;
                     return true;
@@ -104,12 +104,12 @@ namespace DiGi.Rhino.Geometry.Core.Classes
                     {
                         @object = Spatial.Convert.ToDiGi((IGH_GeometricGoo)source!);
                     }
-                    if(typeof(GH_Vector).IsAssignableFrom(type_Source))
+                    if (typeof(GH_Vector).IsAssignableFrom(type_Source))
                     {
                         GH_Vector gH_Vector = (GH_Vector)source!;
                         if (typeof(T).IsAssignableFrom(typeof(Vector3D)))
                         {
-                            if((T?)(object?)gH_Vector.Value.ToDiGi() is T t_Temp)
+                            if ((T?)(object?)gH_Vector.Value.ToDiGi() is T t_Temp)
                             {
                                 Value = t_Temp;
                                 return true;
@@ -164,14 +164,14 @@ namespace DiGi.Rhino.Geometry.Core.Classes
                 {
                     if (typeof(Y).IsAssignableFrom(Value.GetType()))
                     {
-                        if((Y?)(object?)Value.Clone() is Y y)
+                        if ((Y?)(object?)Value.Clone() is Y y)
                         {
                             target = y;
                         }
                     }
                     else
                     {
-                        if(DiGi.Core.Create.Object<Y>(Value) is Y y)
+                        if (DiGi.Core.Create.Object<Y>(Value) is Y y)
                         {
                             target = y;
                         }
@@ -215,15 +215,15 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         }
 
         public BoundingBox ClippingBox => Preview_ComputeClippingBox();
-        
-        public override Guid ComponentGuid => new ("63680047-20b3-4e89-a085-2add878abb76");
-        
+
+        public override Guid ComponentGuid => new("63680047-20b3-4e89-a085-2add878abb76");
+
         public bool Hidden { get; set; }
 
         public bool IsBakeCapable => !VolatileData.IsEmpty;
-        
+
         public bool IsPreviewCapable => !VolatileData.IsEmpty;
-        
+
         public void BakeGeometry(RhinoDoc rhinoDoc, List<Guid> guids)
         {
             BakeGeometry(rhinoDoc, rhinoDoc?.CreateDefaultAttributes(), guids);
@@ -247,7 +247,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
 
                 if (gH_BakeAwareData is IGooGeometry gooGeometry)
                 {
-                    if(gooGeometry.BakeGeometry(rhinoDoc, objectAttributes, out List<Guid>? guids_Temp) && guids_Temp != null)
+                    if (gooGeometry.BakeGeometry(rhinoDoc, objectAttributes, out List<Guid>? guids_Temp) && guids_Temp != null)
                     {
                         guids.AddRange(guids_Temp);
                     }
@@ -293,7 +293,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         {
         }
 
-        public override Guid ComponentGuid => new ("38d1d698-3de7-4537-9175-3b19372718f9");
+        public override Guid ComponentGuid => new("38d1d698-3de7-4537-9175-3b19372718f9");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }

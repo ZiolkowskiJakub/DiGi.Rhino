@@ -1,6 +1,6 @@
 ﻿using Grasshopper.Kernel;
-using Rhino.DocObjects;
 using Rhino;
+using Rhino.DocObjects;
 using System;
 using System.Collections.Generic;
 

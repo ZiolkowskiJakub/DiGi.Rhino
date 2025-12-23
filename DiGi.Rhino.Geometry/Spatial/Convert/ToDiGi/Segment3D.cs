@@ -6,7 +6,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     {
         public static Segment3D? ToDiGi(this global::Rhino.Geometry.Line line)
         {
-            if(!line.IsValid)
+            if (!line.IsValid)
             {
                 return null;
             }

@@ -6,7 +6,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     {
         public static Point3D? ToDiGi(this global::Rhino.Geometry.Point3d point3d)
         {
-            if(!point3d.IsValid)
+            if (!point3d.IsValid)
             {
                 return null;
             }

@@ -1,17 +1,17 @@
-﻿using Grasshopper.Kernel;
-using System;
-using System.Collections.Generic;
-using DiGi.Core.Interfaces;
+﻿using DiGi.Core.Interfaces;
+using DiGi.Geometry.Core.Interfaces;
 using DiGi.Rhino.Core.Classes;
+using DiGi.Rhino.Geometry.Core.Interfaces;
+using Grasshopper.Kernel;
 using Rhino;
 using Rhino.DocObjects;
 using Rhino.Geometry;
-using DiGi.Rhino.Geometry.Core.Interfaces;
-using DiGi.Geometry.Core.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Core.Classes
 {
-    public abstract class GooBakeAwareSerializableObject<TSerializableObject> : GooSerializableObject<TSerializableObject>, IGooBakeAwareSerializableObject where TSerializableObject: ISerializableObject
+    public abstract class GooBakeAwareSerializableObject<TSerializableObject> : GooSerializableObject<TSerializableObject>, IGooBakeAwareSerializableObject where TSerializableObject : ISerializableObject
     {
         public GooBakeAwareSerializableObject()
             : base()
@@ -107,7 +107,7 @@ namespace DiGi.Rhino.Geometry.Core.Classes
                 guids.AddRange(guids_Temp);
             }
         }
-        
+
         public virtual void DrawViewportMeshes(IGH_PreviewArgs args)
         {
             Preview_DrawMeshes(args);

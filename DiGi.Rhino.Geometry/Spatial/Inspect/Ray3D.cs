@@ -31,7 +31,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         [Inspect("X", "X", "X Coordinate")]
         public static GH_Number? X(this DiGi.Geometry.Spatial.Classes.Vector3D? vector3D)
         {
-            if(vector3D == null)
+            if (vector3D == null)
             {
                 return null;
             }

@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("055f06ef-dbc5-462f-a231-20c150e0785a");
+        public override Guid ComponentGuid => new("055f06ef-dbc5-462f-a231-20c150e0785a");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -44,7 +44,7 @@ namespace DiGi.Rhino.Core.Classes
 
                 return [.. result];
 
-                
+
             }
         }
 
@@ -81,9 +81,9 @@ namespace DiGi.Rhino.Core.Classes
                 return;
             }
 
-            if(@object is IGH_Goo gH_Goo)
+            if (@object is IGH_Goo gH_Goo)
             {
-                if(Query.TryGetValue(gH_Goo, out object? @object_Temp))
+                if (Query.TryGetValue(gH_Goo, out object? @object_Temp))
                 {
                     @object = @object_Temp;
                 }

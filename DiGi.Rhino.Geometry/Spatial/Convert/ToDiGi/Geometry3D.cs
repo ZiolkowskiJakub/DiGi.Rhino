@@ -25,12 +25,12 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return null;
             }
 
-            if(@object == null)
+            if (@object == null)
             {
                 return null;
             }
 
-            if (@object is Point3d point3d) 
+            if (@object is Point3d point3d)
             {
                 return ToDiGi(point3d);
             }
@@ -62,7 +62,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 
             if (@object is Brep brep)
             {
-                if(brep.IsSolid)
+                if (brep.IsSolid)
                 {
                     Polyhedron? polyhedron = brep.ToDiGi_Polyhedron(tolerance);
                     if (polyhedron != null)

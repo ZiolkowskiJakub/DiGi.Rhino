@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("6c2fe566-8408-4aa6-b0af-d978db84720a");
+        public override Guid ComponentGuid => new("6c2fe566-8408-4aa6-b0af-d978db84720a");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -92,7 +92,7 @@ namespace DiGi.Rhino.Core.Classes
             List<ISerializableObject> serializableObjects_In = [];
             List<ISerializableObject> serializableObjects_Out = [];
 
-            for (int i=0; i < serializableObjects.Count; i++)
+            for (int i = 0; i < serializableObjects.Count; i++)
             {
                 List<ISerializableObject> serializableObjects_Temp = mask[i % mask.Count] ? serializableObjects_In : serializableObjects_Out;
                 serializableObjects_Temp.Add(serializableObjects[i]);

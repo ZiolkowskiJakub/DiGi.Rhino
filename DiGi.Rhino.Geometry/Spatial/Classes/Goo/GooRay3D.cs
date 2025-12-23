@@ -25,7 +25,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooRay3DParam : GooGeometryParam<Ray3D>
     {
-        public override Guid ComponentGuid => new ("2977f462-45d4-4ec0-8152-83f5800ef328");
+        public override Guid ComponentGuid => new("2977f462-45d4-4ec0-8152-83f5800ef328");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

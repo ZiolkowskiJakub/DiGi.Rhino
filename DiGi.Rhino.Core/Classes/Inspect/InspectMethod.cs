@@ -7,7 +7,7 @@ namespace DiGi.Rhino.Core.Classes
     public class InspectMethod
     {
         public MethodInfo? MethodInfo { get; }
-        
+
         public InspectAttribute? InspectAttribute { get; }
 
         public InspectMethod(MethodInfo? methodInfo, InspectAttribute? inspectAttribute)
@@ -20,7 +20,7 @@ namespace DiGi.Rhino.Core.Classes
         {
             enumerable = false;
 
-            if(MethodInfo == null || InspectAttribute == null)
+            if (MethodInfo == null || InspectAttribute == null)
             {
                 return false;
             }
@@ -39,7 +39,7 @@ namespace DiGi.Rhino.Core.Classes
 
             enumerable = true;
 
-            if(type == typeof(IEnumerable))
+            if (type == typeof(IEnumerable))
             {
                 return true;
             }
@@ -68,24 +68,24 @@ namespace DiGi.Rhino.Core.Classes
         {
             value = default;
 
-            if(@object == null || MethodInfo == null)
+            if (@object == null || MethodInfo == null)
             {
                 return false;
             }
 
             object? value_Temp = MethodInfo.Invoke(null, [@object]);
-            if(value_Temp is T t)
+            if (value_Temp is T t)
             {
                 value = t;
                 return true;
             }
 
-            if(value_Temp is IGH_Goo)
+            if (value_Temp is IGH_Goo)
             {
                 value_Temp = ((dynamic)value_Temp).Value;
             }
 
-            if(!DiGi.Core.Query.TryConvert(value_Temp, out value))
+            if (!DiGi.Core.Query.TryConvert(value_Temp, out value))
             {
                 return false;
             }

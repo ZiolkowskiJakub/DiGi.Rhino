@@ -31,13 +31,13 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
 
     public class GooBoundingBox2DParam : GooGeometryParam<BoundingBox2D>
     {
-        public override Guid ComponentGuid => new ("f0734aef-47d6-4c0e-a10f-cc2761fd7289");
-
-        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
-
         public GooBoundingBox2DParam()
             : base()
         {
         }
+
+        public override Guid ComponentGuid => new("f0734aef-47d6-4c0e-a10f-cc2761fd7289");
+
+        //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
 }

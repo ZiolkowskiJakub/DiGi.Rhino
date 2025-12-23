@@ -16,7 +16,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("07dc7a7e-8105-4e90-a664-2d3ad2c6ab68");
+        public override Guid ComponentGuid => new("07dc7a7e-8105-4e90-a664-2d3ad2c6ab68");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -90,13 +90,13 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
             index = Params.IndexOfInputParam("Plane");
             if (index != -1)
             {
-                if(!dataAccess.GetData(index, ref plane))
+                if (!dataAccess.GetData(index, ref plane))
                 {
                     plane = null;
                 }
             }
 
-            if(plane == null)
+            if (plane == null)
             {
                 if (geometry3D is IPlanar planar)
                 {
@@ -112,7 +112,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
                 IGeometry2D? geometry2D = null;
 
                 PlanarResult? planarResult = DiGi.Geometry.Spatial.Create.ProjectionResult(plane, geometry3D);
-                if(planarResult != null)
+                if (planarResult != null)
                 {
                     geometry2D = planarResult.GetGeometry2Ds<IGeometry2D>()?.FirstOrDefault();
                 }

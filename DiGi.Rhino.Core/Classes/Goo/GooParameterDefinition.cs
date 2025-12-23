@@ -26,7 +26,7 @@ namespace DiGi.GIS.Rhino.Classes
 
     public class GooParameterDefinitionParam : GooSerializablePresistentParam<GooParameterDefinition, Core.Parameter.Interfaces.IParameterDefinition>
     {
-        public override Guid ComponentGuid => new ("ec1459a7-fdfd-4380-8549-7212b9ecc0bb");
+        public override Guid ComponentGuid => new("ec1459a7-fdfd-4380-8549-7212b9ecc0bb");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

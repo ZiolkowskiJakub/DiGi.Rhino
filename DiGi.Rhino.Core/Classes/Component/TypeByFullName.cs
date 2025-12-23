@@ -1,4 +1,3 @@
-using DiGi.GIS.Rhino.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
 using System;
@@ -11,7 +10,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("c77ada5b-8c47-482a-acdc-7988a402a36e");
+        public override Guid ComponentGuid => new("c77ada5b-8c47-482a-acdc-7988a402a36e");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -49,7 +48,7 @@ namespace DiGi.Rhino.Core.Classes
 
                 return [.. result];
 
-                
+
             }
         }
 

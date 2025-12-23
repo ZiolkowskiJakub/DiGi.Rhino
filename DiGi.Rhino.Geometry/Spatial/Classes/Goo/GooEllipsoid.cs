@@ -24,7 +24,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooEllipsoidParam : GooGeometryParam<DiGi.Geometry.Spatial.Classes.Ellipsoid>
     {
-        public override Guid ComponentGuid => new ("528cbdfc-6142-4856-9eab-38c9a20dadbc");
+        public override Guid ComponentGuid => new("528cbdfc-6142-4856-9eab-38c9a20dadbc");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

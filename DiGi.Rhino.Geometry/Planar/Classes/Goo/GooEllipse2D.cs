@@ -26,7 +26,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
 
     public class GooEllipse2DParam : GooGeometryParam<Ellipse2D>
     {
-        public override Guid ComponentGuid => new ("7e79f2a6-a3a8-4955-bcec-536e646943ea");
+        public override Guid ComponentGuid => new("7e79f2a6-a3a8-4955-bcec-536e646943ea");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

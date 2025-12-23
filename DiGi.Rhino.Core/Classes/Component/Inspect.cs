@@ -1,8 +1,6 @@
 using DiGi.Core.Interfaces;
-using DiGi.Rhino.Core.Interfaces;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Attributes;
-using Grasshopper.Kernel.Types;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +14,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("cd6ddc4e-e56a-4b66-9023-5415b96ff7c8");
+        public override Guid ComponentGuid => new("cd6ddc4e-e56a-4b66-9023-5415b96ff7c8");
 
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
@@ -50,7 +48,7 @@ namespace DiGi.Rhino.Core.Classes
 
         void PopulateOutputParameters(IEnumerable<IGH_Param> @params)
         {
-            if(Params is null)
+            if (Params is null)
             {
                 return;
             }
@@ -120,20 +118,20 @@ namespace DiGi.Rhino.Core.Classes
                     @object_Temp = @object_Converted;
                 }
 
-                if(object_Temp is null)
+                if (object_Temp is null)
                 {
                     continue;
                 }
 
                 List<GooParam>? gooParams_Temp = Create.GooParams(@object_Temp);
-                if(gooParams_Temp == null)
+                if (gooParams_Temp == null)
                 {
                     continue;
                 }
 
-                foreach(GooParam gooParam_Temp in gooParams_Temp)
+                foreach (GooParam gooParam_Temp in gooParams_Temp)
                 {
-                    if(gooParam_Temp == null || gooParams.Find(x => x.Name == gooParam_Temp.Name) != null)
+                    if (gooParam_Temp == null || gooParams.Find(x => x.Name == gooParam_Temp.Name) != null)
                     {
                         continue;
                     }

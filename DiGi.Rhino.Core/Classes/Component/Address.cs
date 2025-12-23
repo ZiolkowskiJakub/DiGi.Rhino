@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("7fc32700-de9c-498b-9b6a-bfdf3bdd1ea1");
+        public override Guid ComponentGuid => new("7fc32700-de9c-498b-9b6a-bfdf3bdd1ea1");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -46,7 +46,7 @@ namespace DiGi.Rhino.Core.Classes
                 ];
                 return [.. result];
 
-                
+
             }
         }
 
@@ -107,7 +107,7 @@ namespace DiGi.Rhino.Core.Classes
                 return;
             }
 
-            DiGi.Core.Classes.Address address = new (street, city, postalCode, countryCode);
+            DiGi.Core.Classes.Address address = new(street, city, postalCode, countryCode);
 
             index = Params.IndexOfOutputParam("Address");
             if (index != -1)

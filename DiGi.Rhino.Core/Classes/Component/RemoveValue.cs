@@ -13,7 +13,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("0059dba9-e52e-4da3-aa67-3d9e22c111de");
+        public override Guid ComponentGuid => new("0059dba9-e52e-4da3-aa67-3d9e22c111de");
 
         /// <summary>
         /// Provides an Icon for the component.

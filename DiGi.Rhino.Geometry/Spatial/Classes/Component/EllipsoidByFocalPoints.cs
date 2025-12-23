@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("3fa53622-f528-44e3-853c-11d5af0976f4");
+        public override Guid ComponentGuid => new("3fa53622-f528-44e3-853c-11d5af0976f4");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -104,9 +104,9 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
             double c = b;
             index = Params.IndexOfInputParam("C");
-            if(index != -1)
+            if (index != -1)
             {
-                if(!dataAccess.GetData(index, ref c))
+                if (!dataAccess.GetData(index, ref c))
                 {
                     c = b;
                 }

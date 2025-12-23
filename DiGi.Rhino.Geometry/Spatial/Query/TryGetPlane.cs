@@ -8,7 +8,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         public static bool TryGetPlane(BrepFace? brepFace, out DiGi.Geometry.Spatial.Classes.Plane? plane, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             plane = null;
-            if(brepFace == null)
+            if (brepFace == null)
             {
                 return false;
             }
@@ -26,7 +26,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             }
 
             plane = plane_BrepFace.ToDiGi();
-            if(plane == null)
+            if (plane == null)
             {
                 return false;
             }

@@ -26,7 +26,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
 
     public class GooPolygonal2DParam : GooGeometryParam<IPolygonal2D>
     {
-        public override Guid ComponentGuid => new ("8da7aab4-6b42-4a22-90ad-48e94329f8aa");
+        public override Guid ComponentGuid => new("8da7aab4-6b42-4a22-90ad-48e94329f8aa");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

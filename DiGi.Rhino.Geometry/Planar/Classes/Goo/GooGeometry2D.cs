@@ -44,7 +44,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
 
     public class GooGeometry2DParam : GooGeometryParam<IGeometry2D>
     {
-        public override Guid ComponentGuid => new ("b058cbef-083c-4093-a53a-d6e4d913f662");
+        public override Guid ComponentGuid => new("b058cbef-083c-4093-a53a-d6e4d913f662");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

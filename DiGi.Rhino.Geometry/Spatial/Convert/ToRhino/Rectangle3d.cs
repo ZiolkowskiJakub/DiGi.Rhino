@@ -7,18 +7,18 @@ namespace DiGi.Rhino.Geometry.Spatial
     {
         public static Rectangle3d ToRhino(this Rectangle3D? rectangle3D)
         {
-            if(rectangle3D == null)
+            if (rectangle3D == null)
             {
                 return Rectangle3d.Unset;
             }
 
-            if(rectangle3D.Plane is not DiGi.Geometry.Spatial.Classes.Plane plane_Temp)
+            if (rectangle3D.Plane is not DiGi.Geometry.Spatial.Classes.Plane plane_Temp)
             {
                 return Rectangle3d.Unset;
             }
 
             global::Rhino.Geometry.Plane plane = plane_Temp.ToRhino();
-            if(plane == global::Rhino.Geometry.Plane.Unset)
+            if (plane == global::Rhino.Geometry.Plane.Unset)
             {
                 return Rectangle3d.Unset;
             }

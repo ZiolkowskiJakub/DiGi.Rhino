@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     {
         public static PolygonalFace3D? ToDiGi_PolygonalFace3D(this BrepFace? brepFace, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
-            if(brepFace == null || !brepFace.IsValid)
+            if (brepFace == null || !brepFace.IsValid)
             {
                 return null;
             }

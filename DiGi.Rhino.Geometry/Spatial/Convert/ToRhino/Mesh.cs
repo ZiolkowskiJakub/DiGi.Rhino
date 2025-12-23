@@ -16,18 +16,18 @@ namespace DiGi.Rhino.Geometry.Spatial
             Mesh result = new();
 
             List<Point3D>? point3Ds = mesh3D.GetPoints();
-            if(point3Ds == null)
+            if (point3Ds == null)
             {
                 return result;
             }
 
-            foreach(Point3D point3D in point3Ds)
+            foreach (Point3D point3D in point3Ds)
             {
                 result.Vertices.Add(point3D.X, point3D.Y, point3D.Z);
             }
 
             List<int[]>? indexesList = mesh3D.GetIndexes();
-            if(indexesList != null)
+            if (indexesList != null)
             {
                 foreach (int[] indexes in indexesList)
                 {

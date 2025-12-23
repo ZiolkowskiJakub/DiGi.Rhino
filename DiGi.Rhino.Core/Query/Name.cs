@@ -7,7 +7,7 @@ namespace DiGi.Rhino.Core
         public static string? Name(this Type? type)
         {
             string? result = type?.Name;
-            if(string.IsNullOrWhiteSpace(result))
+            if (string.IsNullOrWhiteSpace(result))
             {
                 return result;
             }

@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Geometry.Planar
         [Inspect("A", "A", "A")]
         public static GH_Number? A(this DiGi.Geometry.Planar.Classes.Ellipse2D? ellipse2D)
         {
-            if(ellipse2D == null)
+            if (ellipse2D == null)
             {
                 return null;
             }

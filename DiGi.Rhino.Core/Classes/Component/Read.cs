@@ -81,7 +81,7 @@ namespace DiGi.Rhino.Core.Classes
 
             Path? path_Temp = path;
 
-            if(!path_Temp.Value.FileExists)
+            if (!path_Temp.Value.FileExists)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "File does not exist or is invalid.");
                 return;

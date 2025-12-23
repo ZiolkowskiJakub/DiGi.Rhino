@@ -15,7 +15,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("bf29bf62-ecc4-4686-9277-00648998c9fc");
+        public override Guid ComponentGuid => new("bf29bf62-ecc4-4686-9277-00648998c9fc");
 
         /// <summary>
         /// Provides an Icon for the component.

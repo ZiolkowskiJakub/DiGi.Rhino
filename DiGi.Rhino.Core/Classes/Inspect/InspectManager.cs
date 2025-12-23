@@ -20,15 +20,15 @@ namespace DiGi.Rhino.Core.Classes
                 Load();
             }
 
-            if(dictionary == null)
+            if (dictionary == null)
             {
                 return null;
             }
 
             List<InspectMethod> result = [];
-            foreach(KeyValuePair<Type, List<InspectMethod>> keyValuePair in dictionary)
+            foreach (KeyValuePair<Type, List<InspectMethod>> keyValuePair in dictionary)
             {
-                if(!keyValuePair.Key.IsAssignableFrom(type))
+                if (!keyValuePair.Key.IsAssignableFrom(type))
                 {
                     continue;
                 }
@@ -44,12 +44,12 @@ namespace DiGi.Rhino.Core.Classes
             dictionary = [];
 
             List<MethodInfo> methodInfos = DiGi.Core.Query.ExtensionMethodInfos();
-            if(methodInfos == null)
+            if (methodInfos == null)
             {
                 return;
             }
 
-            foreach(MethodInfo methodInfo in methodInfos)
+            foreach (MethodInfo methodInfo in methodInfos)
             {
                 InspectAttribute? inspectAttribute = methodInfo?.GetCustomAttribute<InspectAttribute>();
                 if (inspectAttribute == null)
@@ -58,7 +58,7 @@ namespace DiGi.Rhino.Core.Classes
                 }
 
                 ParameterInfo[]? parameterInfos = methodInfo!.GetParameters();
-                if(parameterInfos == null || parameterInfos.Length != 1)
+                if (parameterInfos == null || parameterInfos.Length != 1)
                 {
                     continue;
                 }
@@ -66,14 +66,14 @@ namespace DiGi.Rhino.Core.Classes
                 ParameterInfo parameterInfo = parameterInfos[0];
 
                 Type type = parameterInfo.ParameterType;
-                if(!dictionary.TryGetValue(type, out List<InspectMethod>? inspectMethods) || inspectMethods == null)
+                if (!dictionary.TryGetValue(type, out List<InspectMethod>? inspectMethods) || inspectMethods == null)
                 {
                     inspectMethods = [];
                     dictionary[type] = inspectMethods;
                 }
 
                 InspectMethod inspectMethod = new(methodInfo, inspectAttribute);
-                if(!inspectMethod.IsValid())
+                if (!inspectMethod.IsValid())
                 {
                     continue;
                 }

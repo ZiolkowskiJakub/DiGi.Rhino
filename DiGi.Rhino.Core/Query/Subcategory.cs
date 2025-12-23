@@ -1,6 +1,6 @@
-﻿using Grasshopper.Kernel;
+﻿using DiGi.Rhino.Core.Classes;
 using Grasshopper;
-using DiGi.Rhino.Core.Classes;
+using Grasshopper.Kernel;
 
 namespace DiGi.Rhino.Core
 {
@@ -23,9 +23,9 @@ namespace DiGi.Rhino.Core
 
                 return newParam;
             }
-            finally 
-            { 
-                param.Attributes = attributes; 
+            finally
+            {
+                param.Attributes = attributes;
             }
         }
     }

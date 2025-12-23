@@ -50,13 +50,13 @@ namespace DiGi.Rhino.Core.Classes
                 return Value.GetType().FullName;
             }
         }
-        
+
         public override bool CastFrom(object? source)
         {
             object? source_Temp = source;
             if (source_Temp is IGH_Goo gH_Goo)
             {
-                if(Query.TryGetValue(gH_Goo, out object? value))
+                if (Query.TryGetValue(gH_Goo, out object? value))
                 {
                     source_Temp = value;
                 }
@@ -100,7 +100,7 @@ namespace DiGi.Rhino.Core.Classes
                 }
             }
 
-            if(Value is Y)
+            if (Value is Y)
             {
                 target = (Y)(object)Value;
                 return true;
@@ -187,7 +187,7 @@ namespace DiGi.Rhino.Core.Classes
             {
                 return false;
             }
-           
+
             Value = (TObject)(object)value;
             return true;
         }

@@ -8,7 +8,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     {
         public static Ellipse3D? ToDiGi(this global::Rhino.Geometry.Ellipse ellipse)
         {
-            if(!ellipse.IsValid)
+            if (!ellipse.IsValid)
             {
                 return null;
             }
@@ -17,7 +17,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 
             Vector2D? direction = plane.Convert(plane?.AxisX);
 
-            Ellipse2D ellipse2D = new (plane.Convert(ellipse.Center.ToDiGi()), ellipse.Radius1, ellipse.Radius2, direction);
+            Ellipse2D ellipse2D = new(plane.Convert(ellipse.Center.ToDiGi()), ellipse.Radius1, ellipse.Radius2, direction);
 
             return new Ellipse3D(plane, ellipse2D);
         }

@@ -8,7 +8,7 @@ namespace DiGi.Rhino.Geometry.Planar
         [Inspect("BoundinBox2D", "BoundinBox2D", "BoundinBox2D")]
         public static GooBoundingBox2D? BoundinBox2D(this DiGi.Geometry.Planar.Interfaces.IBoundable2D? boundable2D)
         {
-            if(boundable2D == null)
+            if (boundable2D == null)
             {
                 return null;
             }

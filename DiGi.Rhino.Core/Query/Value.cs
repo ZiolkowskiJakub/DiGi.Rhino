@@ -9,7 +9,7 @@ namespace DiGi.Rhino.Core
     {
         public static object? Value(this IGooSerializableObject? gooSerializableObject, GooParam? gooParam)
         {
-            if(gooParam == null || gooSerializableObject == null)
+            if (gooParam == null || gooSerializableObject == null)
             {
                 return null;
             }

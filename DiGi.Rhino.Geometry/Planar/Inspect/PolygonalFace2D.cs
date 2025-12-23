@@ -10,7 +10,7 @@ namespace DiGi.Rhino.Geometry.Planar
         [Inspect("Centroid", "Centroid", "Centroid")]
         public static GooPoint2D? Centroid(this DiGi.Geometry.Planar.Classes.PolygonalFace2D? polygonalFace2D)
         {
-            if(polygonalFace2D == null)
+            if (polygonalFace2D == null)
             {
                 return null;
             }

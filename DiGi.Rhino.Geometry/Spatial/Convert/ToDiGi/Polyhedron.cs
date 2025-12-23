@@ -8,12 +8,12 @@ namespace DiGi.Rhino.Geometry.Spatial
     {
         public static Polyhedron? ToDiGi_Polyhedron(this Brep? brep, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
-            if(brep == null || !brep.IsValid)
+            if (brep == null || !brep.IsValid)
             {
                 return null;
             }
 
-            if(!brep.IsSolid)
+            if (!brep.IsSolid)
             {
                 return null;
             }
@@ -29,7 +29,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 }
 
                 PolygonalFace3D? polygonalFace3D = brepFace.ToDiGi_PolygonalFace3D(tolerance);
-                if(polygonalFace3D == null)
+                if (polygonalFace3D == null)
                 {
                     continue;
                 }
@@ -37,7 +37,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 polygonalFace3Ds.Add(polygonalFace3D);
             }
 
-            if(polygonalFace3Ds == null || polygonalFace3Ds.Count == 0)
+            if (polygonalFace3Ds == null || polygonalFace3Ds.Count == 0)
             {
                 return null;
             }

@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         [Inspect("A", "A", "A")]
         public static GH_Number? A(this DiGi.Geometry.Spatial.Classes.Ellipsoid? ellipsoid)
         {
-            if(ellipsoid == null)
+            if (ellipsoid == null)
             {
                 return null;
             }

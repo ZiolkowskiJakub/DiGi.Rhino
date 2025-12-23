@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         public static Brep? ToRhino(this IPolygonalFace3D? polygonalFace3D, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             List<IPolygonal3D>? polygonal3Ds = polygonalFace3D?.Edges;
-            if(polygonal3Ds == null || polygonal3Ds.Count == 0)
+            if (polygonal3Ds == null || polygonal3Ds.Count == 0)
             {
                 return null;
             }
@@ -45,7 +45,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         public static Brep? ToRhino(this Polyhedron? polyhedron, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             List<IPolygonalFace3D>? polygonalFace3Ds = polyhedron?.PolygonalFaces;
-            if(polygonalFace3Ds == null)
+            if (polygonalFace3Ds == null)
             {
                 return null;
             }
@@ -81,7 +81,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         public static Brep? ToRhino(this Ellipsoid? ellipsoid)
         {
             Point3d center = ToRhino(ellipsoid?.Center);
-            if(!center.IsValid)
+            if (!center.IsValid)
             {
                 return null;
             }
@@ -106,7 +106,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             nurbSurface.Transform(scale);
 
             Transform orient = Transform.PlaneToPlane(plane, new global::Rhino.Geometry.Plane(center, directionA.ToRhino(), directionB.ToRhino()));
-            
+
             nurbSurface.Transform(orient);
 
             return nurbSurface.ToBrep();

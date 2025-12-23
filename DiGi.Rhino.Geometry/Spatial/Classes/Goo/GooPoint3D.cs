@@ -24,7 +24,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooPoint3DParam : GooGeometryParam<DiGi.Geometry.Spatial.Classes.Point3D>
     {
-        public override Guid ComponentGuid => new ("baacf835-6a09-41d4-9219-dd9ef1b54a0e");
+        public override Guid ComponentGuid => new("baacf835-6a09-41d4-9219-dd9ef1b54a0e");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

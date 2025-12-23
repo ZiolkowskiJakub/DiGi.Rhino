@@ -7,13 +7,13 @@ namespace DiGi.Rhino.Geometry.Spatial
         public static global::Rhino.Geometry.Ellipse ToRhino(this Ellipse3D? ellipse3D)
         {
             Plane? plane = ellipse3D?.Plane;
-            if(plane == null)
+            if (plane == null)
             {
                 return new global::Rhino.Geometry.Ellipse();
             }
 
             Vector3D? axisX = ellipse3D!.Direction;
-            if(axisX == null)
+            if (axisX == null)
             {
                 return new global::Rhino.Geometry.Ellipse();
             }

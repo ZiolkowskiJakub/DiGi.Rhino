@@ -199,7 +199,7 @@ namespace DiGi.Rhino.Core.Classes
         {
         }
 
-        public override Guid ComponentGuid => new ("fa4f4af4-3a0d-45d4-be59-bfb65dc350cb");
+        public override Guid ComponentGuid => new("fa4f4af4-3a0d-45d4-be59-bfb65dc350cb");
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
     public class GooEnumParam : GH_PersistentParam<GooEnum>
@@ -210,7 +210,7 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         public override Guid ComponentGuid => new("659a3dbe-c305-4512-94c2-202f18c80911");
-        
+
         protected override GH_GetterResult Prompt_Plural(ref List<GooEnum> values)
         {
             throw new NotImplementedException();

@@ -7,7 +7,7 @@ namespace DiGi.Rhino.Core
     {
         public static Range<double>? ToDiGi(this Interval interval)
         {
-            if(interval == Interval.Unset)
+            if (interval == Interval.Unset)
             {
                 return null;
             }

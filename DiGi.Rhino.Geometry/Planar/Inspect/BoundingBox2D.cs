@@ -98,7 +98,7 @@ namespace DiGi.Rhino.Geometry.Planar
         [Inspect("Width", "Width", "Width")]
         public static GH_Number? Width(this DiGi.Geometry.Planar.Classes.BoundingBox2D? boundingBox2D)
         {
-            if(boundingBox2D == null)
+            if (boundingBox2D == null)
             {
                 return null;
             }

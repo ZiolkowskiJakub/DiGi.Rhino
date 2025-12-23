@@ -6,7 +6,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     {
         public static global::Rhino.Geometry.Box ToRhino_Box(this BoundingBox3D boundingBox3D)
         {
-            if(boundingBox3D == null)
+            if (boundingBox3D == null)
             {
                 return global::Rhino.Geometry.Box.Unset;
             }

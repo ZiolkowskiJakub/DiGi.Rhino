@@ -11,12 +11,12 @@ namespace DiGi.Rhino.Core
         {
             serializableObject = default;
 
-            if(!TryGetValue(gooSerializableObject, out object? @object)|| @object is null)
+            if (!TryGetValue(gooSerializableObject, out object? @object) || @object is null)
             {
                 return false;
             }
 
-            if(@object is not TSerializableObject)
+            if (@object is not TSerializableObject)
             {
                 return false;
             }
@@ -29,7 +29,7 @@ namespace DiGi.Rhino.Core
         {
             value = null;
 
-            if(gH_Goo?.GetType() is not System.Type type)
+            if (gH_Goo?.GetType() is not System.Type type)
             {
                 return false;
             }
@@ -47,11 +47,11 @@ namespace DiGi.Rhino.Core
         public static bool TryGetValue<TObject>(this object? @object, out TObject? value)
         {
             value = default;
-            if(@object is null)
+            if (@object is null)
             {
                 return false;
             }
-            
+
             if (@object is IGH_Goo gH_Goo)
             {
                 if (TryGetValue(gH_Goo, out object? object_Temp) && object_Temp is TObject t)

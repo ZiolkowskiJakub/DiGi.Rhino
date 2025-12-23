@@ -13,7 +13,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("b5ca211a-a681-4149-9cdb-3eb933143127");
+        public override Guid ComponentGuid => new("b5ca211a-a681-4149-9cdb-3eb933143127");
 
         /// <summary>
         /// Provides an Icon for the component.

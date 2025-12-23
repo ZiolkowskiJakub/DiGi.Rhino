@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Grasshopper.Kernel;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using Grasshopper.Kernel;
 
 namespace DiGi.Rhino.Core.Classes
 {
@@ -91,15 +90,15 @@ namespace DiGi.Rhino.Core.Classes
 
     public class ElementLogicalAndFilter : ElementLogicalFilter
     {
-        public override Guid ComponentGuid => new ("0E534AFB-7264-4AFF-99F3-7F7EA7DB9F3D");
+        public override Guid ComponentGuid => new("0E534AFB-7264-4AFF-99F3-7F7EA7DB9F3D");
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
-        public ElementLogicalAndFilter() 
+        public ElementLogicalAndFilter()
           : base("Core.Test", "Core.Test",
               "Test",
               "DiGi", "DiGi.Core")
         {
-            
+
         }
 
         protected override void SolveInstance(IGH_DataAccess DA)

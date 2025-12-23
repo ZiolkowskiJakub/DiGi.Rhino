@@ -14,7 +14,7 @@ namespace DiGi.Rhino.Core.Classes
         //Return a short string describing the purpose of this GHA library.
         public override string Description => "";
 
-        public override Guid Id => new ("8694c9c9-44d6-4454-8281-c5ce70b43c65");
+        public override Guid Id => new("8694c9c9-44d6-4454-8281-c5ce70b43c65");
 
         //Return a string identifying you or your company.
         public override string AuthorName => "Jakub Ziolkowski";

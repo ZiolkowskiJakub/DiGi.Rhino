@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Core
         [Inspect("Guid", "Guid", "Guid")]
         public static GH_Guid? Guid(this IGuidObject? guidObject)
         {
-            if(guidObject == null)
+            if (guidObject == null)
             {
                 return null;
             }

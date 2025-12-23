@@ -8,7 +8,7 @@ namespace DiGi.Rhino.Geometry.Planar
         [Inspect("X", "X", "X Coordinate")]
         public static GH_Number? X(this DiGi.Geometry.Planar.Classes.Point2D? point2D)
         {
-            if(point2D == null)
+            if (point2D == null)
             {
                 return null;
             }

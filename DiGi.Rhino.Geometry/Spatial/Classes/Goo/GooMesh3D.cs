@@ -25,7 +25,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooMesh3DParam : GooGeometryParam<Mesh3D>
     {
-        public override Guid ComponentGuid => new ("ec6450c0-08fd-4959-be9b-647687d61980");
+        public override Guid ComponentGuid => new("ec6450c0-08fd-4959-be9b-647687d61980");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

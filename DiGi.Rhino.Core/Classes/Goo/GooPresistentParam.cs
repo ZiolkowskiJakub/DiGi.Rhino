@@ -1,7 +1,7 @@
-﻿using Grasshopper.Kernel;
+﻿using DiGi.Core.Interfaces;
+using Grasshopper.Kernel;
 using System;
 using System.Collections.Generic;
-using DiGi.Core.Interfaces;
 
 namespace DiGi.Rhino.Core.Classes
 {
@@ -17,7 +17,7 @@ namespace DiGi.Rhino.Core.Classes
         {
         }
 
-        public override Guid ComponentGuid => new ("a2f8ed2f-2634-416a-b119-57bd05dc559c");
+        public override Guid ComponentGuid => new("a2f8ed2f-2634-416a-b119-57bd05dc559c");
 
         protected override GH_GetterResult Prompt_Plural(ref List<T?> values)
         {

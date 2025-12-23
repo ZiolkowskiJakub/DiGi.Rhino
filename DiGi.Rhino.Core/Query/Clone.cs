@@ -7,7 +7,7 @@ namespace DiGi.Rhino.Core
         public static string Subcategory(this Type type)
         {
             string? name = type?.Assembly?.GetName()?.Name;
-            if(string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 return "DiGi";
             }

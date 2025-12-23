@@ -7,7 +7,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("45480a11-ad3f-46eb-9fbc-35e13b5d254b");
+        public override Guid ComponentGuid => new("45480a11-ad3f-46eb-9fbc-35e13b5d254b");
 
         /// <summary>
         /// Panel Type

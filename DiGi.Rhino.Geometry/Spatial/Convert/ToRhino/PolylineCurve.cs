@@ -10,13 +10,13 @@ namespace DiGi.Rhino.Geometry.Spatial
         public static PolylineCurve? ToRhino(this IPolygonal3D? polygonal3D)
         {
             List<Point3D>? point3Ds = polygonal3D?.GetPoints();
-            if(point3Ds == null)
+            if (point3Ds == null)
             {
                 return null;
             }
 
             List<Point3d>? point3ds = point3Ds.ConvertAll(x => x.ToRhino());
-            if(point3ds.Count > 1)
+            if (point3ds.Count > 1)
             {
                 point3ds.Add(point3ds[0]);
             }

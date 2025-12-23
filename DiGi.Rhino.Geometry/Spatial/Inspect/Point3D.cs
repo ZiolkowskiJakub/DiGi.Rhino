@@ -9,7 +9,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         [Inspect("X", "X", "X Coordinate")]
         public static GH_Number? X(this DiGi.Geometry.Spatial.Classes.Point3D? point3D)
         {
-            if(point3D == null)
+            if (point3D == null)
             {
                 return null;
             }

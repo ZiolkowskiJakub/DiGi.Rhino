@@ -1,11 +1,11 @@
-﻿using Grasshopper.Kernel.Types;
+﻿using DiGi.Core.Interfaces;
+using DiGi.Rhino.Core.Interfaces;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using DiGi.Rhino.Core.Interfaces;
-using DiGi.Core.Interfaces;
 
 namespace DiGi.Rhino.Core.Classes
 {
@@ -17,11 +17,11 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         public GooSerializableObject(TSerializableObject? serializableObject)
-            :base(serializableObject)
+            : base(serializableObject)
         {
             Value = serializableObject;
         }
-        
+
         public override IGH_Goo? Duplicate()
         {
             return new GooSerializableObject<TSerializableObject>(Value);

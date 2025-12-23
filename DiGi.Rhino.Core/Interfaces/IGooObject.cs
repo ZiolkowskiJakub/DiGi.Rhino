@@ -1,5 +1,4 @@
 ﻿using Grasshopper.Kernel.Types;
-using System;
 
 namespace DiGi.Rhino.Core.Interfaces
 {

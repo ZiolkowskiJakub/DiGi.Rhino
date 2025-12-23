@@ -20,7 +20,7 @@ namespace DiGi.Rhino.Core
             }
 
             string? path = null;
-            using (SaveFileDialog saveFileDialog = new ())
+            using (SaveFileDialog saveFileDialog = new())
             {
                 saveFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
                 saveFileDialog.FilterIndex = 1;

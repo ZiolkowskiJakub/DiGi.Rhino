@@ -6,7 +6,7 @@ namespace DiGi.Rhino.Geometry.Spatial
     {
         public static Plane? ToDiGi(this global::Rhino.Geometry.Plane plane)
         {
-            if(!plane.IsValid)
+            if (!plane.IsValid)
             {
                 return null;
             }

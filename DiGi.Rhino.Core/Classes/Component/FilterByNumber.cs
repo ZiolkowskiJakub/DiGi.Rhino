@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("ddd10985-23c4-471d-b14b-881a92560b78");
+        public override Guid ComponentGuid => new("ddd10985-23c4-471d-b14b-881a92560b78");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -120,7 +120,7 @@ namespace DiGi.Rhino.Core.Classes
             double tolerance = 0;
 
             index = Params.IndexOfInputParam("Tolerance");
-            if(index != -1)
+            if (index != -1)
             {
                 double tolerance_Temp = 0;
                 if (dataAccess.GetData(index, ref tolerance_Temp))
@@ -136,38 +136,38 @@ namespace DiGi.Rhino.Core.Classes
             List<bool> mask = [];
 
             Dictionary<Type, InspectMethod> dictionary = [];
-            foreach(ISerializableObject serializableObject in serializableObjects)
+            foreach (ISerializableObject serializableObject in serializableObjects)
             {
-                if(serializableObject == null)
+                if (serializableObject == null)
                 {
                     mask.Add(false);
                     continue;
                 }
 
                 Type? type = serializableObject.GetType();
-                if(type == null)
+                if (type == null)
                 {
                     mask.Add(false);
                     continue;
                 }
 
-                if(!dictionary.TryGetValue(type, out InspectMethod? inspectMethod))
+                if (!dictionary.TryGetValue(type, out InspectMethod? inspectMethod))
                 {
                     inspectMethod = Settings.InspectManager.GetInspectMethods(type)?.Find(x => x.InspectAttribute?.Name == parameterName);
-                    if(inspectMethod is not null)
+                    if (inspectMethod is not null)
                     {
                         dictionary[type] = inspectMethod;
                     }
                 }
 
-                if(inspectMethod == null || !inspectMethod.TryGetValue(serializableObject, out double value_2))
+                if (inspectMethod == null || !inspectMethod.TryGetValue(serializableObject, out double value_2))
                 {
                     serializableObjects_Invalid.Add(serializableObject);
                     mask.Add(false);
                     continue;
                 }
 
-                if(DiGi.Core.Query.Compare(value_2, value_1, numberComparisonType, tolerance))
+                if (DiGi.Core.Query.Compare(value_2, value_1, numberComparisonType, tolerance))
                 {
                     mask.Add(true);
                     serializableObjects_In.Add(serializableObject);

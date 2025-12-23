@@ -20,11 +20,11 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return false;
             }
 
-            if(geometry is IGeometry2D geometry2D)
+            if (geometry is IGeometry2D geometry2D)
             {
                 return BakeGeometry(geometry2D, rhinoDoc, objectAttributes, out guids);
             }
-            else if(geometry is IGeometry3D geometry3D)
+            else if (geometry is IGeometry3D geometry3D)
             {
                 return BakeGeometry(geometry3D, rhinoDoc, objectAttributes, out guids);
             }
@@ -42,7 +42,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             }
 
             IGeometry3D? geometry3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, geometry2D);
-            if(geometry3D == null)
+            if (geometry3D == null)
             {
                 return false;
             }
@@ -54,7 +54,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         {
             guids = null;
 
-            if(geometry3D == null || rhinoDoc == null || objectAttributes == null)
+            if (geometry3D == null || rhinoDoc == null || objectAttributes == null)
             {
                 return false;
             }

@@ -26,7 +26,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooPolyhedronParam : GooGeometryParam<Polyhedron>
     {
-        public override Guid ComponentGuid => new ("e125980f-b14a-4f02-9910-55c2d093e13c");
+        public override Guid ComponentGuid => new("e125980f-b14a-4f02-9910-55c2d093e13c");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 

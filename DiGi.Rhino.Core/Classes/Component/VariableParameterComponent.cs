@@ -59,7 +59,7 @@ namespace DiGi.Rhino.Core.Classes
             var templateParams = parameterSide == GH_ParameterSide.Input ? Inputs : Outputs;
             var componentParams = parameterSide == GH_ParameterSide.Input ? Params.Input : Params.Output;
 
-            if(templateParams is null)
+            if (templateParams is null)
             {
                 return false;
             }
@@ -79,7 +79,7 @@ namespace DiGi.Rhino.Core.Classes
         private IGH_Param? GetTemplateParam(GH_ParameterSide parameterSide, int index)
         {
             var templateParams = parameterSide == GH_ParameterSide.Input ? Inputs : Outputs;
-            if(templateParams is null)
+            if (templateParams is null)
             {
                 return null;
             }
@@ -130,7 +130,7 @@ namespace DiGi.Rhino.Core.Classes
 
         protected override sealed void RegisterInputParams(GH_InputParamManager inputParamManager)
         {
-            if(Inputs == null)
+            if (Inputs == null)
             {
                 return;
             }
@@ -143,7 +143,7 @@ namespace DiGi.Rhino.Core.Classes
 
         protected override sealed void RegisterOutputParams(GH_OutputParamManager outputParamManager)
         {
-            if(Outputs == null)
+            if (Outputs == null)
             {
                 return;
             }

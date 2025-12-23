@@ -12,13 +12,13 @@ namespace DiGi.Rhino.Geometry.Spatial
         public static IEnumerable? Geometry3Ds(this IIntersectionResult3D? intersectionResult3D)
         {
             List<IGeometry3D>? geometry3Ds = intersectionResult3D?.GetGeometry3Ds<IGeometry3D>();
-            if(geometry3Ds == null)
+            if (geometry3Ds == null)
             {
                 return null;
             }
 
             List<GooGeometry3D> result = [];
-            foreach(IGeometry3D geometry3D in geometry3Ds)
+            foreach (IGeometry3D geometry3D in geometry3Ds)
             {
                 result.Add(new GooGeometry3D(geometry3D));
             }

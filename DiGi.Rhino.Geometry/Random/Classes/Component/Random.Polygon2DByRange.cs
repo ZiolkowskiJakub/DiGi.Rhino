@@ -15,7 +15,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("fefc5785-4659-4fe0-b316-65b3eb304723");
+        public override Guid ComponentGuid => new("fefc5785-4659-4fe0-b316-65b3eb304723");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -124,8 +124,8 @@ namespace DiGi.Rhino.Geometry.Random.Classes
                 Polygon2D? polygon2D;
                 if (pointCount == -1)
                 {
-                    System.Random random = DiGi.Core.Create.Random(seed); 
-                    
+                    System.Random random = DiGi.Core.Create.Random(seed);
+
                     polygon2D = DiGi.Geometry.Planar.Random.Create.Polygon2D(interval_X.ToDiGi(), interval_Y.ToDiGi(), DiGi.Core.Query.Random(random, 5, 10), seed, tolerance);
                 }
                 else

@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         [Inspect("A", "A", "A")]
         public static GH_Number? A(this Ellipse3D? ellipse3D)
         {
-            if(ellipse3D == null)
+            if (ellipse3D == null)
             {
                 return null;
             }

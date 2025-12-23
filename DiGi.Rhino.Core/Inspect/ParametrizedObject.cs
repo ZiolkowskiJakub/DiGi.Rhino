@@ -13,13 +13,13 @@ namespace DiGi.Rhino.Core
         [Inspect("Parameters", "Parameters", "Parameters")]
         public static IEnumerable? Parameters(this IParametrizedObject? parametrizedObject)
         {
-            if(parametrizedObject == null)
+            if (parametrizedObject == null)
             {
                 return null;
             }
 
             List<IParameterDefinition>? parameterDefinitions = parametrizedObject.GetParameterDefinitions<IParameterDefinition>();
-            if(parameterDefinitions == null)
+            if (parameterDefinitions == null)
             {
                 return null;
             }
@@ -28,12 +28,12 @@ namespace DiGi.Rhino.Core
             SetValueSettings setValueSettings = new(true, false);
 
             List<GooParameter> result = [];
-            foreach(IParameterDefinition parameterDefinition in parameterDefinitions)
+            foreach (IParameterDefinition parameterDefinition in parameterDefinitions)
             {
-                if(parametrizedObject.TryGetValue(parameterDefinition, out object? value, getValueSettings))
+                if (parametrizedObject.TryGetValue(parameterDefinition, out object? value, getValueSettings))
                 {
                     Parameter? parameter = DiGi.Core.Parameter.Create.Parameter(parameterDefinition, value, setValueSettings);
-                    if(parameter == null)
+                    if (parameter == null)
                     {
                         continue;
                     }

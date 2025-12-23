@@ -1,9 +1,9 @@
-﻿using Grasshopper.Kernel;
+﻿using DiGi.Core.Interfaces;
+using Grasshopper.Kernel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using DiGi.Core.Interfaces;
 
 namespace DiGi.Rhino.Core.Classes
 {
@@ -19,7 +19,7 @@ namespace DiGi.Rhino.Core.Classes
         {
         }
 
-        public override Guid ComponentGuid => new ("f360150a-d89b-4324-aff2-43c883eb3c98");
+        public override Guid ComponentGuid => new("f360150a-d89b-4324-aff2-43c883eb3c98");
 
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
         {
@@ -39,7 +39,7 @@ namespace DiGi.Rhino.Core.Classes
         {
             throw new NotImplementedException();
         }
-        
+
         private void Menu_SaveAs(object? sender, EventArgs e)
         {
             Query.SaveAs(VolatileData);

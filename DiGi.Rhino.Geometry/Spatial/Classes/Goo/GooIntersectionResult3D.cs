@@ -1,9 +1,9 @@
-﻿using Grasshopper.Kernel.Types;
-using System;
+﻿using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
-using DiGi.Rhino.Geometry.Core.Classes;
-using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Spatial.Interfaces;
+using DiGi.Rhino.Geometry.Core.Classes;
+using Grasshopper.Kernel.Types;
+using System;
 using System.Linq;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
@@ -16,7 +16,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         }
 
         public GooIntersectionResult3D(IntersectionResult3D? intersectionResult3D)
-            :base()
+            : base()
         {
             Value = intersectionResult3D;
         }
@@ -41,7 +41,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
         public override bool CastTo<Y>(ref Y target)
         {
-            if(target is null)
+            if (target is null)
             {
                 return base.CastTo(ref target);
             }
@@ -71,7 +71,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 {
                     if (typeof(Y).IsAssignableFrom(Value.GetType()))
                     {
-                        if((Y?)(object?)Value.Clone() is Y y)
+                        if ((Y?)(object?)Value.Clone() is Y y)
                         {
                             target = y;
                         }
@@ -106,7 +106,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     public class GooIntersectionResult3DParam : GooBakeAwareSerializableParam<GooIntersectionResult3D, IntersectionResult3D>
     {
-        public override Guid ComponentGuid => new ("9e9f7879-bd95-46b5-b0e2-4a05b6c12af1");
+        public override Guid ComponentGuid => new("9e9f7879-bd95-46b5-b0e2-4a05b6c12af1");
     }
 
 

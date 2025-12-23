@@ -17,7 +17,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("51201449-28b2-43f0-97dd-391ec76a1adc");
+        public override Guid ComponentGuid => new("51201449-28b2-43f0-97dd-391ec76a1adc");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -51,7 +51,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
                     new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "pointCount", NickName = "pointCount", Description = "Point count", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
                     new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "internalEdgeCount", NickName = "internalEdgeCount", Description = "Internal edge count", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
                 ];
-                Grasshopper.Kernel.Parameters.Param_Number param_Number = new () { Name = "tolerance", NickName = "tolerance", Description = "tolerance", Access = GH_ParamAccess.item, Optional = true };
+                Grasshopper.Kernel.Parameters.Param_Number param_Number = new() { Name = "tolerance", NickName = "tolerance", Description = "tolerance", Access = GH_ParamAccess.item, Optional = true };
                 param_Number.SetPersistentData(DiGi.Core.Constans.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
                 return [.. result];
@@ -130,7 +130,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
                 interval_InternalEdgeCount = new Interval(0, 0);
             }
 
-            if(interval_InternalEdgeCount == Interval.Unset)
+            if (interval_InternalEdgeCount == Interval.Unset)
             {
                 interval_InternalEdgeCount = new Interval(0, 0);
             }
@@ -147,7 +147,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
                     Value = polygonalFace2D
                 };
 
-                if(multiUpdater.Update() && multiUpdater.Value is IGeometry2D geometry2D)
+                if (multiUpdater.Update() && multiUpdater.Value is IGeometry2D geometry2D)
                 {
                     if (geometry2D is PolygonalFace2D polygonalFace2D_Temp)
                     {

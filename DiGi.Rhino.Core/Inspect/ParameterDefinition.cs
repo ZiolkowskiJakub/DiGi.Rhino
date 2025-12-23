@@ -20,14 +20,14 @@ namespace DiGi.Rhino.Core
         [Inspect("Name", "Name", "Name")]
         public static GH_String? Name(this IParameterDefinition? parameterDefinition)
         {
-            if(parameterDefinition == null)
+            if (parameterDefinition == null)
             {
                 return null;
             }
 
             return new GH_String(parameterDefinition.Name);
         }
-        
+
         [Inspect("ParameterType", "ParameterType", "ParameterType")]
         public static GooEnum? ParameterType(this IParameterDefinition? parameterDefinition)
         {

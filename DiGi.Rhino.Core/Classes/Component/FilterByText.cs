@@ -12,7 +12,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid => new ("b5b79ad2-998a-406f-97a6-81d6b6fdee96");
+        public override Guid ComponentGuid => new("b5b79ad2-998a-406f-97a6-81d6b6fdee96");
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -120,7 +120,7 @@ namespace DiGi.Rhino.Core.Classes
             bool caseSensitive = true;
 
             index = Params.IndexOfInputParam("CaseSensitive");
-            if(index != -1)
+            if (index != -1)
             {
                 bool caseSensitive_Temp = true;
                 if (dataAccess.GetData(index, ref caseSensitive))
@@ -136,35 +136,35 @@ namespace DiGi.Rhino.Core.Classes
             List<bool> mask = [];
 
             Dictionary<Type, InspectMethod?> dictionary = [];
-            foreach(ISerializableObject serializableObject in serializableObjects)
+            foreach (ISerializableObject serializableObject in serializableObjects)
             {
-                if(serializableObject == null)
+                if (serializableObject == null)
                 {
                     mask.Add(false);
                     continue;
                 }
 
                 Type? type = serializableObject.GetType();
-                if(type == null)
+                if (type == null)
                 {
                     mask.Add(false);
                     continue;
                 }
 
-                if(!dictionary.TryGetValue(type, out InspectMethod? inspectMethod))
+                if (!dictionary.TryGetValue(type, out InspectMethod? inspectMethod))
                 {
                     inspectMethod = Settings.InspectManager.GetInspectMethods(type)?.Find(x => x.InspectAttribute?.Name == parameterName);
                     dictionary[type] = inspectMethod;
                 }
 
-                if(inspectMethod == null || !inspectMethod.TryGetValue(serializableObject, out string? value_2))
+                if (inspectMethod == null || !inspectMethod.TryGetValue(serializableObject, out string? value_2))
                 {
                     serializableObjects_Invalid.Add(serializableObject);
                     mask.Add(false);
                     continue;
                 }
 
-                if(DiGi.Core.Query.Compare(value_2, value_1, textComparisonType, caseSensitive))
+                if (DiGi.Core.Query.Compare(value_2, value_1, textComparisonType, caseSensitive))
                 {
                     mask.Add(true);
                     serializableObjects_In.Add(serializableObject);

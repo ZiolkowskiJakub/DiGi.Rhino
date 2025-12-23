@@ -22,7 +22,7 @@ namespace DiGi.Rhino.Core
         [Inspect("ParameterDefinition", "ParameterDefinition", "ParameterDefinition")]
         public static GooParameterDefinition? ParameterDefinition(this Parameter? parameter)
         {
-            if(parameter == null)
+            if (parameter == null)
             {
                 return null;
             }

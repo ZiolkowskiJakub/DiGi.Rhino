@@ -16,7 +16,7 @@ namespace DiGi.Rhino.Core
             List<T> result = [];
             foreach (IGH_Goo goo in gH_Structure.AllData(true))
             {
-                if(goo == null)
+                if (goo == null)
                 {
                     continue;
                 }

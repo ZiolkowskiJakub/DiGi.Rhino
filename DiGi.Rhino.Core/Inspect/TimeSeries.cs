@@ -11,7 +11,7 @@ namespace DiGi.Rhino.Core
         [Inspect("DateTimes", "DateTimes", "DateTimes")]
         public static IEnumerable? DateTimes(this DiGi.Core.Interfaces.ITimeSeries? timeSeries)
         {
-            if(timeSeries == null)
+            if (timeSeries == null)
             {
                 return null;
             }

@@ -1,8 +1,8 @@
-﻿using Grasshopper.Kernel.Types;
+﻿using DiGi.Rhino.Core.Interfaces;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using System;
 using System.Collections.Generic;
-using DiGi.Rhino.Core.Interfaces;
 
 namespace DiGi.Rhino.Core.Classes
 {
@@ -14,11 +14,11 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         public GooType(Type? type)
-            :base(type)
+            : base(type)
         {
             Value = type;
         }
-        
+
         public override IGH_Goo? Duplicate()
         {
             return new GooType(Value);
