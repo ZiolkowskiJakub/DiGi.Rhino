@@ -27,7 +27,6 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
             return new GooBoundingBox3D(this);
         }
-
     }
 
     public class GooBoundingBox3DParam : GooGeometryParam<BoundingBox3D>

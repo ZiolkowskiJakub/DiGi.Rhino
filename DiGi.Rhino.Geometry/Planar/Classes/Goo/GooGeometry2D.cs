@@ -39,7 +39,6 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
             return new GooGeometry2D(Value);
         }
-
     }
 
     public class GooGeometry2DParam : GooGeometryParam<IGeometry2D>

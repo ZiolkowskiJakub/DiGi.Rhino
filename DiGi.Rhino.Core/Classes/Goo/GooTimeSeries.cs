@@ -21,7 +21,6 @@ namespace DiGi.GIS.Rhino.Classes
         {
             return new GooTimeSeries(Value);
         }
-
     }
 
     public class GooTimeSeriesParam : GooSerializablePresistentParam<GooTimeSeries, Core.Interfaces.ITimeSeries>

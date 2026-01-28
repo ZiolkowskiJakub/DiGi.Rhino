@@ -2,12 +2,10 @@
 using DiGi.Rhino.Core.Classes;
 using Grasshopper.Kernel.Types;
 
-
 namespace DiGi.Rhino.Core
 {
     public static partial class Inspect
     {
-
         [Inspect("Guid", "Guid", "Guid")]
         public static GH_Guid? Guid(this IGuidObject? guidObject)
         {

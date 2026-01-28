@@ -27,7 +27,6 @@ namespace DiGi.Rhino.Geometry.Spatial
             }
 
             return new PolylineCurve(point3ds);
-
         }
 
         public static PolylineCurve? ToRhino(this Polyline3D? polyline3D)

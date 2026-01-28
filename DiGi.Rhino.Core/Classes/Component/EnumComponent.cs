@@ -30,7 +30,6 @@ namespace DiGi.Rhino.Core.Classes
                 }
                 catch
                 {
-
                 }
             }
 

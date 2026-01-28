@@ -19,7 +19,6 @@ namespace DiGi.Rhino.Geometry.Spatial
                 {
                     point3Ds.Add(point3D_Temp);
                 }
-
             }
 
             return new Polyline3D(point3Ds);

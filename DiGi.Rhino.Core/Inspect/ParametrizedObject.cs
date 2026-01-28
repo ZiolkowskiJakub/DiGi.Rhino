@@ -9,7 +9,6 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Inspect
     {
-
         [Inspect("Parameters", "Parameters", "Parameters")]
         public static IEnumerable? Parameters(this IParametrizedObject? parametrizedObject)
         {

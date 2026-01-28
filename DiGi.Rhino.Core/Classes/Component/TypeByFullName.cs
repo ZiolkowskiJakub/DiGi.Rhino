@@ -47,8 +47,6 @@ namespace DiGi.Rhino.Core.Classes
                 result.Add(new Param(param_Boolean, ParameterVisibility.Voluntary));
 
                 return [.. result];
-
-
             }
         }
 

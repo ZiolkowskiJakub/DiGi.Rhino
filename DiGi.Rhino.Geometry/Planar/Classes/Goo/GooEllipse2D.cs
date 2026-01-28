@@ -21,7 +21,6 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
             return new GooEllipse2D(Value);
         }
-
     }
 
     public class GooEllipse2DParam : GooGeometryParam<Ellipse2D>

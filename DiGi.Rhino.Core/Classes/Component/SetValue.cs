@@ -83,7 +83,6 @@ namespace DiGi.Rhino.Core.Classes
                 return;
             }
 
-
             index = Params.IndexOfInputParam("ParameterDefinition");
             IParameterDefinition? parameterDefinition = null;
             if (index == -1 || !dataAccess.GetData(index, ref parameterDefinition) || parameterDefinition == null)

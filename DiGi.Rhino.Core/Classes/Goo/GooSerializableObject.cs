@@ -54,6 +54,7 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         public override Guid ComponentGuid => new("a557ef4b-4fa1-47a4-a5cc-894c03f057e7");
+
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
         {
             Menu_AppendItem(menu, "Save As...", Menu_SaveAs, VolatileData.AllData(true).Any());
@@ -73,6 +74,7 @@ namespace DiGi.Rhino.Core.Classes
         {
             throw new NotImplementedException();
         }
+
         private void Menu_SaveAs(object? sender, EventArgs? e)
         {
             Query.SaveAs(VolatileData);

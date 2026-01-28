@@ -21,7 +21,6 @@ namespace DiGi.GIS.Rhino.Classes
         {
             return new GooCoordinates(Value);
         }
-
     }
 
     public class GooCoordinatesParam : GooSerializablePresistentParam<GooCoordinates, Core.Classes.Coordinates>
@@ -36,4 +35,3 @@ namespace DiGi.GIS.Rhino.Classes
         }
     }
 }
-

@@ -4,7 +4,6 @@ namespace DiGi.Rhino.Core.Interfaces
 {
     public interface IGooObject : IGH_Goo
     {
-
     }
 
     public interface IGooObject<TObject> : IGooObject

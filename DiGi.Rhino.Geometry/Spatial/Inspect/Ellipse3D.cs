@@ -50,7 +50,6 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return null;
             }
 
-
             return ellipse3D.GetFocalPoints()?.ToList().ConvertAll(x => new GooPoint3D(x));
         }
 
@@ -62,9 +61,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return null;
             }
 
-
             return new GooPlane(ellipse3D.Plane);
         }
-
     }
 }

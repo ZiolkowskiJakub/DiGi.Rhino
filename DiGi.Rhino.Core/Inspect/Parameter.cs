@@ -7,7 +7,6 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Inspect
     {
-
         [Inspect("Name", "Name", "Name")]
         public static GH_String? Name(this Parameter? parameter)
         {

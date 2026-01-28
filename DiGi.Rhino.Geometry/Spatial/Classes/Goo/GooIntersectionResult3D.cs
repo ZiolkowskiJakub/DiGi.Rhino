@@ -46,7 +46,6 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 return base.CastTo(ref target);
             }
 
-
             if (typeof(Y) == typeof(object))
             {
                 target = (Y)(object)Value!;
@@ -92,7 +91,6 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             }
             catch
             {
-
             }
 
             return base.CastTo(ref target);
@@ -108,7 +106,6 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
     {
         public override Guid ComponentGuid => new("9e9f7879-bd95-46b5-b0e2-4a05b6c12af1");
     }
-
 
     //public class GooIntersectionResult3D : GooSerializableObject<IntersectionResult3D>, IGooBakeAware
     //{
@@ -161,7 +158,6 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
     //    public override bool CastTo<Y>(ref Y target)
     //    {
-
     //        if (typeof(Y) == typeof(object))
     //        {
     //            target = (Y)(object)Value;
@@ -201,7 +197,6 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
     //        }
     //        catch
     //        {
-
     //        }
 
     //        return base.CastTo(ref target);

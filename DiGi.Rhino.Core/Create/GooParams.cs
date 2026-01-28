@@ -24,7 +24,6 @@ namespace DiGi.Rhino.Core
                 return null;
             }
 
-
             List<InspectMethod>? inspectMethods = Settings.InspectManager.GetInspectMethods(type);
             if (inspectMethods == null)
             {

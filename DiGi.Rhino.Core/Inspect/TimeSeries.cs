@@ -7,7 +7,6 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Inspect
     {
-
         [Inspect("DateTimes", "DateTimes", "DateTimes")]
         public static IEnumerable? DateTimes(this DiGi.Core.Interfaces.ITimeSeries? timeSeries)
         {

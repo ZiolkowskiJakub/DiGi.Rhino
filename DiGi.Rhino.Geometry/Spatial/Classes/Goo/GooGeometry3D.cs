@@ -39,7 +39,6 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             return new GooGeometry3D(Value);
         }
-
     }
 
     public class GooGeometry3DParam : GooGeometryParam<IGeometry3D>

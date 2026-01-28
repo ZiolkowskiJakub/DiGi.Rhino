@@ -45,8 +45,6 @@ namespace DiGi.Rhino.Core.Classes
                     new Param(new GooEnumParam() { Name = "CountryCode", NickName = "CountryCode", Description = "CountryCode", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
                 ];
                 return [.. result];
-
-
             }
         }
 

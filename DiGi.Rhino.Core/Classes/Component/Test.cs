@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
-
     public abstract class ElementLogicalFilter : Component, IGH_VariableParameterComponent
     {
         protected ElementLogicalFilter(string name, string nickname, string description, string category, string subCategory)
@@ -22,8 +21,9 @@ namespace DiGi.Rhino.Core.Classes
             manager.AddParameter(new Grasshopper.Kernel.Parameters.Param_String(), "Filter", "F", string.Empty, GH_ParamAccess.item);
         }
 
-        static int ToIndex(char value) => value - 'A';
-        static char ToChar(int value) => (char)('A' + value);
+        private static int ToIndex(char value) => value - 'A';
+
+        private static char ToChar(int value) => (char)('A' + value);
 
         public bool CanInsertParameter(GH_ParameterSide side, int index)
         {
@@ -52,7 +52,9 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         public bool DestroyParameter(GH_ParameterSide side, int index) => CanRemoveParameter(side, index);
-        public void VariableParameterMaintenance() { }
+
+        public void VariableParameterMaintenance()
+        { }
 
         public override void AddedToDocument(GH_Document document)
         {
@@ -98,7 +100,6 @@ namespace DiGi.Rhino.Core.Classes
               "Test",
               "DiGi", "DiGi.Core")
         {
-
         }
 
         protected override void SolveInstance(IGH_DataAccess DA)

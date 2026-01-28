@@ -18,7 +18,6 @@ namespace DiGi.Rhino.Core.Classes
 
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
-
         /// <summary>
         /// Initializes a new instance of object.
         /// </summary>
@@ -27,7 +26,6 @@ namespace DiGi.Rhino.Core.Classes
               "Inspect Object",
               "DiGi", "DiGi.Core")
         {
-
         }
 
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
@@ -46,7 +44,7 @@ namespace DiGi.Rhino.Core.Classes
             Menu_AppendSeparator(menu);
         }
 
-        void PopulateOutputParameters(IEnumerable<IGH_Param> @params)
+        private void PopulateOutputParameters(IEnumerable<IGH_Param> @params)
         {
             if (Params is null)
             {
@@ -96,14 +94,14 @@ namespace DiGi.Rhino.Core.Classes
             ExpireSolution(true);
         }
 
-        void AddOutputParameter(IGH_Param param)
+        private void AddOutputParameter(IGH_Param param)
         {
             param.Attributes ??= new GH_LinkedParamAttributes(param, Attributes);
 
             Params.RegisterOutputParam(param);
         }
 
-        void Menu_PopulateOutputsWithAllParameters(object? sender, EventArgs e)
+        private void Menu_PopulateOutputsWithAllParameters(object? sender, EventArgs e)
         {
             List<GooParam> gooParams = [];
             foreach (object @object in Params.Input[0].VolatileData.AllData(true).OfType<object>())
@@ -148,7 +146,7 @@ namespace DiGi.Rhino.Core.Classes
             PopulateOutputParameters(gooParams_Sorted);
         }
 
-        void Menu_PopulateOutputsWithCommonParameters(object? sender, EventArgs e)
+        private void Menu_PopulateOutputsWithCommonParameters(object? sender, EventArgs e)
         {
             Dictionary<Type, List<GooParam>> dictionary = [];
             foreach (object @object in Params.Input[0].VolatileData.AllData(true).OfType<object>())
@@ -214,7 +212,7 @@ namespace DiGi.Rhino.Core.Classes
             PopulateOutputParameters(gooParams);
         }
 
-        void Menu_RemoveUnconnectedParameters(object? sender, EventArgs e)
+        private void Menu_RemoveUnconnectedParameters(object? sender, EventArgs e)
         {
             RecordUndoEvent("Remove Unconnected Outputs");
 
@@ -243,7 +241,6 @@ namespace DiGi.Rhino.Core.Classes
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager outputParamManager)
         {
-
         }
 
         /// <summary>
@@ -309,7 +306,9 @@ namespace DiGi.Rhino.Core.Classes
 
         bool IGH_VariableParameterComponent.DestroyParameter(GH_ParameterSide side, int index) => true;
 
-        void IGH_VariableParameterComponent.VariableParameterMaintenance() { }
+        void IGH_VariableParameterComponent.VariableParameterMaintenance()
+        {
+        }
 
         public override void AddedToDocument(GH_Document document)
         {

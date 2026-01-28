@@ -19,7 +19,6 @@ namespace DiGi.Rhino.Core
             }
 
             return string.Join(".", values[0], values[1]);
-
         }
     }
 }

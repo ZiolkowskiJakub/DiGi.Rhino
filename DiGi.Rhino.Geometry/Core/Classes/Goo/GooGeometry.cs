@@ -185,7 +185,6 @@ namespace DiGi.Rhino.Geometry.Core.Classes
             }
             catch
             {
-
             }
 
             return base.CastTo(ref target);

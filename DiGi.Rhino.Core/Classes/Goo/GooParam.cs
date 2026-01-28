@@ -17,13 +17,11 @@ namespace DiGi.Rhino.Core.Classes
         public GooParam(string name, string nickname, string description, GH_ParamAccess gH_ParamAccess)
             : base(name, nickname, description, "Params", "DiGi", gH_ParamAccess)
         {
-
         }
 
         public GooParam()
             : base(string.Empty, string.Empty, string.Empty, "Params", "DiGi", GH_ParamAccess.item)
         {
-
         }
 
         public override int GetHashCode()

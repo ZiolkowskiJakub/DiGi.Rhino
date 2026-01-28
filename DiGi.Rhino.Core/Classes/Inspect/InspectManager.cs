@@ -10,7 +10,6 @@ namespace DiGi.Rhino.Core.Classes
 
         public InspectManager()
         {
-
         }
 
         public List<InspectMethod>? GetInspectMethods(Type? type)

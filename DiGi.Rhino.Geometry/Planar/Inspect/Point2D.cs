@@ -26,6 +26,5 @@ namespace DiGi.Rhino.Geometry.Planar
 
             return new GH_Number(point2D.Y);
         }
-
     }
 }

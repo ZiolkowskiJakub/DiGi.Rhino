@@ -5,7 +5,6 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Inspect
     {
-
         [Inspect("X", "X", "X Coordinate")]
         public static GH_Number? X(this DiGi.Geometry.Spatial.Classes.Point3D? point3D)
         {

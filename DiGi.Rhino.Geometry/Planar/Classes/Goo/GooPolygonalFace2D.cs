@@ -26,7 +26,6 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
             return new GooPolygonalFace2D(this);
         }
-
     }
 
     public class GooPolygonalFace2DParam : GooGeometryParam<PolygonalFace2D>

@@ -80,7 +80,6 @@ namespace DiGi.Rhino.Core.Classes
                 return;
             }
 
-
             index = Params.IndexOfInputParam("Mask");
             List<bool> mask = [];
             if (index == -1 || !dataAccess.GetDataList(index, mask) || mask == null || mask.Count == 0)
@@ -96,7 +95,6 @@ namespace DiGi.Rhino.Core.Classes
             {
                 List<ISerializableObject> serializableObjects_Temp = mask[i % mask.Count] ? serializableObjects_In : serializableObjects_Out;
                 serializableObjects_Temp.Add(serializableObjects[i]);
-
             }
 
             index = Params.IndexOfOutputParam("In");

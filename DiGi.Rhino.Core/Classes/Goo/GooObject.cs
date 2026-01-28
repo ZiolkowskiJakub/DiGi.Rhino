@@ -127,7 +127,6 @@ namespace DiGi.Rhino.Core.Classes
             }
             catch
             {
-
             }
 
             return base.CastTo(ref target);
@@ -179,7 +178,6 @@ namespace DiGi.Rhino.Core.Classes
                 }
                 catch
                 {
-
                 }
             }
 
@@ -265,6 +263,7 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         public override Guid ComponentGuid => new("2f2f88d8-fe6c-498a-8767-6bf2b18f5566");
+
         protected override GH_GetterResult Prompt_Plural(ref List<GooObject> values)
         {
             throw new NotImplementedException();

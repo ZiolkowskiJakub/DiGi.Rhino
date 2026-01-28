@@ -98,7 +98,6 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 return;
             }
 
-
             Mesh3D? mesh3D = DiGi.Geometry.Spatial.Create.Mesh3D(ellipsoid, stacks, slices);
             index = Params.IndexOfOutputParam("Mesh3D");
             if (index != -1)

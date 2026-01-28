@@ -2,12 +2,10 @@
 using DiGi.Rhino.Core.Classes;
 using Grasshopper.Kernel.Types;
 
-
 namespace DiGi.Rhino.Core
 {
     public static partial class Inspect
     {
-
         [Inspect("UniqueId", "UniqueId", "Unique Id")]
         public static GH_String? UniqueId(this IUniqueIdObject? uniqueIdObject)
         {

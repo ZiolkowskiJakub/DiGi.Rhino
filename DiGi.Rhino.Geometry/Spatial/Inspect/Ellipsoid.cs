@@ -93,7 +93,6 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return null;
             }
 
-
             return ellipsoid.GetFocalPoints()?.ToList().ConvertAll(x => new GooPoint3D(x));
         }
     }

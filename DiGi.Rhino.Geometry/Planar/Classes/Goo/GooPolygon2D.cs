@@ -21,7 +21,6 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
             return new GooPolygon2D(Value);
         }
-
     }
 
     public class GooPolygon2DParam : GooGeometryParam<Polygon2D>
@@ -36,4 +35,3 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         }
     }
 }
-

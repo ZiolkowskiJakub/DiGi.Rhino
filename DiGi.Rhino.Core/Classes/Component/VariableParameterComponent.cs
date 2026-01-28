@@ -13,7 +13,6 @@ namespace DiGi.Rhino.Core.Classes
         public VariableParameterComponent(string name, string nickname, string description, string category, string subCategory)
             : base(name, nickname, description, category, subCategory)
         {
-
         }
 
         public bool CanInsertParameter(GH_ParameterSide parameterSide, int index)
@@ -125,7 +124,6 @@ namespace DiGi.Rhino.Core.Classes
 
         public void VariableParameterMaintenance()
         {
-
         }
 
         protected override sealed void RegisterInputParams(GH_InputParamManager inputParamManager)

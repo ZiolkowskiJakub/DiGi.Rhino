@@ -21,7 +21,6 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             return new GooPolyhedron(Value);
         }
-
     }
 
     public class GooPolyhedronParam : GooGeometryParam<Polyhedron>
@@ -36,4 +35,3 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         }
     }
 }
-

@@ -49,9 +49,7 @@ namespace DiGi.Rhino.Geometry.Planar
                 return null;
             }
 
-
             return ellipse2D.GetFocalPoints()?.ToList().ConvertAll(x => new GooPoint2D(x));
         }
-
     }
 }

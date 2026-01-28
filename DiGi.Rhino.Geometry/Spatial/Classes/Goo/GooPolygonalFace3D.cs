@@ -26,7 +26,6 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         {
             return new GooPolygonalFace3D(this);
         }
-
     }
 
     public class GooPolygonalFace3DParam : GooGeometryParam<IPolygonalFace3D>

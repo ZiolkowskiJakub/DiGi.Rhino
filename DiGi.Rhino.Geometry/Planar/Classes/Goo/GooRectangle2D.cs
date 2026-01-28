@@ -21,7 +21,6 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         {
             return new GooRectangle2D(Value);
         }
-
     }
 
     public class GooRectangle2DParam : GooGeometryParam<Rectangle2D>
@@ -36,4 +35,3 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
 }
-

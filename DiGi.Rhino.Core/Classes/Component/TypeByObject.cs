@@ -43,8 +43,6 @@ namespace DiGi.Rhino.Core.Classes
                 ];
 
                 return [.. result];
-
-
             }
         }
 

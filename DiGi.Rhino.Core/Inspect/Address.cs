@@ -5,7 +5,6 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Inspect
     {
-
         [Inspect("Street", "Street", "Street")]
         public static GH_String? Street(this DiGi.Core.Classes.Address? address)
         {

@@ -45,7 +45,6 @@ namespace DiGi.Rhino.Core.Classes
                     new Param(new Grasshopper.Kernel.Parameters.Param_String() { Name = "Value", NickName = "Value", Description = "Value", Access = GH_ParamAccess.item }, ParameterVisibility.Binding),
                 ];
 
-
                 GooEnumParam<DiGi.Core.Enums.TextComparisonType> gooEnumParam = new() { Name = "TextComparisonType", NickName = "TextComparisonType", Description = "DiGi Core TextComparisonType", Access = GH_ParamAccess.item };
                 gooEnumParam.SetPersistentData(DiGi.Core.Enums.TextComparisonType.Equals);
                 result.Add(new Param(gooEnumParam, ParameterVisibility.Binding));
@@ -91,7 +90,6 @@ namespace DiGi.Rhino.Core.Classes
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
-
 
             index = Params.IndexOfInputParam("ParameterName");
             string? parameterName = null;

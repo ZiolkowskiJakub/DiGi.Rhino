@@ -18,13 +18,11 @@ namespace DiGi.Rhino.Core.Classes
         public GooEnum(GooEnum<T>? gooEnum)
             : base(gooEnum)
         {
-
         }
 
         public GooEnum(T? @enum)
             : base(@enum)
         {
-
         }
 
         public override bool IsValid => Value != null;
@@ -202,6 +200,7 @@ namespace DiGi.Rhino.Core.Classes
         public override Guid ComponentGuid => new("fa4f4af4-3a0d-45d4-be59-bfb65dc350cb");
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
+
     public class GooEnumParam : GH_PersistentParam<GooEnum>
     {
         public GooEnumParam()

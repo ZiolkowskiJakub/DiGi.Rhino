@@ -21,7 +21,6 @@ namespace DiGi.GIS.Rhino.Classes
         {
             return new GooParameterDefinition(Value);
         }
-
     }
 
     public class GooParameterDefinitionParam : GooSerializablePresistentParam<GooParameterDefinition, Core.Parameter.Interfaces.IParameterDefinition>
@@ -36,4 +35,3 @@ namespace DiGi.GIS.Rhino.Classes
         }
     }
 }
-

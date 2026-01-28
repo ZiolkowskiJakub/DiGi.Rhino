@@ -43,7 +43,6 @@ namespace DiGi.Rhino.Geometry.Core.Classes
                 guid = guids[0];
             }
 
-
             return result;
         }
 
