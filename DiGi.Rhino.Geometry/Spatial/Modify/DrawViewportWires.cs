@@ -78,7 +78,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return;
             }
 
-            IGeometry3D? geometry3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constans.Plane.WorldZ, geometry2D);
+            IGeometry3D? geometry3D = DiGi.Geometry.Spatial.Query.Convert(DiGi.Geometry.Spatial.Constants.Plane.WorldZ, geometry2D);
             if (geometry3D == null)
             {
                 return;

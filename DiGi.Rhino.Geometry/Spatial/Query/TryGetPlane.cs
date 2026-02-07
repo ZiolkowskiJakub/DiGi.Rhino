@@ -5,7 +5,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Query
     {
-        public static bool TryGetPlane(BrepFace? brepFace, out DiGi.Geometry.Spatial.Classes.Plane? plane, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static bool TryGetPlane(BrepFace? brepFace, out DiGi.Geometry.Spatial.Classes.Plane? plane, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             plane = null;
             if (brepFace == null)

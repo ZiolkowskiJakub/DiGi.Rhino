@@ -10,7 +10,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static PolygonalFace3D? ToDiGi_PolygonalFace3D(this BrepFace? brepFace, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static PolygonalFace3D? ToDiGi_PolygonalFace3D(this BrepFace? brepFace, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             if (brepFace == null || !brepFace.IsValid)
             {

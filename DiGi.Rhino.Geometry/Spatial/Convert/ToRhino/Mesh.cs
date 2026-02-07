@@ -52,7 +52,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 
             //        List<Curve> lines = triangle3D.GetSegments().ConvertAll(x => (Curve)x.ToRhino());
 
-            //        Mesh mesh = Mesh.CreateFromLines(lines.ToArray(), 3, DiGi.Core.Constans.Tolerance.Distance);
+            //        Mesh mesh = Mesh.CreateFromLines(lines.ToArray(), 3, DiGi.Core.Constants.Tolerance.Distance);
             //        if (mesh == null)
             //        {
             //            continue;

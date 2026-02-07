@@ -5,7 +5,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static GH_Brep? ToGrasshopper(this PolygonalFace3D? polygonalFace3D, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static GH_Brep? ToGrasshopper(this PolygonalFace3D? polygonalFace3D, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             if (polygonalFace3D == null)
             {
@@ -15,7 +15,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             return new GH_Brep(polygonalFace3D.ToRhino(tolerance));
         }
 
-        public static GH_Brep? ToGrasshopper(this Polyhedron? polyhedron, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static GH_Brep? ToGrasshopper(this Polyhedron? polyhedron, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             if (polyhedron == null)
             {
