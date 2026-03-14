@@ -52,7 +52,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
                     new Param(new Grasshopper.Kernel.Parameters.Param_Interval() { Name = "internalEdgeCount", NickName = "internalEdgeCount", Description = "Internal edge count", Access = GH_ParamAccess.item, Optional = true }, ParameterVisibility.Voluntary),
                 ];
                 Grasshopper.Kernel.Parameters.Param_Number param_Number = new() { Name = "tolerance", NickName = "tolerance", Description = "tolerance", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(DiGi.Core.Constants.Tolerance.Distance);
+                param_Number.SetPersistentData(DiGi.Core.Constans.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
                 return [.. result];
             }
@@ -105,10 +105,10 @@ namespace DiGi.Rhino.Geometry.Random.Classes
             }
 
             index = Params.IndexOfInputParam("tolerance");
-            double tolerance = DiGi.Core.Constants.Tolerance.Distance;
+            double tolerance = DiGi.Core.Constans.Tolerance.Distance;
             if (index == -1 || !dataAccess.GetData(index, ref tolerance))
             {
-                tolerance = DiGi.Core.Constants.Tolerance.Distance;
+                tolerance = DiGi.Core.Constans.Tolerance.Distance;
             }
 
             index = Params.IndexOfInputParam("pointCount");

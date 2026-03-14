@@ -10,7 +10,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static ICurve3D? ToDiGi(this Curve? curve, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
+        public static ICurve3D? ToDiGi(this Curve? curve, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             if (curve == null || !curve.IsValid)
             {
@@ -35,7 +35,7 @@ namespace DiGi.Rhino.Geometry.Spatial
             throw new System.NotImplementedException();
         }
 
-        public static ICurve3D? ToDiGi(this PolyCurve? polyCurve, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
+        public static ICurve3D? ToDiGi(this PolyCurve? polyCurve, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             List<Curve>? curves = polyCurve?.Explode()?.ToList();
             if (curves == null || curves.Count == 0)

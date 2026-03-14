@@ -45,7 +45,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 ];
 
                 Grasshopper.Kernel.Parameters.Param_Number param_Number = new() { Name = "Tolerance", NickName = "Tolerance", Description = "Tolerance", Access = GH_ParamAccess.item, Optional = true };
-                param_Number.SetPersistentData(DiGi.Core.Constants.Tolerance.Distance);
+                param_Number.SetPersistentData(DiGi.Core.Constans.Tolerance.Distance);
                 result.Add(new Param(param_Number, ParameterVisibility.Voluntary));
 
                 return [.. result];
@@ -85,7 +85,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 return;
             }
 
-            double tolerance = DiGi.Core.Constants.Tolerance.Distance;
+            double tolerance = DiGi.Core.Constans.Tolerance.Distance;
             index = Params.IndexOfInputParam("Tolerance");
             if (index != -1)
             {

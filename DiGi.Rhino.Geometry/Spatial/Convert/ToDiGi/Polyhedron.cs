@@ -6,7 +6,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static Polyhedron? ToDiGi_Polyhedron(this Brep? brep, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
+        public static Polyhedron? ToDiGi_Polyhedron(this Brep? brep, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
         {
             if (brep == null || !brep.IsValid)
             {
