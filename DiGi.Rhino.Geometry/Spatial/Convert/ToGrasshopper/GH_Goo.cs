@@ -6,7 +6,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static IGH_Goo? ToGrasshopper(this IGeometry3D? geometry3D, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static IGH_Goo? ToGrasshopper(this IGeometry3D? geometry3D, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             if (geometry3D == null)
             {

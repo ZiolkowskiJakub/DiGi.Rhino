@@ -94,7 +94,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
                 }
             }
 
-            plane ??= DiGi.Geometry.Spatial.Constans.Plane.WorldZ;
+            plane ??= DiGi.Geometry.Spatial.Constants.Plane.WorldZ;
 
             index = Params.IndexOfOutputParam("Geometry3D");
             if (index != -1)

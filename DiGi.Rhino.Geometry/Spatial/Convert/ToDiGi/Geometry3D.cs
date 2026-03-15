@@ -8,7 +8,7 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
-        public static IGeometry3D? ToDiGi(this IGH_GeometricGoo? geometricGoo, double tolerance = DiGi.Core.Constans.Tolerance.Distance)
+        public static IGeometry3D? ToDiGi(this IGH_GeometricGoo? geometricGoo, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             if (geometricGoo == null)
             {
