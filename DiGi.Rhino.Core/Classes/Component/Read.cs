@@ -87,7 +87,7 @@ namespace DiGi.Rhino.Core.Classes
                 return;
             }
 
-            List<ISerializableObject>? serializableObjects = DiGi.Core.Convert.ToDiGi<ISerializableObject>(path_Temp);
+            List<ISerializableObject>? serializableObjects = DiGi.Core.Convert.ToDiGi<ISerializableObject>((Path)path_Temp);
 
             index = Params.IndexOfOutputParam("SerializableObjects");
             if (index != -1)
