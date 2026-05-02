@@ -17,7 +17,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return Rectangle3d.Unset;
             }
 
-            global::Rhino.Geometry.Plane plane = plane_Temp.ToRhino();
+            Plane plane = plane_Temp.ToRhino();
             if (plane == global::Rhino.Geometry.Plane.Unset)
             {
                 return Rectangle3d.Unset;

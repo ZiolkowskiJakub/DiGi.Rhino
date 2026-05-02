@@ -61,7 +61,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                     point3Ds.Add(point3D);
                 }
 
-                if (polyCurve!.IsClosed && polyCurve.IsPlanar(tolerance_Temp) && polyCurve.TryGetPlane(out global::Rhino.Geometry.Plane plane_Rhino, tolerance_Temp) && plane_Rhino.IsValid)
+                if (polyCurve!.IsClosed && polyCurve.IsPlanar(tolerance_Temp) && polyCurve.TryGetPlane(out Plane plane_Rhino, tolerance_Temp) && plane_Rhino.IsValid)
                 {
                     DiGi.Geometry.Spatial.Classes.Plane? plane = plane_Rhino.ToDiGi();
                     return new Polygon3D(plane, point3Ds?.ConvertAll(plane.Convert).FilterNulls());

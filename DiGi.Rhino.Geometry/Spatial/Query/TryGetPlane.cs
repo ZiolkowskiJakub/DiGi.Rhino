@@ -20,7 +20,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return false;
             }
 
-            if (!brepFace.TryGetPlane(out global::Rhino.Geometry.Plane plane_BrepFace) || !plane_BrepFace.IsValid)
+            if (!brepFace.TryGetPlane(out Plane plane_BrepFace) || !plane_BrepFace.IsValid)
             {
                 return false;
             }

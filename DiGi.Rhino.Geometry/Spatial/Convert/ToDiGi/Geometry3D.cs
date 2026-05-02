@@ -82,7 +82,7 @@ namespace DiGi.Rhino.Geometry.Spatial
                 }
             }
 
-            if (@object is global::Rhino.Geometry.Plane plane)
+            if (@object is Plane plane)
             {
                 return ToDiGi(plane);
             }
