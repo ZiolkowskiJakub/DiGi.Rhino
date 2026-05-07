@@ -96,16 +96,16 @@ namespace DiGi.Rhino.Geometry.Spatial
                 return null;
             }
 
-            Plane plane = global::Rhino.Geometry.Plane.WorldXY;// new global::Rhino.Geometry.Plane(center, ellipsoid.DirectionA.ToRhino(), ellipsoid.DirectionB.ToRhino());
+            global::Rhino.Geometry.Plane plane = global::Rhino.Geometry.Plane.WorldXY;// new global::Rhino.Geometry.Plane(center, ellipsoid.DirectionA.ToRhino(), ellipsoid.DirectionB.ToRhino());
 
-            Sphere sphere = new(Point3d.Origin, 1.0);
+            global::Rhino.Geometry.Sphere sphere = new(Point3d.Origin, 1.0);
             NurbsSurface nurbSurface = sphere.ToNurbsSurface();
 
             Transform scale = Transform.Scale(plane, ellipsoid.A, ellipsoid.B, ellipsoid.C);
 
             nurbSurface.Transform(scale);
 
-            Transform orient = Transform.PlaneToPlane(plane, new Plane(center, directionA.ToRhino(), directionB.ToRhino()));
+            Transform orient = Transform.PlaneToPlane(plane, new global::Rhino.Geometry.Plane(center, directionA.ToRhino(), directionB.ToRhino()));
 
             nurbSurface.Transform(orient);
 
