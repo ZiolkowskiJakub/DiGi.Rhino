@@ -11,6 +11,7 @@
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	<Nullable>enable</Nullable>
 	<UseWindowsForms>true</UseWindowsForms>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
 	<PropertyGroup>
