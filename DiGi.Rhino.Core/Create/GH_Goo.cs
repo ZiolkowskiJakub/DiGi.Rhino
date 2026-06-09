@@ -8,6 +8,13 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Create
     {
+        /// <summary>
+        /// Converts a given value to its corresponding Grasshopper Goo representation based on the specified parameter type.
+        /// </summary>
+        /// <param name="parameterType">The type of parameter used to determine which GH_Goo implementation to create.</param>
+        /// <param name="value">The object value to be converted into a Goo object.</param>
+        /// <returns>An <see cref="IGH_Goo"/> instance wrapping the value, or <c>null</c> if the conversion fails or the value is null.</returns>
+        /// <exception cref="NotImplementedException">Thrown when the provided <paramref name="parameterType"/> is not supported.</exception>
         public static IGH_Goo? GH_Goo(this ParameterType parameterType, object? value)
         {
             if (value == null)

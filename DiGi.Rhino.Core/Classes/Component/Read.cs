@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that reads serializable objects from a specified file path.
+    /// </summary>
     public class Read : VariableParameterComponent
     {
         /// <summary>
@@ -14,15 +17,15 @@ namespace DiGi.Rhino.Core.Classes
         /// </summary>
         public override Guid ComponentGuid => new("d60640ab-a230-4465-a772-00ead8d7eda7");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, determining how it is displayed in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="Read"/> class.
         /// </summary>
         public Read()
           : base("Core.Read", "Core.Read",

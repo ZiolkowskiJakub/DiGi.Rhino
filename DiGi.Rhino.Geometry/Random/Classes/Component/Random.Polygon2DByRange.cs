@@ -10,6 +10,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Random.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that generates a random 2D polygon based on specified X and Y range intervals.
+    /// </summary>
     public class Polygon2DByRange : VariableParameterComponent
     {
         /// <summary>
@@ -17,11 +20,11 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         /// </summary>
         public override Guid ComponentGuid => new("fefc5785-4659-4fe0-b316-65b3eb304723");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, determining how it is displayed in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

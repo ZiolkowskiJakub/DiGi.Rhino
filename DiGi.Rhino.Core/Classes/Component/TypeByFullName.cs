@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that retrieves a .NET <see cref="Type"/> based on its full assembly-qualified name.
+    /// </summary>
     public class TypeByFullName : VariableParameterComponent
     {
         /// <summary>
@@ -12,15 +15,15 @@ namespace DiGi.Rhino.Core.Classes
         /// </summary>
         public override Guid ComponentGuid => new("c77ada5b-8c47-482a-acdc-7988a402a36e");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, which determines its visual representation in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="TypeByFullName"/> class.
         /// </summary>
         public TypeByFullName()
           : base("Core.TypeByFullName", "Core.TypeByFullName",

@@ -10,6 +10,13 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a Rhino <see cref="Curve"/> to a DiGi <see cref="ICurve3D"/>.
+        /// </summary>
+        /// <param name="curve">The Rhino curve to convert.</param>
+        /// <param name="tolerance">The distance tolerance used for geometric evaluations. Defaults to <see cref="DiGi.Core.Constants.Tolerance.Distance"/>.</param>
+        /// <returns>A DiGi <see cref="ICurve3D"/> instance if the conversion is successful; otherwise, <c>null</c>.</returns>
+        /// <exception cref="System.NotImplementedException">Thrown when the specific curve type is not yet supported for conversion.</exception>
         public static ICurve3D? ToDiGi(this Curve? curve, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             if (curve == null || !curve.IsValid)
@@ -35,6 +42,13 @@ namespace DiGi.Rhino.Geometry.Spatial
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Converts a Rhino <see cref="PolyCurve"/> to a DiGi <see cref="ICurve3D"/>.
+        /// </summary>
+        /// <param name="polyCurve">The Rhino polycurve to convert.</param>
+        /// <param name="tolerance">The distance tolerance used for geometric evaluations. Defaults to <see cref="DiGi.Core.Constants.Tolerance.Distance"/>.</param>
+        /// <returns>A DiGi <see cref="ICurve3D"/> instance (such as <see cref="Polyline3D"/> or <see cref="Polygon3D"/>) if the conversion is successful; otherwise, <c>null</c>.</returns>
+        /// <exception cref="System.NotImplementedException">Thrown when the polycurve contains non-linear segments that are not supported.</exception>
         public static ICurve3D? ToDiGi(this PolyCurve? polyCurve, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             List<Curve>? curves = polyCurve?.Explode()?.ToList();

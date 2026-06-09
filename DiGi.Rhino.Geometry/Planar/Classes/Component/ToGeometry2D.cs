@@ -11,6 +11,9 @@ using System.Linq;
 
 namespace DiGi.Rhino.Geometry.Planar.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that converts 3D DiGi geometry to its 2D representation on a specified plane.
+    /// </summary>
     public class ToGeometry2D : VariableParameterComponent
     {
         /// <summary>
@@ -18,11 +21,11 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
         /// </summary>
         public override Guid ComponentGuid => new("07dc7a7e-8105-4e90-a664-2d3ad2c6ab68");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure of the component, which determines how it is displayed in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

@@ -4,6 +4,11 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a <see cref="Ellipse3D"/> instance to a Rhino <see cref="global::Rhino.Geometry.Ellipse"/>.
+        /// </summary>
+        /// <param name="ellipse3D">The 3D ellipse to convert.</param>
+        /// <returns>A Rhino <see cref="global::Rhino.Geometry.Ellipse"/> representation of the provided ellipse, or a default Rhino ellipse if the input is null or incomplete.</returns>
         public static global::Rhino.Geometry.Ellipse ToRhino(this Ellipse3D? ellipse3D)
         {
             Plane? plane = ellipse3D?.Plane;

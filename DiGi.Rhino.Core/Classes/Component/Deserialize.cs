@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that deserializes JSON strings into a list of serializable objects.
+    /// </summary>
     public class Deserialize : VariableParameterComponent
     {
         /// <summary>
@@ -13,11 +16,11 @@ namespace DiGi.Rhino.Core.Classes
         /// </summary>
         public override Guid ComponentGuid => new("c676a4b2-4add-4528-bdb5-d09bcbfad4e5");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, which determines how it is displayed in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

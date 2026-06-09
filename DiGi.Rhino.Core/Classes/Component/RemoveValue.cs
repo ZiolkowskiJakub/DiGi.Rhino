@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A component that removes a specific parameter definition from a parametrized object.
+    /// </summary>
     public class RemoveValue : VariableParameterComponent
     {
         /// <summary>
@@ -15,15 +18,15 @@ namespace DiGi.Rhino.Core.Classes
         /// </summary>
         public override Guid ComponentGuid => new("0059dba9-e52e-4da3-aa67-3d9e22c111de");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="RemoveValue"/> class.
         /// </summary>
         public RemoveValue()
           : base("Core.RemoveValue", "Core.RemoveValue",
@@ -65,11 +68,9 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         /// <summary>
-        /// This is the method that actually does the work.
+        /// Executes the logic to remove a specific parameter definition from the provided parametrized object.
         /// </summary>
-        /// <param name="dataAccess">
-        /// The DA object is used to retrieve from inputs and store in outputs.
-        /// </param>
+        /// <param name="dataAccess">The DA object used to retrieve data from inputs and store results in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess dataAccess)
         {
             int index;

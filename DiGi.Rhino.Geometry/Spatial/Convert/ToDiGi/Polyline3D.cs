@@ -5,6 +5,11 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a Rhino Geometry Polyline to a DiGi Polyline3D.
+        /// </summary>
+        /// <param name="polyline">The Rhino polyline instance to convert.</param>
+        /// <returns>A new <see cref="Polyline3D"/> instance if the input is valid and not null; otherwise, <c>null</c>.</returns>
         public static Polyline3D? ToDiGi(this global::Rhino.Geometry.Polyline? polyline)
         {
             if (polyline == null || !polyline.IsValid)

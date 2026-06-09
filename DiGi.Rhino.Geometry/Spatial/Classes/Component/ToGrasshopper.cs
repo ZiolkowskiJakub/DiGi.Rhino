@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that converts DiGi geometry objects to their corresponding Grasshopper geometry representations.
+    /// </summary>
     public class ToGrasshopper : VariableParameterComponent
     {
         /// <summary>
@@ -15,11 +18,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// </summary>
         public override Guid ComponentGuid => new("b5ca211a-a681-4149-9cdb-3eb933143127");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, determining how it is displayed in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

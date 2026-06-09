@@ -6,6 +6,11 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Query
     {
+        /// <summary>
+        /// Prompts the user to save a Grasshopper structure containing serializable objects to a JSON file.
+        /// </summary>
+        /// <param name="gH_Structure">The Grasshopper structure to evaluate for serializable objects and save.</param>
+        /// <returns>True if the file was successfully saved and exists on disk; otherwise, false.</returns>
         public static bool SaveAs(this Grasshopper.Kernel.Data.IGH_Structure gH_Structure)
         {
             if (gH_Structure == null)

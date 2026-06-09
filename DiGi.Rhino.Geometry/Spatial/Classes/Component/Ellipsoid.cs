@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
+    /// <summary>
+    /// Represents a Grasshopper component that creates a 3D point based on X, Y, and Z input coordinates.
+    /// </summary>
     public class Point3D : VariableParameterComponent
     {
         /// <summary>
@@ -13,11 +16,12 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// </summary>
         public override Guid ComponentGuid => new("760539d2-870c-448e-ba87-52e3dbeff623");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure of the component, determining if it is primary or secondary.
+        /// </summary>
+        /// <returns>The <see cref="GH_Exposure"/> level of the component.</returns>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

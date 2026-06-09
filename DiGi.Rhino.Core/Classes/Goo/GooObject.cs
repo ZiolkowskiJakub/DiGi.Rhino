@@ -11,20 +11,37 @@ using System.Reflection;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A generic wrapper for objects to be used within Grasshopper, providing serialization and casting capabilities.
+    /// </summary>
+    /// <typeparam name="TObject">The type of the object wrapped by this Goo container.</typeparam>
     public class GooObject<TObject> : GH_Goo<TObject?>, IGooObject<TObject>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GooObject{TObject}"/> class.
+        /// </summary>
         public GooObject()
             : base()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GooObject{TObject}"/> class with a specified value.
+        /// </summary>
+        /// <param name="object">The object to wrap in this Goo container.</param>
         public GooObject(TObject? @object)
         {
             Value = @object;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the wrapped object is valid (not null).
+        /// </summary>
         public override bool IsValid => Value != null;
 
+        /// <summary>
+        /// Gets a human-readable description of the type of the wrapped object.
+        /// </summary>
         public override string? TypeDescription
         {
             get
@@ -38,6 +55,9 @@ namespace DiGi.Rhino.Core.Classes
             }
         }
 
+        /// <summary>
+        /// Gets the full name of the type of the wrapped object.
+        /// </summary>
         public override string? TypeName
         {
             get
@@ -51,6 +71,11 @@ namespace DiGi.Rhino.Core.Classes
             }
         }
 
+        /// <summary>
+        /// Attempts to cast the specified source object into this Goo container.
+        /// </summary>
+        /// <param name="source">The source object to cast from.</param>
+        /// <returns>True if the casting was successful; otherwise, false.</returns>
         public override bool CastFrom(object? source)
         {
             object? source_Temp = source;
@@ -71,6 +96,12 @@ namespace DiGi.Rhino.Core.Classes
             return base.CastFrom(source);
         }
 
+        /// <summary>
+        /// Attempts to cast the wrapped object into the specified target type.
+        /// </summary>
+        /// <typeparam name="Y">The target type to cast to.</typeparam>
+        /// <param name="target">A reference to the target variable where the result will be stored.</param>
+        /// <returns>True if the casting was successful; otherwise, false.</returns>
         public override bool CastTo<Y>(ref Y target)
         {
             Type type = typeof(Y);
@@ -132,16 +163,30 @@ namespace DiGi.Rhino.Core.Classes
             return base.CastTo(ref target);
         }
 
+        /// <summary>
+        /// Creates a duplicate of the current Goo object.
+        /// </summary>
+        /// <returns>A new instance of <see cref="IGH_Goo"/> containing the same value.</returns>
         public override IGH_Goo? Duplicate()
         {
             return new GooObject<TObject>(Value);
         }
 
+        /// <summary>
+        /// Retrieves the wrapped value cast to a more specific type.
+        /// </summary>
+        /// <typeparam name="XObject">The specific type to retrieve, which must inherit from <typeparamref name="TObject"/>.</typeparam>
+        /// <returns>The wrapped value as <typeparamref name="XObject"/> if possible; otherwise, the default value of <typeparamref name="XObject"/>.</returns>
         public XObject? GetValue<XObject>() where XObject : TObject
         {
             return Value is XObject ? (XObject)(object)Value : default;
         }
 
+        /// <summary>
+        /// Reads the wrapped object from a Grasshopper reader.
+        /// </summary>
+        /// <param name="reader">The reader used to deserialize the object.</param>
+        /// <returns>True if reading was successful; otherwise, false.</returns>
         public override bool Read(GH_IReader reader)
         {
             if (reader == null)
@@ -190,6 +235,10 @@ namespace DiGi.Rhino.Core.Classes
             return true;
         }
 
+        /// <summary>
+        /// Returns a string representation of the wrapped object.
+        /// </summary>
+        /// <returns>The full name of the type of the wrapped value, or null if the value is null.</returns>
         public override string? ToString()
         {
             if (Value == null)
@@ -202,6 +251,11 @@ namespace DiGi.Rhino.Core.Classes
             return value;
         }
 
+        /// <summary>
+        /// Writes the wrapped object to a Grasshopper writer.
+        /// </summary>
+        /// <param name="writer">The writer used to serialize the object.</param>
+        /// <returns>True if writing was successful; otherwise, false.</returns>
         public override bool Write(GH_IWriter writer)
         {
             if (Value == null || writer == null)
@@ -237,31 +291,54 @@ namespace DiGi.Rhino.Core.Classes
         }
     }
 
+    /// <summary>
+    /// A non-generic version of <see cref="GooObject{TObject}"/> that wraps an object of type <see cref="object"/>.
+    /// </summary>
     public class GooObject : GooObject<object>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GooObject"/> class.
+        /// </summary>
         public GooObject()
             : base()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GooObject"/> class with a specified value.
+        /// </summary>
+        /// <param name="object">The object to wrap in this Goo container.</param>
         public GooObject(object? @object)
         {
             Value = @object;
         }
 
+        /// <summary>
+        /// Creates a duplicate of the current Goo object.
+        /// </summary>
+        /// <returns>A new instance of <see cref="GooObject"/> containing the same value.</returns>
         public override IGH_Goo? Duplicate()
         {
             return new GooObject(Value);
         }
     }
 
+    /// <summary>
+    /// A Grasshopper persistent parameter for <see cref="GooObject"/>.
+    /// </summary>
     public class GooObjectParam : GH_PersistentParam<GooObject>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GooObjectParam"/> class.
+        /// </summary>
         public GooObjectParam()
             : base(Query.Name(typeof(object)), Query.Name(typeof(object)), typeof(object).FullName?.Replace(".", " "), "Params", Query.Subcategory(typeof(ISerializableObject)))
         {
         }
 
+        /// <summary>
+        /// Gets the unique identifier for this component.
+        /// </summary>
         public override Guid ComponentGuid => new("2f2f88d8-fe6c-498a-8767-6bf2b18f5566");
 
         protected override GH_GetterResult Prompt_Plural(ref List<GooObject> values)

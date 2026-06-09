@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that creates an ellipsoid geometry based on a plane and three semi-axes lengths.
+    /// </summary>
     public class Ellipsoid : VariableParameterComponent
     {
         /// <summary>
@@ -14,15 +17,16 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// </summary>
         public override Guid ComponentGuid => new("3bb37fd8-0b29-43ec-baea-564606ac192b");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, which determines when it is executed.
+        /// </summary>
+        /// <returns>The <see cref="GH_Exposure"/> value for this component.</returns>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="Ellipsoid"/> class.
         /// </summary>
         public Ellipsoid()
           : base("Geometry.Ellipsoid", "Geomery.Ellipsoid",

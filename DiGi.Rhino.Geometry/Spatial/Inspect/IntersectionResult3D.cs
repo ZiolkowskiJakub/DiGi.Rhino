@@ -8,6 +8,11 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Inspect
     {
+        /// <summary>
+        /// Extracts the 3D geometries from the specified intersection result.
+        /// </summary>
+        /// <param name="intersectionResult3D">The intersection result to inspect.</param>
+        /// <returns>An enumerable collection of 3D geometries, or <c>null</c> if the intersection result is null or contains no geometries.</returns>
         [Inspect("Geometry3Ds", "Geometry3Ds", "Geometry3Ds")]
         public static IEnumerable? Geometry3Ds(this IIntersectionResult3D? intersectionResult3D)
         {

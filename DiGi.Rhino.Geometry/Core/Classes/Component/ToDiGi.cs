@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Core.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that converts Rhino geometry to DiGi 3D geometry.
+    /// </summary>
     public class ToDiGi : VariableParameterComponent
     {
         /// <summary>
@@ -16,11 +19,11 @@ namespace DiGi.Rhino.Geometry.Core.Classes
         /// </summary>
         public override Guid ComponentGuid => new("da315540-b151-491b-802a-8a55e9bb3813");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

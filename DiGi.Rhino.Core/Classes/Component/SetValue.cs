@@ -8,18 +8,23 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that sets a value for a given parameter definition on a parametrized object.
+    /// </summary>
     public class SetValue : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
+        /// <returns>The unique identifier of the component.</returns>
         public override Guid ComponentGuid => new("7d05550a-df79-4b5e-8911-1eeb0e501881");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component.
+        /// </summary>
+        /// <returns>The GH_Exposure value.</returns>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
@@ -35,6 +40,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
+        /// <returns>An array of input parameters.</returns>
         protected override Param[] Inputs
         {
             get
@@ -52,6 +58,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
+        /// <returns>An array of output parameters.</returns>
         protected override Param[] Outputs
         {
             get

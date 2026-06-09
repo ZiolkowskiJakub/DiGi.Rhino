@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that calculates a 3D point on the surface of an ellipsoid using phi and theta angles.
+    /// </summary>
     public class Point3DByEllipsoid : VariableParameterComponent
     {
         /// <summary>
@@ -13,11 +16,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// </summary>
         public override Guid ComponentGuid => new("6045bc78-7069-4265-8f76-615326635d2c");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, determining its visual priority on the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

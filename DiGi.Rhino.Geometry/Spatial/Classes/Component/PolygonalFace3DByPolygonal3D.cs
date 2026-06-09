@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that creates a 3D polygonal face from an external boundary and optional internal boundaries.
+    /// </summary>
     public class PolygonalFace3DByPolygonal3D : VariableParameterComponent
     {
         /// <summary>
@@ -14,11 +17,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// </summary>
         public override Guid ComponentGuid => new("cb1c010d-cd43-4f2d-9378-212e4083838b");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure of the component, determining how it is displayed in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

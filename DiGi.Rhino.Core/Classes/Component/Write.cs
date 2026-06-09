@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that serializes a collection of <see cref="ISerializableObject"/> instances and writes them to a file in JSON format.
+    /// </summary>
     public class Write : VariableParameterComponent
     {
         /// <summary>
@@ -13,15 +16,15 @@ namespace DiGi.Rhino.Core.Classes
         /// </summary>
         public override Guid ComponentGuid => new("df9e0fa7-ae39-47ae-94a2-bf1d69f4c37d");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, which determines how it is displayed and interacted with in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="Write"/> class.
         /// </summary>
         public Write()
           : base("Core.Write", "Core.Write",

@@ -7,6 +7,13 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Query
     {
+        /// <summary>
+        /// Attempts to retrieve the value of a serializable object from an <see cref="IGooSerializableObject"/> wrapper, cast to a specific type.
+        /// </summary>
+        /// <typeparam name="TSerializableObject">The expected type of the serializable object. Must implement <see cref="ISerializableObject"/>.</typeparam>
+        /// <param name="gooSerializableObject">The serializable object wrapper to extract the value from.</param>
+        /// <param name="serializableObject">When this method returns, contains the extracted serializable object if successful; otherwise, the default value of <typeparamref name="TSerializableObject"/>.</param>
+        /// <returns><c>true</c> if the value was successfully extracted and is of type <typeparamref name="TSerializableObject"/>; otherwise, <c>false</c>.</returns>
         public static bool TryGetValue<TSerializableObject>(this IGooSerializableObject? gooSerializableObject, out TSerializableObject? serializableObject) where TSerializableObject : ISerializableObject
         {
             serializableObject = default;
@@ -25,6 +32,12 @@ namespace DiGi.Rhino.Core
             return true;
         }
 
+        /// <summary>
+        /// Attempts to retrieve the value from an <see cref="IGH_Goo"/> object by accessing its "Value" property via reflection.
+        /// </summary>
+        /// <param name="gH_Goo">The Grasshopper Goo object to extract the value from.</param>
+        /// <param name="value">When this method returns, contains the extracted value if successful; otherwise, <c>null</c>.</param>
+        /// <returns><c>true</c> if the "Value" property was found and successfully read; otherwise, <c>false</c>.</returns>
         public static bool TryGetValue(this IGH_Goo? gH_Goo, out object? value)
         {
             value = null;
@@ -44,6 +57,13 @@ namespace DiGi.Rhino.Core
             return true;
         }
 
+        /// <summary>
+        /// Attempts to retrieve a value of a specific type from an object, handling both standard objects and those wrapped in <see cref="IGH_Goo"/>.
+        /// </summary>
+        /// <typeparam name="TObject">The expected type of the resulting value.</typeparam>
+        /// <param name="object">The object to evaluate.</param>
+        /// <param name="value">When this method returns, contains the extracted value cast to <typeparamref name="TObject"/> if successful; otherwise, the default value of <typeparamref name="TObject"/>.</param>
+        /// <returns><c>true</c> if the object (or its wrapped value) is of type <typeparamref name="TObject"/>; otherwise, <c>false</c>.</returns>
         public static bool TryGetValue<TObject>(this object? @object, out TObject? value)
         {
             value = default;

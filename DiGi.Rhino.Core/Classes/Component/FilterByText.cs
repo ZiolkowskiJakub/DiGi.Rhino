@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that filters a list of serializable objects based on the text value of a specified parameter.
+    /// </summary>
     public class FilterByText : VariableParameterComponent
     {
         /// <summary>
@@ -14,15 +17,15 @@ namespace DiGi.Rhino.Core.Classes
         /// </summary>
         public override Guid ComponentGuid => new("b5b79ad2-998a-406f-97a6-81d6b6fdee96");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, which determines its visibility and behavior on the canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="FilterByText"/> class.
         /// </summary>
         public FilterByText()
           : base("Core.FilterByText", "Core.FilterByText",
@@ -74,11 +77,9 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         /// <summary>
-        /// This is the method that actually does the work.
+        /// This is the method that actually does the work of filtering objects based on text comparison.
         /// </summary>
-        /// <param name="dataAccess">
-        /// The DA object is used to retrieve from inputs and store in outputs.
-        /// </param>
+        /// <param name="dataAccess">The data access object used to retrieve input values and set output values.</param>
         protected override void SolveInstance(IGH_DataAccess dataAccess)
         {
             int index;

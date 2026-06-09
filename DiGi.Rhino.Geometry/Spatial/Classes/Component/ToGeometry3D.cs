@@ -10,6 +10,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that converts 2D geometry to 3D geometry based on a specified plane.
+    /// </summary>
     public class ToGeometry3D : VariableParameterComponent
     {
         /// <summary>
@@ -17,11 +20,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// </summary>
         public override Guid ComponentGuid => new("42d8cfda-ad7c-4e6e-b90e-f7a2ccf1cdc4");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure of the component, which determines its visibility and priority in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

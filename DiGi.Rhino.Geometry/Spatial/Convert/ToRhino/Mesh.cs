@@ -6,6 +6,11 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a <see cref="Mesh3D"/> to a Rhino <see cref="Mesh"/>.
+        /// </summary>
+        /// <param name="mesh3D">The 3D mesh to convert.</param>
+        /// <returns>A Rhino <see cref="Mesh"/> instance, or <c>null</c> if the input <paramref name="mesh3D"/> is null.</returns>
         public static Mesh? ToRhino(this Mesh3D? mesh3D)
         {
             if (mesh3D == null)

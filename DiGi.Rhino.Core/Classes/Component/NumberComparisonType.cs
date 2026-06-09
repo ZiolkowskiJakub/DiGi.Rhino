@@ -2,6 +2,9 @@ using System;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// Represents a component that allows the selection of a number comparison type.
+    /// </summary>
     public class NumberComparisonType : EnumComponent<DiGi.Core.Enums.NumberComparisonType>
     {
         /// <summary>
@@ -10,7 +13,7 @@ namespace DiGi.Rhino.Core.Classes
         public override Guid ComponentGuid => new("acb79b9c-0038-484f-96fd-664692723928");
 
         /// <summary>
-        /// Panel Type
+        /// Initializes a new instance of the <see cref="NumberComparisonType"/> class.
         /// </summary>
         public NumberComparisonType()
           : base("Core")

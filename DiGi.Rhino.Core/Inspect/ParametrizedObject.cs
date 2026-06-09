@@ -9,6 +9,11 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Inspect
     {
+        /// <summary>
+        /// Retrieves a collection of parameters from the specified parametrized object.
+        /// </summary>
+        /// <param name="parametrizedObject">The object that implements <see cref="IParametrizedObject"/> and contains the parameters to be retrieved.</param>
+        /// <returns>An enumerable collection of <see cref="GooParameter"/> objects if successful; otherwise, null.</returns>
         [Inspect("Parameters", "Parameters", "Parameters")]
         public static IEnumerable? Parameters(this IParametrizedObject? parametrizedObject)
         {

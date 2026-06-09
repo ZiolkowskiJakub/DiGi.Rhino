@@ -2,6 +2,9 @@ using System;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// Represents the country code component used for ISO country identification within the system.
+    /// </summary>
     public class CountryCode : EnumComponent<DiGi.Core.Enums.CountryCode>
     {
         /// <summary>
@@ -10,7 +13,7 @@ namespace DiGi.Rhino.Core.Classes
         public override Guid ComponentGuid => new("87e31e1d-dcb1-42bd-bedc-3aa43198202c");
 
         /// <summary>
-        /// Panel Type
+        /// Initializes a new instance of the <see cref="CountryCode"/> class.
         /// </summary>
         public CountryCode()
           : base("Core")

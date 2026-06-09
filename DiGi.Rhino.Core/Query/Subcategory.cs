@@ -6,6 +6,12 @@ namespace DiGi.Rhino.Core
 {
     public static partial class Query
     {
+        /// <summary>
+        /// Creates a duplicate of the specified Grasshopper parameter, ensuring it has a new instance GUID 
+        /// and updating its nickname based on the central settings if applicable.
+        /// </summary>
+        /// <param name="param">The Grasshopper parameter to clone.</param>
+        /// <returns>A new instance of the cloned <see cref="IGH_Param"/>.</returns>
         public static IGH_Param Clone(this IGH_Param param)
         {
             var attributes = param.Attributes;

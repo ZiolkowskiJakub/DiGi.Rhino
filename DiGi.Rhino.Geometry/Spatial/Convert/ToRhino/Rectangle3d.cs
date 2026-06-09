@@ -5,6 +5,14 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a <see cref="Rectangle3D"/> instance to a Rhino <see cref="Rectangle3d"/>.
+        /// </summary>
+        /// <param name="rectangle3D">The source rectangle to convert.</param>
+        /// <returns>
+        /// A Rhino <see cref="Rectangle3d"/> representation of the input; 
+        /// otherwise, <see cref="Rectangle3d.Unset"/> if the input is null or contains invalid data.
+        /// </returns>
         public static Rectangle3d ToRhino(this Rectangle3D? rectangle3D)
         {
             if (rectangle3D == null)

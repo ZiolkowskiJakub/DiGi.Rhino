@@ -2,6 +2,9 @@ using System;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// Represents the text comparison type component, providing functionality to specify how two strings are compared.
+    /// </summary>
     public class TextComparisonType : EnumComponent<DiGi.Core.Enums.TextComparisonType>
     {
         /// <summary>
@@ -10,7 +13,7 @@ namespace DiGi.Rhino.Core.Classes
         public override Guid ComponentGuid => new("caee035c-51e1-4560-888b-0da1cb2bf12f");
 
         /// <summary>
-        /// Panel Type
+        /// Initializes a new instance of the <see cref="TextComparisonType"/> class.
         /// </summary>
         public TextComparisonType()
           : base("Core")

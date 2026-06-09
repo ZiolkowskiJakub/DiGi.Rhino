@@ -10,6 +10,12 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a Rhino <see cref="BrepFace"/> to a <see cref="PolygonalFace3D"/>.
+        /// </summary>
+        /// <param name="brepFace">The Rhino BrepFace to convert.</param>
+        /// <param name="tolerance">The tolerance used for geometric operations and planarity checks. Defaults to <see cref="DiGi.Core.Constants.Tolerance.Distance"/>.</param>
+        /// <returns>A <see cref="PolygonalFace3D"/> if the face is valid, planar, and consists of polygonal loops; otherwise, <c>null</c>.</returns>
         public static PolygonalFace3D? ToDiGi_PolygonalFace3D(this BrepFace? brepFace, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             if (brepFace == null || !brepFace.IsValid)

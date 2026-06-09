@@ -8,19 +8,34 @@ using System.Linq;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
+    /// <summary>
+    /// Represents a Grasshopper Goo wrapper for the <see cref="IntersectionResult3D"/> class, 
+    /// providing serialization and bake-aware capabilities.
+    /// </summary>
     public class GooIntersectionResult3D : GooBakeAwareSerializableObject<IntersectionResult3D>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GooIntersectionResult3D"/> class.
+        /// </summary>
         public GooIntersectionResult3D()
             : base()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GooIntersectionResult3D"/> class with the specified intersection result.
+        /// </summary>
+        /// <param name="intersectionResult3D">The 3D intersection result to wrap.</param>
         public GooIntersectionResult3D(IntersectionResult3D? intersectionResult3D)
             : base()
         {
             Value = intersectionResult3D;
         }
 
+        /// <summary>
+        /// Gets the collection of geometries associated with the 3D intersection result.
+        /// </summary>
+        /// <returns>An array of <see cref="IGeometry"/> objects, or null if no value exists.</returns>
         public override IGeometry[]? Geometries
         {
             get
@@ -29,6 +44,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             }
         }
 
+        /// <summary>
+        /// Attempts to cast the specified source object to a <see cref="GooIntersectionResult3D"/>.
+        /// </summary>
+        /// <param name="source">The object to cast from.</param>
+        /// <returns>True if the cast was successful; otherwise, false.</returns>
         public override bool CastFrom(object? source)
         {
             if (source == null)
@@ -39,6 +59,12 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             return base.CastFrom(source);
         }
 
+        /// <summary>
+        /// Attempts to cast the wrapped value to a target type <typeparamref name="Y"/>.
+        /// </summary>
+        /// <typeparam name="Y">The target type for the cast.</typeparam>
+        /// <param name="target">A reference to the target variable where the result will be stored.</param>
+        /// <returns>True if the cast was successful; otherwise, false.</returns>
         public override bool CastTo<Y>(ref Y target)
         {
             if (target is null)
@@ -96,14 +122,24 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             return base.CastTo(ref target);
         }
 
+        /// <summary>
+        /// Creates a duplicate of the current <see cref="GooIntersectionResult3D"/> instance.
+        /// </summary>
+        /// <returns>A new <see cref="IGH_Goo"/> object containing a copy of the value.</returns>
         public override IGH_Goo Duplicate()
         {
             return new GooIntersectionResult3D(Value);
         }
     }
 
+    /// <summary>
+    /// Represents the Grasshopper parameter type for <see cref="GooIntersectionResult3D"/>.
+    /// </summary>
     public class GooIntersectionResult3DParam : GooBakeAwareSerializableParam<GooIntersectionResult3D, IntersectionResult3D>
     {
+        /// <summary>
+        /// Gets the unique identifier for the component.
+        /// </summary>
         public override Guid ComponentGuid => new("9e9f7879-bd95-46b5-b0e2-4a05b6c12af1");
     }
 
@@ -162,7 +198,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
     //        {
     //            target = (Y)(object)Value;
     //            return true;
-    //        }
+        //    }
 
     //        if (typeof(GH_ObjectWrapper) == typeof(Y))
     //        {

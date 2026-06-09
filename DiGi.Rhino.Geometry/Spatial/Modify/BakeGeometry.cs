@@ -11,6 +11,14 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Modify
     {
+        /// <summary>
+        /// Bakes a geometry object into the specified Rhino document.
+        /// </summary>
+        /// <param name="geometry">The geometry to bake.</param>
+        /// <param name="rhinoDoc">The target Rhino document.</param>
+        /// <param name="objectAttributes">The attributes to assign to the baked object.</param>
+        /// <param name="guids">When this method returns, contains a list of GUIDs for the objects created in Rhino, or null if baking failed.</param>
+        /// <returns>True if the geometry was successfully baked; otherwise, false.</returns>
         public static bool BakeGeometry(this IGeometry? geometry, RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids)
         {
             guids = null;
@@ -32,6 +40,14 @@ namespace DiGi.Rhino.Geometry.Spatial
             return false;
         }
 
+        /// <summary>
+        /// Bakes a 2D geometry object into the specified Rhino document by converting it to 3D on the World Z plane.
+        /// </summary>
+        /// <param name="geometry2D">The 2D geometry to bake.</param>
+        /// <param name="rhinoDoc">The target Rhino document.</param>
+        /// <param name="objectAttributes">The attributes to assign to the baked object.</param>
+        /// <param name="guids">When this method returns, contains a list of GUIDs for the objects created in Rhino, or null if baking failed.</param>
+        /// <returns>True if the geometry was successfully baked; otherwise, false.</returns>
         public static bool BakeGeometry(this IGeometry2D? geometry2D, RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids)
         {
             guids = null;
@@ -50,6 +66,14 @@ namespace DiGi.Rhino.Geometry.Spatial
             return BakeGeometry(geometry3D, rhinoDoc, objectAttributes, out guids);
         }
 
+        /// <summary>
+        /// Bakes a 3D geometry object into the specified Rhino document.
+        /// </summary>
+        /// <param name="geometry3D">The 3D geometry to bake.</param>
+        /// <param name="rhinoDoc">The target Rhino document.</param>
+        /// <param name="objectAttributes">The attributes to assign to the baked object.</param>
+        /// <param name="guids">When this method returns, contains a list of GUIDs for the objects created in Rhino, or null if baking failed.</param>
+        /// <returns>True if the geometry was successfully baked; otherwise, false.</returns>
         public static bool BakeGeometry(this IGeometry3D? geometry3D, RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids)
         {
             guids = null;
@@ -127,6 +151,15 @@ namespace DiGi.Rhino.Geometry.Spatial
             return false;
         }
 
+        /// <summary>
+        /// Bakes a collection of geometry objects into the specified Rhino document.
+        /// </summary>
+        /// <typeparam name="TGeometry">The type of geometry, which must implement <see cref="IGeometry"/>.</typeparam>
+        /// <param name="geometries">The collection of geometries to bake.</param>
+        /// <param name="rhinoDoc">The target Rhino document.</param>
+        /// <param name="objectAttributes">The attributes to assign to the baked objects.</param>
+        /// <param name="guids">When this method returns, contains a list of GUIDs for all objects created in Rhino, or null if baking failed.</param>
+        /// <returns>True if at least one geometry was successfully baked; otherwise, false.</returns>
         public static bool BakeGeometry<TGeometry>(this IEnumerable<TGeometry>? geometries, RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids) where TGeometry : IGeometry
         {
             guids = null;
@@ -153,6 +186,14 @@ namespace DiGi.Rhino.Geometry.Spatial
             return guids != null && guids.Count > 0;
         }
 
+        /// <summary>
+        /// Bakes the geometries resulting from a 3D intersection into the specified Rhino document.
+        /// </summary>
+        /// <param name="intersectionResult3D">The result of a 3D intersection.</param>
+        /// <param name="rhinoDoc">The target Rhino document.</param>
+        /// <param name="objectAttributes">The attributes to assign to the baked objects.</param>
+        /// <param name="guids">When this method returns, contains a list of GUIDs for the objects created in Rhino, or null if baking failed.</param>
+        /// <returns>True if the intersection geometries were successfully baked; otherwise, false.</returns>
         public static bool BakeGeometry(this IIntersectionResult3D? intersectionResult3D, RhinoDoc? rhinoDoc, ObjectAttributes? objectAttributes, out List<Guid>? guids)
         {
             return BakeGeometry(intersectionResult3D?.GetGeometry3Ds<IGeometry3D>(), rhinoDoc, objectAttributes, out guids);

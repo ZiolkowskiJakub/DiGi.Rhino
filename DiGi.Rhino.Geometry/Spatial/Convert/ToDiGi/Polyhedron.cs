@@ -6,6 +6,12 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a Rhino <see cref="Brep"/> to a <see cref="Polyhedron"/>.
+        /// </summary>
+        /// <param name="brep">The <see cref="Brep"/> instance to convert.</param>
+        /// <param name="tolerance">The tolerance used for planarity checks and conversion. Defaults to <see cref="DiGi.Core.Constants.Tolerance.Distance"/>.</param>
+        /// <returns>A <see cref="Polyhedron"/> if the Brep is valid, solid, and consists of planar faces; otherwise, <c>null</c>.</returns>
         public static Polyhedron? ToDiGi_Polyhedron(this Brep? brep, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             if (brep == null || !brep.IsValid)

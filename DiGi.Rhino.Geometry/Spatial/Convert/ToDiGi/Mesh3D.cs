@@ -7,6 +7,11 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a Rhino <see cref="Mesh"/> to a DiGi <see cref="Mesh3D"/>.
+        /// </summary>
+        /// <param name="mesh">The Rhino mesh to convert.</param>
+        /// <returns>A <see cref="Mesh3D"/> instance if the conversion is successful; otherwise, <c>null</c>.</returns>
         public static Mesh3D? ToDiGi(this Mesh? mesh)
         {
             if (mesh == null || !mesh.IsValid)

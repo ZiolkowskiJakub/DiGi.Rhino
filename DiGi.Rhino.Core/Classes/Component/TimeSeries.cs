@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// Represents a Grasshopper component that generates a time series based on a specified start time, end time, and step interval.
+    /// </summary>
     public class TimeSeries : VariableParameterComponent
     {
         /// <summary>
@@ -15,15 +18,15 @@ namespace DiGi.Rhino.Core.Classes
         /// </summary>
         public override Guid ComponentGuid => new("3f4c4cbd-5494-4f4c-acf8-4753771925c2");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, determining its visibility and priority in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="TimeSeries"/> class.
         /// </summary>
         public TimeSeries()
           : base("Core.TimeSeries", "Core.TimeSeries",

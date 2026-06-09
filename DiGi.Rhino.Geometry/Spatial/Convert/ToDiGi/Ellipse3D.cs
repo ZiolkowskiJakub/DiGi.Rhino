@@ -6,6 +6,11 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a Rhino geometry ellipse to a DiGi spatial ellipse (<see cref="Ellipse3D"/>).
+        /// </summary>
+        /// <param name="ellipse">The Rhino ellipse instance to convert.</param>
+        /// <returns>A <see cref="Ellipse3D"/> object if the input ellipse is valid; otherwise, <c>null</c>.</returns>
         public static Ellipse3D? ToDiGi(this global::Rhino.Geometry.Ellipse ellipse)
         {
             if (!ellipse.IsValid)

@@ -10,22 +10,27 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Random.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that generates a random 2D line segment based on specified X and Y coordinate ranges.
+    /// </summary>
     public class Segment2DByRange : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
+        /// <returns>The unique identifier of the component.</returns>
         public override Guid ComponentGuid => new("bf29bf62-ecc4-4686-9277-00648998c9fc");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component.
+        /// </summary>
+        /// <returns>The <see cref="GH_Exposure"/> value.</returns>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="Segment2DByRange"/> class.
         /// </summary>
         public Segment2DByRange()
           : base("Geometry.Random.Segment2DByRange", "Geomery.Random.Segment2DByRange",
@@ -37,6 +42,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
+        /// <returns>An array of <see cref="Param"/> objects representing the inputs.</returns>
         protected override Param[] Inputs
         {
             get
@@ -58,6 +64,7 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
+        /// <returns>An array of <see cref="Param"/> objects representing the outputs.</returns>
         protected override Param[] Outputs
         {
             get

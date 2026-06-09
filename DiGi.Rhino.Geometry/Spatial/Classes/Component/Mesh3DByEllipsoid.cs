@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that generates a 3D mesh from an ellipsoid geometry based on the specified number of stacks and slices.
+    /// </summary>
     public class Mesh3DByEllipsoid : VariableParameterComponent
     {
         /// <summary>
@@ -14,15 +17,15 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// </summary>
         public override Guid ComponentGuid => new("b060c096-fc99-48ca-90c3-a4b1f1482de3");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets or sets the exposure of the component, determining whether it is a primary or secondary component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="Mesh3DByEllipsoid"/> class.
         /// </summary>
         public Mesh3DByEllipsoid()
           : base("Geometry.Mesh3DByEllipsoid", "Geomery.Mesh3DByEllipsoid",

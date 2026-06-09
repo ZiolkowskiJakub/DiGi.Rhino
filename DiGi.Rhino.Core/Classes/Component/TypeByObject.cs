@@ -6,22 +6,27 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that retrieves the type of a given input object.
+    /// </summary>
     public class TypeByObject : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
+        /// <returns>The unique identifier of the component.</returns>
         public override Guid ComponentGuid => new("055f06ef-dbc5-462f-a231-20c150e0785a");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, which defines how it is displayed in the Grasshopper canvas.
+        /// </summary>
+        /// <returns>The exposure level of the component.</returns>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="TypeByObject"/> class.
         /// </summary>
         public TypeByObject()
           : base("Core.TypeByObject", "Core.TypeByObject",
@@ -33,6 +38,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
+        /// <returns>An array of input parameters.</returns>
         protected override Param[] Inputs
         {
             get
@@ -49,6 +55,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
+        /// <returns>An array of output parameters.</returns>
         protected override Param[] Outputs
         {
             get

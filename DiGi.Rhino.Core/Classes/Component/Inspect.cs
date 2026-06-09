@@ -9,17 +9,24 @@ using System.Windows.Forms;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that inspects DiGi objects and dynamically generates
+    /// output parameters based on the input object's serializable properties.
+    /// </summary>
     public class Inspect : Component, IGH_VariableParameterComponent
     {
         /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
+        /// Gets the unique identifier for this Grasshopper component.
         /// </summary>
         public override Guid ComponentGuid => new("cd6ddc4e-e56a-4b66-9023-5415b96ff7c8");
 
+        /// <summary>
+        /// Gets the exposure level of the component in the Grasshopper toolbar.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="Inspect"/> component.
         /// </summary>
         public Inspect()
           : base("Core.Inspect", "Core.Inspect",
@@ -28,6 +35,10 @@ namespace DiGi.Rhino.Core.Classes
         {
         }
 
+        /// <summary>
+        /// Appends additional custom menu items to the component's right-click context menu.
+        /// </summary>
+        /// <param name="menu">The tool strip dropdown menu to which items are appended.</param>
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
         {
             base.AppendAdditionalMenuItems(menu);
@@ -229,26 +240,27 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         /// <summary>
-        /// Registers all the input parameters for this component.
+        /// Registers all input parameters for this component.
         /// </summary>
+        /// <param name="inputParamManager">The manager used to register input parameters.</param>
         protected override void RegisterInputParams(GH_InputParamManager inputParamManager)
         {
             inputParamManager.AddGenericParameter("Object", "Object", "Object", GH_ParamAccess.item);
         }
 
         /// <summary>
-        /// Registers all the output parameters for this component.
+        /// Registers all output parameters for this component.
         /// </summary>
+        /// <param name="outputParamManager">The manager used to register output parameters.</param>
         protected override void RegisterOutputParams(GH_OutputParamManager outputParamManager)
         {
         }
 
         /// <summary>
-        /// This is the method that actually does the work.
+        /// Executes the main logic of the component, reading the input object and setting
+        /// values on the dynamically generated output parameters.
         /// </summary>
-        /// <param name="dataAccess">
-        /// The DA object is used to retrieve from inputs and store in outputs.
-        /// </param>
+        /// <param name="dataAccess">The data access object used to retrieve inputs and set outputs.</param>
         protected override void SolveInstance(IGH_DataAccess dataAccess)
         {
             object? @object = null;
@@ -298,18 +310,49 @@ namespace DiGi.Rhino.Core.Classes
             }
         }
 
+        /// <summary>
+        /// Determines whether a parameter can be inserted at the specified index on the given side.
+        /// </summary>
+        /// <param name="side">The side (input or output) where the parameter would be inserted.</param>
+        /// <param name="index">The zero-based index position for insertion.</param>
+        /// <returns><see langword="false"/>; insertion is not supported.</returns>
         bool IGH_VariableParameterComponent.CanInsertParameter(GH_ParameterSide side, int index) => false;
 
+        /// <summary>
+        /// Determines whether a parameter can be removed from the specified index on the given side.
+        /// </summary>
+        /// <param name="side">The side (input or output) where the parameter would be removed.</param>
+        /// <param name="index">The zero-based index position for removal.</param>
+        /// <returns><see langword="true"/> if <paramref name="side"/> is <see cref="GH_ParameterSide.Output"/>; otherwise <see langword="false"/>.</returns>
         bool IGH_VariableParameterComponent.CanRemoveParameter(GH_ParameterSide side, int index) => side == GH_ParameterSide.Output;
 
+        /// <summary>
+        /// Creates a new parameter for the specified side and index.
+        /// </summary>
+        /// <param name="side">The side (input or output) for which the parameter should be created.</param>
+        /// <param name="index">The zero-based index position for creation.</param>
+        /// <returns><see langword="null"/>; dynamic parameter creation is not supported.</returns>
         IGH_Param? IGH_VariableParameterComponent.CreateParameter(GH_ParameterSide side, int index) => null;
 
+        /// <summary>
+        /// Destroys the parameter at the specified index on the given side.
+        /// </summary>
+        /// <param name="side">The side (input or output) where the parameter should be destroyed.</param>
+        /// <param name="index">The zero-based index position for destruction.</param>
+        /// <returns><see langword="true"/>.</returns>
         bool IGH_VariableParameterComponent.DestroyParameter(GH_ParameterSide side, int index) => true;
 
+        /// <summary>
+        /// Performs any maintenance required when variable parameters change.
+        /// </summary>
         void IGH_VariableParameterComponent.VariableParameterMaintenance()
         {
         }
 
+        /// <summary>
+        /// Called when this component is added to a Grasshopper document.
+        /// </summary>
+        /// <param name="document">The Grasshopper document to which the component is being added.</param>
         public override void AddedToDocument(GH_Document document)
         {
             base.AddedToDocument(document);

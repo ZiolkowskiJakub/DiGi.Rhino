@@ -5,6 +5,13 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Query
     {
+        /// <summary>
+        /// Attempts to retrieve a <see cref="DiGi.Geometry.Spatial.Classes.Plane"/> from a Rhino <see cref="BrepFace"/>.
+        /// </summary>
+        /// <param name="brepFace">The Brep face to analyze.</param>
+        /// <param name="plane">When this method returns, contains the extracted plane if successful; otherwise, null.</param>
+        /// <param name="tolerance">The tolerance used to determine if the face is planar. Defaults to <see cref="DiGi.Core.Constants.Tolerance.Distance"/>.</param>
+        /// <returns>True if a valid plane was successfully extracted from the face; otherwise, false.</returns>
         public static bool TryGetPlane(BrepFace? brepFace, out DiGi.Geometry.Spatial.Classes.Plane? plane, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             plane = null;

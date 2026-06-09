@@ -6,22 +6,27 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A component that filters a list of serializable objects based on a provided boolean mask.
+    /// </summary>
     public class FilterByMask : VariableParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
+        /// <returns>The unique identifier for the component.</returns>
         public override Guid ComponentGuid => new("6c2fe566-8408-4aa6-b0af-d978db84720a");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, which determines its visibility and behavior in the Grasshopper canvas.
+        /// </summary>
+        /// <returns>The GH_Exposure value indicating the visibility of the component.</returns>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="FilterByMask"/> class.
         /// </summary>
         public FilterByMask()
           : base("Core.FilterByMask", "Core.FilterByMask",
@@ -33,6 +38,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
+        /// <returns>An array of <see cref="Param"/> objects representing the inputs.</returns>
         protected override Param[] Inputs
         {
             get
@@ -49,6 +55,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
+        /// <returns>An array of <see cref="Param"/> objects representing the outputs.</returns>
         protected override Param[] Outputs
         {
             get
@@ -63,10 +70,10 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         /// <summary>
-        /// This is the method that actually does the work.
+        /// This is the method that actually does the work, filtering the input list based on the provided boolean mask.
         /// </summary>
         /// <param name="dataAccess">
-        /// The DA object is used to retrieve from inputs and store in outputs.
+        /// The DA object used to retrieve data from inputs and store results in outputs.
         /// </param>
         protected override void SolveInstance(IGH_DataAccess dataAccess)
         {

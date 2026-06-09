@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// Represents a Grasshopper component that creates geographic coordinates from latitude and longitude inputs.
+    /// </summary>
     public class Coordinates : VariableParameterComponent
     {
         /// <summary>
@@ -13,15 +16,15 @@ namespace DiGi.Rhino.Core.Classes
         /// </summary>
         public override Guid ComponentGuid => new("aad4ac01-458f-4d39-9eca-12de4923f6fa");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component, determining when it is executed.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="Coordinates"/> class.
         /// </summary>
         public Coordinates()
           : base("Core.Coordinates", "Core.Coordinates",
@@ -33,6 +36,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
+        /// <returns>An array of <see cref="Param"/> objects representing the inputs.</returns>
         protected override Param[] Inputs
         {
             get
@@ -49,6 +53,7 @@ namespace DiGi.Rhino.Core.Classes
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
+        /// <returns>An array of <see cref="Param"/> objects representing the outputs.</returns>
         protected override Param[] Outputs
         {
             get
@@ -62,10 +67,10 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         /// <summary>
-        /// This is the method that actually does the work.
+        /// This is the method that actually does the work, processing input latitude and longitude to produce a coordinates object.
         /// </summary>
         /// <param name="dataAccess">
-        /// The DA object is used to retrieve from inputs and store in outputs.
+        /// The DA object used to retrieve data from inputs and store results in outputs.
         /// </param>
         protected override void SolveInstance(IGH_DataAccess dataAccess)
         {

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that creates a <see cref="Mesh3D"/> from various 3D geometry types.
+    /// </summary>
     public class Mesh3DByGeometry3D : VariableParameterComponent
     {
         /// <summary>
@@ -15,11 +18,11 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
         /// </summary>
         public override Guid ComponentGuid => new("c7cf7362-34e1-4222-8a9e-fb272fde8576");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

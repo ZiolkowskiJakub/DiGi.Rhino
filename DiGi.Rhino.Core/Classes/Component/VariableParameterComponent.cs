@@ -4,17 +4,40 @@ using System.Linq;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// Provides a base implementation for Grasshopper components that support dynamic addition and removal of parameters based on predefined templates.
+    /// </summary>
     public abstract class VariableParameterComponent : Component, IGH_VariableParameterComponent
     {
+        /// <summary>
+        /// Gets the template definitions for the input parameters.
+        /// </summary>
         protected abstract Param[]? Inputs { get; }
 
+        /// <summary>
+        /// Gets the template definitions for the output parameters.
+        /// </summary>
         protected abstract Param[]? Outputs { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VariableParameterComponent"/> class.
+        /// </summary>
+        /// <param name="name">The name of the component.</param>
+        /// <param name="nickname">The nickname of the component.</param>
+        /// <param name="description">The description of the component.</param>
+        /// <param name="category">The category the component belongs to.</param>
+        /// <param name="subCategory">The sub-category the component belongs to.</param>
         public VariableParameterComponent(string name, string nickname, string description, string category, string subCategory)
             : base(name, nickname, description, category, subCategory)
         {
         }
 
+        /// <summary>
+        /// Determines whether a parameter can be inserted at the specified index on the given side of the component.
+        /// </summary>
+        /// <param name="parameterSide">The side (Input or Output) where the parameter is to be inserted.</param>
+        /// <param name="index">The index position for insertion.</param>
+        /// <returns><c>true</c> if the parameter can be inserted; otherwise, <c>false</c>.</returns>
         public bool CanInsertParameter(GH_ParameterSide parameterSide, int index)
         {
             var templateParams = parameterSide == GH_ParameterSide.Input ? Inputs : Outputs;
@@ -53,6 +76,12 @@ namespace DiGi.Rhino.Core.Classes
             return false;
         }
 
+        /// <summary>
+        /// Determines whether a parameter can be removed from the specified index on the given side of the component.
+        /// </summary>
+        /// <param name="parameterSide">The side (Input or Output) where the parameter is to be removed.</param>
+        /// <param name="index">The index position of the parameter to remove.</param>
+        /// <returns><c>true</c> if the parameter can be removed; otherwise, <c>false</c>.</returns>
         public bool CanRemoveParameter(GH_ParameterSide parameterSide, int index)
         {
             var templateParams = parameterSide == GH_ParameterSide.Input ? Inputs : Outputs;
@@ -110,6 +139,12 @@ namespace DiGi.Rhino.Core.Classes
             return default;
         }
 
+        /// <summary>
+        /// Creates a new parameter based on the template definition for the specified side and index.
+        /// </summary>
+        /// <param name="parameterSide">The side (Input or Output) where the parameter is to be created.</param>
+        /// <param name="index">The index position for creation.</param>
+        /// <returns>A cloned instance of the template parameter, or <c>null</c> if no suitable template exists.</returns>
         public IGH_Param? CreateParameter(GH_ParameterSide parameterSide, int index)
         {
             if (GetTemplateParam(parameterSide, index) is IGH_Param param)
@@ -120,12 +155,25 @@ namespace DiGi.Rhino.Core.Classes
             return default;
         }
 
+        /// <summary>
+        /// Destroys a parameter at the specified index on the given side of the component.
+        /// </summary>
+        /// <param name="parameterSide">The side (Input or Output) where the parameter is to be destroyed.</param>
+        /// <param name="index">The index position of the parameter to destroy.</param>
+        /// <returns><c>true</c> if the parameter was successfully destroyed; otherwise, <c>false</c>.</returns>
         public virtual bool DestroyParameter(GH_ParameterSide parameterSide, int index) => CanRemoveParameter(parameterSide, index);
 
+        /// <summary>
+        /// Performs maintenance tasks on the variable parameters of the component.
+        /// </summary>
         public void VariableParameterMaintenance()
         {
         }
 
+        /// <summary>
+        /// Registers the default input parameters based on the provided templates.
+        /// </summary>
+        /// <param name="inputParamManager">The manager used to register input parameters.</param>
         protected override sealed void RegisterInputParams(GH_InputParamManager inputParamManager)
         {
             if (Inputs == null)
@@ -139,6 +187,10 @@ namespace DiGi.Rhino.Core.Classes
             }
         }
 
+        /// <summary>
+        /// Registers the default output parameters based on the provided templates.
+        /// </summary>
+        /// <param name="outputParamManager">The manager used to register output parameters.</param>
         protected override sealed void RegisterOutputParams(GH_OutputParamManager outputParamManager)
         {
             if (Outputs == null)

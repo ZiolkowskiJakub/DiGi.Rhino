@@ -7,22 +7,25 @@ using System.Collections.Generic;
 
 namespace DiGi.Rhino.Core.Classes
 {
+    /// <summary>
+    /// A component that filters a list of serializable objects based on the value of a specified numeric property.
+    /// </summary>
     public class FilterByNumber : VariableParameterComponent
     {
         /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
+        /// Gets the unique identifier for this component.
         /// </summary>
         public override Guid ComponentGuid => new("ddd10985-23c4-471d-b14b-881a92560b78");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets the exposure level of the component.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
-        /// Initializes a new instance of object.
+        /// Initializes a new instance of the <see cref="FilterByNumber"/> class.
         /// </summary>
         public FilterByNumber()
           : base("Core.FilterByNumber", "Core.FilterByNumber",
@@ -74,11 +77,9 @@ namespace DiGi.Rhino.Core.Classes
         }
 
         /// <summary>
-        /// This is the method that actually does the work.
+        /// This is the method that actually does the work of filtering objects by a numeric property value.
         /// </summary>
-        /// <param name="dataAccess">
-        /// The DA object is used to retrieve from inputs and store in outputs.
-        /// </param>
+        /// <param name="dataAccess">The DA object used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess dataAccess)
         {
             int index;

@@ -4,6 +4,11 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a <see cref="Plane"/> instance to its corresponding Rhino geometry plane representation.
+        /// </summary>
+        /// <param name="plane">The source plane to convert.</param>
+        /// <returns>A <see cref="global::Rhino.Geometry.Plane"/> representing the converted plane, or <see cref="global::Rhino.Geometry.Plane.Unset"/> if the conversion fails or the input is null.</returns>
         public static global::Rhino.Geometry.Plane ToRhino(this Plane plane)
         {
             if (plane == null)

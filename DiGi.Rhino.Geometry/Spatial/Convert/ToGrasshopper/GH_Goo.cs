@@ -6,6 +6,12 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a 3D geometry object to its corresponding Grasshopper Goo representation.
+        /// </summary>
+        /// <param name="geometry3D">The 3D geometry object to convert.</param>
+        /// <param name="tolerance">The tolerance used for geometric operations during conversion. Defaults to <see cref="DiGi.Core.Constants.Tolerance.Distance"/>.</param>
+        /// <returns>An <see cref="IGH_Goo"/> object representing the geometry in Grasshopper, or <c>null</c> if the input is null or not a supported type.</returns>
         public static IGH_Goo? ToGrasshopper(this IGeometry3D? geometry3D, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             if (geometry3D == null)

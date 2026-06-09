@@ -12,6 +12,10 @@ using System.Linq;
 
 namespace DiGi.Rhino.Geometry.Random.Classes
 {
+    /// <summary>
+    /// A Grasshopper component that generates a random 2D polygonal face based on specified coordinate ranges, 
+    /// point counts, and internal edge counts.
+    /// </summary>
     public class PolygonalFace2DByRange : VariableParameterComponent
     {
         /// <summary>
@@ -19,11 +23,11 @@ namespace DiGi.Rhino.Geometry.Random.Classes
         /// </summary>
         public override Guid ComponentGuid => new("51201449-28b2-43f0-97dd-391ec76a1adc");
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
+        /// <summary>
+        /// Gets or sets the exposure level of the component in the Grasshopper canvas.
+        /// </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

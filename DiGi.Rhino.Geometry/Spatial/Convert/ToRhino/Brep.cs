@@ -8,6 +8,12 @@ namespace DiGi.Rhino.Geometry.Spatial
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts a polygonal face to a Rhino Brep.
+        /// </summary>
+        /// <param name="polygonalFace3D">The polygonal face to convert.</param>
+        /// <param name="tolerance">The distance tolerance used for the conversion process.</param>
+        /// <returns>A Rhino <see cref="Brep"/> representing the polygonal face, or <c>null</c> if the conversion fails.</returns>
         public static Brep? ToRhino(this IPolygonalFace3D? polygonalFace3D, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             List<IPolygonal3D>? polygonal3Ds = polygonalFace3D?.Edges;
@@ -42,6 +48,12 @@ namespace DiGi.Rhino.Geometry.Spatial
             return breps[0];
         }
 
+        /// <summary>
+        /// Converts a polyhedron to a Rhino Brep by joining its polygonal faces.
+        /// </summary>
+        /// <param name="polyhedron">The polyhedron to convert.</param>
+        /// <param name="tolerance">The distance tolerance used for the conversion and joining process.</param>
+        /// <returns>A Rhino <see cref="Brep"/> representing the polyhedron, or <c>null</c> if the conversion fails.</returns>
         public static Brep? ToRhino(this Polyhedron? polyhedron, double tolerance = DiGi.Core.Constants.Tolerance.Distance)
         {
             List<IPolygonalFace3D>? polygonalFace3Ds = polyhedron?.PolygonalFaces;
@@ -78,6 +90,11 @@ namespace DiGi.Rhino.Geometry.Spatial
             return result[0];
         }
 
+        /// <summary>
+        /// Converts an ellipsoid to a Rhino Brep.
+        /// </summary>
+        /// <param name="ellipsoid">The ellipsoid to convert.</param>
+        /// <returns>A Rhino <see cref="Brep"/> representing the ellipsoid, or <c>null</c> if the conversion fails.</returns>
         public static Brep? ToRhino(this Ellipsoid? ellipsoid)
         {
             Point3d center = ToRhino(ellipsoid?.Center);
