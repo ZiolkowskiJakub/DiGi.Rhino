@@ -13,18 +13,12 @@ namespace DiGi.Rhino.Core.Classes
     /// </summary>
     public class SetValue : VariableParameterComponent
     {
-        /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
-        /// </summary>
-        /// <returns>The unique identifier of the component.</returns>
+        /// <summary> Gets the unique ID for this component. Do not change this ID after release. </summary>
         public override Guid ComponentGuid => new("7d05550a-df79-4b5e-8911-1eeb0e501881");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
-        /// <summary>
-        /// Gets the exposure level of the component.
-        /// </summary>
-        /// <returns>The GH_Exposure value.</returns>
+        /// <summary> Gets the exposure level of the component. </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

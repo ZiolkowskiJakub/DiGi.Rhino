@@ -1,4 +1,4 @@
-﻿using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Classes;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
@@ -19,10 +19,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
-        /// <summary>
-        /// Gets the exposure level of the component, which determines when it is executed.
-        /// </summary>
-        /// <returns>The <see cref="GH_Exposure"/> value for this component.</returns>
+        /// <summary> Gets the exposure level of the component, which determines when it is executed. </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using DiGi.Core.Interfaces;
+using DiGi.Core.Interfaces;
 using Grasshopper.Kernel;
 using System;
 using System.Collections.Generic;
@@ -32,10 +32,7 @@ namespace DiGi.Rhino.Core.Classes
         {
         }
 
-        /// <summary>
-        /// Gets the unique identifier for this component type.
-        /// </summary>
-        /// <returns>The <see cref="Guid"/> associated with this parameter.</returns>
+        /// <summary> Gets the unique identifier for this component type. </summary>
         public override Guid ComponentGuid => new("f360150a-d89b-4324-aff2-43c883eb3c98");
 
         /// <summary>

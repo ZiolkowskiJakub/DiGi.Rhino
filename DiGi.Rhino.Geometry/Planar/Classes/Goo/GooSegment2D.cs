@@ -1,4 +1,4 @@
-﻿using DiGi.Geometry.Planar.Classes;
+using DiGi.Geometry.Planar.Classes;
 using DiGi.Rhino.Geometry.Core.Classes;
 using Grasshopper.Kernel.Types;
 using System;
@@ -42,10 +42,7 @@ namespace DiGi.Rhino.Geometry.Planar.Classes
     /// </summary>
     public class GooSegment2DParam : GooGeometryParam<Segment2D>
     {
-        /// <summary>
-        /// Gets the unique identifier for the <see cref="GooSegment2DParam"/> component.
-        /// </summary>
-        /// <returns>The Guid of the component.</returns>
+        /// <summary> Gets the unique identifier for the <see cref="GooSegment2DParam" /> component. </summary>
         public override Guid ComponentGuid => new("ed94a00f-cd43-4ae1-bbec-9d792395f248");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;

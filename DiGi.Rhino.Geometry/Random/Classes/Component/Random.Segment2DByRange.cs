@@ -1,4 +1,4 @@
-﻿using DiGi.Geometry.Planar.Classes;
+using DiGi.Geometry.Planar.Classes;
 using DiGi.Rhino.Core;
 using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
@@ -15,18 +15,12 @@ namespace DiGi.Rhino.Geometry.Random.Classes
     /// </summary>
     public class Segment2DByRange : VariableParameterComponent
     {
-        /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
-        /// </summary>
-        /// <returns>The unique identifier of the component.</returns>
+        /// <summary> Gets the unique ID for this component. Do not change this ID after release. </summary>
         public override Guid ComponentGuid => new("bf29bf62-ecc4-4686-9277-00648998c9fc");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
-        /// <summary>
-        /// Gets the exposure level of the component.
-        /// </summary>
-        /// <returns>The <see cref="GH_Exposure"/> value.</returns>
+        /// <summary> Gets the exposure level of the component. </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

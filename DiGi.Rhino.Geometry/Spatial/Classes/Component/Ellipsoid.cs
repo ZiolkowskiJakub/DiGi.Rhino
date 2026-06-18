@@ -1,4 +1,4 @@
-﻿using DiGi.Rhino.Core.Classes;
+using DiGi.Rhino.Core.Classes;
 using DiGi.Rhino.Core.Enums;
 using Grasshopper.Kernel;
 using System;
@@ -18,10 +18,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
-        /// <summary>
-        /// Gets the exposure of the component, determining if it is primary or secondary.
-        /// </summary>
-        /// <returns>The <see cref="GH_Exposure"/> level of the component.</returns>
+        /// <summary> Gets the exposure of the component, determining if it is primary or secondary. </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

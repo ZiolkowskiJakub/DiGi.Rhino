@@ -1,4 +1,4 @@
-﻿using DiGi.Geometry.Core.Interfaces;
+using DiGi.Geometry.Core.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Spatial.Interfaces;
 using DiGi.Rhino.Geometry.Core.Classes;
@@ -32,10 +32,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
             Value = intersectionResult3D;
         }
 
-        /// <summary>
-        /// Gets the collection of geometries associated with the 3D intersection result.
-        /// </summary>
-        /// <returns>An array of <see cref="IGeometry"/> objects, or null if no value exists.</returns>
+        /// <summary> Gets the collection of geometries associated with the 3D intersection result. </summary>
         public override IGeometry[]? Geometries
         {
             get

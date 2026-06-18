@@ -1,4 +1,4 @@
-﻿using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Classes;
 using DiGi.Rhino.Geometry.Core.Classes;
 using Grasshopper.Kernel.Types;
 using System;
@@ -42,10 +42,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
     /// </summary>
     public class GooRay3DParam : GooGeometryParam<Ray3D>
     {
-        /// <summary>
-        /// Gets the unique identifier for the component.
-        /// </summary>
-        /// <returns>The GUID of the component.</returns>
+        /// <summary> Gets the unique identifier for the component. </summary>
         public override Guid ComponentGuid => new("2977f462-45d4-4ec0-8152-83f5800ef328");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;

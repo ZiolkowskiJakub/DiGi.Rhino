@@ -11,18 +11,12 @@ namespace DiGi.Rhino.Core.Classes
     /// </summary>
     public class FilterByMask : VariableParameterComponent
     {
-        /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
-        /// </summary>
-        /// <returns>The unique identifier for the component.</returns>
+        /// <summary> Gets the unique ID for this component. Do not change this ID after release. </summary>
         public override Guid ComponentGuid => new("6c2fe566-8408-4aa6-b0af-d978db84720a");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
-        /// <summary>
-        /// Gets the exposure level of the component, which determines its visibility and behavior in the Grasshopper canvas.
-        /// </summary>
-        /// <returns>The GH_Exposure value indicating the visibility of the component.</returns>
+        /// <summary> Gets the exposure level of the component, which determines its visibility and behavior in the Grasshopper canvas. </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>

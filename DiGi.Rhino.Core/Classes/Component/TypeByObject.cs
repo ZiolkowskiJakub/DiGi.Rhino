@@ -11,18 +11,12 @@ namespace DiGi.Rhino.Core.Classes
     /// </summary>
     public class TypeByObject : VariableParameterComponent
     {
-        /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
-        /// </summary>
-        /// <returns>The unique identifier of the component.</returns>
+        /// <summary> Gets the unique ID for this component. Do not change this ID after release. </summary>
         public override Guid ComponentGuid => new("055f06ef-dbc5-462f-a231-20c150e0785a");
 
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
 
-        /// <summary>
-        /// Gets the exposure level of the component, which defines how it is displayed in the Grasshopper canvas.
-        /// </summary>
-        /// <returns>The exposure level of the component.</returns>
+        /// <summary> Gets the exposure level of the component, which defines how it is displayed in the Grasshopper canvas. </summary>
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
