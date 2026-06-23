@@ -15,7 +15,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         /// Calculates the bounding box for the specified geometry.
         /// </summary>
         /// <param name="geometry">The geometry to calculate the bounding box for.</param>
-        /// <returns>A <see cref="global::Rhino.Geometry.BoundingBox"/> representing the bounds of the geometry, or <see cref="global::Rhino.Geometry.BoundingBox.Unset"/> if the geometry is null or cannot be bounded.</returns>
+        /// <returns>A <see cref="global::Rhino.Geometry.BoundingBox"/> representing the bounds of the geometry, or <see cref="BoundingBox.Unset"/> if the geometry is null or cannot be bounded.</returns>
         public static BoundingBox BoundingBox(this IGeometry? geometry)
         {
             if (geometry is IBoundable3D boundable3D)
@@ -49,7 +49,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         /// Calculates the unioned bounding box for a collection of geometries.
         /// </summary>
         /// <param name="geometries">The collection of geometries to evaluate.</param>
-        /// <returns>A <see cref="global::Rhino.Geometry.BoundingBox"/> that encompasses all valid geometries in the collection, or <see cref="global::Rhino.Geometry.BoundingBox.Unset"/> if the collection is null or empty.</returns>
+        /// <returns>A <see cref="global::Rhino.Geometry.BoundingBox"/> that encompasses all valid geometries in the collection, or <see cref="BoundingBox.Unset"/> if the collection is null or empty.</returns>
         public static BoundingBox BoundingBox(this IEnumerable<IGeometry>? geometries)
         {
             if (geometries == null || !geometries.Any())
@@ -88,7 +88,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         /// Calculates the bounding box for the geometries resulting from a 3D intersection operation.
         /// </summary>
         /// <param name="intersectionResult3D">The intersection result containing the geometries.</param>
-        /// <returns>A <see cref="global::Rhino.Geometry.BoundingBox"/> encompassing all resulting geometries, or <see cref="global::Rhino.Geometry.BoundingBox.Unset"/> if no valid geometry is found.</returns>
+        /// <returns>A <see cref="global::Rhino.Geometry.BoundingBox"/> encompassing all resulting geometries, or <see cref="BoundingBox.Unset"/> if no valid geometry is found.</returns>
         public static BoundingBox BoundingBox(this IIntersectionResult3D? intersectionResult3D)
         {
             return BoundingBox(intersectionResult3D?.GetGeometry3Ds<IGeometry3D>()?.Cast<IGeometry>());

@@ -9,7 +9,7 @@ using System.Linq;
 namespace DiGi.Rhino.Geometry.Spatial.Classes
 {
     /// <summary>
-    /// Represents a Grasshopper Goo wrapper for the <see cref="IntersectionResult3D"/> class, 
+    /// Represents a Grasshopper Goo wrapper for the <see cref="IntersectionResult3D"/> class,
     /// providing serialization and bake-aware capabilities.
     /// </summary>
     public class GooIntersectionResult3D : GooBakeAwareSerializableObject<IntersectionResult3D>
@@ -195,7 +195,7 @@ namespace DiGi.Rhino.Geometry.Spatial.Classes
     //        {
     //            target = (Y)(object)Value;
     //            return true;
-        //    }
+    //    }
 
     //        if (typeof(GH_ObjectWrapper) == typeof(Y))
     //        {

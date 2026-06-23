@@ -275,6 +275,7 @@ namespace DiGi.Rhino.Core.Classes
         /// Gets the unique identifier for this component.
         /// </summary>
         public override Guid ComponentGuid => new("fa4f4af4-3a0d-45d4-be59-bfb65dc350cb");
+
         //protected override System.Drawing.Bitmap Icon => Resources.DiGi_Small;
     }
 

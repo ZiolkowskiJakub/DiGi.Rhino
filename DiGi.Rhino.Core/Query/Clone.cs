@@ -5,8 +5,8 @@ namespace DiGi.Rhino.Core
     public static partial class Query
     {
         /// <summary>
-        /// Extracts the subcategory name from the assembly of the provided type. 
-        /// If the assembly name is missing, it defaults to "DiGi". 
+        /// Extracts the subcategory name from the assembly of the provided type.
+        /// If the assembly name is missing, it defaults to "DiGi".
         /// If the assembly name contains more than two segments separated by dots, only the first two are returned.
         /// </summary>
         /// <param name="type">The <see cref="Type"/> for which the subcategory is being determined.</param>

@@ -5,7 +5,7 @@ namespace DiGi.Rhino.Core
     public static partial class Query
     {
         /// <summary>
-        /// Gets the name of the specified type, removing the 'I' prefix if it is an interface 
+        /// Gets the name of the specified type, removing the 'I' prefix if it is an interface
         /// following standard naming conventions (where the second character is uppercase).
         /// </summary>
         /// <param name="type">The <see cref="Type"/> to retrieve the name from.</param>

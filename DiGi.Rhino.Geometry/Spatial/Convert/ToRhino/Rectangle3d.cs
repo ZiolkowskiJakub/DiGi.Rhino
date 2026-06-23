@@ -10,7 +10,7 @@ namespace DiGi.Rhino.Geometry.Spatial
         /// </summary>
         /// <param name="rectangle3D">The source rectangle to convert.</param>
         /// <returns>
-        /// A Rhino <see cref="Rectangle3d"/> representation of the input; 
+        /// A Rhino <see cref="Rectangle3d"/> representation of the input;
         /// otherwise, <see cref="Rectangle3d.Unset"/> if the input is null or contains invalid data.
         /// </returns>
         public static Rectangle3d ToRhino(this Rectangle3D? rectangle3D)

@@ -13,7 +13,7 @@ using System.Linq;
 namespace DiGi.Rhino.Geometry.Random.Classes
 {
     /// <summary>
-    /// A Grasshopper component that generates a random 2D polygonal face based on specified coordinate ranges, 
+    /// A Grasshopper component that generates a random 2D polygonal face based on specified coordinate ranges,
     /// point counts, and internal edge counts.
     /// </summary>
     public class PolygonalFace2DByRange : VariableParameterComponent

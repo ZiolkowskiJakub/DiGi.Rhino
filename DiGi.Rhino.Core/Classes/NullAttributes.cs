@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace DiGi.Rhino.Core.Classes
 {
     /// <summary>
-    /// Provides a null implementation of the <see cref="IGH_Attributes"/> interface, 
+    /// Provides a null implementation of the <see cref="IGH_Attributes"/> interface,
     /// serving as a placeholder or default attribute set that performs no operations.
     /// </summary>
     public class NullAttributes : IGH_Attributes

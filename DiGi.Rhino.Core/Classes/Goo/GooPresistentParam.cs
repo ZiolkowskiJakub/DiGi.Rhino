@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace DiGi.Rhino.Core.Classes
 {
     /// <summary>
-    /// Represents a persistent parameter in Grasshopper that manages data of type <typeparamref name="T"/>, 
+    /// Represents a persistent parameter in Grasshopper that manages data of type <typeparamref name="T"/>,
     /// which wraps an underlying object of type <typeparamref name="X"/>.
     /// </summary>
     /// <typeparam name="T">The type of the Goo object, which must inherit from <see cref="GooObject{TObject}"/>.</typeparam>

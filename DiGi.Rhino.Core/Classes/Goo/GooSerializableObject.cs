@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace DiGi.Rhino.Core.Classes
 {
     /// <summary>
-    /// Represents a Goo wrapper for an object that implements the <see cref="ISerializableObject"/> interface, 
+    /// Represents a Goo wrapper for an object that implements the <see cref="ISerializableObject"/> interface,
     /// allowing it to be passed through Grasshopper wires while maintaining serialization capabilities.
     /// </summary>
     /// <typeparam name="TSerializableObject">The type of the serializable object.</typeparam>

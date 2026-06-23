@@ -5,7 +5,7 @@ using System;
 namespace DiGi.GIS.Rhino.Classes
 {
     /// <summary>
-    /// Represents a Goo wrapper for a <see cref="Core.Parameter.Classes.Parameter"/> object, 
+    /// Represents a Goo wrapper for a <see cref="Core.Parameter.Classes.Parameter"/> object,
     /// enabling it to be passed through Grasshopper wires and stored in the document.
     /// </summary>
     public class GooParameter : GooSerializableObject<Core.Parameter.Classes.Parameter>
