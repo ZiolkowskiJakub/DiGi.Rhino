@@ -1,4 +1,4 @@
-#### [DiGi\.Rhino\.Core](index.md 'index')
+#### [DiGi\.Rhino\.Core](DiGi.Rhino.Core.Overview.md 'DiGi\.Rhino\.Core\.Overview')
 
 ## DiGi\.GIS\.Rhino\.Classes Namespace
 ### Classes
